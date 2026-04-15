@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Atuação — Indústrias atendidas e modelos de engajamento</title>
+<meta name="description" content="Sede em Caxias do Sul / RS. Atendimento nacional em empresas médias. Onde estamos, onde operamos." />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+.mapa-bloco{padding:80px 0 140px}
+.mapa-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:start}
+.mapa-info h2{font-family:'Outfit';font-weight:200;font-size:clamp(36px,4vw,52px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:24px}
+.mapa-info h2 em{font-style:italic;color:var(--azul-atto)}
+.mapa-info p{font-size:17px;line-height:1.7;color:var(--cinza-escuro);margin-bottom:20px}
+.mapa-dados{background:var(--papel-alt);padding:40px;border-radius:2px}
+.mapa-dados h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:16px}
+.mapa-dados .end{font-family:'Outfit';font-weight:400;font-size:20px;line-height:1.4;color:var(--tinta);margin-bottom:8px}
+.mapa-dados .cidade{font-size:14px;color:var(--cinza-escuro);margin-bottom:32px}
+.mapa-dados ul{list-style:none;padding:0;margin:0}
+.mapa-dados li{font-size:14px;line-height:1.7;color:var(--cinza-escuro);padding:6px 0;border-bottom:1px solid rgba(10,14,26,.06)}
+.mapa-dados li:last-child{border-bottom:none}
+.mapa-dados li strong{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:2px;font-weight:500}
+
+.mapa-viz{aspect-ratio:4/5;background:linear-gradient(180deg,var(--papel-alt) 0%,var(--papel) 100%);border:1px solid var(--linha);border-radius:2px;position:relative;overflow:hidden;padding:40px}
+.mapa-viz .br-outline{position:absolute;inset:40px;opacity:.15}
+.mapa-viz .br-outline svg{width:100%;height:100%}
+.mapa-viz .pin{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--azul-atto);transform:translate(-50%,-50%);box-shadow:0 0 0 4px rgba(26,58,143,.15)}
+.mapa-viz .pin.sede{background:var(--teal-atto);box-shadow:0 0 0 6px rgba(0,181,184,.2),0 0 0 12px rgba(0,181,184,.08)}
+.mapa-viz .pin-label{position:absolute;transform:translate(16px,-50%);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza-escuro);white-space:nowrap}
+.mapa-viz .pin-label.sede{color:var(--teal-atto);font-weight:600}
+.mapa-viz .legend{position:absolute;bottom:24px;left:24px;background:rgba(255,255,255,.9);padding:12px 16px;border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza-escuro)}
+.mapa-viz .legend span{display:inline-flex;align-items:center;gap:6px;margin-right:12px}
+.mapa-viz .legend span::before{content:'';width:8px;height:8px;border-radius:50%}
+.mapa-viz .legend .ls::before{background:var(--teal-atto)}
+.mapa-viz .legend .lc::before{background:var(--azul-atto)}
+
+.regioes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:40px 0}
+.regiao{border-top:2px solid var(--azul-atto);padding:24px 0}
+.regiao h5{font-family:'Outfit';font-weight:400;font-size:18px;color:var(--tinta);margin-bottom:8px}
+.regiao .kpi{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:12px}
+.regiao p{font-size:14px;line-height:1.55;color:var(--cinza-escuro)}
+
+@media (max-width:900px){
+  .mapa-grid{grid-template-columns:1fr;gap:40px}
+  .regioes-grid{grid-template-columns:1fr 1fr;gap:16px}
+}
+</style>
+<meta name="description" content="Onde estamos, em quais setores atuamos e quais formatos de projeto oferecemos.">
+<meta name="author" content="Atto Estratégias & Educação">
+<meta name="theme-color" content="#1A3A8F">
+<link rel="canonical" href="https://www.gestaoatto.com.br/atuacao.html">
+<link rel="icon" type="image/png" href="assets/atto_logo_dark_sm.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Atto Estratégias">
+<meta property="og:title" content="Atuação — Indústrias atendidas e modelos de engajamento">
+<meta property="og:description" content="Onde estamos, em quais setores atuamos e quais formatos de projeto oferecemos.">
+<meta property="og:url" content="https://www.gestaoatto.com.br/atuacao.html">
+<meta property="og:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Atuação — Indústrias atendidas e modelos de engajamento">
+<meta name="twitter:description" content="Onde estamos, em quais setores atuamos e quais formatos de projeto oferecemos.">
+<meta name="twitter:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Atto Estratégias & Educação",
+  "url": "https://www.gestaoatto.com.br",
+  "logo": "https://www.gestaoatto.com.br/assets/atto_logo_dark.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Caxias do Sul",
+    "addressRegion": "RS",
+    "addressCountry": "BR"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/atto-estrategias"
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-mark"><img class="logo-light" src="assets/atto_logo_light_sm.png" alt="Atto" /><img class="logo-dark" src="assets/atto_logo_dark_sm.png" alt="Atto" /></a>
+    <nav>
+      <a href="metodo.html">Método</a>
+      <a href="atuacao.html" class="is-active">Atuação</a>
+      <a href="perspectivas.html">Perspectivas</a>
+      <a href="sobre.html">A Atto</a>
+      <a href="contato.html#agendar" class="cta-nav">Agende conversa <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="breadcrumb"><a href="index.html">A Atto</a><span class="sep">/</span><a href="sobre.html">Quem somos</a><span class="sep">/</span><span class="current">Atuação</span></div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="kicker">Atuação · Onde estamos, como operamos</div>
+    <h1>Sede em Caxias. <em>Método híbrido calibrado</em>.</h1>
+    <p class="lead">A Atto opera a partir de uma única casa, na Serra Gaúcha — em Caxias do Sul. É ali que o método é calibrado, é dali que o time sai para atender. O modelo de atendimento combina imersões presenciais em momentos estruturais e rotina mensal em formato híbrido — com agenda desenhada para que a distância nunca comprometa a profundidade do trabalho.</p>
+  </div>
+</section>
+
+<section class="mapa-bloco">
+  <div class="container">
+    <div class="mapa-grid">
+      <div class="mapa-info">
+        <h2>A <em>casa</em>, o <em>território</em>, a <em>lógica</em>.</h2>
+        <p>A Atto funciona em sede física em Caxias do Sul — região que concentra, historicamente, a indústria metalmecânica, de perfis e de distribuição do Rio Grande do Sul. Essa escolha não é acidental. Estar fisicamente no território dos clientes garante proximidade real com o tipo de empresa que atendemos — conversas no chão de fábrica, imersões em obra, reuniões na mesa do sócio.</p>
+        <p>O modelo híbrido é calibrado caso a caso: presencial nos momentos estruturais (imersão inicial do Diagnóstico, decisões de sucessão e M&amp;A, reunião trimestral de direção), remoto na rotina mensal (leitura de painel, reunião de performance, acompanhamento de frentes). Confidencialidade e profundidade são mantidas pelo método — não pelo CEP.</p>
+      </div>
+      <div>
+        <div class="mapa-viz" aria-label="Indicador visual da sede em Caxias do Sul">
+          <div class="pin sede" style="top:60%;left:42%"></div>
+          <span class="pin-label sede" style="top:60%;left:42%">Caxias do Sul / RS · Sede única</span>
+          <div class="legend">
+            <span class="ls">Sede</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:80px">
+      <div class="section-label">Escritório</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:24px">
+        <div class="mapa-dados">
+          <h4>Endereço</h4>
+          <div class="end">Rua Guerino Sanvitto, 704 · Sala 607</div>
+          <div class="cidade">Caxias do Sul / RS</div>
+          <ul>
+            <li><strong>Horário</strong>Segunda a sexta · 08h às 18h</li>
+            <li><strong>Atendimento</strong>Com agendamento prévio (reuniões de clientes e imersões)</li>
+            <li><strong>Email geral</strong>contato@gestaoatto.com.br</li>
+            <li><strong>Guilherme Walter</strong>+55 (51) 99333-3826</li>
+            <li><strong>Juliano Walter</strong>+55 (54) 99624-5417</li>
+          </ul>
+        </div>
+        <div class="mapa-dados">
+          <h4>Logística do atendimento</h4>
+          <div class="end">Modelo híbrido calibrado</div>
+          <div class="cidade">Presencial onde e quando faz sentido — remoto no que é rotina</div>
+          <ul>
+            <li><strong>Imersão inicial</strong>2 a 3 dias presenciais na casa do cliente (início do Diagnóstico)</li>
+            <li><strong>Rotina mensal</strong>Reunião híbrida — presencial trimestral, remota mensal</li>
+            <li><strong>M&amp;A e sucessão</strong>Imersões presenciais conforme intensidade do momento</li>
+            <li><strong>Acesso à mesa técnica</strong>Linha direta por canal seguro (WhatsApp corporativo e email)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sintomas">
+  <div class="container">
+    <div class="section-label">Como funciona o atendimento</div>
+    <div class="sintomas-grid">
+      <h3>Três <em>formatos</em> de presença, uma mesma disciplina.</h3>
+      <ul class="sintomas-list">
+        <li><span class="num">01</span><span><strong>Imersão inicial presencial.</strong> Dois a três dias na casa do cliente, sempre no início da relação. Conversa com sócios, diretoria, chão de operação. É nessa fase que o método é calibrado à realidade da empresa.</span></li>
+        <li><span class="num">02</span><span><strong>Rotina mensal híbrida.</strong> Reunião de performance mensal em formato híbrido — remoto na rotina, presencial trimestral. Acompanhamento de frentes prioritárias em conversas quinzenais com os responsáveis.</span></li>
+        <li><span class="num">03</span><span><strong>Governança e M&amp;A sob demanda.</strong> Em processos de sucessão, conselho e M&amp;A, imersões presenciais adicionais conforme a intensidade do momento. Não há contagem de horas — há compromisso com a entrega.</span></li>
+        <li><span class="num">04</span><span><strong>Mesa técnica sempre aberta.</strong> Linha direta por canal seguro (WhatsApp corporativo e email) entre a Atto e o sócio. Dúvida de pricing, renegociação de banco, oportunidade fora do calendário — resposta com número por trás.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="container">
+    <h2>Quer conhecer <em>a sede e o time</em>?</h2>
+    <p>Café na casa, conversa com um dos sócios, tour pelo time técnico. Para quem está avaliando contratar a Atto ou só quer entender como a casa funciona por dentro.</p>
+    <div class="actions">
+      <a href="contato.html" class="btn-primary">Agendar conversa <span class="arrow">→</span></a>
+      <a href="metodo.html" class="btn-ghost">Ver o método <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p></div>
+      <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
+      <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li></ul></div>
+      <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
+      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="#">Política de privacidade</a> · <a href="#">Termos</a></div></div>
+  </div>
+</footer>
+<script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
+</body>
+</html>

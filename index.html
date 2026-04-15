@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atto Estratégias — Direção, Finanças, Pessoas e M&amp;A para empresas que querem crescer com método</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul-noite: #080F1E;
+    --azul-atto: #1A3A8F;
+    --teal-atto: #00B5B8;
+    --roxo-contratacao: #5340C8;
+    --papel: #F5F3EE;
+    --papel-alt: #ECE8DF;
+    --tinta: #0A0E1A;
+    --cinza-medio: #6B6F7A;
+    --cinza-claro: #D4D1C9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    background: var(--papel);
+    color: var(--tinta);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    line-height: 1.05;
+    color: var(--tinta);
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  @media (max-width: 768px) { .container { padding: 0 24px; } }
+
+  /* === HEADER === */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 0;
+    background: rgba(245, 243, 238, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(10, 14, 26, 0.06);
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+  header.on-dark {
+    background: rgba(8, 15, 30, 0.7);
+    border-bottom-color: rgba(255,255,255,0.06);
+  }
+  header.on-dark nav a, header.on-dark .cta-nav {
+    color: #fff;
+  }
+  header.on-dark .cta-nav {
+    border-color: rgba(255,255,255,0.3);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+  }
+  .logo-mark img {
+    height: 36px;
+    width: auto;
+    display: block;
+  }
+  .logo-mark .logo-light { display: block; }
+  .logo-mark .logo-dark { display: none; }
+  header.on-dark .logo-mark .logo-light { display: none; }
+  header.on-dark .logo-mark .logo-dark { display: block; }
+  nav { display: flex; gap: 36px; align-items: center; }
+  nav a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--tinta);
+    position: relative;
+    padding: 6px 0;
+    transition: color 0.2s;
+  }
+  nav a:not(.cta-nav)::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.25s;
+  }
+  nav a:not(.cta-nav):hover::after { width: 100%; }
+  .cta-nav {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    padding: 12px 22px;
+    border: 1px solid var(--tinta);
+    border-radius: 0;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cta-nav:hover { background: var(--tinta); color: var(--papel); }
+  header.on-dark .cta-nav:hover { background: #fff; color: var(--azul-noite); }
+  @media (max-width: 900px) {
+    nav a:not(.cta-nav) { display: none; }
+  }
+
+  /* === HERO — FULL-BLEED EDITORIAL === */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 160px 0 80px;
+    color: #fff;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=2400&q=80');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    filter: grayscale(15%) contrast(1.05);
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(8,15,30,0.25) 0%, rgba(8,15,30,0.55) 55%, rgba(8,15,30,0.96) 100%),
+      linear-gradient(90deg, rgba(8,15,30,0.55) 0%, rgba(8,15,30,0) 60%);
+    z-index: 1;
+  }
+  .hero-content { position: relative; z-index: 2; width: 100%; }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-atto);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--teal-atto);
+  }
+  .hero h1 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: clamp(44px, 7.2vw, 104px);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: #fff;
+    max-width: 20ch;
+    margin-bottom: 36px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--teal-atto);
+  }
+  .hero-sub {
+    font-size: clamp(17px, 1.3vw, 22px);
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 58ch;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 56px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-primary {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 18px 32px;
+    background: #fff;
+    color: var(--azul-noite);
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover {
+    background: var(--teal-atto);
+    color: #fff;
+    transform: translateX(4px);
+  }
+  .btn-ghost {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 18px 0;
+    color: #fff;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn-ghost::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 10px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    opacity: 0.35;
+    transition: background 0.25s, opacity 0.25s;
+  }
+  .btn-ghost:hover::after { background: var(--teal-atto); opacity: 1; }
+  .btn-ghost--dark { color: var(--tinta); }
+  .btn-ghost--dark:hover { color: var(--azul-atto); }
+  .arrow { display: inline-block; transition: transform 0.25s; }
+  .btn-primary:hover .arrow, .btn-ghost:hover .arrow { transform: translateX(6px); }
+
+  .hero-meta {
+    position: absolute;
+    bottom: 40px;
+    right: 48px;
+    z-index: 2;
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+  }
+  @media (max-width: 768px) { .hero-meta { display: none; } }
+
+  /* === SECTION BASE === */
+  section { padding: 140px 0; position: relative; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cinza-medio);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--cinza-medio);
+  }
+  .section-title {
+    font-size: clamp(36px, 4.6vw, 68px);
+    font-weight: 400;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    max-width: 22ch;
+    margin-bottom: 72px;
+  }
+  .section-title strong { font-weight: 700; }
+
+  /* === MOMENTO === */
+  .momento {
+    background: var(--papel);
+    padding: 160px 0 120px;
+    position: relative;
+  }
+  .momento::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: rgba(10,14,26,0.1);
+  }
+  .momento-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: start;
+  }
+  .momento-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--tinta);
+    max-width: 14ch;
+  }
+  .momento-title em {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--teal-atto);
+  }
+  .momento-lead {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--tinta);
+    margin-bottom: 40px;
+    max-width: 42ch;
+  }
+  .momento-list {
+    list-style: none;
+    margin-bottom: 40px;
+    border-top: 1px solid rgba(10,14,26,0.12);
+  }
+  .momento-list li {
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(10,14,26,0.12);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--tinta);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .momento-list li span {
+    color: var(--teal-atto);
+    font-family: 'JetBrains Mono', monospace;
+    flex-shrink: 0;
+  }
+  .momento-close {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--tinta);
+    max-width: 42ch;
+  }
+  .momento-close strong {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    color: var(--azul-atto);
+  }
+  @media (max-width: 900px) {
+    .momento-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  /* === SOLUÇÕES === */
+  .solucoes { background: var(--papel); padding-top: 160px; }
+  .sol-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 100px;
+  }
+  .sol-intro-text p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--cinza-medio);
+    max-width: 42ch;
+  }
+  @media (max-width: 900px) {
+    .sol-intro { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .sol-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--tinta);
+  }
+  .sol-item {
+    display: grid;
+    grid-template-columns: 70px 1.1fr 1.5fr 60px;
+    align-items: start;
+    padding: 72px 0;
+    border-bottom: 1px solid rgba(10, 14, 26, 0.15);
+    gap: 56px;
+    cursor: pointer;
+    transition: color 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+    position: relative;
+    color: var(--tinta);
+    isolation: isolate;
+  }
+  .sol-item > * { position: relative; z-index: 2; }
+  .sol-item::before {
+    z-index: 1 !important;
+  }
+  .sol-item--highlight {
+    background:
+      linear-gradient(90deg, rgba(0,181,184,0) 0%, rgba(0,181,184,0.04) 4%, rgba(0,181,184,0) 100%);
+  }
+  .sol-item--highlight::after {
+    content: '';
+    position: absolute;
+    top: 28px; left: -48px;
+    width: 3px;
+    height: calc(100% - 56px);
+    background: var(--teal-atto);
+    z-index: 3;
+  }
+  .sol-item::before {
+    content: '';
+    position: absolute;
+    left: -48px; right: -48px; top: 0;
+    height: 100%;
+    background: var(--tinta);
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+  .sol-item:hover { color: var(--papel); }
+  .sol-item:hover::before { opacity: 1; }
+  .sol-item:hover .sol-number { color: var(--teal-atto); }
+  .sol-item:hover .sol-bullets { color: var(--teal-atto); }
+  .sol-item:hover .sol-arrow {
+    background: var(--teal-atto);
+    color: var(--azul-noite);
+    border-color: var(--teal-atto);
+    transform: rotate(-45deg) scale(1.05);
+  }
+
+  .sol-number {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--cinza-medio);
+    padding-top: 4px;
+    transition: color 0.35s;
+  }
+  .sol-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cinza-medio);
+    margin-bottom: 20px;
+    transition: color 0.35s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .sol-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    padding: 4px 10px;
+    background: var(--teal-atto);
+    color: var(--azul-noite);
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .sol-headline h3 {
+    font-size: clamp(30px, 3.4vw, 48px);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    margin-bottom: 0;
+    color: inherit;
+  }
+  .sol-headline h3 em {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--teal-atto);
+  }
+  .sol-item:hover .sol-kicker { color: rgba(245, 243, 238, 0.6); }
+  .sol-body { padding-top: 6px; }
+  .sol-body .sol-lead {
+    font-size: 17px;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .sol-body .sol-outcome {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    padding-left: 16px;
+    border-left: 2px solid var(--teal-atto);
+    color: inherit;
+  }
+  .sol-body .sol-outcome span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-atto);
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .sol-bullets {
+    list-style: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--cinza-medio);
+    text-transform: uppercase;
+    transition: color 0.35s;
+  }
+  .sol-bullets li {
+    padding: 8px 0;
+    border-top: 1px solid currentColor;
+    opacity: 0.75;
+  }
+  .sol-bullets li:first-child { border-top: none; padding-top: 0; }
+
+  .sol-more {
+    margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-atto);
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.35s ease;
+  }
+  .sol-item:hover .sol-more { gap: 14px; }
+
+  .sol-arrow {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s;
+    align-self: center;
+    justify-self: end;
+  }
+
+  @media (max-width: 1000px) {
+    .sol-item { grid-template-columns: 60px 1fr 40px; gap: 24px; }
+    .sol-body { grid-column: 2 / 4; margin-top: 20px; }
+    .sol-arrow { grid-column: 3; grid-row: 1; }
+  }
+
+  /* === MÉTODO (dark) === */
+  .metodo {
+    background: var(--azul-noite);
+    color: #fff;
+    padding: 160px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .metodo::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 120%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,181,184,0.4), transparent);
+  }
+  .metodo .section-label { color: var(--teal-atto); }
+  .metodo .section-label::before { background: var(--teal-atto); }
+  .metodo .section-title { color: #fff; }
+  .metodo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .metodo-step {
+    padding: 60px 40px 60px 0;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .metodo-step:last-child { border-right: none; }
+  .metodo-step:nth-child(n+2) { padding-left: 40px; }
+  .step-num {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(64px, 6vw, 96px);
+    font-weight: 200;
+    letter-spacing: -0.04em;
+    color: var(--teal-atto);
+    line-height: 1;
+    margin-bottom: 32px;
+  }
+  .step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 16px;
+  }
+  .step-title {
+    font-size: 28px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .step-desc {
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.75);
+  }
+  .metodo-footer {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+  }
+  .metodo-footer p {
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 60ch;
+    color: rgba(255,255,255,0.85);
+  }
+  .metodo-footer .btn-ghost { color: #fff; }
+  @media (max-width: 900px) {
+    .metodo-grid { grid-template-columns: 1fr; }
+    .metodo-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 40px 0; }
+    .metodo-step:nth-child(n+2) { padding-left: 0; }
+    .metodo-footer { grid-template-columns: 1fr; }
+  }
+
+  /* === TESE EDITORIAL (pull quote XXL) === */
+  .tese {
+    background: var(--papel-alt);
+    padding: 180px 0;
+    position: relative;
+  }
+  .tese-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .tese-quote {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4.6vw, 68px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--tinta);
+    margin-bottom: 48px;
+    text-indent: -0.4em;
+  }
+  .tese-quote::first-letter { color: var(--teal-atto); }
+  .tese-attr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cinza-medio);
+    margin-bottom: 80px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .tese-attr::before {
+    content: '';
+    width: 60px; height: 1px; background: var(--cinza-medio);
+  }
+  .tese-para {
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--tinta);
+    max-width: 68ch;
+    font-weight: 400;
+  }
+  .tese-para strong {
+    font-weight: 600;
+    background: linear-gradient(180deg, transparent 55%, rgba(0, 181, 184, 0.28) 55%);
+    padding: 0 2px;
+  }
+
+  /* === PERSPECTIVAS === */
+  .perspectivas { background: var(--papel); padding: 160px 0; }
+  .persp-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+  .persp-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 48px;
+  }
+  @media (max-width: 1000px) {
+    .persp-grid { grid-template-columns: 1fr; gap: 64px; }
+  }
+  .persp-card {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.35s;
+  }
+  .persp-card:hover { transform: translateY(-4px); }
+  .persp-card .img-wrap {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    margin-bottom: 24px;
+    background: var(--cinza-claro);
+  }
+  .persp-card .img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .persp-card:hover .img-wrap img { transform: scale(1.04); }
+  .persp-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal-atto);
+    margin-bottom: 16px;
+  }
+  .persp-card h3 {
+    font-size: clamp(21px, 1.7vw, 26px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .persp-card:first-child h3 {
+    font-size: clamp(24px, 2.1vw, 32px);
+  }
+  .persp-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--cinza-medio);
+    text-transform: uppercase;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(10,14,26,0.12);
+  }
+
+  /* === CLIENTES (prova) === */
+  .clientes {
+    background: var(--papel);
+    padding: 140px 0 160px;
+    position: relative;
+    overflow: hidden;
+  }
+  .clientes .section-label { color: var(--cinza-medio); }
+  .clientes-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 80px;
+  }
+  .clientes-header h2 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: clamp(36px, 4.4vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--tinta);
+    max-width: 18ch;
+  }
+  .clientes-header h2 em {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--azul-atto);
+  }
+  .clientes-header .clientes-lede {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--cinza-escuro);
+    max-width: 40ch;
+    padding-bottom: 8px;
+  }
+  .clientes-header .clientes-lede strong {
+    color: var(--tinta);
+    font-weight: 600;
+  }
+  .logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2px;
+    background: rgba(10, 14, 26, 0.08);
+    border: 1px solid rgba(10, 14, 26, 0.08);
+  }
+  .logo-cell {
+    background: var(--papel);
+    aspect-ratio: 3 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 24px;
+    transition: background 0.35s ease;
+  }
+  .logo-cell img {
+    max-width: 100%;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%) contrast(0.95) brightness(0.6);
+    opacity: 0.72;
+    transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+  }
+  .logo-cell:hover {
+    background: #fff;
+  }
+  .logo-cell:hover img {
+    filter: grayscale(0%) contrast(1) brightness(1);
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  .clientes-footnote {
+    margin-top: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 1px solid rgba(10, 14, 26, 0.12);
+  }
+  .clientes-footnote p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--cinza-escuro);
+    max-width: 56ch;
+  }
+  .clientes-footnote a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--azul-atto);
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+  }
+  .clientes-footnote a:hover { color: var(--teal-atto); }
+  @media (max-width: 900px) {
+    .clientes-header { grid-template-columns: 1fr; gap: 32px; }
+    .logos-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+  }
+
+  /* === AGENDAR === */
+  .agendar {
+    background: var(--azul-noite);
+    color: #fff;
+    padding: 180px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .agendar-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2400&q=80');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.12;
+    z-index: 0;
+    filter: grayscale(40%);
+  }
+  .agendar-inner {
+    position: relative; z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+  .agendar .section-label { color: var(--teal-atto); }
+  .agendar .section-label::before { background: var(--teal-atto); }
+  .agendar h2 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    font-size: clamp(36px, 4.8vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 40px;
+    max-width: 20ch;
+  }
+  .agendar h2 em {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--teal-atto);
+  }
+  .agendar p.lead {
+    font-size: 19px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.8);
+    max-width: 62ch;
+    margin-bottom: 64px;
+  }
+  .agendar-actions {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .agendar .btn-primary {
+    background: var(--teal-atto);
+    color: var(--azul-noite);
+  }
+  .agendar .btn-primary:hover {
+    background: #fff;
+    color: var(--azul-noite);
+  }
+  .agendar .btn-ghost { color: #fff; }
+  .agendar-contact {
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .contact-block .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 10px;
+  }
+  .contact-block .value {
+    font-size: 16px;
+    color: #fff;
+  }
+  @media (max-width: 768px) {
+    .agendar-contact { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  /* === FOOTER === */
+  footer {
+    background: var(--azul-noite);
+    color: rgba(255,255,255,0.7);
+    padding: 80px 0 40px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 64px;
+  }
+  .footer-brand .footer-logo {
+    display: block;
+    margin-bottom: 24px;
+    line-height: 0;
+  }
+  .footer-brand .footer-logo img {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+  .footer-brand p {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 32ch;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-col h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 24px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 12px; }
+  .footer-col a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--teal-atto); }
+  .footer-bottom {
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  @media (max-width: 900px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { grid-template-columns: 1fr; }
+  }
+
+  .dev-note {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    background: var(--tinta);
+    color: var(--papel);
+    padding: 10px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 999;
+    opacity: 0.7;
+    border-radius: 2px;
+  }
+</style>
+<meta name="description" content="Consultoria executiva para empresas familiares e médias do Sul do Brasil. Direção estratégica, performance financeira, pessoas &amp; liderança e M&amp;A advisory com método e cadência mensal.">
+<meta name="author" content="Atto Estratégias & Educação">
+<meta name="theme-color" content="#1A3A8F">
+<link rel="canonical" href="https://www.gestaoatto.com.br/">
+<link rel="icon" type="image/png" href="assets/atto_logo_dark_sm.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Atto Estratégias">
+<meta property="og:title" content="Atto Estratégias — Direção, Finanças, Pessoas e M&amp;A para empresas que querem crescer com método">
+<meta property="og:description" content="Consultoria executiva para empresas familiares e médias do Sul do Brasil. Direção estratégica, performance financeira, pessoas &amp; liderança e M&amp;A advisory com método e cadência mensal.">
+<meta property="og:url" content="https://www.gestaoatto.com.br/">
+<meta property="og:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Atto Estratégias — Direção, Finanças, Pessoas e M&amp;A para empresas que querem crescer com método">
+<meta name="twitter:description" content="Consultoria executiva para empresas familiares e médias do Sul do Brasil. Direção estratégica, performance financeira, pessoas &amp; liderança e M&amp;A advisory com método e cadência mensal.">
+<meta name="twitter:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Atto Estratégias & Educação",
+  "url": "https://www.gestaoatto.com.br",
+  "logo": "https://www.gestaoatto.com.br/assets/atto_logo_dark.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Caxias do Sul",
+    "addressRegion": "RS",
+    "addressCountry": "BR"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/atto-estrategias"
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+</head>
+<body>
+
+<header id="siteHeader" class="on-dark">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-mark" aria-label="Atto Estratégias">
+      <img class="logo-light" src="assets/atto_logo_light_sm.png" alt="Atto Estratégias" />
+      <img class="logo-dark" src="assets/atto_logo_dark_sm.png" alt="Atto Estratégias" />
+    </a>
+    <nav>
+      <a href="metodo.html">Método</a>
+      <a href="atuacao.html">Atuação</a>
+      <a href="perspectivas.html">Perspectivas</a>
+      <a href="sobre.html">A Atto</a>
+      <a href="contato.html#agendar" class="cta-nav">Agende conversa <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <div class="hero-eyebrow">Boutique de estruturação empresarial · desde 2019</div>
+    <h1>Do caos para<br>o <em>método</em>.</h1>
+    <p class="hero-sub">Estruturamos empresas médias para operar com número, decidir com clareza e chegar prontas ao próximo ciclo — incluindo M&amp;A.</p>
+    <div class="hero-actions">
+      <a href="contato.html#agendar" class="btn-primary">Agendar diagnóstico <span class="arrow">→</span></a>
+      <a href="metodo.html" class="btn-ghost">Conheça o método <span class="arrow">↓</span></a>
+    </div>
+  </div>
+  <div class="hero-meta">
+    Caxias do Sul / RS<br>
+    Atuação nacional
+  </div>
+</section>
+
+<!-- MOMENTO (reconhecimento editorial da dor do leitor) -->
+<section class="momento">
+  <div class="container">
+    <div class="momento-grid">
+      <div class="momento-left">
+        <div class="section-label" style="color: var(--teal-atto);">Onde você está agora</div>
+        <h2 class="momento-title">A empresa<br>ultrapassou <em>o<br>jeito</em> de operar.</h2>
+      </div>
+      <div class="momento-right">
+        <p class="momento-lead">Você montou esse negócio à mão. Conhece cada cliente, cada fornecedor, cada linha do caixa. E num certo dia percebeu: o jeito que sempre funcionou começou a falhar.</p>
+        <ul class="momento-list">
+          <li><span>→</span> A reunião de sócios gira, mas não fecha.</li>
+          <li><span>→</span> O DRE contábil não diz onde a margem está vazando.</li>
+          <li><span>→</span> O time espera sua decisão para cada escolha do dia.</li>
+          <li><span>→</span> Aparece uma proposta de compra e você não sabe o que a empresa vale.</li>
+        </ul>
+        <p class="momento-close"><strong>Não é a sua empresa que é menor.</strong> É o método que ficou pequeno para o próximo ciclo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUÇÕES -->
+<section class="solucoes" id="solucoes">
+  <div class="container">
+    <div class="section-label">01 / Soluções</div>
+    <div class="sol-intro">
+      <h2 class="section-title">Quatro frentes.<br>Uma tese comum:<br><strong>decisão baseada em método.</strong></h2>
+      <div class="sol-intro-text">
+        <p>A Atto trabalha em três pilares integrados que sustentam o crescimento da empresa média — e em uma frente dedicada de M&amp;A Advisory, quando o ciclo pede a próxima fase.</p>
+      </div>
+    </div>
+
+    <div class="sol-list">
+      <a class="sol-item" href="direcao-estrategica.html">
+        <div class="sol-number">01</div>
+        <div class="sol-headline">
+          <div class="sol-kicker">Direção Estratégica</div>
+          <h3>Volte a pensar a empresa — <em>não a apagar incêndio</em>.</h3>
+        </div>
+        <div class="sol-body">
+          <p class="sol-lead">Existe um momento em que todo sócio que cresce percebe a mesma coisa: virou refém do próprio negócio. Cada decisão passa por ele, cada cliente exige seu nome na linha, cada crise aterrissa na sua agenda. A Atto reconstrói essa equação — instalando a camada de governança que devolve pro sócio a coisa mais escassa do negócio: tempo para pensar o próximo ciclo, em vez de reagir ao próximo problema.</p>
+          <p class="sol-outcome"><span>O que muda na sua agenda</span>Você volta a olhar dois anos à frente. A empresa passa a andar pela pauta da estratégia, não pela urgência do dia. O próximo movimento é escolhido — não improvisado.</p>
+          <ul class="sol-bullets">
+            <li>Planejamento estratégico com horizonte de 3 anos</li>
+            <li>Rotina de Direção trimestral com ata e responsável</li>
+            <li>Painel executivo de pilotagem do negócio</li>
+          </ul>
+          <div class="sol-more">Saiba mais sobre Direção Estratégica →</div>
+        </div>
+        <div class="sol-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></div>
+      </a>
+
+      <a class="sol-item" href="performance-financeira.html">
+        <div class="sol-number">02</div>
+        <div class="sol-headline">
+          <div class="sol-kicker">Performance Financeira</div>
+          <h3>A clareza que transforma ansiedade em <em>decisão cirúrgica</em>.</h3>
+        </div>
+        <div class="sol-body">
+          <p class="sol-lead">Empresa média que cresce rápido chega num ponto doloroso — o mês fecha com faturamento recorde e, no final do ano, o resultado não aparece. A Atto reconstrói a leitura por dentro. Cada linha do negócio ganha cor: a que gera caixa de verdade, a que só gera volume, a que queima margem sem ninguém ver. Você passa a enxergar o próprio negócio com a nitidez que ele sempre mereceu — e a dormir sem a ansiedade do dia 20.</p>
+          <p class="sol-outcome"><span>O que muda na sua cabeça</span>Decisão sai do feeling e vira método. Preço certo, cliente certo, dinheiro no tempo certo. A previsibilidade que parecia privilégio de multinacional passa a ser a rotina da sua casa.</p>
+          <ul class="sol-bullets">
+            <li>Modelo de rentabilidade por produto, cliente e canal</li>
+            <li>Previsibilidade de caixa em horizonte de 90 dias</li>
+            <li>Comitê mensal de performance instalado</li>
+          </ul>
+          <div class="sol-more">Saiba mais sobre Performance Financeira →</div>
+        </div>
+        <div class="sol-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></div>
+      </a>
+
+      <a class="sol-item" href="pessoas-lideranca.html">
+        <div class="sol-number">03</div>
+        <div class="sol-headline">
+          <div class="sol-kicker">Pessoas &amp; Liderança</div>
+          <h3>O time certo, no lugar certo — <em>antes de você precisar</em>.</h3>
+        </div>
+        <div class="sol-body">
+          <p class="sol-lead">O próximo ciclo da empresa não é uma questão de contratar mais gente. É uma questão de contratar o tipo certo de gente — e desenvolver dentro de casa a liderança que vai tocar o salto. A Atto desenha a arquitetura humana a partir da estratégia do negócio: quais capacidades precisam existir, quem precisa vir de fora, quem precisa crescer de dentro. Operamos Recrutamento &amp; Seleção com filtro técnico e cultural, e instalamos o programa <strong>Líderes em Campo</strong> — formando a geração que vai assumir as áreas.</p>
+          <p class="sol-outcome"><span>O que muda no seu time</span>Você para de apagar vagas com urgência. O time cresce pelo tipo certo de gente. A liderança que o próximo ciclo exige já está sendo formada aqui dentro — antes de faltar.</p>
+          <ul class="sol-bullets">
+            <li>Arquitetura humana alinhada à estratégia do negócio</li>
+            <li>Recrutamento &amp; Seleção com filtro técnico e cultural</li>
+            <li>Líderes em Campo — formação em 3 níveis</li>
+          </ul>
+          <div class="sol-more">Saiba mais sobre Pessoas &amp; Liderança →</div>
+        </div>
+        <div class="sol-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></div>
+      </a>
+
+      <a class="sol-item sol-item--highlight" href="governanca-ma.html">
+        <div class="sol-number">04</div>
+        <div class="sol-headline">
+          <div class="sol-kicker">Governança &amp; M&amp;A <span class="sol-tag">Frente dedicada</span></div>
+          <h3>Pronto para <em>qualquer próximo ciclo</em> — no seu tempo, pelas suas regras.</h3>
+        </div>
+        <div class="sol-body">
+          <p class="sol-lead">A maioria das empresas médias brasileiras é governada por acordos tácitos e conversas de almoço. Funciona — até o dia em que aparece o primeiro evento grande: uma proposta de compra, a entrada de um novo sócio, uma discussão de sucessão, uma oportunidade de consolidação. Nessa hora, quem não tem governança perde o controle da própria história.</p>
+          <p class="sol-lead">A Atto instala a camada que a maioria não teve tempo de construir — conselho com regras claras, holding organizada, acordo de sócios escrito, sucessão prevista, controles documentados. E quando o momento de M&amp;A chega (venda, aquisição, captação ou entrada estratégica), você não improvisa: entra na mesa com <strong>dossiê auditável, valuation sustentado e o controle do processo com você</strong> — não com o comprador.</p>
+          <p class="sol-outcome"><span>O que muda no seu legado</span>A empresa deixa de depender exclusivamente do fundador para continuar existindo. O próximo ciclo acontece no seu tempo, pelas suas regras — e com o valor real do negócio preservado.</p>
+          <ul class="sol-bullets">
+            <li>Conselho consultivo ou administrativo estruturado</li>
+            <li>Holding, acordo de sócios e governança familiar</li>
+            <li>Preparação M&amp;A: due diligence, valuation, teaser cego</li>
+            <li>Condução do processo até a LOI</li>
+          </ul>
+          <div class="sol-more">Saiba mais sobre Governança &amp; M&amp;A →</div>
+        </div>
+        <div class="sol-arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 12L12 4M12 4H5M12 4V11"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MÉTODO -->
+<section class="metodo" id="metodo">
+  <div class="container">
+    <div class="section-label">02 / Método</div>
+    <h2 class="section-title">O jeito Atto<br>de começar:<br><strong>Diagnóstico 90 dias.</strong></h2>
+
+    <div class="metodo-grid">
+      <div class="metodo-step">
+        <div class="step-num">01</div>
+        <div class="step-label">Mês 1</div>
+        <div class="step-title">Leitura</div>
+        <p class="step-desc">Mergulhamos nos dados, entrevistamos time e sócios, observamos a rotina atual. Saímos com o diagnóstico dos cinco gargalos que mais limitam o crescimento.</p>
+      </div>
+      <div class="metodo-step">
+        <div class="step-num">02</div>
+        <div class="step-label">Mês 2</div>
+        <div class="step-title">Desenho</div>
+        <p class="step-desc">Construímos o mapa de prioridades, calibramos o modelo financeiro e testamos hipóteses com o time. O plano ganha forma com números que fecham.</p>
+      </div>
+      <div class="metodo-step">
+        <div class="step-num">03</div>
+        <div class="step-label">Mês 3</div>
+        <div class="step-title">Entrega</div>
+        <p class="step-desc">Fechamos o plano de 12 meses, a governança, os KPIs. No dia 91, a rotina mensal da Atto já está rodando dentro da empresa.</p>
+      </div>
+    </div>
+
+    <div class="metodo-footer">
+      <p>Depois dos 90 dias, a Atto fica — em rotina mensal de governança — enquanto o resultado se sustenta. O método segue sendo calibrado para a sua empresa, a cada ciclo.</p>
+      <a href="#" class="btn-ghost">Entender o método <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- TESE EDITORIAL -->
+<section class="tese">
+  <div class="tese-inner">
+    <div class="section-label">03 / Perspectiva</div>
+    <blockquote class="tese-quote">"Empresa média que cresce rápido bate num teto de método — não de mercado. Até um certo ponto, o jeito do sócio resolve. Depois, precisa virar sistema."</blockquote>
+    <div class="tese-attr">Tese editorial Atto · 2026</div>
+    <p class="tese-para">É pra esse ponto exato que a gente entra. Não para <strong>acelerar</strong> a empresa que já anda sozinha, nem para <strong>salvar</strong> a que está em crise. Para <strong>estruturar</strong> a empresa que já provou o modelo e agora precisa organizar o próximo ciclo — incluindo M&amp;A.</p>
+  </div>
+</section>
+
+<!-- PERSPECTIVAS -->
+<section class="perspectivas" id="perspectivas">
+  <div class="container">
+    <div class="persp-header">
+      <div>
+        <div class="section-label">04 / Perspectivas</div>
+        <h2 class="section-title">O que andamos<br><strong>pensando.</strong></h2>
+      </div>
+      <a href="#" class="btn-ghost btn-ghost--dark">Ver todas as perspectivas <span class="arrow">→</span></a>
+    </div>
+
+    <div class="persp-grid">
+      <article class="persp-card">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80" alt="Empresa familiar" loading="lazy">
+        </div>
+        <div class="persp-tag">Empresa familiar</div>
+        <h3>Quando a segunda geração entra — e a empresa precisa virar sistema para aguentar.</h3>
+        <div class="persp-meta">Perspectiva · Abril 2026 · 8 min</div>
+      </article>
+
+      <article class="persp-card">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" alt="M&A Advisory" loading="lazy">
+        </div>
+        <div class="persp-tag">M&amp;A</div>
+        <h3>O que a empresa média precisa organizar antes de aceitar a primeira proposta.</h3>
+        <div class="persp-meta">Perspectiva · Março 2026 · 6 min</div>
+      </article>
+
+      <article class="persp-card">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80" alt="Finanças & Performance" loading="lazy">
+        </div>
+        <div class="persp-tag">Finanças</div>
+        <h3>RQS: a métrica que separa receita boa de receita que dá trabalho.</h3>
+        <div class="persp-meta">Perspectiva · Março 2026 · 5 min</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="clientes" id="clientes">
+  <div class="container">
+    <div class="section-label">05 / Prova</div>
+    <div class="clientes-header">
+      <h2>Clientes que aprovam <em>o método</em>.</h2>
+      <p class="clientes-lede">Indústrias, distribuidoras e empresas familiares que abriram a casa, rodaram a metodologia da Atto e <strong>autorizaram falar sobre o processo</strong>. A tese sustentada por nome e logo — não por adjetivo.</p>
+    </div>
+    <div class="logos-grid">
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Acrilys.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Ábile_Componentes.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Biometria.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Braslux.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/CLP_Automação_Industrial.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Cappeletti.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Cobra_Correntes.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Dinamics.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Franzoi.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/ING.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Motronics.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Opus.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Perfiltec.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Saluto.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Solferti.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Sulvisual.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Track.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Tutto.png" alt="Cliente Atto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_silhuetas/Zenit.png" alt="Cliente Atto" /></div>
+    </div>
+    <div class="clientes-footnote">
+      <p>Cada cliente listado autorizou uso público do logo. Depoimentos nominais e casos resumidos estão na página <strong>Clientes que aprovam o método</strong> — junto com o recorte setorial de cada operação.</p>
+      <a href="#">Ver todos os depoimentos <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDAR -->
+<section class="agendar" id="agendar">
+  <div class="agendar-bg"></div>
+  <div class="agendar-inner">
+    <div class="section-label">06 / Conversa</div>
+    <h2>Trinta minutos com o time.<br><em>Sem pitch.</em></h2>
+    <p class="lead">Agende uma leitura honesta do seu cenário. Você sai da conversa com uma perspectiva clara sobre o que faz sentido no seu momento — independentemente de virar projeto com a Atto.</p>
+    <div class="agendar-actions">
+      <a href="contato.html#agendar" class="btn-primary">Agendar conversa <span class="arrow">→</span></a>
+      <a href="#" class="btn-ghost">Receber Newsletter Atto <span class="arrow">→</span></a>
+    </div>
+
+    <div class="agendar-contact">
+      <div class="contact-block">
+        <div class="label">E-mail</div>
+        <div class="value">contato@gestaoatto.com.br</div>
+      </div>
+      <div class="contact-block">
+        <div class="label">Sede</div>
+        <div class="value">Caxias do Sul / RS</div>
+      </div>
+      <div class="contact-block">
+        <div class="label">Atuação</div>
+        <div class="value">Nacional · empresas médias</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo" aria-label="Atto Estratégias">
+          <img src="assets/atto_logo_dark.png" alt="Atto Estratégias" />
+        </a>
+        <p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS. Atuação nacional em empresas médias.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Método</h5>
+        <ul>
+          <li><a href="metodo.html">Como trabalhamos</a></li>
+          <li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li>
+          <li><a href="rotina-mensal.html">Rotina mensal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Soluções</h5>
+        <ul>
+          <li><a href="direcao-estrategica.html">Direção Estratégica</a></li>
+          <li><a href="performance-financeira.html">Finanças &amp; Performance</a></li>
+          <li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li>
+          <li><a href="governanca-ma.html">M&amp;A Advisory</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Indústrias</h5>
+        <ul>
+          <li><a href="industria-manufatura.html">Indústria e Manufatura</a></li>
+          <li><a href="comercio-distribuicao.html">Comércio e Distribuição</a></li>
+          <li><a href="atuacao.html">Empresas Familiares</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>A Atto</h5>
+        <ul>
+          <li><a href="sobre.html">Quem somos</a></li>
+          <li><a href="perspectivas.html">Perspectivas</a></li>
+          <li><a href="#">Carreiras</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Atto Estratégias &amp; Educação Empresarial · Todos os direitos reservados</div>
+      <div>Política de privacidade · Termos de uso</div>
+    </div>
+  </div>
+</footer>
+
+<div class="dev-note">Mockup v2 — editorial</div>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  const hero = document.querySelector('.hero');
+  const darkSections = document.querySelectorAll('.metodo, .agendar');
+
+  function updateHeader() {
+    const heroRect = hero.getBoundingClientRect();
+    const inHero = heroRect.bottom > 80;
+    let inDark = false;
+    darkSections.forEach(s => {
+      const r = s.getBoundingClientRect();
+      if (r.top < 80 && r.bottom > 80) inDark = true;
+    });
+    header.classList.toggle('on-dark', inHero || inDark);
+  }
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  window.addEventListener('resize', updateHeader);
+  updateHeader();
+</script>
+
+</body>
+</html>

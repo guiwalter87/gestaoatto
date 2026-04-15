@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Contato — Agende uma conversa com a Atto</title>
+<meta name="description" content="Agendar conversa confidencial. 30 minutos com um dos sócios. Sigilo antes, durante e depois." />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+.contato-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;padding:40px 0 140px;align-items:start}
+
+.form-card{background:#fff;border:1px solid var(--linha);padding:56px 48px;border-radius:2px}
+.form-card h3{font-family:'Outfit';font-weight:300;font-size:28px;color:var(--tinta);margin-bottom:8px;letter-spacing:-.01em}
+.form-card .sub{font-size:15px;color:var(--cinza-escuro);margin-bottom:40px;line-height:1.6}
+
+.field{margin-bottom:24px}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:10px}
+.field input,.field textarea,.field select{width:100%;border:none;border-bottom:1px solid var(--linha);background:transparent;padding:12px 0;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;color:var(--tinta);transition:border-color .2s;border-radius:0}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-bottom-color:var(--azul-atto)}
+.field textarea{resize:vertical;min-height:100px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.field-check{display:flex;gap:12px;align-items:flex-start;margin-bottom:24px;font-size:14px;color:var(--cinza-escuro);line-height:1.55}
+.field-check input{width:16px;height:16px;margin-top:2px;accent-color:var(--azul-atto)}
+.form-card button{width:100%;margin-top:16px;background:var(--azul-noite);color:#fff;border:none;padding:20px 32px;font-family:'Outfit';font-weight:500;font-size:15px;letter-spacing:.01em;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;justify-content:center;gap:12px;transition:background .2s}
+.form-card button:hover{background:var(--azul-atto)}
+.form-card button .arrow{transition:transform .2s}
+.form-card button:hover .arrow{transform:translateX(4px)}
+
+.info-side h2{font-family:'Outfit';font-weight:200;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:24px}
+.info-side h2 em{font-style:italic;color:var(--azul-atto)}
+.info-side .intro{font-size:17px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:48px;max-width:46ch}
+.info-block{padding:28px 0;border-top:1px solid var(--linha)}
+.info-block:last-child{border-bottom:1px solid var(--linha)}
+.info-block h5{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:12px}
+.info-block .valor{font-family:'Outfit';font-weight:400;font-size:20px;color:var(--tinta);margin-bottom:4px;letter-spacing:-.01em}
+.info-block .valor a{color:inherit;border-bottom:1px solid transparent;transition:border-color .2s}
+.info-block .valor a:hover{border-bottom-color:var(--azul-atto);color:var(--azul-atto)}
+.info-block .sub{font-size:14px;color:var(--cinza-medio);line-height:1.5}
+
+.confid{padding:60px 0 80px}
+.confid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.confid-bloco{border-top:2px solid var(--teal-atto);padding:24px 0}
+.confid-bloco h5{font-family:'Outfit';font-weight:400;font-size:20px;color:var(--tinta);margin-bottom:12px;letter-spacing:-.01em}
+.confid-bloco p{font-size:15px;line-height:1.65;color:var(--cinza-escuro)}
+
+@media (max-width:900px){
+  .contato-grid{grid-template-columns:1fr;gap:48px}
+  .field-row{grid-template-columns:1fr;gap:0}
+  .confid-grid{grid-template-columns:1fr;gap:16px}
+  .form-card{padding:40px 28px}
+}
+</style>
+<meta name="description" content="Agende uma conversa de 30 minutos com nossos sócios. Atendemos empresas em todo o Brasil a partir de Caxias do Sul.">
+<meta name="author" content="Atto Estratégias & Educação">
+<meta name="theme-color" content="#1A3A8F">
+<link rel="canonical" href="https://www.gestaoatto.com.br/contato.html">
+<link rel="icon" type="image/png" href="assets/atto_logo_dark_sm.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Atto Estratégias">
+<meta property="og:title" content="Contato — Agende uma conversa com a Atto">
+<meta property="og:description" content="Agende uma conversa de 30 minutos com nossos sócios. Atendemos empresas em todo o Brasil a partir de Caxias do Sul.">
+<meta property="og:url" content="https://www.gestaoatto.com.br/contato.html">
+<meta property="og:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contato — Agende uma conversa com a Atto">
+<meta name="twitter:description" content="Agende uma conversa de 30 minutos com nossos sócios. Atendemos empresas em todo o Brasil a partir de Caxias do Sul.">
+<meta name="twitter:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Atto Estratégias & Educação",
+  "url": "https://www.gestaoatto.com.br",
+  "logo": "https://www.gestaoatto.com.br/assets/atto_logo_dark.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Caxias do Sul",
+    "addressRegion": "RS",
+    "addressCountry": "BR"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/atto-estrategias"
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-mark"><img class="logo-light" src="assets/atto_logo_light_sm.png" alt="Atto" /><img class="logo-dark" src="assets/atto_logo_dark_sm.png" alt="Atto" /></a>
+    <nav>
+      <a href="metodo.html">Método</a>
+      <a href="atuacao.html">Atuação</a>
+      <a href="perspectivas.html">Perspectivas</a>
+      <a href="sobre.html">A Atto</a>
+      <a href="contato.html#agendar" class="cta-nav">Agende conversa <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="breadcrumb"><span class="current">Contato</span></div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="kicker">Contato · Conversa confidencial</div>
+    <h1>30 minutos. <em>Sigilo antes</em>, durante e depois.</h1>
+    <p class="lead">A primeira conversa com a Atto é técnica, gratuita e sob sigilo absoluto. Nenhum dado compartilhado por você é usado em qualquer outro contexto sem autorização escrita — inclusive o fato de que a conversa aconteceu. É dessa forma que operamos há sete anos.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="contato-grid">
+
+      <div class="form-card">
+        <h3>Agende uma conversa.</h3>
+        <p class="sub">Resposta em até 1 dia útil. Encaminhamos convite de agenda com dois horários sugeridos — videoconferência ou presencial em Caxias, conforme sua preferência.</p>
+
+        <form onsubmit="event.preventDefault();alert('Este é um mockup. Em produção, o formulário envia via email / CRM.')">
+          <div class="field-row">
+            <div class="field">
+              <label>Nome completo</label>
+              <input type="text" required placeholder="Seu nome" />
+            </div>
+            <div class="field">
+              <label>Cargo</label>
+              <input type="text" placeholder="Ex.: Sócio-diretor" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Empresa</label>
+              <input type="text" required placeholder="Nome da empresa" />
+            </div>
+            <div class="field">
+              <label>Cidade / UF</label>
+              <input type="text" placeholder="Ex.: Caxias do Sul / RS" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Email corporativo</label>
+              <input type="email" required placeholder="voce@empresa.com.br" />
+            </div>
+            <div class="field">
+              <label>WhatsApp</label>
+              <input type="tel" placeholder="(00) 00000-0000" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Assunto principal</label>
+            <select>
+              <option>Diagnóstico 90 dias</option>
+              <option>Direção Estratégica</option>
+              <option>Performance Financeira</option>
+              <option>Pessoas &amp; Liderança</option>
+              <option>Governança &amp; M&amp;A (confidencial)</option>
+              <option>Sucessão / conselho consultivo</option>
+              <option>Trabalhar na Atto</option>
+              <option>Imprensa / parceria editorial</option>
+              <option>Outro assunto</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Conte brevemente o contexto</label>
+            <textarea placeholder="Em até 3 parágrafos: o que está na mesa, qual sua hipótese sobre o gargalo, o que você gostaria de discutir na conversa."></textarea>
+          </div>
+
+          <div class="field-check">
+            <input type="checkbox" required id="conf" />
+            <label for="conf" style="font-family:inherit;font-size:14px;letter-spacing:0;text-transform:none;color:var(--cinza-escuro);margin:0">Autorizo a Atto a entrar em contato por email ou telefone. Os dados enviados são tratados sob sigilo e não são compartilhados com terceiros. <a href="#" style="color:var(--azul-atto);border-bottom:1px solid var(--azul-atto)">Política de privacidade</a>.</label>
+          </div>
+
+          <button type="submit">Agendar conversa confidencial <span class="arrow">→</span></button>
+        </form>
+      </div>
+
+      <div class="info-side">
+        <h2>Outras formas de <em>nos encontrar</em>.</h2>
+        <p class="intro">Se preferir conversa direta antes de preencher o formulário — ou se o assunto pede outro canal —, os contatos estão aqui. Nenhum deles é atendido por bot.</p>
+
+        <div class="info-block">
+          <h5>Email institucional</h5>
+          <div class="valor"><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></div>
+          <div class="sub">Triado pelos sócios · resposta em até 1 dia útil</div>
+        </div>
+
+        <div class="info-block">
+          <h5>Contato direto · Sócio-diretor</h5>
+          <div class="valor"><a href="mailto:guilherme.walter@gestaoatto.com.br">guilherme.walter@gestaoatto.com.br</a></div>
+          <div class="sub">Guilherme Walter · Direção Estratégica · Governança &amp; M&amp;A</div>
+        </div>
+
+        <div class="info-block">
+          <h5>Contato direto · Sócio</h5>
+          <div class="valor"><a href="mailto:juliano.walter@gestaoatto.com.br">juliano.walter@gestaoatto.com.br</a></div>
+          <div class="sub">Juliano Walter · Gestão &amp; Finanças</div>
+        </div>
+
+        <div class="info-block">
+          <h5>Telefones</h5>
+          <div class="valor">+55 (51) 99333-3826</div>
+          <div class="sub">Guilherme Walter</div>
+          <div class="valor" style="margin-top:12px">+55 (54) 99624-5417</div>
+          <div class="sub">Juliano Walter</div>
+        </div>
+
+        <div class="info-block">
+          <h5>Sede</h5>
+          <div class="valor">Rua Guerino Sanvitto, 704 · Sala 607</div>
+          <div class="sub">Caxias do Sul / RS · Atendimento com agendamento prévio</div>
+        </div>
+
+        <div class="info-block">
+          <h5>LinkedIn</h5>
+          <div class="valor"><a href="#">linkedin.com/company/atto-estrategias</a></div>
+          <div class="sub">Publicações institucionais e da plataforma Perspectivas</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="confid" style="background:var(--papel-alt)">
+  <div class="container">
+    <div class="section-label">Como tratamos sua informação</div>
+    <h2 class="section-title" style="margin-bottom:24px">Confidencialidade é <em>premissa</em> — não cláusula de contrato.</h2>
+    <p class="section-lead" style="max-width:62ch;margin-bottom:16px">A Atto opera com três princípios de tratamento de informação. Eles valem antes do contrato, durante a relação e depois que o trabalho termina — e não dependem de NDA para serem aplicados.</p>
+
+    <div class="confid-grid">
+      <div class="confid-bloco">
+        <h5>Sigilo por padrão</h5>
+        <p>Nenhuma informação de empresa potencial ou atendida é compartilhada com outros clientes, parceiros, imprensa ou em redes sociais — mesmo que o assunto pareça banal. O default é sempre o sigilo.</p>
+      </div>
+      <div class="confid-bloco">
+        <h5>NDA quando o caso pede</h5>
+        <p>Para conversas envolvendo sucessão, M&amp;A, conflito societário ou dados financeiros detalhados, assinamos NDA antes da primeira reunião técnica. Modelo padrão da Atto ou do cliente — o que for mais confortável.</p>
+      </div>
+      <div class="confid-bloco">
+        <h5>Aparição só com autorização</h5>
+        <p>Nome, logo, depoimento ou caso concreto do cliente só aparecem em materiais da Atto com autorização escrita. Casos anônimos preservam a empresa mesmo quando a história é contada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="container">
+    <h2>Prefere começar pelo <em>método</em> antes de conversar?</h2>
+    <p>Se ainda está avaliando, vale passar no método ou nas páginas de solução. A conversa fica mais produtiva quando as duas partes chegam com contexto.</p>
+    <div class="actions">
+      <a href="metodo.html" class="btn-primary">Ver o método <span class="arrow">→</span></a>
+      <a href="diagnostico-90-dias.html" class="btn-ghost">Ver Diagnóstico 90 dias <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p></div>
+      <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
+      <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li></ul></div>
+      <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
+      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="#">Política de privacidade</a> · <a href="#">Termos</a></div></div>
+  </div>
+</footer>
+<script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
+</body>
+</html>
