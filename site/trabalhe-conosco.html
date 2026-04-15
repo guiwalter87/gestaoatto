@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Trabalhe conosco — Carreiras na Atto Estratégias</title>
+<meta name="description" content="Como é trabalhar na Atto. Cultura da casa, primeiro ciclo de quem entra e cadastro de currículo para banco de talentos." />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+.cultura-blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding:40px 0}
+.cultura-bloco{background:#fff;border:1px solid var(--linha);padding:40px 32px;border-radius:2px}
+.cultura-bloco .cb-num{font-family:'Outfit';font-weight:200;font-size:48px;color:var(--teal-atto);line-height:1;margin-bottom:24px}
+.cultura-bloco h4{font-family:'Outfit';font-weight:300;font-size:22px;color:var(--tinta);margin-bottom:16px;letter-spacing:-.01em}
+.cultura-bloco p{font-size:15px;line-height:1.65;color:var(--cinza-escuro)}
+
+.cv-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;padding:40px 0 140px;align-items:start}
+.cv-side h2{font-family:'Outfit';font-weight:200;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:24px}
+.cv-side h2 em{font-style:italic;color:var(--azul-atto)}
+.cv-side .intro{font-size:17px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:40px;max-width:46ch}
+.cv-side ul{list-style:none;padding:0;margin:0}
+.cv-side li{padding:20px 0;border-top:1px solid var(--linha);display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.cv-side li:last-child{border-bottom:1px solid var(--linha)}
+.cv-side li .mark{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-atto)}
+.cv-side li .text{font-size:15px;line-height:1.6;color:var(--cinza-escuro)}
+.cv-side li .text strong{color:var(--tinta);font-weight:500}
+
+.form-card{background:#fff;border:1px solid var(--linha);padding:56px 48px;border-radius:2px}
+.form-card h3{font-family:'Outfit';font-weight:300;font-size:28px;color:var(--tinta);margin-bottom:8px;letter-spacing:-.01em}
+.form-card .sub{font-size:15px;color:var(--cinza-escuro);margin-bottom:40px;line-height:1.6}
+.field{margin-bottom:24px}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:10px}
+.field input,.field textarea,.field select{width:100%;border:none;border-bottom:1px solid var(--linha);background:transparent;padding:12px 0;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;color:var(--tinta);transition:border-color .2s;border-radius:0}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-bottom-color:var(--azul-atto)}
+.field textarea{resize:vertical;min-height:100px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.field-file{border:1px dashed var(--linha);padding:20px 16px;border-radius:2px;font-size:14px;color:var(--cinza-escuro)}
+.field-file input{padding:0;border:none;font-size:14px}
+.field-check{display:flex;gap:12px;align-items:flex-start;margin-bottom:24px;font-size:14px;color:var(--cinza-escuro);line-height:1.55}
+.field-check input{width:16px;height:16px;margin-top:2px;accent-color:var(--azul-atto)}
+.form-card button{width:100%;margin-top:16px;background:var(--azul-noite);color:#fff;border:none;padding:20px 32px;font-family:'Outfit';font-weight:500;font-size:15px;letter-spacing:.01em;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;justify-content:center;gap:12px;transition:background .2s}
+.form-card button:hover{background:var(--azul-atto)}
+.form-card button .arrow{transition:transform .2s}
+.form-card button:hover .arrow{transform:translateX(4px)}
+
+@media (max-width:900px){
+  .cv-grid{grid-template-columns:1fr;gap:48px}
+  .cultura-blocks{grid-template-columns:1fr;gap:16px}
+  .field-row{grid-template-columns:1fr;gap:0}
+  .form-card{padding:40px 28px}
+}
+</style>
+<meta name="description" content="Estamos sempre abertos a conversar com profissionais de consultoria, finanças, gente e dados. Conheça nossas oportunidades.">
+<meta name="author" content="Atto Estratégias & Educação">
+<meta name="theme-color" content="#1A3A8F">
+<link rel="canonical" href="https://www.gestaoatto.com.br/trabalhe-conosco.html">
+<link rel="icon" type="image/png" href="assets/atto_logo_dark_sm.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Atto Estratégias">
+<meta property="og:title" content="Trabalhe conosco — Carreiras na Atto Estratégias">
+<meta property="og:description" content="Estamos sempre abertos a conversar com profissionais de consultoria, finanças, gente e dados. Conheça nossas oportunidades.">
+<meta property="og:url" content="https://www.gestaoatto.com.br/trabalhe-conosco.html">
+<meta property="og:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trabalhe conosco — Carreiras na Atto Estratégias">
+<meta name="twitter:description" content="Estamos sempre abertos a conversar com profissionais de consultoria, finanças, gente e dados. Conheça nossas oportunidades.">
+<meta name="twitter:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Atto Estratégias & Educação",
+  "url": "https://www.gestaoatto.com.br",
+  "logo": "https://www.gestaoatto.com.br/assets/atto_logo_dark.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Caxias do Sul",
+    "addressRegion": "RS",
+    "addressCountry": "BR"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/atto-estrategias"
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-mark"><img class="logo-light" src="assets/atto_logo_light_sm.png" alt="Atto" /><img class="logo-dark" src="assets/atto_logo_dark_sm.png" alt="Atto" /></a>
+    <nav>
+      <a href="metodo.html">Método</a>
+      <a href="atuacao.html">Atuação</a>
+      <a href="perspectivas.html">Perspectivas</a>
+      <a href="sobre.html">A Atto</a>
+      <a href="contato.html#agendar" class="cta-nav">Agende conversa <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="breadcrumb"><a href="index.html">A Atto</a><span class="sep">/</span><a href="sobre.html">Quem somos</a><span class="sep">/</span><span class="current">Trabalhe conosco</span></div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="kicker">Carreira · Trabalhe conosco</div>
+    <h1>Boutique por escolha. <em>Carreira densa</em> por consequência.</h1>
+    <p class="lead">A Atto cresce devagar porque acredita que consultoria boa se faz com gente que entende do que está falando. Quem entra na casa trabalha ao lado dos sócios desde o primeiro dia, participa de reuniões reais com clientes, escreve, decide e é cobrado como sênior. Não tem camada intermediária entre quem pensa e quem executa.</p>
+    <p class="lead">Se você procura carreira linear em grande consultoria, este não é o lugar. Se procura aprender rápido, escrever com propriedade e construir método com os próprios dedos — o banco de talentos da Atto está aberto.</p>
+  </div>
+</section>
+
+<section class="sintomas" style="background:var(--papel-alt)">
+  <div class="container">
+    <div class="section-label">Cultura</div>
+    <div class="sintomas-grid">
+      <h3>Como <em>é de fato</em> trabalhar na Atto.</h3>
+      <ul class="sintomas-list">
+        <li><span class="num">01</span><span><strong>Mão na massa desde cedo.</strong> Analista Sênior conversa direto com sócio do cliente. Estagiário escreve documento que o sócio da Atto assina. Zero camada intermediária.</span></li>
+        <li><span class="num">02</span><span><strong>Escrita é parte do trabalho.</strong> Todo entregável técnico passa por edição — e boa parte do time publica em Perspectivas. Consultoria sem escrita é consultoria rasa.</span></li>
+        <li><span class="num">03</span><span><strong>Aprendizado formal garantido.</strong> 10% do tempo contratado é para leitura, estudo e formação. Livros e cursos são custeados pela casa quando aplicáveis ao trabalho.</span></li>
+        <li><span class="num">04</span><span><strong>Trajetória negociada.</strong> Não existe carreira em Y fixa. Quem quer ser consultor sênior, quem quer virar sócio e quem quer sair para virar CFO de cliente — todos são conversas recorrentes.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="entregas">
+  <div class="container">
+    <div class="section-label">Primeiros 100 dias</div>
+    <h2 class="section-title">O que <em>espera</em> quem entra na Atto.</h2>
+
+    <div class="cultura-blocks">
+      <div class="cultura-bloco">
+        <div class="cb-num">01</div>
+        <h4>Primeiras 4 semanas · Imersão no método.</h4>
+        <p>Integração no método: framework da Atto, padrões de entregável, leitura dos casos da casa, acompanhamento sombra de reuniões de cliente. Ao final do primeiro mês, você já entendeu como a casa pensa.</p>
+      </div>
+      <div class="cultura-bloco">
+        <div class="cb-num">02</div>
+        <h4>Semana 5 à 12 · Primeira frente.</h4>
+        <p>Entrada em uma frente de cliente ao lado de um sócio ou consultor sênior. Primeiros entregáveis assinados por você. Feedback semanal. Correção de rumo rápida — ninguém espera o trimestre para cobrar.</p>
+      </div>
+      <div class="cultura-bloco">
+        <div class="cb-num">03</div>
+        <h4>Pós-100 dias · Revisão e plano.</h4>
+        <p>Ao fim dos 100 dias, avaliação formal com os sócios. O que está funcionando, o que precisa mudar, para onde você quer crescer. O plano individual dos 12 meses seguintes é desenhado aqui.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="cv-grid">
+      <div class="cv-side">
+        <div class="section-label">Banco de talentos</div>
+        <h2>Envie seu <em>currículo</em>.</h2>
+        <p class="intro">A Atto mantém banco de talentos ativo para as áreas de Estratégias Empresariais, Gestão &amp; Finanças, Gente &amp; Gestão e R&amp;S. Quando há abertura, o banco é o primeiro canal consultado. Cadastre-se uma vez — usamos seu currículo quando houver aderência real ao momento da casa.</p>
+
+        <ul>
+          <li>
+            <span class="mark">01</span>
+            <span class="text"><strong>Resposta sob demanda.</strong> Não damos resposta automática. Entramos em contato quando uma frente se abre com aderência ao seu perfil — pode ser em semanas ou em meses.</span>
+          </li>
+          <li>
+            <span class="mark">02</span>
+            <span class="text"><strong>Sigilo garantido.</strong> Seu currículo não é compartilhado com clientes, parceiros ou terceiros. Fica restrito à mesa de R&amp;S da Atto.</span>
+          </li>
+          <li>
+            <span class="mark">03</span>
+            <span class="text"><strong>Conversa técnica no primeiro encontro.</strong> Quando chamamos, a primeira conversa já é técnica — não triagem. Vale vir preparado para falar sobre um case que você conduziu e por que ele importa.</span>
+          </li>
+          <li>
+            <span class="mark">04</span>
+            <span class="text"><strong>Reaplicação permitida.</strong> Se você já se cadastrou antes e o contexto mudou (nova certificação, projeto relevante, mudança de área de interesse), reenvie atualizando os dados. Mantemos o histórico.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-card">
+        <h3>Cadastro de currículo.</h3>
+        <p class="sub">Os campos abaixo alimentam o banco de talentos. Triagem feita pelos sócios da Atto.</p>
+
+        <form onsubmit="event.preventDefault();alert('Este é um mockup. Em produção, o formulário envia via email / CRM.')">
+          <div class="field-row">
+            <div class="field">
+              <label>Nome completo</label>
+              <input type="text" required placeholder="Seu nome" />
+            </div>
+            <div class="field">
+              <label>Data de nascimento</label>
+              <input type="date" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Email</label>
+              <input type="email" required placeholder="voce@email.com" />
+            </div>
+            <div class="field">
+              <label>WhatsApp</label>
+              <input type="tel" placeholder="(00) 00000-0000" />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Cidade / UF</label>
+              <input type="text" placeholder="Ex.: Caxias do Sul / RS" />
+            </div>
+            <div class="field">
+              <label>Formação</label>
+              <input type="text" placeholder="Ex.: Administração · UFRGS" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Área de interesse</label>
+            <select>
+              <option>Estratégias Empresariais</option>
+              <option>Gestão &amp; Finanças</option>
+              <option>Gente &amp; Gestão</option>
+              <option>Recrutamento &amp; Seleção</option>
+              <option>Dados &amp; Painéis</option>
+              <option>Estágio</option>
+              <option>Outra / múltiplas áreas</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Nível de experiência</label>
+            <select>
+              <option>Estagiário</option>
+              <option>Júnior (até 2 anos)</option>
+              <option>Pleno (3-5 anos)</option>
+              <option>Sênior (6+ anos)</option>
+              <option>Especialista / Consultor independente</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Currículo (PDF)</label>
+            <div class="field-file">
+              <input type="file" accept=".pdf,.doc,.docx" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Breve apresentação</label>
+            <textarea placeholder="Em até 3 parágrafos: trajetória, áreas de profundidade e por que a Atto faz sentido agora."></textarea>
+          </div>
+
+          <div class="field-check">
+            <input type="checkbox" required id="conf-cv2" />
+            <label for="conf-cv2" style="font-family:inherit;font-size:14px;letter-spacing:0;text-transform:none;color:var(--cinza-escuro);margin:0">Autorizo a Atto a armazenar meu currículo em banco de talentos. Os dados são tratados sob sigilo e não são compartilhados com terceiros. <a href="#" style="color:var(--azul-atto);border-bottom:1px solid var(--azul-atto)">Política de privacidade</a>.</label>
+          </div>
+
+          <button type="submit">Enviar currículo <span class="arrow">→</span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="prova">
+  <div class="container">
+    <div class="section-label">Prova pela tese</div>
+    <p class="prova-quote">Quem entra na Atto aprende em um ano o que levaria três em grande consultoria. A contrapartida é que aqui não tem onde se esconder — o trabalho é seu, o erro é seu, o crédito também.</p>
+    <div class="prova-meta">
+      <span class="name">Guilherme Walter</span>
+      <span>Sócio-diretor · Atto Estratégias</span>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="container">
+    <h2>Quer conhecer <em>a casa por dentro</em>?</h2>
+    <p>Café na sede, conversa com um dos sócios, tour pelo time técnico. Para quem está em processo de avaliação ou para quem só quer entender melhor como a Atto funciona.</p>
+    <div class="actions">
+      <a href="time.html" class="btn-primary">Ver o time <span class="arrow">→</span></a>
+      <a href="contato.html" class="btn-ghost">Agendar visita <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p></div>
+      <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
+      <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li></ul></div>
+      <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
+      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="#">Política de privacidade</a> · <a href="#">Termos</a></div></div>
+  </div>
+</footer>
+<script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
+</body>
+</html>
