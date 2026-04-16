@@ -391,183 +391,224 @@
     .sol-intro { grid-template-columns: 1fr; gap: 40px; }
   }
 
+  /* Layout editorial · sem caixas, tipografia protagonista */
   .sol-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    border-top: 1px solid var(--tinta);
-    border-left: 1px solid rgba(10, 14, 26, 0.15);
-  }
-  .sol-item {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    padding: 56px 48px 48px;
-    border-right: 1px solid rgba(10, 14, 26, 0.15);
-    border-bottom: 1px solid rgba(10, 14, 26, 0.15);
-    cursor: pointer;
-    transition: background 0.35s ease, color 0.35s ease;
+    border-top: 1px solid rgba(10, 14, 26, 0.12);
+  }
+  .sol-item {
+    display: grid;
+    grid-template-columns: minmax(200px, 26%) 1fr;
+    gap: clamp(40px, 6vw, 96px);
+    align-items: start;
+    padding: clamp(72px, 9vw, 120px) 0;
+    border-bottom: 1px solid rgba(10, 14, 26, 0.08);
     position: relative;
     color: var(--tinta);
-    isolation: isolate;
-    background: var(--papel);
-    min-height: 100%;
+    text-decoration: none;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: pointer;
   }
+  .sol-item::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 0;
+    height: 1px;
+    background: var(--teal-atto);
+    transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .sol-item:hover {
+    transform: translateX(6px);
+  }
+  .sol-item:hover::after {
+    width: 100%;
+  }
+
+  /* Card 4 · frente dedicada M&A */
   .sol-item--highlight {
-    background: linear-gradient(180deg, rgba(0,181,184,0.06) 0%, rgba(0,181,184,0.02) 100%);
+    background: radial-gradient(ellipse at 0% 50%, rgba(0, 181, 184, 0.055) 0%, transparent 55%);
+    margin: 0 calc(-1 * clamp(24px, 4vw, 60px));
+    padding-left: clamp(24px, 4vw, 60px);
+    padding-right: clamp(24px, 4vw, 60px);
   }
   .sol-item--highlight::before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 3px;
-    height: 100%;
-    background: var(--teal-atto);
-    z-index: 3;
-  }
-  .sol-item:hover { background: var(--tinta); color: var(--papel); }
-  .sol-item-head h3 { color: inherit; }
-  .sol-item:hover h3 { color: var(--papel); }
-  .sol-item:hover .sol-number { color: var(--teal-atto); }
-  .sol-item:hover .sol-bullets { color: rgba(245,243,238,0.6); }
-  .sol-item:hover .sol-kicker { color: var(--teal-atto); }
-  .sol-item:hover .sol-arrow {
-    background: var(--teal-atto);
-    color: var(--azul-noite);
-    border-color: var(--teal-atto);
-    transform: rotate(-45deg) scale(1.05);
-  }
-  .sol-item-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 32px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid rgba(10,14,26,0.12);
-    gap: 16px;
-  }
-  .sol-item:hover .sol-item-head {
-    border-bottom-color: rgba(245,243,238,0.2);
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 72px;
+    background: linear-gradient(180deg, var(--azul-atto), var(--teal-atto));
   }
 
+  /* Coluna esquerda · número + kicker */
+  .sol-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: sticky;
+    top: 140px;
+  }
   .sol-number {
     font-family: 'Outfit', sans-serif;
-    font-size: 44px;
+    font-size: clamp(104px, 13vw, 184px);
     font-weight: 200;
-    letter-spacing: -0.03em;
-    color: var(--azul-atto);
-    line-height: 1;
-    transition: color 0.35s;
+    line-height: 0.82;
+    letter-spacing: -0.055em;
+    background: linear-gradient(135deg, var(--azul-atto) 0%, var(--teal-atto) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    transform-origin: left bottom;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    margin-bottom: 4px;
+  }
+  .sol-item:hover .sol-number {
+    transform: scale(1.03);
   }
   .sol-kicker {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--cinza-medio);
-    margin-bottom: 16px;
-    transition: color 0.35s;
+    line-height: 1.5;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 12px;
-    flex-wrap: wrap;
   }
   .sol-tag {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
-    letter-spacing: 0.15em;
-    padding: 4px 10px;
+    letter-spacing: 0.18em;
+    padding: 5px 10px;
     background: var(--teal-atto);
     color: var(--azul-noite);
     border-radius: 2px;
     text-transform: uppercase;
     font-weight: 500;
+    align-self: flex-start;
   }
-  .sol-headline h3 {
-    font-size: clamp(24px, 2.6vw, 34px);
+
+  /* Coluna direita · conteúdo editorial */
+  .sol-content {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 62ch;
+  }
+  .sol-headline {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(28px, 3.2vw, 44px);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--tinta);
+    margin: 0;
+  }
+  .sol-headline em {
+    font-style: italic;
     font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 24px;
-    color: inherit;
+    color: var(--azul-atto);
   }
-  .sol-headline h3 em {
-    font-style: normal;
-    font-weight: 700;
-    color: var(--teal-atto);
-  }
-  .sol-item:hover .sol-kicker { color: rgba(245, 243, 238, 0.6); }
-  .sol-body { padding-top: 6px; }
-  .sol-body .sol-lead {
-    font-size: 17px;
-    line-height: 1.65;
-    margin-bottom: 20px;
-  }
-  .sol-body .sol-outcome {
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 28px;
-    padding-left: 16px;
-    border-left: 2px solid var(--teal-atto);
-    color: inherit;
-  }
-  .sol-body .sol-outcome span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--teal-atto);
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 500;
+  .sol-lead {
+    font-size: clamp(16px, 1.15vw, 18px);
+    line-height: 1.7;
+    color: var(--cinza-medio);
+    font-weight: 400;
+    margin: 0;
   }
   .sol-bullets {
     list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
-    letter-spacing: 0.04em;
-    color: var(--cinza-medio);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    transition: color 0.35s;
+    color: var(--cinza-medio);
   }
   .sol-bullets li {
-    padding: 8px 0;
-    border-top: 1px solid currentColor;
-    opacity: 0.75;
+    padding-left: 28px;
+    position: relative;
+    line-height: 1.5;
   }
-  .sol-bullets li:first-child { border-top: none; padding-top: 0; }
+  .sol-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 16px;
+    height: 1px;
+    background: var(--teal-atto);
+    transition: width 0.4s ease;
+  }
+  .sol-item:hover .sol-bullets li::before { width: 22px; }
 
-  .sol-more {
-    margin-top: 24px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--teal-atto);
-    font-weight: 500;
+  .sol-cta {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    transition: gap 0.35s ease;
+    gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--azul-atto);
+    font-weight: 500;
+    padding: 16px 0 0;
+    border-top: 1px solid rgba(10, 14, 26, 0.12);
+    margin-top: 12px;
+    align-self: flex-start;
+    position: relative;
+    transition: gap 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.35s;
   }
-  .sol-item:hover .sol-more { gap: 14px; }
-
-  .sol-arrow {
-    width: 48px; height: 48px;
-    border-radius: 50%;
-    border: 1px solid currentColor;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.35s;
-    align-self: center;
-    justify-self: end;
+  .sol-cta::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 0;
+    width: 40px;
+    height: 1px;
+    background: var(--teal-atto);
+    transition: width 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
+  .sol-cta .arrow {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .sol-item:hover .sol-cta {
+    gap: 18px;
+    color: var(--teal-atto);
+  }
+  .sol-item:hover .sol-cta::before { width: 100%; }
+  .sol-item:hover .sol-cta .arrow { transform: translateX(4px); }
 
   @media (max-width: 900px) {
-    .sol-list { grid-template-columns: 1fr; }
-    .sol-item { padding: 40px 28px; }
+    .sol-item {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 64px 0;
+    }
+    .sol-aside {
+      position: static;
+      gap: 12px;
+    }
+    .sol-number {
+      font-size: 88px;
+    }
+    .sol-item--highlight {
+      margin: 0 -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .sol-item:hover { transform: none; }
   }
 
   /* === MÉTODO (dark) === */
@@ -1166,71 +1207,66 @@
 
     <div class="sol-list">
       <a class="sol-item" href="direcao-estrategica.html">
-        <div class="sol-item-head">
-          <div>
-            <div class="sol-kicker">Direção Estratégica</div>
-            <h3>Volte a pensar a empresa — <em>não a apagar incêndio</em>.</h3>
-          </div>
+        <div class="sol-aside">
           <div class="sol-number">01</div>
+          <div class="sol-kicker">Direção Estratégica</div>
         </div>
-        <div class="sol-body">
+        <div class="sol-content">
+          <h3 class="sol-headline">Volte a pensar a empresa — <em>não a apagar incêndio</em>.</h3>
           <p class="sol-lead">Existe um momento em que todo sócio que cresce percebe a mesma coisa: virou refém do próprio negócio. A Atto reconstrói essa equação — instalando a camada de governança que devolve pro sócio a coisa mais escassa do negócio: tempo para pensar o próximo ciclo, em vez de reagir ao próximo problema.</p>
           <ul class="sol-bullets">
             <li>Planejamento estratégico com horizonte de 3 anos</li>
             <li>Rotina de Direção trimestral com ata e responsável</li>
             <li>Painel executivo de pilotagem do negócio</li>
           </ul>
-          <div class="sol-more">Conhecer a frente →</div>
+          <span class="sol-cta">Conhecer a frente <span class="arrow">→</span></span>
         </div>
       </a>
 
       <a class="sol-item" href="performance-financeira.html">
-        <div class="sol-item-head">
-          <div>
-            <div class="sol-kicker">Performance Financeira</div>
-            <h3>A clareza que transforma ansiedade em <em>decisão cirúrgica</em>.</h3>
-          </div>
+        <div class="sol-aside">
           <div class="sol-number">02</div>
+          <div class="sol-kicker">Performance Financeira</div>
         </div>
-        <div class="sol-body">
+        <div class="sol-content">
+          <h3 class="sol-headline">A clareza que transforma ansiedade em <em>decisão cirúrgica</em>.</h3>
           <p class="sol-lead">Empresa média que cresce rápido chega num ponto doloroso: o mês fecha com faturamento recorde e, no fim do ano, o resultado não aparece. A Atto reconstrói a leitura por dentro — cada linha ganha cor: a que gera caixa, a que só gera volume, a que queima margem sem ninguém ver.</p>
           <ul class="sol-bullets">
             <li>Rentabilidade por produto, cliente e canal</li>
             <li>Previsibilidade de caixa em horizonte de 90 dias</li>
             <li>Comitê mensal de performance instalado</li>
           </ul>
-          <div class="sol-more">Conhecer a frente →</div>
+          <span class="sol-cta">Conhecer a frente <span class="arrow">→</span></span>
         </div>
       </a>
 
       <a class="sol-item" href="pessoas-lideranca.html">
-        <div class="sol-item-head">
-          <div>
-            <div class="sol-kicker">Pessoas &amp; Liderança</div>
-            <h3>O time certo, no lugar certo — <em>antes de você precisar</em>.</h3>
-          </div>
+        <div class="sol-aside">
           <div class="sol-number">03</div>
+          <div class="sol-kicker">Pessoas &amp; Liderança</div>
         </div>
-        <div class="sol-body">
+        <div class="sol-content">
+          <h3 class="sol-headline">O time certo, no lugar certo — <em>antes de você precisar</em>.</h3>
           <p class="sol-lead">O próximo ciclo não é contratar mais gente. É contratar o tipo certo de gente e desenvolver dentro de casa a liderança que vai tocar o salto. A Atto desenha a arquitetura humana a partir da estratégia — e instala o programa <strong>Líderes em Campo</strong>.</p>
           <ul class="sol-bullets">
             <li>Arquitetura humana alinhada à estratégia</li>
             <li>R&amp;S com filtro técnico e cultural</li>
             <li>Líderes em Campo — formação em 3 níveis</li>
           </ul>
-          <div class="sol-more">Conhecer a frente →</div>
+          <span class="sol-cta">Conhecer a frente <span class="arrow">→</span></span>
         </div>
       </a>
 
       <a class="sol-item sol-item--highlight" href="governanca-ma.html">
-        <div class="sol-item-head">
-          <div>
-            <div class="sol-kicker">Governança &amp; M&amp;A <span class="sol-tag">Frente dedicada</span></div>
-            <h3>Pronto para <em>qualquer próximo ciclo</em> — no seu tempo, pelas suas regras.</h3>
-          </div>
+        <div class="sol-aside">
           <div class="sol-number">04</div>
+          <div class="sol-kicker">
+            Governança &amp; M&amp;A
+            <span class="sol-tag">Frente dedicada</span>
+          </div>
         </div>
-        <div class="sol-body">
+        <div class="sol-content">
+          <h3 class="sol-headline">Pronto para <em>qualquer próximo ciclo</em> — no seu tempo, pelas suas regras.</h3>
           <p class="sol-lead">Quando aparece o primeiro evento grande — proposta de compra, novo sócio, sucessão, consolidação — quem não tem governança perde o controle da própria história. A Atto instala a camada que a maioria não teve tempo de construir e conduz o processo até a LOI com <strong>dossiê auditável e valuation sustentado</strong>.</p>
           <ul class="sol-bullets">
             <li>Conselho consultivo ou administrativo</li>
@@ -1238,7 +1274,7 @@
             <li>Due diligence, valuation e teaser cego</li>
             <li>Condução do processo até a LOI</li>
           </ul>
-          <div class="sol-more">Conhecer a frente →</div>
+          <span class="sol-cta">Conhecer a frente <span class="arrow">→</span></span>
         </div>
       </a>
     </div>
