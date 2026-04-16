@@ -4,45 +4,130 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Atuação — Indústrias atendidas e modelos de engajamento</title>
-<meta name="description" content="Sede em Caxias do Sul / RS. Atendimento nacional em empresas médias. Onde estamos, onde operamos." />
+<meta name="description" content="Onde a Atto atua: setores, capacidades e modelos de engajamento. Boutique de estruturação empresarial para empresas médias do Rio Grande do Sul." />
 <link rel="stylesheet" href="assets/site.css" />
 <style>
-.mapa-bloco{padding:80px 0 140px}
-.mapa-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:start}
-.mapa-info h2{font-family:'Outfit';font-weight:200;font-size:clamp(36px,4vw,52px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:24px}
-.mapa-info h2 em{font-style:italic;color:var(--azul-atto)}
-.mapa-info p{font-size:17px;line-height:1.7;color:var(--cinza-escuro);margin-bottom:20px}
-.mapa-dados{background:var(--papel-alt);padding:40px;border-radius:2px}
-.mapa-dados h4{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:16px}
-.mapa-dados .end{font-family:'Outfit';font-weight:400;font-size:20px;line-height:1.4;color:var(--tinta);margin-bottom:8px}
-.mapa-dados .cidade{font-size:14px;color:var(--cinza-escuro);margin-bottom:32px}
-.mapa-dados ul{list-style:none;padding:0;margin:0}
-.mapa-dados li{font-size:14px;line-height:1.7;color:var(--cinza-escuro);padding:6px 0;border-bottom:1px solid rgba(10,14,26,.06)}
-.mapa-dados li:last-child{border-bottom:none}
-.mapa-dados li strong{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:2px;font-weight:500}
+/* === HERO DARK === */
+.atu-hero{background:var(--azul-noite);color:var(--papel);padding:140px 0 120px;position:relative;overflow:hidden}
+.atu-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 900px 500px at 85% 30%,rgba(0,181,184,.10),transparent 60%),radial-gradient(ellipse 700px 400px at 15% 80%,rgba(26,58,143,.22),transparent 60%);pointer-events:none}
+.atu-hero .container{position:relative}
+.atu-hero .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-atto);margin-bottom:28px}
+.atu-hero h1{font-family:'Outfit';font-weight:200;font-size:clamp(44px,6.5vw,88px);line-height:1.02;letter-spacing:-.025em;color:var(--papel);max-width:20ch;margin-bottom:40px}
+.atu-hero h1 em{font-style:italic;color:var(--teal-atto)}
+.atu-hero .lead{font-size:19px;line-height:1.65;color:rgba(245,243,238,.78);max-width:58ch;margin-bottom:56px}
+.atu-hero .hero-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding-top:48px;border-top:1px solid rgba(245,243,238,.14)}
+.hero-meta .m-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,243,238,.5);margin-bottom:10px}
+.hero-meta .m-valor{font-family:'Outfit';font-weight:300;font-size:22px;line-height:1.25;color:var(--papel);letter-spacing:-.01em}
+.hero-meta .m-valor em{font-style:italic;color:var(--teal-atto)}
 
-.mapa-viz{aspect-ratio:4/5;background:linear-gradient(180deg,var(--papel-alt) 0%,var(--papel) 100%);border:1px solid var(--linha);border-radius:2px;position:relative;overflow:hidden;padding:40px}
-.mapa-viz .br-outline{position:absolute;inset:40px;opacity:.15}
-.mapa-viz .br-outline svg{width:100%;height:100%}
-.mapa-viz .pin{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--azul-atto);transform:translate(-50%,-50%);box-shadow:0 0 0 4px rgba(26,58,143,.15)}
-.mapa-viz .pin.sede{background:var(--teal-atto);box-shadow:0 0 0 6px rgba(0,181,184,.2),0 0 0 12px rgba(0,181,184,.08)}
-.mapa-viz .pin-label{position:absolute;transform:translate(16px,-50%);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--cinza-escuro);white-space:nowrap}
-.mapa-viz .pin-label.sede{color:var(--teal-atto);font-weight:600}
-.mapa-viz .legend{position:absolute;bottom:24px;left:24px;background:rgba(255,255,255,.9);padding:12px 16px;border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza-escuro)}
-.mapa-viz .legend span{display:inline-flex;align-items:center;gap:6px;margin-right:12px}
-.mapa-viz .legend span::before{content:'';width:8px;height:8px;border-radius:50%}
-.mapa-viz .legend .ls::before{background:var(--teal-atto)}
-.mapa-viz .legend .lc::before{background:var(--azul-atto)}
+/* === NAV ANCOR BAR === */
+.atu-anchor{position:sticky;top:72px;z-index:40;background:rgba(245,243,238,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--linha)}
+.atu-anchor .container{display:flex;gap:4px;overflow-x:auto;padding:0;scrollbar-width:none}
+.atu-anchor .container::-webkit-scrollbar{display:none}
+.atu-anchor a{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-escuro);padding:18px 22px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
+.atu-anchor a:hover{color:var(--azul-atto);border-bottom-color:var(--azul-atto)}
 
-.regioes-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:40px 0}
-.regiao{border-top:2px solid var(--azul-atto);padding:24px 0}
-.regiao h5{font-family:'Outfit';font-weight:400;font-size:18px;color:var(--tinta);margin-bottom:8px}
-.regiao .kpi{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:12px}
-.regiao p{font-size:14px;line-height:1.55;color:var(--cinza-escuro)}
+/* === BLOCO SETORES === */
+.setores{padding:120px 0 80px}
+.setores-head{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;margin-bottom:80px;align-items:end}
+.setores-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(40px,5vw,64px);line-height:1.02;letter-spacing:-.02em;color:var(--tinta)}
+.setores-head h2 em{font-style:italic;color:var(--azul-atto)}
+.setores-head p{font-size:17px;line-height:1.7;color:var(--cinza-escuro);max-width:52ch}
 
-@media (max-width:900px){
-  .mapa-grid{grid-template-columns:1fr;gap:40px}
-  .regioes-grid{grid-template-columns:1fr 1fr;gap:16px}
+.setores-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linha);border:1px solid var(--linha)}
+.setor-card{background:#fff;padding:48px 40px 44px;display:flex;flex-direction:column;min-height:360px;transition:background .2s;position:relative}
+.setor-card:hover{background:var(--papel-alt)}
+.setor-card .sc-icon{width:44px;height:44px;margin-bottom:28px;color:var(--azul-atto)}
+.setor-card .sc-icon svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.setor-card .sc-kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:10px}
+.setor-card h3{font-family:'Outfit';font-weight:400;font-size:24px;line-height:1.2;color:var(--tinta);margin-bottom:14px;letter-spacing:-.01em}
+.setor-card p{font-size:14.5px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:28px;flex:1}
+.setor-card .sc-tags{display:flex;flex-wrap:wrap;gap:6px}
+.setor-card .sc-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--azul-atto);padding:5px 10px;border:1px solid rgba(26,58,143,.2);border-radius:100px;background:rgba(26,58,143,.03)}
+
+/* === BLOCO CAPACIDADES === */
+.capac{padding:120px 0;background:var(--azul-noite);color:var(--papel)}
+.capac .section-label{color:var(--teal-atto)}
+.capac-head{max-width:70ch;margin-bottom:72px}
+.capac-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(40px,5vw,64px);line-height:1.02;letter-spacing:-.02em;color:var(--papel);margin-bottom:24px}
+.capac-head h2 em{font-style:italic;color:var(--teal-atto)}
+.capac-head p{font-size:17px;line-height:1.7;color:rgba(245,243,238,.78)}
+
+.capac-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(245,243,238,.12);border:1px solid rgba(245,243,238,.12)}
+.capac-col{background:var(--azul-noite);padding:44px 36px 40px;display:flex;flex-direction:column;min-height:420px;transition:background .2s}
+.capac-col:hover{background:rgba(0,181,184,.06)}
+.capac-col .cc-num{font-family:'Outfit';font-weight:200;font-size:44px;color:rgba(245,243,238,.28);margin-bottom:18px;line-height:1}
+.capac-col h3{font-family:'Outfit';font-weight:400;font-size:22px;line-height:1.22;color:var(--papel);margin-bottom:14px;letter-spacing:-.01em}
+.capac-col h3 em{font-style:italic;color:var(--teal-atto)}
+.capac-col p{font-size:14px;line-height:1.6;color:rgba(245,243,238,.7);margin-bottom:24px;flex:1}
+.capac-col ul{list-style:none;padding:0;margin:0 0 20px}
+.capac-col li{font-size:13px;color:rgba(245,243,238,.85);padding:8px 0;border-top:1px solid rgba(245,243,238,.08);position:relative;padding-left:20px}
+.capac-col li::before{content:"—";position:absolute;left:0;color:var(--teal-atto)}
+.capac-col .cc-link{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-atto);display:inline-flex;align-items:center;gap:8px;margin-top:auto}
+
+/* === BLOCO ENGAGEMENT MODELS === */
+.eng{padding:120px 0}
+.eng-head{max-width:64ch;margin-bottom:64px}
+.eng-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(40px,5vw,56px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:20px}
+.eng-head h2 em{font-style:italic;color:var(--azul-atto)}
+.eng-head p{font-size:17px;line-height:1.7;color:var(--cinza-escuro)}
+
+.eng-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.eng-card{background:#fff;border:1px solid var(--linha);padding:40px 36px 36px;display:flex;flex-direction:column;min-height:440px;transition:all .2s}
+.eng-card:hover{border-color:var(--azul-atto);transform:translateY(-2px);box-shadow:0 14px 44px rgba(10,14,26,.06)}
+.eng-card .eng-chip{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--azul-atto);padding:6px 12px;border-radius:100px;background:rgba(26,58,143,.06);border:1px solid rgba(26,58,143,.15);margin-bottom:24px;align-self:flex-start}
+.eng-card h3{font-family:'Outfit';font-weight:400;font-size:26px;line-height:1.18;color:var(--tinta);margin-bottom:14px;letter-spacing:-.01em}
+.eng-card h3 em{font-style:italic;color:var(--azul-atto)}
+.eng-card .eng-desc{font-size:15px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:28px;flex:1}
+.eng-card .eng-specs{display:grid;grid-template-columns:1fr 1fr;gap:14px 20px;padding:20px 0;border-top:1px solid var(--linha);margin-bottom:20px}
+.eng-card .eng-specs div{font-size:13px;line-height:1.4}
+.eng-card .eng-specs .sp-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:4px;display:block}
+.eng-card .eng-specs .sp-valor{color:var(--tinta);font-weight:500}
+
+/* === CASES/INSIGHTS === */
+.cases{padding:120px 0;background:var(--papel-alt)}
+.cases-head{margin-bottom:56px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end}
+.cases-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(36px,4.4vw,52px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta)}
+.cases-head h2 em{font-style:italic;color:var(--azul-atto)}
+.cases-head p{font-size:16px;line-height:1.7;color:var(--cinza-escuro)}
+.cases-list{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.case-card{background:#fff;border:1px solid var(--linha);padding:36px 32px 32px;display:flex;flex-direction:column;min-height:340px;transition:all .2s}
+.case-card:hover{border-color:var(--azul-atto);transform:translateY(-2px)}
+.case-card .cs-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-atto);margin-bottom:20px}
+.case-card h4{font-family:'Outfit';font-weight:400;font-size:20px;line-height:1.28;color:var(--tinta);margin-bottom:16px;letter-spacing:-.01em}
+.case-card p{font-size:14.5px;line-height:1.6;color:var(--cinza-escuro);margin-bottom:24px;flex:1}
+.case-card .cs-meta{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--linha);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza-medio)}
+
+/* === SEDE / FOOTER BLOCO === */
+.sede-bloco{padding:120px 0 140px}
+.sede-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.sede-info h2{font-family:'Outfit';font-weight:200;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:20px}
+.sede-info h2 em{font-style:italic;color:var(--azul-atto)}
+.sede-info p{font-size:16px;line-height:1.7;color:var(--cinza-escuro);margin-bottom:32px;max-width:48ch}
+.sede-dados{display:grid;grid-template-columns:1fr;gap:0}
+.sede-item{padding:20px 0;border-top:1px solid var(--linha)}
+.sede-item:last-child{border-bottom:1px solid var(--linha)}
+.sede-item .si-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:8px}
+.sede-item .si-valor{font-family:'Outfit';font-weight:400;font-size:18px;color:var(--tinta);letter-spacing:-.005em}
+.sede-item .si-valor a{color:inherit;border-bottom:1px solid transparent;transition:border-color .2s}
+.sede-item .si-valor a:hover{border-bottom-color:var(--azul-atto);color:var(--azul-atto)}
+.sede-mapa{aspect-ratio:1/1;background:linear-gradient(160deg,var(--azul-noite) 0%,var(--azul-atto) 100%);border-radius:2px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff}
+.sede-mapa::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,181,184,.18),transparent 55%)}
+.sede-mapa .pin-wrap{position:relative;z-index:2;text-align:center}
+.sede-mapa .pin-ring{width:64px;height:64px;border-radius:50%;background:var(--teal-atto);margin:0 auto 20px;position:relative;box-shadow:0 0 0 8px rgba(0,181,184,.2),0 0 0 20px rgba(0,181,184,.1)}
+.sede-mapa .pin-ring::after{content:"";position:absolute;inset:22px;background:#fff;border-radius:50%}
+.sede-mapa .pin-city{font-family:'Outfit';font-weight:300;font-size:28px;letter-spacing:-.01em;margin-bottom:6px}
+.sede-mapa .pin-uf{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.7}
+
+@media (max-width:1100px){
+  .setores-grid,.capac-grid{grid-template-columns:repeat(2,1fr)}
+  .eng-grid,.cases-list{grid-template-columns:repeat(2,1fr)}
+  .sede-grid{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .setores-grid,.capac-grid,.eng-grid,.cases-list{grid-template-columns:1fr}
+  .setores-head,.cases-head{grid-template-columns:1fr;gap:24px}
+  .atu-hero .hero-meta{grid-template-columns:1fr 1fr;gap:24px}
 }
 </style>
 <meta name="description" content="Onde estamos, em quais setores atuamos e quais formatos de projeto oferecemos.">
@@ -75,7 +160,9 @@
     "addressCountry": "BR"
   },
   "sameAs": [
-    "https://www.linkedin.com/company/atto-estrategias"
+    "https://www.linkedin.com/company/gestaoatto",
+    "https://www.instagram.com/gestaoatto",
+    "https://www.facebook.com/gestaoatto"
   ]
 }
 </script>
@@ -103,87 +190,294 @@
   </div>
 </header>
 
-<div class="container">
-  <div class="breadcrumb"><a href="index.html">A Atto</a><span class="sep">/</span><a href="sobre.html">Quem somos</a><span class="sep">/</span><span class="current">Atuação</span></div>
-</div>
-
-<section class="page-hero">
+<section class="atu-hero page-hero--dark">
   <div class="container">
-    <div class="kicker">Atuação · Onde estamos, como operamos</div>
-    <h1>Sede em Caxias. <em>Método híbrido calibrado</em>.</h1>
-    <p class="lead">A Atto opera a partir de uma única casa, na Serra Gaúcha — em Caxias do Sul. É ali que o método é calibrado, é dali que o time sai para atender. O modelo de atendimento combina imersões presenciais em momentos estruturais e rotina mensal em formato híbrido — com agenda desenhada para que a distância nunca comprometa a profundidade do trabalho.</p>
+    <div class="kicker">Atuação · Setores, capacidades, modelos</div>
+    <h1>Onde <em>operamos</em>, para quem <em>trabalhamos</em>.</h1>
+    <p class="lead">A Atto é boutique por escolha: atendemos empresas médias do Rio Grande do Sul com método próprio, equipe técnica enxuta e relação de longo prazo. Esta página organiza as três lentes que definem onde atuamos — setores que conhecemos a fundo, capacidades que instalamos dentro de casa e os modelos de engajamento em que operamos.</p>
+    <div class="hero-meta">
+      <div><div class="m-label">Sede</div><div class="m-valor">Caxias do Sul <em>/ RS</em></div></div>
+      <div><div class="m-label">Território</div><div class="m-valor">Rio Grande do Sul</div></div>
+      <div><div class="m-label">Porte alvo</div><div class="m-valor">Empresas médias</div></div>
+      <div><div class="m-label">Modelo</div><div class="m-valor">Boutique técnica</div></div>
+    </div>
   </div>
 </section>
 
-<section class="mapa-bloco">
+<nav class="atu-anchor" aria-label="Índice da página">
   <div class="container">
-    <div class="mapa-grid">
-      <div class="mapa-info">
-        <h2>A <em>casa</em>, o <em>território</em>, a <em>lógica</em>.</h2>
-        <p>A Atto funciona em sede física em Caxias do Sul — região que concentra, historicamente, a indústria metalmecânica, de perfis e de distribuição do Rio Grande do Sul. Essa escolha não é acidental. Estar fisicamente no território dos clientes garante proximidade real com o tipo de empresa que atendemos — conversas no chão de fábrica, imersões em obra, reuniões na mesa do sócio.</p>
-        <p>O modelo híbrido é calibrado caso a caso: presencial nos momentos estruturais (imersão inicial do Diagnóstico, decisões de sucessão e M&amp;A, reunião trimestral de direção), remoto na rotina mensal (leitura de painel, reunião de performance, acompanhamento de frentes). Confidencialidade e profundidade são mantidas pelo método — não pelo CEP.</p>
+    <a href="#setores">01 · Setores</a>
+    <a href="#capacidades">02 · Capacidades</a>
+    <a href="#engajamento">03 · Engajamento</a>
+    <a href="#cases">04 · Casos &amp; leituras</a>
+    <a href="#sede">05 · Sede</a>
+  </div>
+</nav>
+
+<!-- ========== 01 · SETORES ========== -->
+<section class="setores" id="setores">
+  <div class="container">
+    <div class="section-label">01 · Setores</div>
+    <div class="setores-head">
+      <h2>Seis <em>setores</em> que a Atto lê de fábrica.</h2>
+      <p>A Serra Gaúcha construiu sua reputação empresarial em indústria e comércio de médio porte — e é nesse ecossistema que a Atto opera. Conhecer o setor importa: permite entrar na conversa já sabendo qual é o gargalo estrutural típico, qual é o ponto de apertar, qual é a métrica que o dono olha. Abaixo, as seis verticais em que temos leitura acumulada.</p>
+    </div>
+
+    <div class="setores-grid">
+      <!-- 01 Indústria Metalmecânica -->
+      <div class="setor-card">
+        <div class="sc-icon"><svg viewBox="0 0 48 48"><path d="M8 40 L16 20 L24 32 L32 16 L40 40 Z"/><path d="M8 40 L40 40"/><circle cx="32" cy="12" r="3"/></svg></div>
+        <span class="sc-kicker">Indústria · Manufatura</span>
+        <h3>Metalmecânica &amp; perfis</h3>
+        <p>Forjaria, estamparia, perfilação, usinagem, montagem. O setor que mais conhecemos: custos de insumo, gestão de estoque, precificação por ordem, plano de capacidade e sucessão industrial.</p>
+        <div class="sc-tags"><span class="sc-tag">Custos</span><span class="sc-tag">Pricing</span><span class="sc-tag">Capex</span><span class="sc-tag">Sucessão</span></div>
       </div>
+
+      <!-- 02 Distribuição -->
+      <div class="setor-card">
+        <div class="sc-icon"><svg viewBox="0 0 48 48"><rect x="6" y="18" width="20" height="18"/><path d="M26 22 L36 22 L42 30 L42 36 L26 36"/><circle cx="14" cy="40" r="3"/><circle cx="34" cy="40" r="3"/></svg></div>
+        <span class="sc-kicker">Comércio · B2B</span>
+        <h3>Distribuição &amp; representação</h3>
+        <p>Distribuidores de autopeças, insumos industriais, materiais elétricos, construção. Foco em mix de produto, margem por cliente, giro de estoque, remuneração variável da força comercial.</p>
+        <div class="sc-tags"><span class="sc-tag">Mix</span><span class="sc-tag">RQS</span><span class="sc-tag">Carteira</span><span class="sc-tag">Estoque</span></div>
+      </div>
+
+      <!-- 03 Construção & materiais -->
+      <div class="setor-card">
+        <div class="sc-icon"><svg viewBox="0 0 48 48"><path d="M6 40 L24 10 L42 40 Z"/><path d="M14 40 L14 28 L24 22 L34 28 L34 40"/><path d="M22 40 L22 32 L26 32 L26 40"/></svg></div>
+        <span class="sc-kicker">Indústria · B2B</span>
+        <h3>Construção &amp; materiais</h3>
+        <p>Pré-moldados, perfis estruturais, acabamentos, componentes de obra. Ciclos longos, orçamento por obra, pagamento por medição, exposição a aço e commodity. Gestão de fluxo é crítica.</p>
+        <div class="sc-tags"><span class="sc-tag">Ciclo</span><span class="sc-tag">Commodity</span><span class="sc-tag">Fluxo</span><span class="sc-tag">Obra</span></div>
+      </div>
+
+      <!-- 04 Agro & componentes -->
+      <div class="setor-card">
+        <div class="sc-icon"><svg viewBox="0 0 48 48"><path d="M24 8 C30 14 32 20 30 28 C28 30 24 30 22 28 C20 20 22 14 24 8 Z"/><path d="M10 24 C18 22 24 24 28 30 C28 32 26 34 24 34 C18 32 14 28 10 24 Z"/><path d="M22 28 L22 40"/></svg></div>
+        <span class="sc-kicker">Agro · Serviços</span>
+        <h3>Agro, componentes &amp; máquinas</h3>
+        <p>Componentes agrícolas, máquinas implementadas, serviços de campo. Sazonalidade pesada, pressão de safra, capital de giro crítico e margem que depende de planejamento anual — não mensal.</p>
+        <div class="sc-tags"><span class="sc-tag">Safra</span><span class="sc-tag">Capital giro</span><span class="sc-tag">Planejamento</span></div>
+      </div>
+
+      <!-- 05 Serviços B2B -->
+      <div class="setor-card">
+        <div class="sc-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="18" r="6"/><path d="M12 40 C12 32 18 28 24 28 C30 28 36 32 36 40"/><circle cx="38" cy="14" r="3"/><circle cx="10" cy="14" r="3"/></svg></div>
+        <span class="sc-kicker">Serviços · B2B</span>
+        <h3>Serviços profissionais &amp; técnicos</h3>
+        <p>Engenharia, automação, consultoria técnica, laboratórios, TI corporativa. Negócios que vendem hora especializada — a briga é sobre precificação, utilização e escala da equipe.</p>
+        <div class="sc-tags"><span class="sc-tag">Utilização</span><span class="sc-tag">Hora técnica</span><span class="sc-tag">Headcount</span></div>
+      </div>
+
+      <!-- 06 Varejo & bens de consumo -->
+      <div class="setor-card">
+        <div class="sc-icon"><svg viewBox="0 0 48 48"><path d="M8 14 L40 14 L38 38 L10 38 Z"/><path d="M16 14 L16 10 C16 7 20 6 24 6 C28 6 32 7 32 10 L32 14"/></svg></div>
+        <span class="sc-kicker">Comércio · Varejo</span>
+        <h3>Varejo &amp; bens de consumo</h3>
+        <p>Redes de loja, e-commerce próprio, franqueadoras regionais, bens duráveis. Disciplina de curva ABC, margem por canal, marketing-to-sales, sazonalidade e operação de frente de caixa.</p>
+        <div class="sc-tags"><span class="sc-tag">Canal</span><span class="sc-tag">Marketing</span><span class="sc-tag">Curva ABC</span><span class="sc-tag">Franquia</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 02 · CAPACIDADES ========== -->
+<section class="capac" id="capacidades">
+  <div class="container">
+    <div class="section-label">02 · Capacidades</div>
+    <div class="capac-head">
+      <h2>Quatro <em>capacidades</em> instaladas. Uma só disciplina.</h2>
+      <p>A Atto não vende serviços avulsos — instala capacidades. O diagnóstico de 90 dias é o ponto de entrada único; a partir dele, desdobra-se o trabalho em quatro frentes integradas. Cada uma tem escopo claro, entregas contratadas e disciplina de acompanhamento. Juntas, formam o método.</p>
+    </div>
+
+    <div class="capac-grid">
+      <div class="capac-col">
+        <div class="cc-num">01</div>
+        <h3>Direção <em>Estratégica</em></h3>
+        <p>Tese, visão, estratégia competitiva, planejamento anual, ritual do dono. O que a empresa quer ser — e como chega lá sem apagar incêndio.</p>
+        <ul>
+          <li>Plano estratégico 3–5 anos</li>
+          <li>Tese de investimento</li>
+          <li>Comitê de direção</li>
+          <li>Ritual do sócio</li>
+        </ul>
+        <a href="direcao-estrategica.html" class="cc-link">Ver capacidade <span class="arrow">→</span></a>
+      </div>
+
+      <div class="capac-col">
+        <div class="cc-num">02</div>
+        <h3>Performance <em>Financeira</em></h3>
+        <p>Controladoria, painel gerencial, fluxo de caixa, pricing, renegociação bancária. A capacidade que instala a lógica financeira — e tira o sócio do caixa.</p>
+        <ul>
+          <li>Painel gerencial mensal</li>
+          <li>Custos, margem, pricing</li>
+          <li>Capital de giro</li>
+          <li>Relação com bancos</li>
+        </ul>
+        <a href="performance-financeira.html" class="cc-link">Ver capacidade <span class="arrow">→</span></a>
+      </div>
+
+      <div class="capac-col">
+        <div class="cc-num">03</div>
+        <h3>Pessoas &amp; <em>Liderança</em></h3>
+        <p>Organograma, remuneração, plano de carreira, desenvolvimento da liderança, cultura. A capacidade que forma gente para que o sistema ande sem o sócio na sala.</p>
+        <ul>
+          <li>Desenho de organograma</li>
+          <li>Remuneração variável</li>
+          <li>Plano de desenvolvimento</li>
+          <li>Cultura e valores</li>
+        </ul>
+        <a href="pessoas-lideranca.html" class="cc-link">Ver capacidade <span class="arrow">→</span></a>
+      </div>
+
+      <div class="capac-col">
+        <div class="cc-num">04</div>
+        <h3>Governança &amp; <em>M&amp;A</em></h3>
+        <p>Acordo de sócios, conselho consultivo, sucessão, valuation, preparação para venda, assessoria em transações. A capacidade sensível — conduzida sob sigilo absoluto.</p>
+        <ul>
+          <li>Acordo de sócios</li>
+          <li>Conselho consultivo</li>
+          <li>Sucessão familiar</li>
+          <li>Valuation &amp; M&amp;A buy/sell side</li>
+        </ul>
+        <a href="governanca-ma.html" class="cc-link">Ver capacidade <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 03 · ENGAGEMENT MODELS ========== -->
+<section class="eng" id="engajamento">
+  <div class="container">
+    <div class="section-label">03 · Modelos de engajamento</div>
+    <div class="eng-head">
+      <h2>Três <em>formatos</em>, um critério comum.</h2>
+      <p>Empresa média não tem um modelo único — tem contexto. O formato da relação com a Atto se ajusta ao momento da empresa: diagnóstico pontual, acompanhamento contínuo ou projeto sensível de transação. O critério comum é sempre o mesmo: entrega técnica, relação de longo prazo, confidencialidade de default.</p>
+    </div>
+
+    <div class="eng-grid">
+      <div class="eng-card">
+        <span class="eng-chip">Pontual</span>
+        <h3>Diagnóstico de <em>90 dias</em></h3>
+        <p class="eng-desc">Ponto de entrada único. Leitura técnica da empresa em 90 dias — sem prescrição antes do diagnóstico. Resultado: foto honesta do ponto zero, mapa de gargalos e plano priorizado de endereçamento. Decidir contratar (ou não) o acompanhamento vem depois.</p>
+        <div class="eng-specs">
+          <div><span class="sp-label">Duração</span><span class="sp-valor">90 dias</span></div>
+          <div><span class="sp-label">Formato</span><span class="sp-valor">Imersão + entregáveis</span></div>
+          <div><span class="sp-label">Entregáveis</span><span class="sp-valor">Painel + plano</span></div>
+          <div><span class="sp-label">Compromisso</span><span class="sp-valor">Fixo por escopo</span></div>
+        </div>
+        <a href="diagnostico-90-dias.html" class="cc-link" style="color:var(--azul-atto)">Ver Diagnóstico 90d <span class="arrow">→</span></a>
+      </div>
+
+      <div class="eng-card">
+        <span class="eng-chip">Contínuo</span>
+        <h3>Rotina <em>mensal</em> da Atto</h3>
+        <p class="eng-desc">Acompanhamento técnico recorrente. Reunião mensal de performance, frentes prioritárias em conversas quinzenais, comitê trimestral de direção. A Atto assume corresponsabilidade pela entrega — e está na mesa quando o plano encontra a realidade.</p>
+        <div class="eng-specs">
+          <div><span class="sp-label">Duração</span><span class="sp-valor">12+ meses</span></div>
+          <div><span class="sp-label">Cadência</span><span class="sp-valor">Mensal + quinzenal</span></div>
+          <div><span class="sp-label">Formato</span><span class="sp-valor">Híbrido calibrado</span></div>
+          <div><span class="sp-label">Compromisso</span><span class="sp-valor">Retainer mensal</span></div>
+        </div>
+        <a href="rotina-mensal.html" class="cc-link" style="color:var(--azul-atto)">Ver Rotina mensal <span class="arrow">→</span></a>
+      </div>
+
+      <div class="eng-card">
+        <span class="eng-chip">Projeto</span>
+        <h3>Projeto de <em>M&amp;A / sucessão</em></h3>
+        <p class="eng-desc">Estruturação e condução de processos sensíveis: sucessão familiar, constituição de conselho, valuation, preparação para venda e assessoria em transações. Escopo fechado, tempo variável, sigilo absoluto — conduzido sob NDA desde a primeira conversa.</p>
+        <div class="eng-specs">
+          <div><span class="sp-label">Duração</span><span class="sp-valor">6 a 18 meses</span></div>
+          <div><span class="sp-label">Confidencialidade</span><span class="sp-valor">NDA obrigatório</span></div>
+          <div><span class="sp-label">Formato</span><span class="sp-valor">Projeto dedicado</span></div>
+          <div><span class="sp-label">Compromisso</span><span class="sp-valor">Escopo + success fee</span></div>
+        </div>
+        <a href="governanca-ma.html" class="cc-link" style="color:var(--azul-atto)">Ver Governança &amp; M&amp;A <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 04 · CASES & INSIGHTS ========== -->
+<section class="cases" id="cases">
+  <div class="container">
+    <div class="cases-head">
       <div>
-        <div class="mapa-viz" aria-label="Indicador visual da sede em Caxias do Sul">
-          <div class="pin sede" style="top:60%;left:42%"></div>
-          <span class="pin-label sede" style="top:60%;left:42%">Caxias do Sul / RS · Sede única</span>
-          <div class="legend">
-            <span class="ls">Sede</span>
+        <div class="section-label">04 · Casos &amp; leituras</div>
+        <h2>O que a <em>leitura de setor</em> produz, na prática.</h2>
+      </div>
+      <p>Em vez de portfólio de casos com nome, trazemos leituras setoriais — pontos recorrentes que a Atto enxerga na operação das empresas médias gaúchas e que merecem atenção. Os clientes que autorizam uso público do nome e do caso estão na página Clientes.</p>
+    </div>
+
+    <div class="cases-list">
+      <a href="perspectivas.html" class="case-card">
+        <span class="cs-tag">Setor · Indústria</span>
+        <h4>Por que o pricing por cliente importa mais que o pricing por produto.</h4>
+        <p>Em operações metalmecânicas com mix alto, a análise de margem por produto engana. A margem real está escondida no custo do cliente — frete, prazo, descontos, retrabalho. Como montamos a leitura.</p>
+        <div class="cs-meta"><span>Leitura setorial</span><span>Ler →</span></div>
+      </a>
+
+      <a href="perspectivas.html" class="case-card">
+        <span class="cs-tag">Setor · Distribuição</span>
+        <h4>A matriz de RQS como instrumento de direção, não de relatório.</h4>
+        <p>Distribuidores que olham RQS (Recorrência, Quantidade, Spread) só no fechamento mensal perdem a janela de ação. Defesa do modelo RQS como painel gerencial vivo — e como desenhamos a cadência.</p>
+        <div class="cs-meta"><span>Leitura setorial</span><span>Ler →</span></div>
+      </a>
+
+      <a href="perspectivas.html" class="case-card">
+        <span class="cs-tag">Governança · Sucessão</span>
+        <h4>Sucessão familiar: o erro de começar pelo documento, não pela conversa.</h4>
+        <p>Acordo de sócios não resolve conflito — apenas o escreve. Em empresas médias com segunda geração na mesa, o trabalho começa muito antes, na leitura das expectativas não ditas. Como a Atto conduz.</p>
+        <div class="cs-meta"><span>Leitura setorial</span><span>Ler →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 05 · SEDE ========== -->
+<section class="sede-bloco" id="sede">
+  <div class="container">
+    <div class="sede-grid">
+      <div class="sede-info">
+        <div class="section-label">05 · Sede</div>
+        <h2>Sede <em>única</em>, na Serra Gaúcha.</h2>
+        <p>A Atto opera a partir de uma única casa, em Caxias do Sul. Atendimento presencial na Serra e imersões de início nas sedes dos clientes dentro do Rio Grande do Sul. Rotina mensal em modelo híbrido — com agenda desenhada para que a distância não comprometa a profundidade do trabalho.</p>
+
+        <div class="sede-dados">
+          <div class="sede-item">
+            <div class="si-label">Endereço</div>
+            <div class="si-valor">Rua Guerino Sanvitto, 704 · Sala 607 · Caxias do Sul / RS</div>
+          </div>
+          <div class="sede-item">
+            <div class="si-label">Horário</div>
+            <div class="si-valor">Segunda a sexta · 08h às 18h · com agendamento</div>
+          </div>
+          <div class="sede-item">
+            <div class="si-label">Email institucional</div>
+            <div class="si-valor"><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></div>
+          </div>
+          <div class="sede-item">
+            <div class="si-label">Telefone institucional</div>
+            <div class="si-valor"><a href="tel:+555431969798">+55 (54) 3196.9798</a> · <a href="https://wa.me/5554999079939" target="_blank" rel="noopener">WhatsApp (54) 99907.9939</a></div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div style="margin-top:80px">
-      <div class="section-label">Escritório</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:24px">
-        <div class="mapa-dados">
-          <h4>Endereço</h4>
-          <div class="end">Rua Guerino Sanvitto, 704 · Sala 607</div>
-          <div class="cidade">Caxias do Sul / RS</div>
-          <ul>
-            <li><strong>Horário</strong>Segunda a sexta · 08h às 18h</li>
-            <li><strong>Atendimento</strong>Com agendamento prévio (reuniões de clientes e imersões)</li>
-            <li><strong>Email geral</strong>contato@gestaoatto.com.br</li>
-            <li><strong>Guilherme Walter</strong>+55 (51) 99333-3826</li>
-            <li><strong>Juliano Walter</strong>+55 (54) 99624-5417</li>
-          </ul>
-        </div>
-        <div class="mapa-dados">
-          <h4>Logística do atendimento</h4>
-          <div class="end">Modelo híbrido calibrado</div>
-          <div class="cidade">Presencial onde e quando faz sentido — remoto no que é rotina</div>
-          <ul>
-            <li><strong>Imersão inicial</strong>2 a 3 dias presenciais na casa do cliente (início do Diagnóstico)</li>
-            <li><strong>Rotina mensal</strong>Reunião híbrida — presencial trimestral, remota mensal</li>
-            <li><strong>M&amp;A e sucessão</strong>Imersões presenciais conforme intensidade do momento</li>
-            <li><strong>Acesso à mesa técnica</strong>Linha direta por canal seguro (WhatsApp corporativo e email)</li>
-          </ul>
+      <div class="sede-mapa" aria-label="Sede em Caxias do Sul, Rio Grande do Sul">
+        <div class="pin-wrap">
+          <div class="pin-ring"></div>
+          <div class="pin-city">Caxias do Sul</div>
+          <div class="pin-uf">Rio Grande do Sul · Brasil</div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="sintomas">
-  <div class="container">
-    <div class="section-label">Como funciona o atendimento</div>
-    <div class="sintomas-grid">
-      <h3>Três <em>formatos</em> de presença, uma mesma disciplina.</h3>
-      <ul class="sintomas-list">
-        <li><span class="num">01</span><span><strong>Imersão inicial presencial.</strong> Dois a três dias na casa do cliente, sempre no início da relação. Conversa com sócios, diretoria, chão de operação. É nessa fase que o método é calibrado à realidade da empresa.</span></li>
-        <li><span class="num">02</span><span><strong>Rotina mensal híbrida.</strong> Reunião de performance mensal em formato híbrido — remoto na rotina, presencial trimestral. Acompanhamento de frentes prioritárias em conversas quinzenais com os responsáveis.</span></li>
-        <li><span class="num">03</span><span><strong>Governança e M&amp;A sob demanda.</strong> Em processos de sucessão, conselho e M&amp;A, imersões presenciais adicionais conforme a intensidade do momento. Não há contagem de horas — há compromisso com a entrega.</span></li>
-        <li><span class="num">04</span><span><strong>Mesa técnica sempre aberta.</strong> Linha direta por canal seguro (WhatsApp corporativo e email) entre a Atto e o sócio. Dúvida de pricing, renegociação de banco, oportunidade fora do calendário — resposta com número por trás.</span></li>
-      </ul>
     </div>
   </div>
 </section>
 
 <section class="cta-final">
   <div class="container">
-    <h2>Quer conhecer <em>a sede e o time</em>?</h2>
-    <p>Café na casa, conversa com um dos sócios, tour pelo time técnico. Para quem está avaliando contratar a Atto ou só quer entender como a casa funciona por dentro.</p>
+    <h2>Quer falar sobre a <em>sua empresa</em>?</h2>
+    <p>30 minutos, sob sigilo, com um dos sócios. Sem proposta comercial disfarçada — conversa técnica sobre o que está na mesa.</p>
     <div class="actions">
       <a href="contato.html" class="btn-primary">Agendar conversa <span class="arrow">→</span></a>
       <a href="metodo.html" class="btn-ghost">Ver o método <span class="arrow">→</span></a>
@@ -194,15 +488,15 @@
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p></div>
+      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p><div class="footer-social" style="display:flex;gap:10px;margin-top:16px"><a href="https://www.linkedin.com/company/gestaoatto" target="_blank" rel="noopener" aria-label="LinkedIn" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;color:rgba(255,255,255,.75);transition:all .2s"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://www.instagram.com/gestaoatto" target="_blank" rel="noopener" aria-label="Instagram" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;color:rgba(255,255,255,.75);transition:all .2s"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="https://www.facebook.com/gestaoatto" target="_blank" rel="noopener" aria-label="Facebook" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;color:rgba(255,255,255,.75);transition:all .2s"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a></div></div>
       <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
       <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li></ul></div>
       <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
       <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="#">Política de privacidade</a> · <a href="#">Termos</a></div></div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="politica-privacidade.html">Política de privacidade</a> · <a href="termos-uso.html">Termos</a></div></div>
   </div>
 </footer>
-<script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
+<script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark,.capac');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
 </body>
 </html>

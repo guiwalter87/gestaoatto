@@ -82,7 +82,17 @@
   </url>
   <url>
     <loc>https://www.gestaoatto.com.br/contato.html</loc>
-    <lastmod>2026-04-15</lastmod>
+    <lastmod>2026-04-16</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.gestaoatto.com.br/politica-privacidade.html</loc>
+    <lastmod>2026-04-16</lastmod>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.gestaoatto.com.br/termos-uso.html</loc>
+    <lastmod>2026-04-16</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>

@@ -8,12 +8,10 @@
 <link rel="stylesheet" href="assets/site.css" />
 <style>
 .logos-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--linha);border-left:1px solid var(--linha);margin-top:40px}
-.logo-cell{aspect-ratio:16/9;border-right:1px solid var(--linha);border-bottom:1px solid var(--linha);display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;transition:background .25s}
+.logo-cell{aspect-ratio:16/9;border-right:1px solid var(--linha);border-bottom:1px solid var(--linha);display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;transition:background .25s;overflow:hidden}
 .logo-cell:hover{background:var(--papel-alt)}
-.logo-cell .logo-txt{font-family:'Outfit';font-weight:500;font-size:18px;letter-spacing:-.01em;color:var(--cinza-medio);transition:color .25s}
-.logo-cell:hover .logo-txt{color:var(--azul-noite)}
-.logo-cell .setor{position:absolute;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-claro);margin-top:44px;opacity:0;transition:opacity .25s}
-.logo-cell:hover .setor{opacity:1}
+.logo-cell img{max-width:100%;max-height:56px;width:auto;height:auto;object-fit:contain;filter:grayscale(100%) contrast(1.05);mix-blend-mode:multiply;opacity:.85;transition:filter .25s, opacity .25s, transform .25s}
+.logo-cell:hover img{filter:grayscale(0%) contrast(1);opacity:1;transform:scale(1.03)}
 
 .depo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;padding:40px 0}
 .depo{background:#fff;border:1px solid var(--linha);padding:48px 40px;border-radius:2px;display:flex;flex-direction:column}
@@ -32,7 +30,7 @@
 .caso .meta-caso{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--azul-atto);padding-top:16px;border-top:1px solid rgba(10,14,26,.08)}
 
 @media (max-width:900px){
-  .logos-grid{grid-template-columns:repeat(2,1fr)}
+  .logos-grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
   .depo-grid,.casos-grid{grid-template-columns:1fr;gap:16px}
 }
 </style>
@@ -66,7 +64,9 @@
     "addressCountry": "BR"
   },
   "sameAs": [
-    "https://www.linkedin.com/company/atto-estrategias"
+    "https://www.linkedin.com/company/gestaoatto",
+    "https://www.instagram.com/gestaoatto",
+    "https://www.facebook.com/gestaoatto"
   ]
 }
 </script>
@@ -102,31 +102,38 @@
   <div class="container">
     <div class="kicker">Clientes · Quem aprova o método</div>
     <h1>As empresas que <em>aprovam o método</em>.</h1>
-    <p class="lead">A prova da Atto não está em slides — está nas empresas que seguem com a gente por anos e permitem que suas marcas apareçam ao lado da nossa. Nomes de clientes entram aqui somente com autorização escrita. Casos sensíveis entram em formato anônimo, preservando a confidencialidade que o trabalho exige.</p>
-    <p class="lead"><strong>Política da casa:</strong> nome só se autorizado. Depoimento só se revisado e assinado pelo cliente. E tudo que envolve transação confidencial permanece fora do site, sempre.</p>
+    <p class="lead">A prova da Atto não está em slides — está nas empresas que seguem com a gente por anos e permitem que suas marcas apareçam ao lado da nossa. Atuamos com empresas médias do Rio Grande do Sul, em relação de anos, com método aplicado na casa.</p>
+    <p class="lead"><strong>Política da casa:</strong> nome só se autorizado. Depoimento só se revisado e assinado pelo cliente. Tudo que envolve transação confidencial permanece fora do site, sempre.</p>
   </div>
 </section>
 
 <section style="padding:80px 0">
   <div class="container">
-    <div class="section-label">Marcas que autorizam aparecer</div>
+    <div class="section-label">Marcas ativas na casa</div>
     <h2 class="section-title" style="margin-bottom:16px">Indústria, distribuição, <em>serviços técnicos</em>.</h2>
-    <p class="section-lead" style="max-width:60ch">Empresas de médio porte em setores que a Atto conhece bem. O padrão é: relação ativa, método aplicado, autorização formal para uso da marca neste espaço.</p>
+    <p class="section-lead" style="max-width:60ch">Empresas médias da Serra Gaúcha, da região metropolitana e do interior do Rio Grande do Sul. Relação ativa, método aplicado, uso de marca neste espaço conforme o padrão da casa.</p>
 
     <div class="logos-grid">
-      <div class="logo-cell"><span class="logo-txt">Cliente 01</span></div>
-      <div class="logo-cell"><span class="logo-txt">Cliente 02</span></div>
-      <div class="logo-cell"><span class="logo-txt">Cliente 03</span></div>
-      <div class="logo-cell"><span class="logo-txt">Cliente 04</span></div>
-      <div class="logo-cell"><span class="logo-txt">Cliente 05</span></div>
-      <div class="logo-cell"><span class="logo-txt">Cliente 06</span></div>
-      <div class="logo-cell"><span class="logo-txt">Cliente 07</span></div>
-      <div class="logo-cell"><span class="logo-txt">Cliente 08</span></div>
-      <div class="logo-cell"><span class="logo-txt">Cliente 09</span></div>
-      <div class="logo-cell"><span class="logo-txt">Cliente 10</span></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Acrilys.png" alt="Acrilys" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/%C3%81bile%20Componentes.webp" alt="Ábile Componentes" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Biometria.jpeg" alt="Biometria" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Braslux.png" alt="Braslux" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Cappeletti.png" alt="Cappeletti" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/CLP%20Automa%C3%A7%C3%A3o%20Industrial.jpeg" alt="CLP Automação Industrial" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Cobra_Correntes.jpeg" alt="Cobra Correntes" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Dinamics.jpg" alt="Dinamics" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Franzoi.png" alt="Franzoi" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/ING.svg" alt="ING Guindastes" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Motronics.png" alt="Motronics" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Opus.webp" alt="Opus" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Perfiltec.png" alt="Perfiltec" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Saluto.jpeg" alt="Saluto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Solferti.png" alt="Solferti" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Sulvisual.png" alt="Sulvisual" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Track.png" alt="Track Automotive" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Tutto.png" alt="Tutto Hidráulicos" /></div>
+      <div class="logo-cell"><img src="assets/clientes_new/Zenit.svg" alt="Zenit" /></div>
     </div>
-
-    <p style="font-size:13px;color:var(--cinza-medio);margin-top:24px;max-width:60ch">* Espaço reservado para logos que venham a ser autorizados no lançamento do novo site. Outros clientes ativos permanecem sob sigilo por escolha — a confidencialidade é sempre a opção padrão.</p>
   </div>
 </section>
 
@@ -203,7 +210,7 @@
     <div class="casos-grid">
 
       <div class="caso">
-        <div class="kicker-caso">Caso 01 · Indústria · RS · Médio porte</div>
+        <div class="kicker-caso">Caso 01 · Indústria · Serra Gaúcha · Médio porte</div>
         <h4>Do faturamento recorde ao <em>resultado que some</em>.</h4>
         <p><strong>Contexto:</strong> indústria familiar com crescimento acelerado, DRE gerencial inexistente, dificuldade em enxergar onde a margem era perdida.</p>
         <p><strong>Método aplicado:</strong> Diagnóstico 90 dias + reconstituição gerencial por linha de produto, canal e representante. Implantação de RQS e painel executivo.</p>
@@ -212,7 +219,7 @@
       </div>
 
       <div class="caso">
-        <div class="kicker-caso">Caso 02 · Distribuição · SP · Médio porte</div>
+        <div class="kicker-caso">Caso 02 · Distribuição · RS · Médio porte</div>
         <h4>Crédito travado, <em>operação sufocada</em>.</h4>
         <p><strong>Contexto:</strong> distribuidora industrial com operação saudável e caixa no sufoco. Ciclo financeiro longo, inadimplência não medida, estoque inchado.</p>
         <p><strong>Método aplicado:</strong> modelo de capital de giro por unidade, política de crédito escrita, régua de cobrança automatizada, renegociação de banking.</p>
@@ -258,13 +265,13 @@
 <footer>
   <div class="container">
     <div class="footer-grid">
-      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p></div>
+      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p><div class="footer-social" style="display:flex;gap:10px;margin-top:16px"><a href="https://www.linkedin.com/company/gestaoatto" target="_blank" rel="noopener" aria-label="LinkedIn" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;color:rgba(255,255,255,.75);transition:all .2s"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://www.instagram.com/gestaoatto" target="_blank" rel="noopener" aria-label="Instagram" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;color:rgba(255,255,255,.75);transition:all .2s"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="https://www.facebook.com/gestaoatto" target="_blank" rel="noopener" aria-label="Facebook" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;color:rgba(255,255,255,.75);transition:all .2s"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a></div></div>
       <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
       <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li></ul></div>
       <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
       <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="#">Política de privacidade</a> · <a href="#">Termos</a></div></div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="politica-privacidade.html">Política de privacidade</a> · <a href="termos-uso.html">Termos</a></div></div>
   </div>
 </footer>
 <script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
