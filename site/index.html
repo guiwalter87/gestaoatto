@@ -393,7 +393,7 @@
 
   .sol-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 0;
     border-top: 1px solid var(--tinta);
     border-left: 1px solid rgba(10, 14, 26, 0.15);
@@ -426,6 +426,8 @@
     z-index: 3;
   }
   .sol-item:hover { background: var(--tinta); color: var(--papel); }
+  .sol-item-head h3 { color: inherit; }
+  .sol-item:hover h3 { color: var(--papel); }
   .sol-item:hover .sol-number { color: var(--teal-atto); }
   .sol-item:hover .sol-bullets { color: rgba(245,243,238,0.6); }
   .sol-item:hover .sol-kicker { color: var(--teal-atto); }
