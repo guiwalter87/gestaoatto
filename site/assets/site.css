@@ -237,34 +237,59 @@ section{padding:140px 0;position:relative}
 .timeline .section-label::before{background:var(--teal-atto)}
 .timeline .section-title{color:#fff}
 .timeline .section-title em{color:var(--teal-atto)}
+/* ==== TIMELINE — padrão 3 colunas (usado em 8 páginas) ==== */
 .timeline-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
   background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.08);
-  margin-top:clamp(40px,5vw,64px);
 }
 .timeline-col{
-  background:var(--azul-noite);padding:clamp(48px,5vw,72px) clamp(36px,4vw,56px);
-  display:flex;flex-direction:column;gap:24px;
+  background:var(--azul-noite);padding:48px 36px;
+  display:flex;flex-direction:column;gap:20px;
+  transition:background .3s;
+}
+.timeline-col:hover{background:#0D152A}
+.timeline-kicker{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--teal-atto);
+}
+.timeline-col h4{
+  font-family:'Outfit',sans-serif;font-weight:500;
+  font-size:clamp(22px,2.1vw,32px);line-height:1.15;letter-spacing:-.02em;
+}
+.timeline-col p{font-size:15px;line-height:1.65;color:rgba(255,255,255,0.78)}
+.timeline-col ul{list-style:none;margin-top:auto;padding-top:24px;border-top:1px solid rgba(255,255,255,0.12)}
+.timeline-col ul li{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;
+  color:rgba(255,255,255,0.56);padding:8px 0;text-transform:uppercase;
+}
+@media (max-width:900px){.timeline-grid{grid-template-columns:1fr}}
+
+/* ==== TIMELINE — variante PILARES (2x2 editorial, só página Método) ==== */
+.timeline-grid--pillars{
+  grid-template-columns:repeat(2,1fr);gap:1px;
+  margin-top:clamp(40px,5vw,64px);
+}
+.timeline-grid--pillars .timeline-col{
+  padding:clamp(48px,5vw,72px) clamp(36px,4vw,56px);gap:24px;
   transition:background .4s ease,transform .5s cubic-bezier(0.2,0.8,0.2,1);
   position:relative;text-decoration:none;color:inherit;cursor:pointer;
   min-height:clamp(320px,38vh,400px);
 }
-.timeline-col:hover{background:#0D152A}
-.timeline-col::before{
+.timeline-grid--pillars .timeline-col::before{
   content:'';position:absolute;left:0;top:0;
   width:0;height:1px;background:var(--teal-atto);
   transition:width .5s cubic-bezier(0.2,0.8,0.2,1);
 }
-.timeline-col:hover::before{width:100%}
-.timeline-col--highlight{
+.timeline-grid--pillars .timeline-col:hover::before{width:100%}
+.timeline-grid--pillars .timeline-col--highlight{
   background:linear-gradient(160deg,var(--azul-noite) 0%,rgba(0,181,184,0.06) 100%);
   border-left:1px solid rgba(0,181,184,0.35);
 }
-.timeline-col--highlight:hover{
+.timeline-grid--pillars .timeline-col--highlight:hover{
   background:linear-gradient(160deg,#0D152A 0%,rgba(0,181,184,0.08) 100%);
 }
-.timeline-col-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
-.timeline-num{
+.timeline-grid--pillars .timeline-col-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.timeline-grid--pillars .timeline-num{
   font-family:'Outfit',sans-serif;font-weight:200;
   font-size:clamp(48px,5vw,80px);line-height:0.82;letter-spacing:-.05em;
   background:linear-gradient(135deg,rgba(255,255,255,0.9),var(--teal-atto));
@@ -272,27 +297,24 @@ section{padding:140px 0;position:relative}
   background-clip:text;color:transparent;
   transition:transform .5s cubic-bezier(0.2,0.8,0.2,1);transform-origin:left bottom;
 }
-.timeline-col:hover .timeline-num{transform:scale(1.04)}
-.timeline-kicker{
-  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--teal-atto);padding-top:8px;
+.timeline-grid--pillars .timeline-col:hover .timeline-num{transform:scale(1.04)}
+.timeline-grid--pillars .timeline-kicker{
+  letter-spacing:.22em;padding-top:8px;
   display:inline-flex;align-items:center;gap:10px;
 }
-.timeline-tag{
+.timeline-grid--pillars .timeline-tag{
   font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;
   padding:4px 9px;background:var(--teal-atto);color:var(--azul-noite);
   border-radius:2px;text-transform:uppercase;font-weight:500;
 }
-.timeline-col h4{
-  font-family:'Outfit',sans-serif;font-weight:400;
-  font-size:clamp(22px,1.9vw,30px);line-height:1.15;letter-spacing:-.02em;
-  color:#fff;margin:0;
+.timeline-grid--pillars .timeline-col h4{
+  font-weight:400;font-size:clamp(22px,1.9vw,30px);color:#fff;margin:0;
 }
-.timeline-col p{
+.timeline-grid--pillars .timeline-col p{
   font-size:clamp(14px,1vw,16px);line-height:1.65;
   color:rgba(255,255,255,0.68);font-weight:300;margin:0;
 }
-.timeline-cta{
+.timeline-grid--pillars .timeline-cta{
   margin-top:auto;padding-top:24px;
   border-top:1px solid rgba(255,255,255,0.12);
   font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;
@@ -300,18 +322,18 @@ section{padding:140px 0;position:relative}
   display:inline-flex;align-items:center;gap:10px;
   transition:gap .4s cubic-bezier(0.2,0.8,0.2,1);position:relative;
 }
-.timeline-cta::before{
+.timeline-grid--pillars .timeline-cta::before{
   content:'';position:absolute;top:-1px;left:0;
   width:32px;height:1px;background:var(--teal-atto);
   transition:width .5s cubic-bezier(0.2,0.8,0.2,1);
 }
-.timeline-col:hover .timeline-cta{gap:14px}
-.timeline-col:hover .timeline-cta::before{width:100%}
-.timeline-cta .arrow{display:inline-block;transition:transform .4s cubic-bezier(0.2,0.8,0.2,1)}
-.timeline-col:hover .timeline-cta .arrow{transform:translateX(4px)}
+.timeline-grid--pillars .timeline-col:hover .timeline-cta{gap:14px}
+.timeline-grid--pillars .timeline-col:hover .timeline-cta::before{width:100%}
+.timeline-grid--pillars .timeline-cta .arrow{display:inline-block;transition:transform .4s cubic-bezier(0.2,0.8,0.2,1)}
+.timeline-grid--pillars .timeline-col:hover .timeline-cta .arrow{transform:translateX(4px)}
 @media (max-width:900px){
-  .timeline-grid{grid-template-columns:1fr}
-  .timeline-col{min-height:auto}
+  .timeline-grid--pillars{grid-template-columns:1fr}
+  .timeline-grid--pillars .timeline-col{min-height:auto}
 }
 
 /* ==== PROVA / QUOTE ==== */
