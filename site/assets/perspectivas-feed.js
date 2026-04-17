@@ -29,9 +29,10 @@
 
   function renderCard(post) {
     const catSlug = categoriaSlug(post.categoria);
+    const capa = `assets/capas/${post.slug}_hero.png`;
     return `
       <a class="persp-card" href="perspectivas/${post.slug}.html">
-        <div class="persp-cover persp-cover--${catSlug}" aria-hidden="true"></div>
+        <div class="persp-cover persp-cover--${catSlug}" aria-hidden="true" style="background-image:url('${capa}');background-size:cover;background-position:center"></div>
         <div class="persp-body">
           <div class="persp-tag">${post.categoria}</div>
           <h3>${post.titulo}</h3>

@@ -1,7 +1,9 @@
 [
   {
     "slug": "governanca-subcontratada-valuation",
+    "numero": "07",
     "titulo": "A empresa média brasileira está <em>subcontratada</em> em governança — e é isso que explica o desconto no valuation.",
+    "titulo_curto": "Governança subcontratada derruba o valuation.",
     "categoria": "Governança",
     "data": "2026-04-10",
     "excerpt": "O corte recorrente de valuation vem sempre da mesma região do balanço: ausência de conselho, acordo de sócios frágil e DRE gerencial que não resiste à due diligence.",
@@ -9,7 +11,9 @@
   },
   {
     "slug": "rqs-metrica-empresa-media",
+    "numero": "06",
     "titulo": "RQS: por que faturamento não é a métrica certa para quem opera empresa média.",
+    "titulo_curto": "RQS: a métrica certa da empresa média.",
     "categoria": "Performance",
     "data": "2026-04-02",
     "excerpt": "A diferença entre crescer e crescer bem aparece no corte de receita por qualidade — margem, pulverização, recorrência e mix.",
@@ -17,7 +21,9 @@
   },
   {
     "slug": "conselho-consultivo-empresa-media",
+    "numero": "05",
     "titulo": "Conselho consultivo não é acessório — é o rito que separa empresa grande de empresa que só cresceu.",
+    "titulo_curto": "Conselho consultivo não é acessório.",
     "categoria": "Governança",
     "data": "2026-03-22",
     "excerpt": "O conselho bem desenhado resolve três problemas ao mesmo tempo: solidão do sócio, falta de mesa de decisão e preparação para eventos de M&A.",
@@ -25,7 +31,9 @@
   },
   {
     "slug": "arquitetura-humana-consequencia-estrategia",
+    "numero": "04",
     "titulo": "Arquitetura humana é consequência da estratégia — não o contrário.",
+    "titulo_curto": "Arquitetura humana é consequência da estratégia.",
     "categoria": "Pessoas",
     "data": "2026-03-10",
     "excerpt": "Por que organograma redesenhado sem passar pela estratégia é perda de tempo. Como abordar o problema na ordem correta — a partir das frentes dos próximos 24 meses.",
@@ -33,7 +41,9 @@
   },
   {
     "slug": "pre-ma-multiplo-construido",
+    "numero": "03",
     "titulo": "Pré-M&A é onde o múltiplo é construído — não na negociação.",
+    "titulo_curto": "Pré-M&A é onde o múltiplo nasce.",
     "categoria": "M&A",
     "data": "2026-02-18",
     "excerpt": "A fase que todo mundo subestima. Do que consiste a preparação técnica para venda, por que ela muda o valuation e quanto tempo leva para ser feita direito.",
@@ -41,7 +51,9 @@
   },
   {
     "slug": "socio-refem-agenda-direcao",
+    "numero": "02",
     "titulo": "O sócio refém — e como o método de Direção devolve a agenda que ele nunca deveria ter perdido.",
+    "titulo_curto": "O sócio refém do próprio negócio.",
     "categoria": "Direção",
     "data": "2026-02-05",
     "excerpt": "O momento em que todo sócio bem-sucedido percebe que virou refém do próprio negócio. E o que é preciso instalar para que a empresa ande sem ele na sala.",
@@ -49,7 +61,9 @@
   },
   {
     "slug": "familia-sociedade-gestao-tres-circulos",
+    "numero": "01",
     "titulo": "Família, sociedade e gestão — os três círculos que a empresa familiar precisa separar antes da sucessão.",
+    "titulo_curto": "Os três círculos da empresa familiar.",
     "categoria": "Sucessão",
     "data": "2026-01-24",
     "excerpt": "O protocolo familiar não é burocracia cartorial. É o documento que permite à família conversar sobre dinheiro, poder e afeto sem misturar os três.",

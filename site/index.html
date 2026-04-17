@@ -853,20 +853,14 @@
 
   .persp-cover {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     margin-bottom: 28px;
     background: linear-gradient(135deg, var(--azul-atto), var(--teal-atto));
+    background-size: cover;
+    background-position: center;
     position: relative;
     transition: box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  .persp-cover::after {
-    content: '';
-    position: absolute;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background: radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.12) 0%, transparent 50%);
-    pointer-events: none;
   }
   .persp-card:hover .persp-cover {
     box-shadow: 0 20px 48px rgba(10, 14, 26, 0.18);
