@@ -8,14 +8,14 @@
 <link rel="stylesheet" href="assets/site.css" />
 <style>
 .persp-feature{padding:60px 0 120px}
-.persp-feature-img{width:100%;aspect-ratio:16/9;border-radius:2px;background:var(--papel-alt);background-size:cover;background-position:center;margin-bottom:48px;transition:transform .4s}
+.persp-feature-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center}
+.persp-feature-img{width:100%;aspect-ratio:16/9;border-radius:2px;background:var(--papel-alt);background-size:cover;background-position:center;transition:transform .4s, box-shadow .4s;display:block}
 .persp-feature a:hover .persp-feature-img{transform:translateY(-4px);box-shadow:0 24px 60px rgba(10,14,26,.18)}
-.persp-feature-body{max-width:880px}
 .persp-feature .kicker{color:var(--teal-atto);margin-bottom:20px;display:inline-block}
-.persp-feature h2{font-family:'Outfit';font-weight:200;font-size:clamp(36px,4.4vw,56px);line-height:1.08;letter-spacing:-.02em;color:var(--tinta);margin-bottom:28px}
+.persp-feature h2{font-family:'Outfit';font-weight:200;font-size:clamp(30px,3.4vw,44px);line-height:1.1;letter-spacing:-.02em;color:var(--tinta);margin-bottom:24px}
 .persp-feature h2 em{font-style:italic;color:var(--azul-atto)}
-.persp-feature .meta{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza-medio);display:flex;gap:24px;margin-bottom:28px;flex-wrap:wrap}
-.persp-feature .excerpt{font-size:18px;line-height:1.65;color:var(--cinza-escuro);max-width:62ch;margin-bottom:32px}
+.persp-feature .meta{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza-medio);display:flex;gap:20px;margin-bottom:20px;flex-wrap:wrap}
+.persp-feature .excerpt{font-size:16px;line-height:1.6;color:var(--cinza-escuro);margin-bottom:28px}
 
 .persp-filter{border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);padding:24px 0}
 .persp-filter-inner{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
@@ -46,6 +46,7 @@
 .persp-more{text-align:center;padding:32px 0 0;border-top:1px solid var(--linha);margin-top:80px}
 
 @media (max-width:900px){
+  .persp-feature-grid{grid-template-columns:1fr;gap:40px}
   .persp-feed-grid{grid-template-columns:1fr;gap:48px}
   .persp-feature{padding:40px 0 80px}
 }
@@ -125,19 +126,21 @@
 <section class="persp-feature">
   <div class="container">
     <!-- POSTS:FEATURE_START -->
-    <a href="perspectivas/governanca-subcontratada-valuation.html" style="display:block;text-decoration:none;color:inherit">
-      <div class="persp-feature-img" style="background-image:url('assets/capas/governanca-subcontratada-valuation_hero.png')"></div>
-    </a>
-    <div class="persp-feature-body">
-      <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase">Em destaque · Abr · 2026</div>
-      <div class="meta">
-        <span>Governança</span>
-        <span>Abr · 2026</span>
-        <span>12 min de leitura</span>
+    <div class="persp-feature-grid">
+      <div class="persp-feature-body">
+        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase">Em destaque · Abr · 2026</div>
+        <div class="meta">
+          <span>Governança</span>
+          <span>Abr · 2026</span>
+          <span>12 min de leitura</span>
+        </div>
+        <h2>A empresa média brasileira está <em>subcontratada</em> em governança — e é isso que explica o desconto no valuation.</h2>
+        <p class="excerpt">O corte recorrente de valuation em empresas médias vem da mesma região do balanço: ausência de conselho, acordo de sócios frágil e DRE gerencial que não resiste à due diligence. O desconto não é sobre o ativo — é sobre a falta de leitura sobre o ativo.</p>
+        <a href="perspectivas/governanca-subcontratada-valuation.html" class="btn-primary" style="display:inline-flex;align-items:center">Ler a tese completa <span class="arrow" style="margin-left:12px">→</span></a>
       </div>
-      <h2>A empresa média brasileira está <em>subcontratada</em> em governança — e é isso que explica o desconto no valuation.</h2>
-      <p class="excerpt">O corte recorrente de valuation em empresas médias vem da mesma região do balanço: ausência de conselho, acordo de sócios frágil e DRE gerencial que não resiste à due diligence. O desconto não é sobre o ativo — é sobre a falta de leitura sobre o ativo.</p>
-      <a href="perspectivas/governanca-subcontratada-valuation.html" class="btn-primary" style="display:inline-flex;align-items:center">Ler a tese completa <span class="arrow" style="margin-left:12px">→</span></a>
+      <a href="perspectivas/governanca-subcontratada-valuation.html" style="display:block">
+        <div class="persp-feature-img" style="background-image:url('assets/capas/governanca-subcontratada-valuation_hero.png')"></div>
+      </a>
     </div>
     <!-- POSTS:FEATURE_END -->
   </div>
@@ -227,7 +230,7 @@
     <h2>Quer receber as <em>próximas perspectivas</em> antes da publicação?</h2>
     <p>Newsletter mensal da Atto. Uma tese por edição, sem marketing, sem promessa milagrosa. Para quem dirige uma empresa e quer pensar com mais profundidade.</p>
     <div class="actions">
-      <a href="contato.html" class="btn-primary">Assinar a newsletter <span class="arrow">→</span></a>
+      <a href="newsletter.html" class="btn-primary">Assinar a newsletter <span class="arrow">→</span></a>
       <a href="metodo.html" class="btn-ghost">Ver o método <span class="arrow">→</span></a>
     </div>
   </div>
@@ -240,7 +243,7 @@
       <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
       <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li></ul></div>
       <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
-      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
+      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="newsletter.html">Newsletter</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
     </div>
     <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="politica-privacidade.html">Política de privacidade</a> · <a href="termos-uso.html">Termos</a></div></div>
   </div>

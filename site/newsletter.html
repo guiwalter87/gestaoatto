@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Newsletter — Perspectivas Atto Estratégias</title>
+<meta name="description" content="Newsletter mensal da Atto. Uma tese por edição, sem marketing, sem promessa milagrosa. Para quem dirige uma empresa e quer pensar com mais profundidade." />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+.nl-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;padding:40px 0 140px;align-items:start}
+.nl-side h2{font-family:'Outfit';font-weight:200;font-size:clamp(32px,4vw,48px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:24px}
+.nl-side h2 em{font-style:italic;color:var(--azul-atto)}
+.nl-side .intro{font-size:17px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:40px;max-width:48ch}
+.nl-side ul{list-style:none;padding:0;margin:0}
+.nl-side li{padding:20px 0;border-top:1px solid var(--linha);display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.nl-side li:last-child{border-bottom:1px solid var(--linha)}
+.nl-side li .mark{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-atto)}
+.nl-side li .text{font-size:15px;line-height:1.6;color:var(--cinza-escuro)}
+.nl-side li .text strong{color:var(--tinta);font-weight:500}
+
+.nl-card{background:#fff;border:1px solid var(--linha);padding:56px 48px;border-radius:2px;position:sticky;top:120px}
+.nl-card h3{font-family:'Outfit';font-weight:300;font-size:26px;color:var(--tinta);margin-bottom:8px;letter-spacing:-.01em}
+.nl-card .sub{font-size:15px;color:var(--cinza-escuro);margin-bottom:40px;line-height:1.6}
+.field{margin-bottom:24px}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:10px}
+.field input,.field select{width:100%;border:none;border-bottom:1px solid var(--linha);background:transparent;padding:12px 0;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;color:var(--tinta);transition:border-color .2s;border-radius:0}
+.field input:focus,.field select:focus{outline:none;border-bottom-color:var(--azul-atto)}
+.field-check{display:flex;gap:12px;align-items:flex-start;margin-bottom:24px;font-size:14px;color:var(--cinza-escuro);line-height:1.55}
+.field-check input{width:16px;height:16px;margin-top:2px;accent-color:var(--azul-atto)}
+.nl-card button{width:100%;margin-top:16px;background:var(--azul-noite);color:#fff;border:none;padding:20px 32px;font-family:'Outfit';font-weight:500;font-size:15px;letter-spacing:.01em;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;justify-content:center;gap:12px;transition:background .2s}
+.nl-card button:hover{background:var(--azul-atto)}
+.nl-card button .arrow{transition:transform .2s}
+.nl-card button:hover .arrow{transform:translateX(4px)}
+.nl-success{display:none;background:rgba(0,181,184,.08);border:1px solid rgba(0,181,184,.3);padding:24px;border-radius:2px;color:var(--tinta);font-size:15px;line-height:1.6;margin-top:16px}
+.nl-success.is-on{display:block}
+.nl-success strong{color:var(--azul-atto);display:block;margin-bottom:8px;font-family:'Outfit';font-weight:500}
+
+.nl-editions{padding:100px 0;border-top:1px solid var(--linha)}
+.nl-editions .section-label{color:var(--cinza-medio)}
+.nl-editions h2{font-family:'Outfit';font-weight:200;font-size:clamp(28px,3vw,40px);letter-spacing:-.02em;color:var(--tinta);margin-bottom:16px}
+.nl-editions h2 em{font-style:italic;color:var(--azul-atto)}
+.nl-editions .lead{font-size:16px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:48px;max-width:60ch}
+
+@media (max-width:900px){
+  .nl-grid{grid-template-columns:1fr;gap:48px}
+  .nl-card{position:static;padding:40px 28px}
+}
+</style>
+<meta name="author" content="Atto Estratégias & Educação">
+<meta name="theme-color" content="#1A3A8F">
+<link rel="canonical" href="https://www.gestaoatto.com.br/newsletter.html">
+<link rel="icon" type="image/png" href="assets/atto_logo_dark_sm.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Atto Estratégias">
+<meta property="og:title" content="Newsletter — Perspectivas Atto Estratégias">
+<meta property="og:description" content="Uma tese por edição. Para quem dirige uma empresa e quer pensar com mais profundidade.">
+<meta property="og:url" content="https://www.gestaoatto.com.br/newsletter.html">
+<meta property="og:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Newsletter — Perspectivas Atto">
+<meta name="twitter:description" content="Uma tese por edição. Para quem dirige uma empresa e quer pensar com mais profundidade.">
+<meta name="twitter:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-mark"><img class="logo-light" src="assets/atto_logo_light_sm.png" alt="Atto" /><img class="logo-dark" src="assets/atto_logo_dark_sm.png" alt="Atto" /></a>
+    <nav>
+      <a href="metodo.html">Método</a>
+      <a href="atuacao.html">Atuação</a>
+      <a href="perspectivas.html">Perspectivas</a>
+      <a href="sobre.html">A Atto</a>
+      <a href="contato.html#agendar" class="cta-nav">Agende conversa <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="breadcrumb"><a href="index.html">A Atto</a><span class="sep">/</span><a href="perspectivas.html">Perspectivas</a><span class="sep">/</span><span class="current">Newsletter</span></div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="kicker">Newsletter · Perspectivas Atto</div>
+    <h1>Uma tese por edição. <em>Sem ruído.</em></h1>
+    <p class="lead">Newsletter mensal da Atto Estratégias. Cada edição traz uma única tese desenvolvida — sobre governança, direção, performance financeira, pessoas ou M&amp;A — escrita para quem dirige uma empresa e quer pensar com mais profundidade. Zero marketing, zero promessa milagrosa, zero follow-up comercial disfarçado de conteúdo.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="nl-grid">
+      <div class="nl-side">
+        <div class="section-label">O que esperar</div>
+        <h2>O que entra e o que <em>nunca entra</em> na newsletter.</h2>
+        <p class="intro">Padrão editorial da casa — mesma régua dos artigos publicados em Perspectivas, entregue na caixa de entrada antes da publicação pública.</p>
+        <ul>
+          <li><span class="mark">01</span><span class="text"><strong>Uma edição por mês.</strong> Nem mais, nem menos. Escrita, revisada e assinada por um dos sócios da Atto.</span></li>
+          <li><span class="mark">02</span><span class="text"><strong>Uma tese desenvolvida.</strong> Não é digest de links, não é resumo de novidades. É argumento construído em profundidade, da origem ao desdobramento prático.</span></li>
+          <li><span class="mark">03</span><span class="text"><strong>Prévia antes da publicação.</strong> Assinantes recebem em primeira mão, uma semana antes do texto ir para Perspectivas.</span></li>
+          <li><span class="mark">04</span><span class="text"><strong>Sem venda disfarçada.</strong> Nenhuma edição termina com call to action comercial. Quem quiser conversar sobre projeto agenda direto — o caminho é outro.</span></li>
+          <li><span class="mark">05</span><span class="text"><strong>Descadastro imediato.</strong> Um clique no rodapé do e-mail. Sem pergunta, sem pesquisa de saída.</span></li>
+        </ul>
+      </div>
+
+      <div class="nl-card">
+        <h3>Assinar a newsletter</h3>
+        <p class="sub">Dois campos, LGPD, pronto. Você confirma o e-mail na caixa de entrada e começa a receber na próxima edição.</p>
+
+        <form id="nl-form" onsubmit="return submitNewsletter(event)">
+          <div class="field">
+            <label>Seu nome</label>
+            <input type="text" name="nome" required placeholder="Como prefere ser chamado" />
+          </div>
+
+          <div class="field">
+            <label>Seu e-mail</label>
+            <input type="email" name="email" required placeholder="voce@empresa.com" />
+          </div>
+
+          <div class="field">
+            <label>Empresa (opcional)</label>
+            <input type="text" name="empresa" placeholder="Nome da empresa onde atua" />
+          </div>
+
+          <div class="field">
+            <label>Cargo / função (opcional)</label>
+            <select name="cargo">
+              <option value="">— selecione —</option>
+              <option>Sócio · Fundador</option>
+              <option>Conselheiro</option>
+              <option>CEO · Diretor executivo</option>
+              <option>CFO · Diretor financeiro</option>
+              <option>Diretor · Outras áreas</option>
+              <option>Gerente · Coordenador</option>
+              <option>Consultor · Profissional autônomo</option>
+              <option>Outro</option>
+            </select>
+          </div>
+
+          <div class="field-check">
+            <input type="checkbox" required id="conf-lgpd" />
+            <label for="conf-lgpd" style="font-family:inherit;font-size:14px;letter-spacing:0;text-transform:none;color:var(--cinza-escuro);margin:0">Autorizo a Atto a tratar meu e-mail exclusivamente para envio da newsletter mensal. Posso descadastrar a qualquer momento. <a href="politica-privacidade.html" style="color:var(--azul-atto);border-bottom:1px solid var(--azul-atto)">Política de privacidade</a>.</label>
+          </div>
+
+          <button type="submit">Assinar a newsletter <span class="arrow">→</span></button>
+        </form>
+
+        <div id="nl-success" class="nl-success">
+          <strong>Abrimos seu e-mail pra enviar a confirmação.</strong>
+          Se nada abriu, copie e envie manualmente para <a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a> com o assunto "Assinatura Newsletter". Respondemos com a confirmação em até 1 dia útil.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="nl-editions">
+  <div class="container">
+    <div class="section-label">Edições recentes em Perspectivas</div>
+    <h2>Do que a casa <em>anda escrevendo</em>.</h2>
+    <p class="lead">Todas as edições passadas ficam públicas em Perspectivas — assinantes recebem antes, o resto lê depois. Confira algumas teses recentes antes de assinar.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <a href="perspectivas.html" class="btn-primary">Ver Perspectivas <span class="arrow">→</span></a>
+      <a href="metodo.html" class="btn-ghost">Ver o método <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p><div class="footer-social" style="display:flex;gap:10px;margin-top:16px"><a href="https://www.linkedin.com/company/gestaoatto" target="_blank" rel="noopener" aria-label="LinkedIn" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;color:rgba(255,255,255,.75);transition:all .2s"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://www.instagram.com/gestaoatto" target="_blank" rel="noopener" aria-label="Instagram" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;color:rgba(255,255,255,.75);transition:all .2s"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a><a href="https://www.facebook.com/gestaoatto" target="_blank" rel="noopener" aria-label="Facebook" style="width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.18);border-radius:50%;color:rgba(255,255,255,.75);transition:all .2s"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a></div></div>
+      <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
+      <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li></ul></div>
+      <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
+      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="newsletter.html">Newsletter</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="politica-privacidade.html">Política de privacidade</a> · <a href="termos-uso.html">Termos</a></div></div>
+  </div>
+</footer>
+
+<script>
+function submitNewsletter(e) {
+  e.preventDefault();
+  const f = e.target;
+  const nome = (f.nome.value || '').trim();
+  const email = (f.email.value || '').trim();
+  const empresa = (f.empresa.value || '').trim();
+  const cargo = (f.cargo.value || '').trim();
+  const linhas = [
+    'Gostaria de assinar a Newsletter Atto — Perspectivas.',
+    '',
+    'Nome: ' + nome,
+    'E-mail: ' + email,
+  ];
+  if (empresa) linhas.push('Empresa: ' + empresa);
+  if (cargo)   linhas.push('Cargo: ' + cargo);
+  linhas.push('');
+  linhas.push('Autorizo o tratamento do e-mail conforme a Política de Privacidade da Atto.');
+  const subject = encodeURIComponent('Assinatura Newsletter Atto');
+  const body = encodeURIComponent(linhas.join('\n'));
+  document.getElementById('nl-success').classList.add('is-on');
+  window.location.href = 'mailto:contato@gestaoatto.com.br?subject=' + subject + '&body=' + body;
+  return false;
+}
+</script>
+<script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
+</body>
+</html>
