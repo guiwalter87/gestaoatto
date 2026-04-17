@@ -856,22 +856,17 @@
     aspect-ratio: 16 / 9;
     overflow: hidden;
     margin-bottom: 28px;
-    background: linear-gradient(135deg, var(--azul-atto), var(--teal-atto));
+    background-color: var(--papel-alt);
+    background-image: linear-gradient(135deg, var(--azul-atto), var(--teal-atto));
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     transition: box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .persp-card:hover .persp-cover {
     box-shadow: 0 20px 48px rgba(10, 14, 26, 0.18);
   }
-  /* Gradientes por categoria — personalidade visual sem dependência de imagem */
-  .persp-cover--governanca { background: linear-gradient(135deg, #1A3A8F, #00B5B8); }
-  .persp-cover--performance { background: linear-gradient(135deg, #00B5B8, #1A3A8F); }
-  .persp-cover--pessoas { background: linear-gradient(135deg, #1A3A8F, #5340C8); }
-  .persp-cover--ma { background: linear-gradient(135deg, #080F1E, #00B5B8); }
-  .persp-cover--direcao { background: linear-gradient(135deg, #1A3A8F, #080F1E); }
-  .persp-cover--sucessao { background: linear-gradient(135deg, #5340C8, #00B5B8); }
 
   .persp-body {
     display: flex;
@@ -1489,7 +1484,7 @@
       <!-- Conteúdo carregado dinamicamente por assets/perspectivas-feed.js a partir de /perspectivas-data.json -->
       <!-- Fallback estático (exibido se o JS falhar ou enquanto carrega): -->
       <a href="perspectivas/governanca-subcontratada-valuation.html" class="persp-card">
-        <div class="persp-cover persp-cover--governanca" aria-hidden="true"></div>
+        <div class="persp-cover" aria-hidden="true" style="background-image:url('assets/capas/governanca-subcontratada-valuation_hero.png')"></div>
         <div class="persp-body">
           <div class="persp-tag">Governança</div>
           <h3>A empresa média brasileira está <em>subcontratada</em> em governança — e é isso que explica o desconto no valuation.</h3>
@@ -1502,7 +1497,7 @@
         </div>
       </a>
       <a href="perspectivas/rqs-metrica-empresa-media.html" class="persp-card">
-        <div class="persp-cover persp-cover--performance" aria-hidden="true"></div>
+        <div class="persp-cover" aria-hidden="true" style="background-image:url('assets/capas/rqs-metrica-empresa-media_hero.png')"></div>
         <div class="persp-body">
           <div class="persp-tag">Performance</div>
           <h3>RQS: por que faturamento não é a métrica certa para quem opera empresa média.</h3>
@@ -1515,7 +1510,7 @@
         </div>
       </a>
       <a href="perspectivas/conselho-consultivo-empresa-media.html" class="persp-card">
-        <div class="persp-cover persp-cover--governanca" aria-hidden="true"></div>
+        <div class="persp-cover" aria-hidden="true" style="background-image:url('assets/capas/conselho-consultivo-empresa-media_hero.png')"></div>
         <div class="persp-body">
           <div class="persp-tag">Governança</div>
           <h3>Conselho consultivo não é acessório — é o rito que separa empresa grande de empresa que só cresceu.</h3>
