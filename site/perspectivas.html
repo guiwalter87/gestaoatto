@@ -7,16 +7,15 @@
 <meta name="description" content="Leituras, teses e análises sobre governança, performance e o próximo ciclo da empresa que cresceu mais rápido do que a própria estrutura." />
 <link rel="stylesheet" href="assets/site.css" />
 <style>
-.persp-feature{padding:80px 0 120px}
-.persp-feature-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:80px;align-items:end}
-.persp-feature .kicker{color:var(--teal-atto);margin-bottom:24px}
-.persp-feature h2{font-family:'Outfit';font-weight:200;font-size:clamp(40px,5vw,64px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:32px}
+.persp-feature{padding:60px 0 120px}
+.persp-feature-img{width:100%;aspect-ratio:16/9;border-radius:2px;background:var(--papel-alt);background-size:cover;background-position:center;margin-bottom:48px;transition:transform .4s}
+.persp-feature a:hover .persp-feature-img{transform:translateY(-4px);box-shadow:0 24px 60px rgba(10,14,26,.18)}
+.persp-feature-body{max-width:880px}
+.persp-feature .kicker{color:var(--teal-atto);margin-bottom:20px;display:inline-block}
+.persp-feature h2{font-family:'Outfit';font-weight:200;font-size:clamp(36px,4.4vw,56px);line-height:1.08;letter-spacing:-.02em;color:var(--tinta);margin-bottom:28px}
 .persp-feature h2 em{font-style:italic;color:var(--azul-atto)}
-.persp-feature .meta{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza-medio);display:flex;gap:24px;margin-bottom:24px}
-.persp-feature .excerpt{font-size:18px;line-height:1.65;color:var(--cinza-escuro);max-width:58ch;margin-bottom:32px}
-.persp-feature-img{aspect-ratio:4/5;background:linear-gradient(135deg,var(--azul-atto) 0%,var(--teal-atto) 100%);border-radius:2px;position:relative;overflow:hidden}
-.persp-feature-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.15),transparent 60%)}
-.persp-feature-img .badge{position:absolute;top:24px;left:24px;background:var(--papel);color:var(--azul-noite);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;border-radius:100px}
+.persp-feature .meta{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza-medio);display:flex;gap:24px;margin-bottom:28px;flex-wrap:wrap}
+.persp-feature .excerpt{font-size:18px;line-height:1.65;color:var(--cinza-escuro);max-width:62ch;margin-bottom:32px}
 
 .persp-filter{border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);padding:24px 0}
 .persp-filter-inner{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
@@ -47,8 +46,8 @@
 .persp-more{text-align:center;padding:32px 0 0;border-top:1px solid var(--linha);margin-top:80px}
 
 @media (max-width:900px){
-  .persp-feature-grid{grid-template-columns:1fr;gap:48px}
   .persp-feed-grid{grid-template-columns:1fr;gap:48px}
+  .persp-feature{padding:40px 0 80px}
 }
 </style>
 <meta name="description" content="Artigos, estudos de caso e perspectivas sobre estratégia, finanças, gente e M&amp;A em empresas familiares e de médio porte.">
@@ -126,21 +125,21 @@
 <section class="persp-feature">
   <div class="container">
     <!-- POSTS:FEATURE_START -->
-    <div class="persp-feature-grid">
-      <div>
-        <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase">Em destaque · Abr · 2026</div>
-        <div class="meta">
-          <span>Governança</span>
-          <span>Abr · 2026</span>
-          <span>12 min de leitura</span>
-        </div>
-        <h2>A empresa média brasileira está <em>subcontratada</em> em governança — e é isso que explica o desconto no valuation.</h2>
-        <p class="excerpt">O corte recorrente de valuation em empresas médias vem da mesma região do balanço: ausência de conselho, acordo de sócios frágil e DRE gerencial que não resiste à due diligence. O desconto não é sobre o ativo — é sobre a falta de leitura sobre o ativo.</p>
-        <a href="perspectivas/governanca-subcontratada-valuation.html" class="btn-primary" style="display:inline-flex;align-items:center">Ler a tese completa <span class="arrow" style="margin-left:12px">→</span></a>
+    <a href="perspectivas/governanca-subcontratada-valuation.html" style="display:block;text-decoration:none;color:inherit">
+      <div class="persp-feature-img" style="background-image:url('assets/capas/governanca-subcontratada-valuation_hero.png')"></div>
+    </a>
+    <div class="persp-feature-body">
+      <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase">Em destaque · Abr · 2026</div>
+      <div class="meta">
+        <span>Governança</span>
+        <span>Abr · 2026</span>
+        <span>12 min de leitura</span>
       </div>
-      <div class="persp-feature-img"><span class="badge">Em destaque · Governança</span></div>
+      <h2>A empresa média brasileira está <em>subcontratada</em> em governança — e é isso que explica o desconto no valuation.</h2>
+      <p class="excerpt">O corte recorrente de valuation em empresas médias vem da mesma região do balanço: ausência de conselho, acordo de sócios frágil e DRE gerencial que não resiste à due diligence. O desconto não é sobre o ativo — é sobre a falta de leitura sobre o ativo.</p>
+      <a href="perspectivas/governanca-subcontratada-valuation.html" class="btn-primary" style="display:inline-flex;align-items:center">Ler a tese completa <span class="arrow" style="margin-left:12px">→</span></a>
     </div>
-      <!-- POSTS:FEATURE_END -->
+    <!-- POSTS:FEATURE_END -->
   </div>
 </section>
 
