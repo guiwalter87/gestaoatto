@@ -1004,7 +1004,7 @@
   .logos-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    gap: 0;
+    gap: 12px 24px;
     background: transparent;
   }
   .logo-cell {
@@ -1013,23 +1013,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px 20px;
-    transition: background 0.4s ease;
+    padding: 18px 16px;
+    transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
     position: relative;
-    overflow: hidden;
   }
   .logo-cell img {
     max-width: 100%;
-    max-height: 72px;
+    max-height: 54px;
     width: auto;
     height: auto;
     object-fit: contain;
-    mix-blend-mode: multiply;
-    filter: grayscale(1) opacity(0.65) contrast(0.95);
+    filter: grayscale(1) opacity(0.6) contrast(0.95);
     transition: filter 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  .logo-cell:hover {
-    background: var(--papel-alt);
   }
   .logo-cell:hover img {
     filter: grayscale(0) opacity(1) contrast(1);
@@ -1037,11 +1032,11 @@
   }
   @media (max-width: 1100px) {
     .logos-grid { grid-template-columns: repeat(4, 1fr); }
-    .logo-cell img { max-height: 64px; }
+    .logo-cell img { max-height: 50px; }
   }
   @media (max-width: 700px) {
-    .logos-grid { grid-template-columns: repeat(3, 1fr); }
-    .logo-cell img { max-height: 56px; }
+    .logos-grid { grid-template-columns: repeat(3, 1fr); gap: 8px 16px; }
+    .logo-cell img { max-height: 42px; }
   }
   .clientes-footnote {
     margin-top: 56px;
@@ -1548,28 +1543,28 @@
   <div class="container">
     <div class="section-label">05 / Prova</div>
     <div class="clientes-header">
-      <h2>Clientes que aprovam <em>o método</em>.</h2>
-      <p class="clientes-lede">Indústrias, distribuidoras e empresas familiares que abriram a casa, rodaram a metodologia da Atto e <strong>autorizaram falar sobre o processo</strong>. A tese sustentada por nome e logo — não por adjetivo.</p>
+      <h2>Marcas que rodam o método <em>dentro de casa</em>.</h2>
+      <p class="clientes-lede">Indústrias, distribuidoras e empresas familiares onde a metodologia da Atto deixou de ser projeto e virou rotina — diagnóstico, direção e performance em operação contínua. <strong>Relação construída ao longo de anos</strong>, com entrega consistente.</p>
     </div>
     <div class="logos-grid">
-      <div class="logo-cell"><img src="assets/clientes_new/Acrilys.png" alt="Acrilys" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/%C3%81bile%20Componentes.webp" alt="Ábile Componentes" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Biometria.jpeg" alt="Biometria" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Cappeletti.png" alt="Cappeletti" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/CLP%20Automa%C3%A7%C3%A3o%20Industrial.jpeg" alt="CLP Automação Industrial" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Cobra_Correntes.jpeg" alt="Cobra Correntes" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Dinamics.jpg" alt="Dinamics" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Franzoi.png" alt="Franzoi" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/ING.svg" alt="ING Guindastes" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Motronics.png" alt="Motronics" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Opus.webp" alt="Opus" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Perfiltec.png" alt="Perfiltec" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Saluto.jpeg" alt="Saluto" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Solferti.png" alt="Solferti" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Sulvisual.png" alt="Sulvisual" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Track.png" alt="Track Automotive" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Tutto.png" alt="Tutto Hidráulicos" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Zenit.svg" alt="Zenit" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Acrilys.png" alt="Acrilys" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Abile.png" alt="Ábile Componentes" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Biometria.png" alt="Biometria" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Cappeletti.png" alt="Cappeletti" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/CLP.png" alt="CLP Automação Industrial" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Cobra.png" alt="Cobra Correntes" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Dinamics.png" alt="Dinamics" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Franzoi.png" alt="Franzoi" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/ING.svg" alt="ING Guindastes" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Motronics.png" alt="Motronics" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Opus.png" alt="Opus" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Perfiltec.png" alt="Perfiltec" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Saluto.png" alt="Saluto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Solferti.png" alt="Solferti" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Sulvisual.png" alt="Sulvisual" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Track.png" alt="Track Automotive" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Tutto.png" alt="Tutto Hidráulicos" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Zenit.svg" alt="Zenit" /></div>
     </div>
     <div class="clientes-footnote">
       <a href="clientes.html">Conheça os clientes atendidos <span>→</span></a>

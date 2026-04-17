@@ -7,10 +7,9 @@
 <meta name="description" content="Empresas que aprovam o método. Depoimentos nominais quando autorizados. Casos anônimos em temas sensíveis." />
 <link rel="stylesheet" href="assets/site.css" />
 <style>
-.logos-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0;background:transparent;margin-top:40px}
-.logo-cell{aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:24px 20px;background:transparent;transition:background .4s ease;overflow:hidden}
-.logo-cell:hover{background:var(--papel-alt)}
-.logo-cell img{max-width:100%;max-height:72px;width:auto;height:auto;object-fit:contain;mix-blend-mode:multiply;filter:grayscale(1) opacity(.65) contrast(.95);transition:filter .45s cubic-bezier(0.2,0.8,0.2,1), transform .45s cubic-bezier(0.2,0.8,0.2,1)}
+.logos-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px 24px;background:transparent;margin-top:40px}
+.logo-cell{aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:18px 16px;background:transparent;transition:transform .45s cubic-bezier(0.2,0.8,0.2,1)}
+.logo-cell img{max-width:100%;max-height:54px;width:auto;height:auto;object-fit:contain;filter:grayscale(1) opacity(.6) contrast(.95);transition:filter .45s cubic-bezier(0.2,0.8,0.2,1), transform .45s cubic-bezier(0.2,0.8,0.2,1)}
 .logo-cell:hover img{filter:grayscale(0) opacity(1) contrast(1);transform:scale(1.06)}
 
 .depo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;padding:40px 0}
@@ -31,11 +30,11 @@
 
 @media (max-width:1100px){
   .logos-grid{grid-template-columns:repeat(4,1fr)}
-  .logo-cell img{max-height:64px}
+  .logo-cell img{max-height:50px}
 }
 @media (max-width:700px){
-  .logos-grid{grid-template-columns:repeat(3,1fr)}
-  .logo-cell img{max-height:56px}
+  .logos-grid{grid-template-columns:repeat(3,1fr);gap:8px 16px}
+  .logo-cell img{max-height:42px}
   .depo-grid,.casos-grid{grid-template-columns:1fr;gap:16px}
 }
 </style>
@@ -105,9 +104,9 @@
 
 <section class="page-hero">
   <div class="container">
-    <div class="kicker">Clientes · Quem aprova o método</div>
-    <h1>As empresas que <em>aprovam o método</em>.</h1>
-    <p class="lead">A prova da Atto não está em slides — está nas empresas que seguem com a gente por anos e permitem que suas marcas apareçam ao lado da nossa. Atuamos com empresas de portes diferentes, em relação de anos, com método aplicado dentro de casa.</p>
+    <div class="kicker">Clientes · Quem roda o método com a Atto</div>
+    <h1>As empresas que <em>rodam o método</em> com a Atto.</h1>
+    <p class="lead">Não é portfólio — é a casa de clientes que aplica a metodologia da Atto em regime contínuo. Indústria, distribuição e serviços técnicos, de diferentes portes, com relação construída ao longo dos anos e operação saindo do papel mês a mês.</p>
   </div>
 </section>
 
@@ -115,27 +114,27 @@
   <div class="container">
     <div class="section-label">Clientes que confiam no processo da Atto</div>
     <h2 class="section-title" style="margin-bottom:16px">Indústria, distribuição, <em>serviços técnicos</em>.</h2>
-    <p class="section-lead" style="max-width:60ch">Empresas de diferentes portes e setores, atendidas a partir de Caxias do Sul com alcance nacional. Relação ativa, método aplicado, uso de marca neste espaço conforme o padrão da casa.</p>
+    <p class="section-lead" style="max-width:60ch">Empresas atendidas a partir de Caxias do Sul com alcance nacional. Porte variado, setores distintos, mesma referência de método: diagnóstico, direção e rotina em operação contínua.</p>
 
     <div class="logos-grid">
-      <div class="logo-cell"><img src="assets/clientes_new/Acrilys.png" alt="Acrilys" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/%C3%81bile%20Componentes.webp" alt="Ábile Componentes" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Biometria.jpeg" alt="Biometria" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Cappeletti.png" alt="Cappeletti" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/CLP%20Automa%C3%A7%C3%A3o%20Industrial.jpeg" alt="CLP Automação Industrial" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Cobra_Correntes.jpeg" alt="Cobra Correntes" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Dinamics.jpg" alt="Dinamics" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Franzoi.png" alt="Franzoi" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/ING.svg" alt="ING Guindastes" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Motronics.png" alt="Motronics" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Opus.webp" alt="Opus" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Perfiltec.png" alt="Perfiltec" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Saluto.jpeg" alt="Saluto" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Solferti.png" alt="Solferti" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Sulvisual.png" alt="Sulvisual" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Track.png" alt="Track Automotive" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Tutto.png" alt="Tutto Hidráulicos" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Zenit.svg" alt="Zenit" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Acrilys.png" alt="Acrilys" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Abile.png" alt="Ábile Componentes" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Biometria.png" alt="Biometria" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Cappeletti.png" alt="Cappeletti" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/CLP.png" alt="CLP Automação Industrial" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Cobra.png" alt="Cobra Correntes" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Dinamics.png" alt="Dinamics" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Franzoi.png" alt="Franzoi" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/ING.svg" alt="ING Guindastes" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Motronics.png" alt="Motronics" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Opus.png" alt="Opus" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Perfiltec.png" alt="Perfiltec" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Saluto.png" alt="Saluto" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Solferti.png" alt="Solferti" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Sulvisual.png" alt="Sulvisual" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Track.png" alt="Track Automotive" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Tutto.png" alt="Tutto Hidráulicos" /></div>
+      <div class="logo-cell"><img src="assets/clientes_final/Zenit.svg" alt="Zenit" /></div>
     </div>
   </div>
 </section>
