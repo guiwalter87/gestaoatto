@@ -7,11 +7,11 @@
 <meta name="description" content="Empresas que aprovam o método. Depoimentos nominais quando autorizados. Casos anônimos em temas sensíveis." />
 <link rel="stylesheet" href="assets/site.css" />
 <style>
-.logos-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--linha);border-left:1px solid var(--linha);margin-top:40px}
-.logo-cell{aspect-ratio:16/9;border-right:1px solid var(--linha);border-bottom:1px solid var(--linha);display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;transition:background .25s;overflow:hidden}
+.logos-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0;background:transparent;margin-top:40px}
+.logo-cell{aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;padding:24px 20px;background:transparent;transition:background .4s ease;overflow:hidden}
 .logo-cell:hover{background:var(--papel-alt)}
-.logo-cell img{max-width:100%;max-height:56px;width:auto;height:auto;object-fit:contain;filter:grayscale(100%) contrast(1.05);mix-blend-mode:multiply;opacity:.85;transition:filter .25s, opacity .25s, transform .25s}
-.logo-cell:hover img{filter:grayscale(0%) contrast(1);opacity:1;transform:scale(1.03)}
+.logo-cell img{max-width:100%;max-height:72px;width:auto;height:auto;object-fit:contain;mix-blend-mode:multiply;filter:grayscale(1) opacity(.65) contrast(.95);transition:filter .45s cubic-bezier(0.2,0.8,0.2,1), transform .45s cubic-bezier(0.2,0.8,0.2,1)}
+.logo-cell:hover img{filter:grayscale(0) opacity(1) contrast(1);transform:scale(1.06)}
 
 .depo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;padding:40px 0}
 .depo{background:#fff;border:1px solid var(--linha);padding:48px 40px;border-radius:2px;display:flex;flex-direction:column}
@@ -29,8 +29,13 @@
 .caso p{font-size:15px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:20px}
 .caso .meta-caso{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--azul-atto);padding-top:16px;border-top:1px solid rgba(10,14,26,.08)}
 
-@media (max-width:900px){
-  .logos-grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+@media (max-width:1100px){
+  .logos-grid{grid-template-columns:repeat(4,1fr)}
+  .logo-cell img{max-height:64px}
+}
+@media (max-width:700px){
+  .logos-grid{grid-template-columns:repeat(3,1fr)}
+  .logo-cell img{max-height:56px}
   .depo-grid,.casos-grid{grid-template-columns:1fr;gap:16px}
 }
 </style>
@@ -103,21 +108,19 @@
     <div class="kicker">Clientes · Quem aprova o método</div>
     <h1>As empresas que <em>aprovam o método</em>.</h1>
     <p class="lead">A prova da Atto não está em slides — está nas empresas que seguem com a gente por anos e permitem que suas marcas apareçam ao lado da nossa. Atuamos com empresas de portes diferentes, em relação de anos, com método aplicado dentro de casa.</p>
-    <p class="lead"><strong>Política da casa:</strong> nome só se autorizado. Depoimento só se revisado e assinado pelo cliente. Tudo que envolve transação confidencial permanece fora do site, sempre.</p>
   </div>
 </section>
 
 <section style="padding:80px 0">
   <div class="container">
-    <div class="section-label">Marcas ativas na casa</div>
+    <div class="section-label">Clientes que confiam no processo da Atto</div>
     <h2 class="section-title" style="margin-bottom:16px">Indústria, distribuição, <em>serviços técnicos</em>.</h2>
-    <p class="section-lead" style="max-width:60ch">Empresas médias da Serra Gaúcha, da região metropolitana e do interior do Rio Grande do Sul. Relação ativa, método aplicado, uso de marca neste espaço conforme o padrão da casa.</p>
+    <p class="section-lead" style="max-width:60ch">Empresas de diferentes portes e setores, atendidas a partir de Caxias do Sul com alcance nacional. Relação ativa, método aplicado, uso de marca neste espaço conforme o padrão da casa.</p>
 
     <div class="logos-grid">
       <div class="logo-cell"><img src="assets/clientes_new/Acrilys.png" alt="Acrilys" /></div>
       <div class="logo-cell"><img src="assets/clientes_new/%C3%81bile%20Componentes.webp" alt="Ábile Componentes" /></div>
       <div class="logo-cell"><img src="assets/clientes_new/Biometria.jpeg" alt="Biometria" /></div>
-      <div class="logo-cell"><img src="assets/clientes_new/Braslux.png" alt="Braslux" /></div>
       <div class="logo-cell"><img src="assets/clientes_new/Cappeletti.png" alt="Cappeletti" /></div>
       <div class="logo-cell"><img src="assets/clientes_new/CLP%20Automa%C3%A7%C3%A3o%20Industrial.jpeg" alt="CLP Automação Industrial" /></div>
       <div class="logo-cell"><img src="assets/clientes_new/Cobra_Correntes.jpeg" alt="Cobra Correntes" /></div>
@@ -210,30 +213,27 @@
     <div class="casos-grid">
 
       <div class="caso">
-        <div class="kicker-caso">Caso 01 · Indústria · Serra Gaúcha · Médio porte</div>
+        <div class="kicker-caso">Caso 01 · Indústria · Médio porte</div>
         <h4>Do faturamento recorde ao <em>resultado que some</em>.</h4>
         <p><strong>Contexto:</strong> indústria familiar com crescimento acelerado, DRE gerencial inexistente, dificuldade em enxergar onde a margem era perdida.</p>
         <p><strong>Método aplicado:</strong> Diagnóstico 90 dias + reconstituição gerencial por linha de produto, canal e representante. Implantação de RQS e painel executivo.</p>
         <p><strong>Mudança:</strong> em dois trimestres, a sócia passou a conduzir reunião de performance sobre números novos. Política de pricing escrita. Desconto deixou de ser cultura.</p>
-        <div class="meta-caso">Pilares: Performance · Direção</div>
       </div>
 
       <div class="caso">
-        <div class="kicker-caso">Caso 02 · Distribuição · RS · Médio porte</div>
+        <div class="kicker-caso">Caso 02 · Distribuição · Médio porte</div>
         <h4>Crédito travado, <em>operação sufocada</em>.</h4>
         <p><strong>Contexto:</strong> distribuidora industrial com operação saudável e caixa no sufoco. Ciclo financeiro longo, inadimplência não medida, estoque inchado.</p>
         <p><strong>Método aplicado:</strong> modelo de capital de giro por unidade, política de crédito escrita, régua de cobrança automatizada, renegociação de banking.</p>
         <p><strong>Mudança:</strong> previsão de caixa em 90 dias confiável, inadimplência caindo mês a mês, linhas bancárias dimensionadas. O dia 20 deixou de ser evento traumático.</p>
-        <div class="meta-caso">Pilares: Performance · Direção</div>
       </div>
 
       <div class="caso">
-        <div class="kicker-caso">Caso 03 · Indústria · Serra Gaúcha · Turnaround</div>
+        <div class="kicker-caso">Caso 03 · Indústria · Turnaround</div>
         <h4>O turnaround <em>que virou plano</em>.</h4>
         <p><strong>Contexto:</strong> indústria familiar com margem em queda, endividamento curto, liderança intermediária sobrecarregada, sem visibilidade de onde o resultado era perdido.</p>
         <p><strong>Método aplicado:</strong> Diagnóstico 90 dias + reconstituição gerencial + preparação de lideranças em três níveis (supervisor, gerente, diretor). Cobrança semanal das frentes prioritárias.</p>
         <p><strong>Mudança:</strong> em doze meses, margem recomposta, endividamento reperfilado, time recalibrado. A empresa voltou a ter conversa confortável com bancos e fornecedores.</p>
-        <div class="meta-caso">Pilares: Performance · Pessoas · Direção</div>
       </div>
 
     </div>
