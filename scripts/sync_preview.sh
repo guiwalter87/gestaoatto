@@ -23,8 +23,11 @@ echo "→ Espelhando $ROOT/site/ em $PREVIEW/"
 # --delete: remove arquivos que não existem mais no origem
 rsync -a --delete \
   --exclude='.git/' \
+  --exclude='.github/' \
   --exclude='.DS_Store' \
   --exclude='CNAME' \
+  --exclude='README.md' \
+  --exclude='README_DEPLOY.md' \
   "$ROOT/site/" "$PREVIEW/"
 
 # Garante que README e .git/ do preview não sejam apagados
