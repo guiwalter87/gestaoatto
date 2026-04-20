@@ -459,3 +459,34 @@ footer{background:var(--azul-noite);color:#fff;padding:100px 0 40px}
 .bg-dark .section-label{color:var(--teal-atto)}
 .bg-dark .section-label::before{background:var(--teal-atto)}
 .bg-dark .section-lead{color:rgba(255,255,255,0.78)}
+
+/* ==== MOTION: reveal on scroll ==== */
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1);
+  will-change:opacity,transform;
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* ==== SCROLL PROGRESS ==== */
+.scroll-progress{
+  position:fixed;top:0;left:0;
+  height:2px;background:var(--teal-atto);
+  z-index:200;width:0;
+  transition:width .1s linear;pointer-events:none;
+}
+
+/* ==== NOISE GRAIN OVERLAY ==== */
+body::after{
+  content:'';position:fixed;inset:0;z-index:1;
+  pointer-events:none;opacity:.28;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode:multiply;
+}
+
+/* ==== TEXT WRAP (balance/pretty) ==== */
+h1,h2,h3,h4{text-wrap:balance}
+.section-lead,.page-hero .lead,.intro-grid .intro-body p,.entrega-body p,.timeline-col p,.numero-label{text-wrap:pretty}

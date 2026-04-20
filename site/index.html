@@ -1215,6 +1215,116 @@
     .footer-bottom { grid-template-columns: 1fr; }
   }
 
+  /* === PROVA EM NÚMEROS === */
+  .prova-numeros { padding: 140px 0; position: relative; background: var(--papel); overflow: hidden; }
+  .numeros-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    background: rgba(10,14,26,0.12);
+    border-top: 1px solid rgba(10,14,26,0.12);
+    border-bottom: 1px solid rgba(10,14,26,0.12);
+  }
+  .numero-card {
+    background: var(--papel); padding: 56px 40px 52px;
+    display: flex; flex-direction: column; gap: 16px;
+    position: relative; transition: background .4s cubic-bezier(.2,.8,.2,1);
+    min-height: 340px;
+  }
+  .numero-card:hover { background: var(--papel-alt); }
+  .numero-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 0; height: 2px; background: var(--teal-atto);
+    transition: width .5s cubic-bezier(.2,.8,.2,1);
+  }
+  .numero-card:hover::before { width: 100%; }
+  .numero-kicker {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: var(--teal-atto); font-weight: 500;
+  }
+  .numero-valor {
+    font-family: 'Outfit', sans-serif; font-weight: 200;
+    font-size: clamp(64px, 8vw, 128px); line-height: .85;
+    letter-spacing: -.05em; color: var(--tinta);
+    display: flex; align-items: baseline; gap: 6px;
+  }
+  .numero-card:first-child .numero-valor { color: var(--azul-atto); }
+  .numero-valor .sufixo {
+    font-size: .4em; font-weight: 300;
+    color: var(--cinza-medio); letter-spacing: -.02em;
+  }
+  .numero-valor .prefixo {
+    font-size: .42em; font-weight: 300;
+    color: var(--cinza-medio); margin-right: 2px;
+  }
+  .numero-label {
+    font-family: 'Outfit', sans-serif; font-weight: 400;
+    font-size: 15px; line-height: 1.35; color: var(--tinta); max-width: 22ch;
+  }
+  .numero-nota {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--cinza-medio); margin-top: auto; padding-top: 24px;
+    border-top: 1px solid rgba(10,14,26,0.12);
+  }
+  .numeros-titulo {
+    font-family: 'Outfit', sans-serif; font-weight: 400;
+    font-size: clamp(36px, 4.6vw, 64px); line-height: 1.04;
+    letter-spacing: -.03em; max-width: 28ch; margin-bottom: 96px;
+    color: var(--tinta); text-wrap: balance;
+  }
+  .numeros-titulo em { font-style: normal; font-weight: 700; color: var(--azul-atto); }
+  .numeros-footer {
+    margin-top: 56px; padding-top: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 24px; flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--cinza-medio);
+  }
+  .numeros-footer .dot {
+    display: inline-block; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--teal-atto);
+    margin-right: 10px; vertical-align: middle;
+  }
+  @media (max-width: 1000px) {
+    .numeros-grid { grid-template-columns: repeat(2, 1fr); }
+    .numero-card { min-height: 280px; }
+  }
+  @media (max-width: 600px) {
+    .numeros-grid { grid-template-columns: 1fr; }
+    .numero-card { min-height: auto; }
+  }
+
+  /* === MOTION HELPERS (IntersectionObserver reveal) === */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1);
+    will-change: opacity, transform;
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* === SCROLL PROGRESS === */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0;
+    height: 2px; background: var(--teal-atto);
+    z-index: 200; width: 0;
+    transition: width .1s linear; pointer-events: none;
+  }
+
+  /* === NOISE GRAIN (papel premium) === */
+  body::after {
+    content: ''; position: fixed; inset: 0; z-index: 1;
+    pointer-events: none; opacity: 0.3;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    mix-blend-mode: multiply;
+  }
+
+  /* === TEXT WRAP === */
+  h1, h2, h3, h4 { text-wrap: balance; }
+  .hero-sub, .momento-lead, .sol-intro-text p, .persp-excerpt, .numero-label { text-wrap: pretty; }
+
 </style>
 <meta name="description" content="Boutique de estruturação empresarial. Instalamos método, leitura financeira e rotina de decisão em empresas que cresceram mais rápido do que a própria estrutura — e preparamos o próximo ciclo antes que ele chegue. Caxias do Sul / RS.">
 <meta name="author" content="Atto Estratégias & Educação">
@@ -1225,12 +1335,12 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Atto Estratégias">
 <meta property="og:title" content="Atto Estratégias — Direção, Finanças, Pessoas e M&amp;A para empresas que querem crescer com método">
-<meta property="og:description" content="Consultoria executiva para empresas familiares e médias do Sul do Brasil. Direção estratégica, performance financeira, pessoas &amp; liderança e M&amp;A advisory com método e cadência mensal.">
+<meta property="og:description" content="Consultoria estratégica para pequenas e médias empresas do Brasil. Direção estratégica, performance financeira, pessoas &amp; liderança e M&amp;A advisory com método e cadência mensal.">
 <meta property="og:url" content="https://www.gestaoatto.com.br/">
 <meta property="og:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Atto Estratégias — Direção, Finanças, Pessoas e M&amp;A para empresas que querem crescer com método">
-<meta name="twitter:description" content="Consultoria executiva para empresas familiares e médias do Sul do Brasil. Direção estratégica, performance financeira, pessoas &amp; liderança e M&amp;A advisory com método e cadência mensal.">
+<meta name="twitter:description" content="Consultoria estratégica para pequenas e médias empresas do Brasil. Direção estratégica, performance financeira, pessoas &amp; liderança e M&amp;A advisory com método e cadência mensal.">
 <meta name="twitter:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
 <script type="application/ld+json">
 {
@@ -1262,6 +1372,8 @@
 </script>
 </head>
 <body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
 
 <header id="siteHeader" class="on-dark">
   <div class="container header-inner">
@@ -1527,13 +1639,53 @@
   </div>
 </section>
 
+<!-- PROVA EM NÚMEROS -->
+<section class="prova-numeros" id="numeros">
+  <div class="container">
+    <div class="section-label">05 / Prova em números</div>
+    <h2 class="numeros-titulo">Consultoria estratégica para <em>pequenas e médias empresas</em> — com consequência, não com PowerPoint.</h2>
+
+    <div class="numeros-grid">
+      <div class="numero-card">
+        <div class="numero-kicker">01 · Trajetória</div>
+        <div class="numero-valor"><span data-count="7">0</span><span class="sufixo">anos</span></div>
+        <div class="numero-label">estruturando PMEs pelo Brasil</div>
+        <div class="numero-nota">desde 2019</div>
+      </div>
+      <div class="numero-card">
+        <div class="numero-kicker">02 · Alcance</div>
+        <div class="numero-valor"><span class="prefixo">+</span><span data-count="75">0</span></div>
+        <div class="numero-label">negócios transformados em mais de 20 setores</div>
+        <div class="numero-nota">indústria · comércio · serviços</div>
+      </div>
+      <div class="numero-card">
+        <div class="numero-kicker">03 · Impacto</div>
+        <div class="numero-valor"><span class="prefixo">R$</span><span data-count="900">0</span><span class="sufixo">mi</span></div>
+        <div class="numero-label">em receita acompanhada pelas frentes que estruturamos</div>
+        <div class="numero-nota">base 2025</div>
+      </div>
+      <div class="numero-card">
+        <div class="numero-kicker">04 · Consequência</div>
+        <div class="numero-valor"><span data-count="82">0</span><span class="sufixo">%</span></div>
+        <div class="numero-label">dos clientes renovam ou ampliam escopo após 12 meses</div>
+        <div class="numero-nota">pós-entrega</div>
+      </div>
+    </div>
+
+    <div class="numeros-footer">
+      <span><span class="dot"></span>+400 profissionais capacitados em programas de desenvolvimento</span>
+      <span>Números atualizados em abr/2026</span>
+    </div>
+  </div>
+</section>
+
 <!-- CLIENTES -->
 <section class="clientes" id="clientes">
   <div class="container">
-    <div class="section-label">05 / Prova</div>
+    <div class="section-label">06 / Clientes</div>
     <div class="clientes-header">
       <h2>Marcas que rodam o método <em>dentro de casa</em>.</h2>
-      <p class="clientes-lede">Indústrias, distribuidoras e empresas familiares onde a metodologia da Atto deixou de ser projeto e virou rotina — diagnóstico, direção e performance em operação contínua. <strong>Relação construída ao longo de anos</strong>, com entrega consistente.</p>
+      <p class="clientes-lede">Indústrias, distribuidoras e comércios — pequenas e médias empresas onde a metodologia da Atto deixou de ser projeto e virou rotina. Diagnóstico, direção e performance em operação contínua. <strong>Relação construída ao longo de anos</strong>, com entrega consistente.</p>
     </div>
     <div class="logos-grid">
       <div class="logo-cell"><img src="assets/clientes_final/Acrilys.png" alt="Acrilys" /></div>
@@ -1633,7 +1785,7 @@
         <ul>
           <li><a href="industria-manufatura.html">Indústria e Manufatura</a></li>
           <li><a href="comercio-distribuicao.html">Comércio e Distribuição</a></li>
-          <li><a href="atuacao.html">Empresas Familiares</a></li>
+          <li><a href="atuacao.html">Pequenas e Médias Empresas</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -1672,6 +1824,93 @@
   window.addEventListener('scroll', updateHeader, { passive: true });
   window.addEventListener('resize', updateHeader);
   updateHeader();
+</script>
+
+<script>
+  /* ===== SCROLL PROGRESS BAR ===== */
+  (function(){
+    const bar = document.querySelector('.scroll-progress');
+    if (!bar) return;
+    function update(){
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      bar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  /* ===== MOTION REVEALS ===== */
+  (function(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Auto-tag seções/conteúdos comuns
+    const autoTag = [
+      '.section-label', '.section-title', '.section-lead',
+      '.momento-left', '.momento-right',
+      '.sol-intro', '.solucoes-grid', '.sol-card',
+      '.metodo-grid', '.metodo-col',
+      '.persp-feature', '.persp-feed-grid', '.persp-card',
+      '.numeros-titulo', '.numero-card', '.numeros-footer',
+      '.clientes-header', '.logos-grid',
+      '.agendar-grid', '.agendar-left', '.agendar-right'
+    ];
+    autoTag.forEach(sel => {
+      document.querySelectorAll(sel).forEach(el => el.classList.add('reveal'));
+    });
+
+    // Stagger em cards de grids
+    ['.numero-card', '.sol-card', '.metodo-col', '.persp-card'].forEach(sel => {
+      document.querySelectorAll(sel).forEach((el, i) => {
+        el.style.transitionDelay = (i * 0.08) + 's';
+      });
+    });
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px' });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  })();
+
+  /* ===== COUNTER ANIMATION ===== */
+  (function(){
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+    function animateCount(el){
+      const target = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const duration = 1500;
+      const start = performance.now();
+      function fmt(v){
+        return decimals
+          ? v.toFixed(decimals).replace('.', ',')
+          : Math.round(v).toLocaleString('pt-BR');
+      }
+      function step(now){
+        const p = Math.min((now - start) / duration, 1);
+        el.textContent = fmt(target * easeOutCubic(p));
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = fmt(target);
+      }
+      requestAnimationFrame(step);
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !e.target.dataset.counted) {
+          e.target.dataset.counted = '1';
+          animateCount(e.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('[data-count]').forEach(el => io.observe(el));
+  })();
 </script>
 
 </body>
