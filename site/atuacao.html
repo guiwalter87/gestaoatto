@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Atuação — Indústrias atendidas e modelos de engajamento</title>
-<meta name="description" content="Onde a Atto atua: setores, capacidades e modelos de engajamento. Boutique de estruturação empresarial sediada em Caxias do Sul, com atuação nacional." />
+<title>Atuação: Indústrias atendidas e modelos de engajamento</title>
+<meta name="description" content="Onde a Atto atua: setores, capacidades e modelos de engajamento. Boutique de estruturação empresarial para empresas médias do Rio Grande do Sul." />
 <link rel="stylesheet" href="assets/site.css" />
 <style>
 /* === HERO DARK === */
@@ -15,7 +15,7 @@
 .atu-hero h1{font-family:'Outfit';font-weight:200;font-size:clamp(44px,6.5vw,88px);line-height:1.02;letter-spacing:-.025em;color:var(--papel);max-width:20ch;margin-bottom:40px}
 .atu-hero h1 em{font-style:italic;color:var(--teal-atto)}
 .atu-hero .lead{font-size:19px;line-height:1.65;color:rgba(245,243,238,.78);max-width:58ch;margin-bottom:56px}
-.atu-hero .hero-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;padding-top:48px;border-top:1px solid rgba(245,243,238,.14);max-width:720px}
+.atu-hero .hero-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding-top:48px;border-top:1px solid rgba(245,243,238,.14)}
 .hero-meta .m-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,243,238,.5);margin-bottom:10px}
 .hero-meta .m-valor{font-family:'Outfit';font-weight:300;font-size:22px;line-height:1.25;color:var(--papel);letter-spacing:-.01em}
 .hero-meta .m-valor em{font-style:italic;color:var(--teal-atto)}
@@ -35,35 +35,15 @@
 .setores-head p{font-size:17px;line-height:1.7;color:var(--cinza-escuro);max-width:52ch}
 
 .setores-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linha);border:1px solid var(--linha)}
-.setor-card{
-  background:#fff;padding:56px 44px 52px;
-  display:flex;flex-direction:column;min-height:280px;
-  position:relative;overflow:hidden;
-  transition:background .4s ease, transform .5s cubic-bezier(0.2,0.8,0.2,1);
-}
-.setor-card::before{
-  content:'';position:absolute;left:0;top:0;
-  width:0;height:2px;background:var(--teal-atto);
-  transition:width .5s cubic-bezier(0.2,0.8,0.2,1);
-}
+.setor-card{background:#fff;padding:48px 40px 44px;display:flex;flex-direction:column;min-height:360px;transition:background .2s;position:relative}
 .setor-card:hover{background:var(--papel-alt)}
-.setor-card:hover::before{width:100%}
-.setor-card:hover .sc-icon{transform:scale(1.08);color:var(--teal-atto)}
-.setor-card .sc-icon{
-  width:42px;height:42px;margin-bottom:32px;color:var(--azul-atto);
-  transition:transform .45s cubic-bezier(0.2,0.8,0.2,1), color .35s ease;
-  transform-origin:left center;
-}
-.setor-card .sc-icon svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.setor-card .sc-kicker{
-  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--cinza-medio);margin-bottom:14px;
-}
-.setor-card h3{
-  font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(22px,1.7vw,26px);
-  line-height:1.18;color:var(--tinta);margin-bottom:18px;letter-spacing:-.018em;
-}
-.setor-card p{font-size:14.5px;line-height:1.6;color:var(--cinza-medio);margin:0;font-weight:400}
+.setor-card .sc-icon{width:44px;height:44px;margin-bottom:28px;color:var(--azul-atto)}
+.setor-card .sc-icon svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.setor-card .sc-kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:10px}
+.setor-card h3{font-family:'Outfit';font-weight:400;font-size:24px;line-height:1.2;color:var(--tinta);margin-bottom:14px;letter-spacing:-.01em}
+.setor-card p{font-size:14.5px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:28px;flex:1}
+.setor-card .sc-tags{display:flex;flex-wrap:wrap;gap:6px}
+.setor-card .sc-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--azul-atto);padding:5px 10px;border:1px solid rgba(26,58,143,.2);border-radius:100px;background:rgba(26,58,143,.03)}
 
 /* === BLOCO CAPACIDADES === */
 .capac{padding:120px 0;background:var(--azul-noite);color:var(--papel)}
@@ -131,12 +111,13 @@
 .sede-item .si-valor{font-family:'Outfit';font-weight:400;font-size:18px;color:var(--tinta);letter-spacing:-.005em}
 .sede-item .si-valor a{color:inherit;border-bottom:1px solid transparent;transition:border-color .2s}
 .sede-item .si-valor a:hover{border-bottom-color:var(--azul-atto);color:var(--azul-atto)}
-.sede-mapa{aspect-ratio:1/1;border-radius:2px;position:relative;overflow:hidden;background:var(--papel-alt);box-shadow:0 2px 12px rgba(10,14,26,0.06)}
-.sede-mapa iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(0.25) contrast(1.02)}
-.sede-mapa-link{display:inline-flex;align-items:center;gap:10px;margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--azul-atto);font-weight:500;text-decoration:none;transition:color .3s, gap .4s cubic-bezier(0.2,0.8,0.2,1)}
-.sede-mapa-link:hover{color:var(--teal-atto);gap:14px}
-.sede-mapa-link .arrow{display:inline-block;transition:transform .4s cubic-bezier(0.2,0.8,0.2,1)}
-.sede-mapa-link:hover .arrow{transform:translateX(4px)}
+.sede-mapa{aspect-ratio:1/1;background:linear-gradient(160deg,var(--azul-noite) 0%,var(--azul-atto) 100%);border-radius:2px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#fff}
+.sede-mapa::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,181,184,.18),transparent 55%)}
+.sede-mapa .pin-wrap{position:relative;z-index:2;text-align:center}
+.sede-mapa .pin-ring{width:64px;height:64px;border-radius:50%;background:var(--teal-atto);margin:0 auto 20px;position:relative;box-shadow:0 0 0 8px rgba(0,181,184,.2),0 0 0 20px rgba(0,181,184,.1)}
+.sede-mapa .pin-ring::after{content:"";position:absolute;inset:22px;background:#fff;border-radius:50%}
+.sede-mapa .pin-city{font-family:'Outfit';font-weight:300;font-size:28px;letter-spacing:-.01em;margin-bottom:6px}
+.sede-mapa .pin-uf{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.7}
 
 @media (max-width:1100px){
   .setores-grid,.capac-grid{grid-template-columns:repeat(2,1fr)}
@@ -148,6 +129,35 @@
   .setores-head,.cases-head{grid-template-columns:1fr;gap:24px}
   .atu-hero .hero-meta{grid-template-columns:1fr 1fr;gap:24px}
 }
+
+/* === BLOCO PROGRAMAS ESPECIAIS (Contratação Estratégica) === */
+.prog-bloco{padding:120px 0;background:var(--papel-alt)}
+.prog-head{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;margin-bottom:56px;align-items:end}
+.prog-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(40px,5vw,60px);line-height:1.04;letter-spacing:-.02em;color:var(--tinta)}
+.prog-head h2 em{font-style:italic;color:var(--azul-atto)}
+.prog-head p{font-size:17px;line-height:1.7;color:var(--cinza-escuro);max-width:54ch}
+.prog-card{background:linear-gradient(135deg,var(--azul-noite) 0%,#0E1B36 60%,var(--azul-atto) 100%);color:#fff;border-radius:2px;padding:56px 56px;display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden;transition:all .25s}
+.prog-card::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 700px 500px at 100% 100%,rgba(0,181,184,.20),transparent 60%);pointer-events:none}
+.prog-card:hover{transform:translateY(-2px);box-shadow:0 18px 50px rgba(10,14,26,.18)}
+.prog-card>*{position:relative}
+.prog-card .pg-chip{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-atto);padding:6px 12px;border-radius:100px;background:rgba(0,181,184,.1);border:1px solid rgba(0,181,184,.3);margin-bottom:24px;align-self:flex-start;display:inline-flex}
+.prog-card h3{font-family:'Outfit';font-weight:300;font-size:clamp(30px,3.4vw,42px);line-height:1.08;letter-spacing:-.02em;color:#fff;margin-bottom:18px}
+.prog-card h3 em{font-style:italic;color:var(--teal-atto);font-weight:600}
+.prog-card .pg-desc{font-size:16px;line-height:1.65;color:rgba(255,255,255,.82);margin-bottom:24px;max-width:54ch}
+.prog-card .pg-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.prog-card .pg-tag{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.78);padding:5px 10px;border:1px solid rgba(255,255,255,.18);border-radius:100px;background:rgba(255,255,255,.04)}
+.prog-card .pg-cta{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-atto);font-weight:500;display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border:1px solid var(--teal-atto);border-radius:2px;transition:all .2s}
+.prog-card .pg-cta:hover{background:var(--teal-atto);color:var(--azul-noite)}
+.prog-card .pg-cta .arrow{transition:transform .2s}
+.prog-card .pg-cta:hover .arrow{transform:translateX(4px)}
+.prog-card .pg-side{display:flex;flex-direction:column;gap:18px;border-left:1px solid rgba(255,255,255,.12);padding-left:40px}
+.prog-card .pg-side .ps-item{display:flex;flex-direction:column;gap:4px}
+.prog-card .pg-side .ps-label{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.prog-card .pg-side .ps-valor{font-family:'Outfit';font-weight:400;font-size:18px;color:#fff;letter-spacing:-.005em}
+.prog-card .pg-side .ps-valor em{font-style:italic;color:var(--teal-atto);font-weight:500}
+@media (max-width:1000px){.prog-card{grid-template-columns:1fr;gap:36px}.prog-card .pg-side{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,.12);padding-top:36px}}
+@media (max-width:900px){.prog-head{grid-template-columns:1fr;gap:24px}}
+@media (max-width:720px){.prog-card{padding:40px 32px}}
 </style>
 <meta name="description" content="Onde estamos, em quais setores atuamos e quais formatos de projeto oferecemos.">
 <meta name="author" content="Atto Estratégias & Educação">
@@ -157,12 +167,12 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Atto Estratégias">
-<meta property="og:title" content="Atuação — Indústrias atendidas e modelos de engajamento">
+<meta property="og:title" content="Atuação: Indústrias atendidas e modelos de engajamento">
 <meta property="og:description" content="Onde estamos, em quais setores atuamos e quais formatos de projeto oferecemos.">
 <meta property="og:url" content="https://www.gestaoatto.com.br/atuacao.html">
 <meta property="og:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Atuação — Indústrias atendidas e modelos de engajamento">
+<meta name="twitter:title" content="Atuação: Indústrias atendidas e modelos de engajamento">
 <meta name="twitter:description" content="Onde estamos, em quais setores atuamos e quais formatos de projeto oferecemos.">
 <meta name="twitter:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
 <script type="application/ld+json">
@@ -186,17 +196,15 @@
 }
 </script>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTS41WC8HS"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-PTS41WC8HS');
 </script>
 </head>
 <body>
-
-<div class="scroll-progress" aria-hidden="true"></div>
 
 <header id="siteHeader">
   <div class="container header-inner">
@@ -215,10 +223,11 @@
   <div class="container">
     <div class="kicker">Atuação · Setores, capacidades, modelos</div>
     <h1>Onde <em>operamos</em>, para quem <em>trabalhamos</em>.</h1>
-    <p class="lead">A Atto é boutique por escolha: atendemos empresas que cresceram mais rápido do que a própria estrutura — com método próprio, equipe técnica enxuta e relação de longo prazo. Esta página organiza as três lentes que definem onde atuamos — setores que conhecemos a fundo, capacidades que instalamos dentro de casa e os modelos de engajamento em que operamos.</p>
+    <p class="lead">A Atto é boutique por escolha: atendemos empresas médias do Rio Grande do Sul com método próprio, equipe técnica enxuta e relação de longo prazo. Esta página organiza as três lentes que definem onde atuamos: setores que conhecemos a fundo, capacidades que instalamos dentro de casa e os modelos de engajamento em que operamos.</p>
     <div class="hero-meta">
       <div><div class="m-label">Sede</div><div class="m-valor">Caxias do Sul <em>/ RS</em></div></div>
-      <div><div class="m-label">Território</div><div class="m-valor">Brasil</div></div>
+      <div><div class="m-label">Território</div><div class="m-valor">Rio Grande do Sul</div></div>
+      <div><div class="m-label">Porte alvo</div><div class="m-valor">Empresas médias</div></div>
       <div><div class="m-label">Modelo</div><div class="m-valor">Boutique técnica</div></div>
     </div>
   </div>
@@ -228,6 +237,7 @@
   <div class="container">
     <a href="#setores">01 · Setores</a>
     <a href="#capacidades">02 · Capacidades</a>
+    <a href="#programas">Programa especial</a>
     <a href="#engajamento">03 · Engajamento</a>
     <a href="#cases">04 · Casos &amp; leituras</a>
     <a href="#sede">05 · Sede</a>
@@ -240,7 +250,7 @@
     <div class="section-label">01 · Setores</div>
     <div class="setores-head">
       <h2>Seis <em>setores</em> que a Atto lê de fábrica.</h2>
-      <p>A Serra Gaúcha construiu sua reputação empresarial em indústria e comércio — pequenas e médias empresas, e é nesse ecossistema que a Atto opera. Conhecer o setor importa: permite entrar na conversa já sabendo qual é o gargalo estrutural típico, qual é o ponto de apertar, qual é a métrica que o dono olha. Abaixo, as seis verticais em que temos leitura acumulada.</p>
+      <p>A Serra Gaúcha construiu sua reputação empresarial em indústria e comércio de médio porte. É nesse ecossistema que a Atto opera. Conhecer o setor importa: permite entrar na conversa já sabendo qual é o gargalo estrutural típico, qual é o ponto de apertar, qual é a métrica que o dono olha. Abaixo, as seis verticais em que temos leitura acumulada.</p>
     </div>
 
     <div class="setores-grid">
@@ -249,7 +259,8 @@
         <div class="sc-icon"><svg viewBox="0 0 48 48"><path d="M8 40 L16 20 L24 32 L32 16 L40 40 Z"/><path d="M8 40 L40 40"/><circle cx="32" cy="12" r="3"/></svg></div>
         <span class="sc-kicker">Indústria · Manufatura</span>
         <h3>Metalmecânica &amp; perfis</h3>
-        <p>Forjaria, estamparia, perfilação, usinagem. Custos de insumo, precificação por ordem, plano de capacidade.</p>
+        <p>Forjaria, estamparia, perfilação, usinagem, montagem. O setor que mais conhecemos: custos de insumo, gestão de estoque, precificação por ordem, plano de capacidade e sucessão industrial.</p>
+        <div class="sc-tags"><span class="sc-tag">Custos</span><span class="sc-tag">Pricing</span><span class="sc-tag">Capex</span><span class="sc-tag">Sucessão</span></div>
       </div>
 
       <!-- 02 Distribuição -->
@@ -257,7 +268,8 @@
         <div class="sc-icon"><svg viewBox="0 0 48 48"><rect x="6" y="18" width="20" height="18"/><path d="M26 22 L36 22 L42 30 L42 36 L26 36"/><circle cx="14" cy="40" r="3"/><circle cx="34" cy="40" r="3"/></svg></div>
         <span class="sc-kicker">Comércio · B2B</span>
         <h3>Distribuição &amp; representação</h3>
-        <p>Autopeças, insumos industriais, materiais elétricos, construção. Mix, margem por cliente, giro de estoque.</p>
+        <p>Distribuidores de autopeças, insumos industriais, materiais elétricos, construção. Foco em mix de produto, margem por cliente, giro de estoque, remuneração variável da força comercial.</p>
+        <div class="sc-tags"><span class="sc-tag">Mix</span><span class="sc-tag">RQS</span><span class="sc-tag">Carteira</span><span class="sc-tag">Estoque</span></div>
       </div>
 
       <!-- 03 Construção & materiais -->
@@ -265,7 +277,8 @@
         <div class="sc-icon"><svg viewBox="0 0 48 48"><path d="M6 40 L24 10 L42 40 Z"/><path d="M14 40 L14 28 L24 22 L34 28 L34 40"/><path d="M22 40 L22 32 L26 32 L26 40"/></svg></div>
         <span class="sc-kicker">Indústria · B2B</span>
         <h3>Construção &amp; materiais</h3>
-        <p>Pré-moldados, perfis estruturais, componentes de obra. Ciclos longos e gestão de fluxo crítica.</p>
+        <p>Pré-moldados, perfis estruturais, acabamentos, componentes de obra. Ciclos longos, orçamento por obra, pagamento por medição, exposição a aço e commodity. Gestão de fluxo é crítica.</p>
+        <div class="sc-tags"><span class="sc-tag">Ciclo</span><span class="sc-tag">Commodity</span><span class="sc-tag">Fluxo</span><span class="sc-tag">Obra</span></div>
       </div>
 
       <!-- 04 Agro & componentes -->
@@ -273,7 +286,8 @@
         <div class="sc-icon"><svg viewBox="0 0 48 48"><path d="M24 8 C30 14 32 20 30 28 C28 30 24 30 22 28 C20 20 22 14 24 8 Z"/><path d="M10 24 C18 22 24 24 28 30 C28 32 26 34 24 34 C18 32 14 28 10 24 Z"/><path d="M22 28 L22 40"/></svg></div>
         <span class="sc-kicker">Agro · Serviços</span>
         <h3>Agro, componentes &amp; máquinas</h3>
-        <p>Componentes, máquinas, serviços de campo. Sazonalidade pesada e planejamento anual.</p>
+        <p>Componentes agrícolas, máquinas implementadas, serviços de campo. Sazonalidade pesada, pressão de safra, capital de giro crítico e margem que depende de planejamento anual, não mensal.</p>
+        <div class="sc-tags"><span class="sc-tag">Safra</span><span class="sc-tag">Capital giro</span><span class="sc-tag">Planejamento</span></div>
       </div>
 
       <!-- 05 Serviços B2B -->
@@ -281,7 +295,8 @@
         <div class="sc-icon"><svg viewBox="0 0 48 48"><circle cx="24" cy="18" r="6"/><path d="M12 40 C12 32 18 28 24 28 C30 28 36 32 36 40"/><circle cx="38" cy="14" r="3"/><circle cx="10" cy="14" r="3"/></svg></div>
         <span class="sc-kicker">Serviços · B2B</span>
         <h3>Serviços profissionais &amp; técnicos</h3>
-        <p>Engenharia, automação, TI, laboratórios. Precificação, utilização e escala da equipe.</p>
+        <p>Engenharia, automação, consultoria técnica, laboratórios, TI corporativa. Negócios que vendem hora especializada. A briga é sobre precificação, utilização e escala da equipe.</p>
+        <div class="sc-tags"><span class="sc-tag">Utilização</span><span class="sc-tag">Hora técnica</span><span class="sc-tag">Headcount</span></div>
       </div>
 
       <!-- 06 Varejo & bens de consumo -->
@@ -289,7 +304,8 @@
         <div class="sc-icon"><svg viewBox="0 0 48 48"><path d="M8 14 L40 14 L38 38 L10 38 Z"/><path d="M16 14 L16 10 C16 7 20 6 24 6 C28 6 32 7 32 10 L32 14"/></svg></div>
         <span class="sc-kicker">Comércio · Varejo</span>
         <h3>Varejo &amp; bens de consumo</h3>
-        <p>Redes de loja, franqueadoras regionais, bens duráveis. Curva ABC, margem por canal, sazonalidade.</p>
+        <p>Redes de loja, e-commerce próprio, franqueadoras regionais, bens duráveis. Disciplina de curva ABC, margem por canal, marketing-to-sales, sazonalidade e operação de frente de caixa.</p>
+        <div class="sc-tags"><span class="sc-tag">Canal</span><span class="sc-tag">Marketing</span><span class="sc-tag">Curva ABC</span><span class="sc-tag">Franquia</span></div>
       </div>
     </div>
   </div>
@@ -301,14 +317,14 @@
     <div class="section-label">02 · Capacidades</div>
     <div class="capac-head">
       <h2>Quatro <em>capacidades</em> instaladas. Uma só disciplina.</h2>
-      <p>A Atto não vende serviços avulsos — instala capacidades. O diagnóstico de 90 dias é o ponto de entrada único; a partir dele, desdobra-se o trabalho em quatro frentes integradas. Cada uma tem escopo claro, entregas contratadas e disciplina de acompanhamento. Juntas, formam o método.</p>
+      <p>A Atto não vende serviços avulsos. Instala capacidades. O diagnóstico de 90 dias é o ponto de entrada único; a partir dele, desdobra-se o trabalho em quatro frentes integradas. Cada uma tem escopo claro, entregas contratadas e disciplina de acompanhamento. Juntas, formam o método.</p>
     </div>
 
     <div class="capac-grid">
       <div class="capac-col">
         <div class="cc-num">01</div>
         <h3>Direção <em>Estratégica</em></h3>
-        <p>Tese, visão, estratégia competitiva, planejamento anual, ritual do dono. O que a empresa quer ser — e como chega lá sem apagar incêndio.</p>
+        <p>Tese, visão, estratégia competitiva, planejamento anual, ritual do dono. O que a empresa quer ser, e como chega lá sem apagar incêndio.</p>
         <ul>
           <li>Plano estratégico 3–5 anos</li>
           <li>Tese de investimento</li>
@@ -321,7 +337,7 @@
       <div class="capac-col">
         <div class="cc-num">02</div>
         <h3>Performance <em>Financeira</em></h3>
-        <p>Controladoria, painel gerencial, fluxo de caixa, pricing, renegociação bancária. A capacidade que instala a lógica financeira — e tira o sócio do caixa.</p>
+        <p>Controladoria, painel gerencial, fluxo de caixa, pricing, renegociação bancária. A capacidade que instala a lógica financeira. Tira o sócio do caixa.</p>
         <ul>
           <li>Painel gerencial mensal</li>
           <li>Custos, margem, pricing</li>
@@ -347,7 +363,7 @@
       <div class="capac-col">
         <div class="cc-num">04</div>
         <h3>Governança &amp; <em>M&amp;A</em></h3>
-        <p>Acordo de sócios, conselho consultivo, sucessão, valuation, preparação para venda, assessoria em transações. A capacidade sensível — conduzida sob sigilo absoluto.</p>
+        <p>Acordo de sócios, conselho consultivo, sucessão, valuation, preparação para venda, assessoria em transações. A capacidade sensível (conduzida sob sigilo absoluto).</p>
         <ul>
           <li>Acordo de sócios</li>
           <li>Conselho consultivo</li>
@@ -360,20 +376,52 @@
   </div>
 </section>
 
+<!-- ========== PROGRAMA ESPECIAL · CONTRATAÇÃO ESTRATÉGICA ========== -->
+<section class="prog-bloco" id="programas">
+  <div class="container">
+    <div class="section-label">Programa especial</div>
+    <div class="prog-head">
+      <h2>Contratação <em>Estratégica</em>.</h2>
+      <p>Um programa dedicado dentro da capacidade de Pessoas &amp; Liderança: Recrutamento e Seleção sob curadoria comportamental, com parecer executivo técnico e garantia baseada em evidência. Não é mais uma vertical, é um produto com modelo próprio, conduzido pela Patrícia Misturini.</p>
+    </div>
+
+    <article class="prog-card">
+      <div>
+        <span class="pg-chip">Programa especial</span>
+        <h3>Contratar com <em>método</em>, sustentar com <em>evidência</em>.</h3>
+        <p class="pg-desc">Quatro etapas: Alinhamento Estruturado, Curadoria Ativa, Entrevista Estruturada e Parecer Executivo. Dois modelos calibrados pelo risco da vaga, com garantia de 60 a 90 dias.</p>
+        <div class="pg-tags">
+          <span class="pg-tag">Curadoria comportamental</span>
+          <span class="pg-tag">Parecer executivo</span>
+          <span class="pg-tag">Garantia 60–90 dias</span>
+          <span class="pg-tag">Vagas abertas</span>
+        </div>
+        <a href="contratacao-estrategica.html" class="pg-cta">Ver Contratação Estratégica <span class="arrow">→</span></a>
+      </div>
+      <div class="pg-side">
+        <div class="ps-item"><span class="ps-label">Liderança técnica</span><span class="ps-valor">Patrícia <em>Misturini</em></span></div>
+        <div class="ps-item"><span class="ps-label">Operação</span><span class="ps-valor">Jéssica <em>Varela</em></span></div>
+        <div class="ps-item"><span class="ps-label">Modelos</span><span class="ps-valor">Essencial <em>·</em> Alta Aderência</span></div>
+        <div class="ps-item"><span class="ps-label">Investimento</span><span class="ps-valor">Sob <em>consulta</em></span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
 <!-- ========== 03 · ENGAGEMENT MODELS ========== -->
 <section class="eng" id="engajamento">
   <div class="container">
     <div class="section-label">03 · Modelos de engajamento</div>
     <div class="eng-head">
       <h2>Três <em>formatos</em>, um critério comum.</h2>
-      <p>Empresa média não tem um modelo único — tem contexto. O formato da relação com a Atto se ajusta ao momento da empresa: diagnóstico pontual, acompanhamento contínuo ou projeto sensível de transação. O critério comum é sempre o mesmo: entrega técnica, relação de longo prazo, confidencialidade de default.</p>
+      <p>Empresa média não tem um modelo único, tem contexto. O formato da relação com a Atto se ajusta ao momento da empresa: diagnóstico pontual, acompanhamento contínuo ou projeto sensível de transação. O critério comum é sempre o mesmo: entrega técnica, relação de longo prazo, confidencialidade de default.</p>
     </div>
 
     <div class="eng-grid">
       <div class="eng-card">
         <span class="eng-chip">Pontual</span>
         <h3>Diagnóstico de <em>90 dias</em></h3>
-        <p class="eng-desc">Ponto de entrada único. Leitura técnica da empresa em 90 dias — sem prescrição antes do diagnóstico. Resultado: foto honesta do ponto zero, mapa de gargalos e plano priorizado de endereçamento. Decidir contratar (ou não) o acompanhamento vem depois.</p>
+        <p class="eng-desc">Ponto de entrada único. Leitura técnica da empresa em 90 dias. Sem prescrição antes do diagnóstico. Resultado: foto honesta do ponto zero, mapa de gargalos e plano priorizado de endereçamento. Decidir contratar (ou não) o acompanhamento vem depois.</p>
         <div class="eng-specs">
           <div><span class="sp-label">Duração</span><span class="sp-valor">90 dias</span></div>
           <div><span class="sp-label">Formato</span><span class="sp-valor">Imersão + entregáveis</span></div>
@@ -386,7 +434,7 @@
       <div class="eng-card">
         <span class="eng-chip">Contínuo</span>
         <h3>Rotina <em>mensal</em> da Atto</h3>
-        <p class="eng-desc">Acompanhamento técnico recorrente. Reunião mensal de performance, frentes prioritárias em conversas quinzenais, comitê trimestral de direção. A Atto assume corresponsabilidade pela entrega — e está na mesa quando o plano encontra a realidade.</p>
+        <p class="eng-desc">Acompanhamento técnico recorrente. Reunião mensal de performance, frentes prioritárias em conversas quinzenais, comitê trimestral de direção. A Atto assume corresponsabilidade pela entrega. Está na mesa quando o plano encontra a realidade.</p>
         <div class="eng-specs">
           <div><span class="sp-label">Duração</span><span class="sp-valor">12+ meses</span></div>
           <div><span class="sp-label">Cadência</span><span class="sp-valor">Mensal + quinzenal</span></div>
@@ -399,7 +447,7 @@
       <div class="eng-card">
         <span class="eng-chip">Projeto</span>
         <h3>Projeto de <em>M&amp;A / sucessão</em></h3>
-        <p class="eng-desc">Estruturação e condução de processos sensíveis: sucessão familiar, constituição de conselho, valuation, preparação para venda e assessoria em transações. Escopo fechado, tempo variável, sigilo absoluto — conduzido sob NDA desde a primeira conversa.</p>
+        <p class="eng-desc">Estruturação e condução de processos sensíveis: sucessão familiar, constituição de conselho, valuation, preparação para venda e assessoria em transações. Escopo fechado, tempo variável, sigilo absoluto (conduzido sob NDA desde a primeira conversa).</p>
         <div class="eng-specs">
           <div><span class="sp-label">Duração</span><span class="sp-valor">6 a 18 meses</span></div>
           <div><span class="sp-label">Confidencialidade</span><span class="sp-valor">NDA obrigatório</span></div>
@@ -420,28 +468,28 @@
         <div class="section-label">04 · Casos &amp; leituras</div>
         <h2>O que a <em>leitura de setor</em> produz, na prática.</h2>
       </div>
-      <p>Em vez de portfólio de casos com nome, trazemos leituras setoriais — pontos recorrentes que a Atto enxerga na operação das empresas que atende e que merecem atenção. Os clientes que autorizam uso público do nome e do caso estão na página Clientes.</p>
+      <p>Em vez de portfólio de casos com nome, trazemos leituras setoriais: pontos recorrentes que a Atto enxerga na operação das empresas médias gaúchas e que merecem atenção. Os clientes que autorizam uso público do nome e do caso estão na página Clientes.</p>
     </div>
 
     <div class="cases-list">
       <a href="perspectivas.html" class="case-card">
         <span class="cs-tag">Setor · Indústria</span>
         <h4>Por que o pricing por cliente importa mais que o pricing por produto.</h4>
-        <p>Em operações metalmecânicas com mix alto, a análise de margem por produto engana. A margem real está escondida no custo do cliente — frete, prazo, descontos, retrabalho. Como montamos a leitura.</p>
+        <p>Em operações metalmecânicas com mix alto, a análise de margem por produto engana. A margem real está escondida no custo do cliente: frete, prazo, descontos, retrabalho. Como montamos a leitura.</p>
         <div class="cs-meta"><span>Leitura setorial</span><span>Ler →</span></div>
       </a>
 
       <a href="perspectivas.html" class="case-card">
         <span class="cs-tag">Setor · Distribuição</span>
         <h4>A matriz de RQS como instrumento de direção, não de relatório.</h4>
-        <p>Distribuidores que olham RQS (Recorrência, Quantidade, Spread) só no fechamento mensal perdem a janela de ação. Defesa do modelo RQS como painel gerencial vivo — e como desenhamos a cadência.</p>
+        <p>Distribuidores que olham RQS (Recorrência, Quantidade, Spread) só no fechamento mensal perdem a janela de ação. Defesa do modelo RQS como painel gerencial vivo, e como desenhamos a cadência.</p>
         <div class="cs-meta"><span>Leitura setorial</span><span>Ler →</span></div>
       </a>
 
       <a href="perspectivas.html" class="case-card">
         <span class="cs-tag">Governança · Sucessão</span>
         <h4>Sucessão familiar: o erro de começar pelo documento, não pela conversa.</h4>
-        <p>Acordo de sócios não resolve conflito — apenas o escreve. Em empresas familiares com segunda geração na mesa, o trabalho começa muito antes, na leitura das expectativas não ditas. Como a Atto conduz.</p>
+        <p>Acordo de sócios não resolve conflito: apenas o escreve. Em empresas médias com segunda geração na mesa, o trabalho começa muito antes, na leitura das expectativas não ditas. Como a Atto conduz.</p>
         <div class="cs-meta"><span>Leitura setorial</span><span>Ler →</span></div>
       </a>
     </div>
@@ -455,7 +503,7 @@
       <div class="sede-info">
         <div class="section-label">05 · Sede</div>
         <h2>Sede <em>única</em>, na Serra Gaúcha.</h2>
-        <p>A Atto opera a partir de uma única casa, em Caxias do Sul. Imersões de início nas sedes dos clientes, em todo o Brasil. Rotina mensal em modelo híbrido — com agenda desenhada para que a distância não comprometa a profundidade do trabalho.</p>
+        <p>A Atto opera a partir de uma única casa, em Caxias do Sul. Atendimento presencial na Serra e imersões de início nas sedes dos clientes dentro do Rio Grande do Sul. Rotina mensal em modelo híbrido, com agenda desenhada para que a distância não comprometa a profundidade do trabalho.</p>
 
         <div class="sede-dados">
           <div class="sede-item">
@@ -477,16 +525,12 @@
         </div>
       </div>
 
-      <div>
-        <div class="sede-mapa" aria-label="Sede da Atto em Caxias do Sul, Rio Grande do Sul">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3462.8!2d-51.1782!3d-29.1631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sRua+Guerino+Sanvitto%2C+704+-+Sala+607%2C+Caxias+do+Sul+-+RS!5e0!3m2!1spt-BR!2sbr!4v1713300000000"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Mapa Google — Atto Estratégias, Caxias do Sul / RS"
-            allowfullscreen></iframe>
+      <div class="sede-mapa" aria-label="Sede em Caxias do Sul, Rio Grande do Sul">
+        <div class="pin-wrap">
+          <div class="pin-ring"></div>
+          <div class="pin-city">Caxias do Sul</div>
+          <div class="pin-uf">Rio Grande do Sul · Brasil</div>
         </div>
-        <a href="https://share.google/dchIyZVDgrMOyyVq0" target="_blank" rel="noopener" class="sede-mapa-link">Ver no Google Maps e avaliar <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -495,7 +539,7 @@
 <section class="cta-final">
   <div class="container">
     <h2>Quer falar sobre a <em>sua empresa</em>?</h2>
-    <p>30 minutos, sob sigilo, com um dos sócios. Sem proposta comercial disfarçada — conversa técnica sobre o que está na mesa.</p>
+    <p>30 minutos, sob sigilo, com um dos sócios. Sem proposta comercial disfarçada, conversa técnica sobre o que está na mesa.</p>
     <div class="actions">
       <a href="contato.html" class="btn-primary">Agendar conversa <span class="arrow">→</span></a>
       <a href="metodo.html" class="btn-ghost">Ver o método <span class="arrow">→</span></a>
@@ -510,12 +554,11 @@
       <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
       <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li></ul></div>
       <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
-      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="newsletter.html">Newsletter</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
+      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
     </div>
     <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="politica-privacidade.html">Política de privacidade</a> · <a href="termos-uso.html">Termos</a></div></div>
   </div>
 </footer>
 <script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark,.capac');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
-<script src="assets/site.js" defer></script>
 </body>
 </html>
