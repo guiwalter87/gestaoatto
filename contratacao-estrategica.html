@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Contratação Estratégica: Recrutamento e Seleção sob curadoria comportamental</title>
+<meta name="description" content="Contratar com método e sustentar com evidência. Recrutamento e Seleção sob curadoria comportamental para empresas médias do Sul do Brasil." />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+/* ===== HERO DARK (mesmo padrão de .atu-hero) ===== */
+.ce-hero{background:var(--azul-noite);color:var(--papel);padding:140px 0 120px;position:relative;overflow:hidden}
+.ce-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 900px 500px at 85% 30%,rgba(0,181,184,.10),transparent 60%),radial-gradient(ellipse 700px 400px at 15% 80%,rgba(26,58,143,.22),transparent 60%);pointer-events:none}
+.ce-hero .container{position:relative}
+.ce-hero .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-atto);margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.ce-hero .kicker::before{content:'';width:32px;height:1px;background:var(--teal-atto)}
+.ce-hero h1{font-family:'Outfit';font-weight:200;font-size:clamp(44px,6.5vw,88px);line-height:1.02;letter-spacing:-.025em;color:var(--papel);max-width:18ch;margin-bottom:32px}
+.ce-hero h1 em{font-style:italic;color:var(--teal-atto)}
+.ce-hero .tagline{font-family:'Outfit';font-weight:300;font-size:clamp(22px,2.2vw,30px);line-height:1.35;color:rgba(245,243,238,.92);max-width:42ch;margin-bottom:24px;letter-spacing:-.005em}
+.ce-hero .tagline strong{color:var(--teal-atto);font-weight:500}
+.ce-hero .lead{font-size:18px;line-height:1.65;color:rgba(245,243,238,.72);max-width:60ch;margin-bottom:56px}
+.ce-hero .hero-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding-top:48px;border-top:1px solid rgba(245,243,238,.14)}
+.hero-meta .m-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,243,238,.5);margin-bottom:10px}
+.hero-meta .m-valor{font-family:'Outfit';font-weight:300;font-size:20px;line-height:1.25;color:var(--papel);letter-spacing:-.01em}
+.hero-meta .m-valor em{font-style:italic;color:var(--teal-atto)}
+@media (max-width:900px){.ce-hero .hero-meta{grid-template-columns:1fr 1fr;gap:24px}}
+
+/* ===== STICKY ANCHOR NAV (mesmo padrão de .atu-anchor) ===== */
+.ce-anchor{position:sticky;top:72px;z-index:40;background:rgba(245,243,238,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--linha)}
+.ce-anchor .container{display:flex;gap:4px;overflow-x:auto;padding:0 48px;scrollbar-width:none}
+.ce-anchor .container::-webkit-scrollbar{display:none}
+.ce-anchor a{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-escuro);padding:18px 22px;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
+.ce-anchor a:hover{color:var(--azul-atto);border-bottom-color:var(--azul-atto)}
+
+/* ===== 01 · POSICIONAMENTO ===== */
+.posicionamento{padding:120px 0 100px}
+.pos-head{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;margin-bottom:80px;align-items:end}
+.pos-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(40px,5vw,64px);line-height:1.02;letter-spacing:-.02em;color:var(--tinta)}
+.pos-head h2 em{font-style:italic;color:var(--azul-atto)}
+.pos-head p{font-size:17px;line-height:1.7;color:var(--cinza-escuro);max-width:54ch}
+.pos-head p strong{color:var(--tinta);font-weight:600}
+.pos-comparativo{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:24px}
+.pos-card{background:#fff;border:1px solid var(--linha);padding:48px 44px;display:flex;flex-direction:column;min-height:340px;border-radius:2px}
+.pos-card.tradicional{background:var(--papel-alt);border-color:transparent}
+.pos-card.atto{background:linear-gradient(135deg,var(--azul-noite) 0%,#0E1B36 100%);color:#fff;border-color:transparent;position:relative;overflow:hidden}
+.pos-card.atto::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 600px 400px at 100% 100%,rgba(0,181,184,.18),transparent 60%);pointer-events:none}
+.pos-card .pc-kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:16px}
+.pos-card.atto .pc-kicker{color:var(--teal-atto)}
+.pos-card h3{font-family:'Outfit';font-weight:300;font-size:30px;line-height:1.15;letter-spacing:-.015em;color:var(--tinta);margin-bottom:24px;position:relative}
+.pos-card.atto h3{color:#fff}
+.pos-card.atto h3 em{font-style:italic;color:var(--teal-atto);font-weight:600}
+.pos-card ul{list-style:none;position:relative}
+.pos-card li{padding:14px 0;border-top:1px solid var(--linha);font-size:15px;line-height:1.5;color:var(--cinza-escuro);display:flex;gap:14px;align-items:baseline}
+.pos-card.atto li{border-top-color:rgba(255,255,255,.1);color:rgba(255,255,255,.85)}
+.pos-card li:last-child{border-bottom:1px solid var(--linha)}
+.pos-card.atto li:last-child{border-bottom-color:rgba(255,255,255,.1)}
+.pos-card li::before{content:"—";color:var(--cinza-medio);flex-shrink:0}
+.pos-card.atto li::before{color:var(--teal-atto)}
+.pos-insight{margin-top:48px;padding:32px 40px;background:rgba(83,64,200,.05);border-left:3px solid var(--roxo);border-radius:2px;display:flex;gap:20px;align-items:baseline}
+.pos-insight .ins-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--roxo);font-weight:500;flex-shrink:0}
+.pos-insight p{font-size:16px;line-height:1.6;color:var(--tinta);font-weight:400}
+.pos-insight strong{font-weight:600}
+@media (max-width:900px){.pos-head,.pos-comparativo{grid-template-columns:1fr;gap:24px}}
+
+/* ===== 02 · PROCESSO ===== */
+.processo{padding:120px 0;background:var(--azul-noite);color:var(--papel)}
+.processo .section-label{color:var(--teal-atto)}
+.processo .section-label::before{background:var(--teal-atto)}
+.proc-head{max-width:70ch;margin-bottom:72px}
+.proc-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(40px,5vw,64px);line-height:1.02;letter-spacing:-.02em;color:var(--papel);margin-bottom:24px}
+.proc-head h2 em{font-style:italic;color:var(--teal-atto)}
+.proc-head p{font-size:17px;line-height:1.7;color:rgba(245,243,238,.78);max-width:60ch}
+.proc-head p strong{color:#fff;font-weight:600}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(245,243,238,.12);border:1px solid rgba(245,243,238,.12)}
+.proc-col{background:var(--azul-noite);padding:44px 36px 40px;display:flex;flex-direction:column;min-height:340px;transition:background .2s}
+.proc-col:hover{background:rgba(0,181,184,.06)}
+.proc-col .pc-num{font-family:'Outfit';font-weight:200;font-size:64px;color:rgba(245,243,238,.18);margin-bottom:16px;line-height:1;letter-spacing:-.02em}
+.proc-col h3{font-family:'Outfit';font-weight:400;font-size:22px;line-height:1.22;color:var(--papel);margin-bottom:14px;letter-spacing:-.01em}
+.proc-col h3 em{font-style:italic;color:var(--teal-atto)}
+.proc-col p{font-size:14px;line-height:1.6;color:rgba(245,243,238,.7);flex:1}
+.proc-col .pc-meta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,243,238,.5);margin-top:24px;padding-top:20px;border-top:1px solid rgba(245,243,238,.1)}
+@media (max-width:900px){.proc-grid{grid-template-columns:1fr}}
+
+/* ===== 03 · MODELOS ===== */
+.modelos{padding:120px 0;background:var(--papel)}
+.mod-head{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;margin-bottom:64px;align-items:end}
+.mod-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(40px,5vw,64px);line-height:1.02;letter-spacing:-.02em;color:var(--tinta)}
+.mod-head h2 em{font-style:italic;color:var(--azul-atto)}
+.mod-head p{font-size:17px;line-height:1.7;color:var(--cinza-escuro);max-width:54ch}
+.mod-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.mod-card{background:#fff;border:1px solid var(--linha);padding:48px 44px 44px;display:flex;flex-direction:column;min-height:560px;border-radius:2px;position:relative;transition:all .25s}
+.mod-card:hover{transform:translateY(-2px);box-shadow:0 14px 44px rgba(10,14,26,.06);border-color:var(--azul-atto)}
+.mod-card.alta{background:linear-gradient(155deg,#0E1B36 0%,var(--azul-atto) 100%);color:#fff;border-color:transparent}
+.mod-card.alta:hover{border-color:var(--teal-atto);box-shadow:0 14px 44px rgba(0,181,184,.18)}
+.mod-card .mc-chip{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--azul-atto);padding:6px 12px;border-radius:100px;background:rgba(26,58,143,.06);border:1px solid rgba(26,58,143,.15);margin-bottom:24px;align-self:flex-start;display:inline-flex}
+.mod-card.alta .mc-chip{color:var(--teal-atto);background:rgba(0,181,184,.1);border-color:rgba(0,181,184,.3)}
+.mod-card h3{font-family:'Outfit';font-weight:300;font-size:38px;line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:14px}
+.mod-card.alta h3{color:#fff}
+.mod-card.alta h3 em{font-style:italic;color:var(--teal-atto);font-weight:600}
+.mod-card .mc-sub{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:28px}
+.mod-card.alta .mc-sub{color:rgba(255,255,255,.6)}
+.mod-card .mc-desc{font-size:15px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:32px}
+.mod-card.alta .mc-desc{color:rgba(255,255,255,.78)}
+.mod-card ul{list-style:none;flex:1;margin-bottom:32px}
+.mod-card li{padding:16px 0;border-top:1px solid var(--linha);font-size:14.5px;line-height:1.5;color:var(--tinta);display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline}
+.mod-card.alta li{border-top-color:rgba(255,255,255,.12);color:rgba(255,255,255,.92)}
+.mod-card li:last-child{border-bottom:1px solid var(--linha)}
+.mod-card.alta li:last-child{border-bottom-color:rgba(255,255,255,.12)}
+.mod-card li .li-tit{font-weight:600;color:var(--azul-atto)}
+.mod-card.alta li .li-tit{color:var(--teal-atto)}
+.mod-card li .li-desc{color:var(--cinza-escuro);font-weight:400}
+.mod-card.alta li .li-desc{color:rgba(255,255,255,.78)}
+.mod-card .mc-garantia{margin-top:auto;padding:24px 28px;background:rgba(26,58,143,.04);border:1px solid rgba(26,58,143,.12);border-radius:2px;display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.mod-card.alta .mc-garantia{background:rgba(0,181,184,.08);border-color:rgba(0,181,184,.22)}
+.mod-card .mc-garantia .gar-label{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza-medio)}
+.mod-card.alta .mc-garantia .gar-label{color:rgba(255,255,255,.7)}
+.mod-card .mc-garantia .gar-valor{font-family:'Outfit';font-weight:600;font-size:24px;color:var(--azul-atto);letter-spacing:-.01em}
+.mod-card.alta .mc-garantia .gar-valor{color:var(--teal-atto)}
+.mod-nota{margin-top:40px;padding:24px 32px;background:var(--papel-alt);border-left:3px solid var(--azul-atto);border-radius:2px;display:flex;gap:20px;align-items:baseline}
+.mod-nota .nota-label{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--azul-atto);font-weight:500;flex-shrink:0}
+.mod-nota p{font-size:15px;line-height:1.6;color:var(--cinza-escuro)}
+@media (max-width:900px){.mod-head,.mod-grid{grid-template-columns:1fr;gap:24px}}
+
+/* ===== 04 · GARANTIA + CUSTO DO ERRO ===== */
+.garantia{padding:120px 0;background:var(--papel-alt)}
+.gar-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:center}
+.gar-info h2{font-family:'Outfit';font-weight:200;font-size:clamp(36px,4.6vw,56px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:24px;max-width:18ch}
+.gar-info h2 em{font-style:italic;color:var(--azul-atto)}
+.gar-info .gar-lead{font-size:17px;line-height:1.7;color:var(--cinza-escuro);margin-bottom:32px;max-width:48ch}
+.gar-info .gar-frase{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza-medio);padding-top:20px;border-top:1px solid var(--linha);max-width:42ch}
+.custo-card{background:#fff;border:1px solid var(--linha);padding:48px 44px;border-radius:2px;position:relative;overflow:hidden}
+.custo-card::before{content:"";position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(83,64,200,.08),transparent 70%);pointer-events:none}
+.custo-card .cc-kicker{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:18px}
+.custo-card .cc-num{font-family:'Outfit';font-weight:200;font-size:clamp(64px,8vw,108px);line-height:1;letter-spacing:-.04em;color:var(--azul-atto);margin-bottom:14px}
+.custo-card .cc-num em{font-style:italic;color:var(--roxo);font-weight:300}
+.custo-card .cc-desc{font-size:18px;line-height:1.5;color:var(--tinta);font-weight:500;margin-bottom:20px;max-width:24ch}
+.custo-card .cc-meta{font-size:14.5px;line-height:1.65;color:var(--cinza-escuro);max-width:36ch}
+@media (max-width:900px){.gar-grid{grid-template-columns:1fr;gap:40px}}
+
+/* ===== 05 · VAGAS ABERTAS ===== */
+.vagas{padding:120px 0;background:var(--papel)}
+.vag-head{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-bottom:64px;align-items:end}
+.vag-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(36px,4.6vw,56px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta)}
+.vag-head h2 em{font-style:italic;color:var(--azul-atto)}
+.vag-head p{font-size:16px;line-height:1.7;color:var(--cinza-escuro);max-width:48ch}
+.vag-head p strong{color:var(--tinta);font-weight:600}
+.vag-list{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.vag-card{background:#fff;border:1px solid var(--linha);padding:36px 36px 32px;display:flex;flex-direction:column;min-height:280px;border-radius:2px;transition:all .2s;position:relative}
+.vag-card:hover{border-color:var(--azul-atto);transform:translateY(-2px);box-shadow:0 14px 44px rgba(10,14,26,.06)}
+.vag-card .vc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.vag-card .vc-tag{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--azul-atto);padding:5px 10px;border:1px solid rgba(26,58,143,.2);border-radius:100px;background:rgba(26,58,143,.04)}
+.vag-card .vc-tag.tag-modalidade{color:var(--teal-atto);border-color:rgba(0,181,184,.3);background:rgba(0,181,184,.06)}
+.vag-card h3{font-family:'Outfit';font-weight:400;font-size:24px;line-height:1.2;letter-spacing:-.01em;color:var(--tinta);margin-bottom:12px}
+.vag-card h3 em{font-style:italic;color:var(--azul-atto)}
+.vag-card .vc-cliente{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:18px}
+.vag-card .vc-resumo{font-size:14.5px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:28px;flex:1}
+.vag-card .vc-footer{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--linha)}
+.vag-card .vc-local{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio)}
+.vag-card .vc-cta{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--azul-atto);font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:gap .2s}
+.vag-card:hover .vc-cta{gap:12px;color:var(--teal-atto)}
+.vag-banco{margin-top:48px;background:linear-gradient(135deg,rgba(0,181,184,.04) 0%,rgba(26,58,143,.04) 100%);border:1px solid var(--linha);padding:40px 44px;border-radius:2px;display:grid;grid-template-columns:2fr 1fr;gap:40px;align-items:center}
+.vag-banco h3{font-family:'Outfit';font-weight:300;font-size:26px;line-height:1.2;color:var(--tinta);margin-bottom:8px;letter-spacing:-.01em}
+.vag-banco h3 em{font-style:italic;color:var(--azul-atto)}
+.vag-banco p{font-size:15px;line-height:1.6;color:var(--cinza-escuro)}
+.vag-banco .banco-cta{justify-self:end}
+@media (max-width:900px){.vag-list,.vag-head,.vag-banco{grid-template-columns:1fr;gap:24px}.vag-banco .banco-cta{justify-self:start}}
+
+/* ===== 06 · LIDERANÇA ===== */
+.lideranca{padding:120px 0;background:var(--papel-alt)}
+.lid-head{max-width:62ch;margin-bottom:64px}
+.lid-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(36px,4.4vw,52px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta);margin-bottom:20px}
+.lid-head h2 em{font-style:italic;color:var(--azul-atto)}
+.lid-head p{font-size:17px;line-height:1.7;color:var(--cinza-escuro)}
+.lid-head p strong{color:var(--tinta);font-weight:600}
+.lid-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.lid-card{background:#fff;border:1px solid var(--linha);padding:40px 40px 36px;display:grid;grid-template-columns:140px 1fr;gap:32px;align-items:start;border-radius:2px;transition:all .2s}
+.lid-card:hover{border-color:var(--azul-atto);transform:translateY(-2px)}
+.lid-card .lc-foto{width:140px;height:140px;border-radius:50%;background:var(--papel-alt);overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lid-card .lc-foto img{width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block}
+.lid-card .lc-info{padding-top:8px}
+.lid-card .lc-role{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-atto);margin-bottom:10px}
+.lid-card h3{font-family:'Outfit';font-weight:400;font-size:24px;line-height:1.2;color:var(--tinta);margin-bottom:8px}
+.lid-card h3 em{font-style:italic;color:var(--azul-atto)}
+.lid-card .lc-area{font-size:14px;color:var(--cinza-escuro);margin-bottom:16px}
+.lid-card p{font-size:14.5px;line-height:1.6;color:var(--cinza-escuro)}
+@media (max-width:900px){.lid-grid{grid-template-columns:1fr}.lid-card{grid-template-columns:1fr;gap:20px}.lid-card .lc-foto{width:120px;height:120px}}
+
+/* ===== CTA FINAL · overrides específicos ===== */
+.cta-final::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 800px 500px at 80% 50%,rgba(0,181,184,.18),transparent 60%);pointer-events:none}
+.cta-final{position:relative;overflow:hidden}
+.cta-final .container{position:relative}
+.cta-final .cta-kicker{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-atto);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.cta-final .cta-kicker::before{content:"";width:32px;height:1px;background:var(--teal-atto)}
+</style>
+<meta name="description" content="Contratar com método e sustentar com evidência. Recrutamento e Seleção da Atto com curadoria comportamental, parecer executivo e garantia de 60 a 90 dias.">
+<meta name="author" content="Atto Estratégias & Educação">
+<meta name="theme-color" content="#1A3A8F">
+<link rel="canonical" href="https://www.gestaoatto.com.br/contratacao-estrategica.html">
+<link rel="icon" type="image/png" href="assets/atto_logo_dark_sm.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Atto Estratégias">
+<meta property="og:title" content="Contratação Estratégica: Recrutamento e Seleção sob curadoria comportamental">
+<meta property="og:description" content="Contratar com método e sustentar com evidência. Recrutamento e Seleção da Atto com curadoria comportamental, parecer executivo e garantia de 60 a 90 dias.">
+<meta property="og:url" content="https://www.gestaoatto.com.br/contratacao-estrategica.html">
+<meta property="og:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contratação Estratégica: Recrutamento e Seleção sob curadoria comportamental">
+<meta name="twitter:description" content="Contratar com método e sustentar com evidência. Recrutamento e Seleção da Atto com curadoria comportamental, parecer executivo e garantia de 60 a 90 dias.">
+<meta name="twitter:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Atto Estratégias & Educação",
+  "url": "https://www.gestaoatto.com.br",
+  "logo": "https://www.gestaoatto.com.br/assets/atto_logo_dark.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Caxias do Sul",
+    "addressRegion": "RS",
+    "addressCountry": "BR"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/gestaoatto",
+    "https://www.instagram.com/gestaoatto",
+    "https://www.facebook.com/gestaoatto"
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTS41WC8HS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PTS41WC8HS');
+</script>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-mark"><img class="logo-light" src="assets/atto_logo_light_sm.png" alt="Atto" /><img class="logo-dark" src="assets/atto_logo_dark_sm.png" alt="Atto" /></a>
+    <nav>
+      <a href="metodo.html">Método</a>
+      <a href="atuacao.html">Atuação</a>
+      <a href="perspectivas.html">Perspectivas</a>
+      <a href="sobre.html">A Atto</a>
+      <a href="contato.html#agendar" class="cta-nav">Agende conversa <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- ====== HERO ====== -->
+<section class="ce-hero">
+  <div class="container">
+    <div class="kicker">Atuação · Contratação Estratégica</div>
+    <h1>Contratar com <em>método</em>. Sustentar com <em>evidência</em>.</h1>
+    <p class="tagline">O mercado vende vagas preenchidas. <strong>Nós entregamos decisões conscientes.</strong></p>
+    <p class="lead">A Atto ocupa o espaço da inteligência entre o recrutamento operacional e o executive search de alto custo. Avaliamos pessoas por evidências, não por impressões. E acompanhamos a entrada para transformar expectativa em performance.</p>
+
+    <div class="hero-meta">
+      <div><div class="m-label">Modelos</div><div class="m-valor">Essencial <em>·</em> Alta Aderência</div></div>
+      <div><div class="m-label">Garantia</div><div class="m-valor">60 a 90 <em>dias</em></div></div>
+      <div><div class="m-label">Liderança técnica</div><div class="m-valor">Patrícia <em>Misturini</em></div></div>
+      <div><div class="m-label">Operação</div><div class="m-valor">Jéssica <em>Varela</em></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== STICKY ANCHOR ====== -->
+<nav class="ce-anchor" aria-label="Índice da página">
+  <div class="container">
+    <a href="#posicionamento">01 · Posicionamento</a>
+    <a href="#processo">02 · Processo</a>
+    <a href="#modelos">03 · Modelos</a>
+    <a href="#garantia">04 · Garantia</a>
+    <a href="#vagas">05 · Vagas abertas</a>
+    <a href="#lideranca">06 · Liderança</a>
+  </div>
+</nav>
+
+<!-- ====== 01 · POSICIONAMENTO ====== -->
+<section class="posicionamento" id="posicionamento">
+  <div class="container">
+    <div class="section-label">01 · Posicionamento</div>
+    <div class="pos-head">
+      <h2>O <em>espaço</em> da inteligência.</h2>
+      <p>O mercado tradicional vende volume e devolve risco para o gestor. O <em>executive search</em> entrega processo robusto, mas a um custo que não cabe na maior parte das contratações da empresa média. <strong>A Atto opera no meio</strong>: método estruturado e parecer técnico, com lista curta e curadoria comportamental, no formato e no preço que a empresa média do Rio Grande do Sul precisa.</p>
+    </div>
+
+    <div class="pos-comparativo">
+      <div class="pos-card tradicional">
+        <div class="pc-kicker">Mercado tradicional</div>
+        <h3>Volume preenche a vaga, não decide.</h3>
+        <ul>
+          <li>Volume em vez de curadoria</li>
+          <li>Entrevistas pouco comparáveis entre si</li>
+          <li>Risco da decisão fica com o gestor</li>
+          <li>Sem leitura cultural estruturada</li>
+        </ul>
+      </div>
+
+      <div class="pos-card atto">
+        <div class="pc-kicker">A escolha Atto</div>
+        <h3>Decisão consciente, com <em>evidência</em>.</h3>
+        <ul>
+          <li>Lista curta e curadoria ativa</li>
+          <li>Entrevista estruturada e comparável</li>
+          <li>Parecer executivo com riscos e mitigação</li>
+          <li>Aderência cultural avaliada por método</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pos-insight">
+      <div class="ins-label">Insight</div>
+      <p>O <strong>custo do erro</strong> cresce rapidamente quando a vaga exige execução, maturidade e alinhamento cultural. O barato sai caro nas posições em que o ambiente não perdoa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 02 · PROCESSO ====== -->
+<section class="processo" id="processo">
+  <div class="container">
+    <div class="section-label">02 · Processo</div>
+    <div class="proc-head">
+      <h2>Contratar melhor <em>começa antes</em> da entrevista.</h2>
+      <p>Não existe contratação perfeita sem clareza de expectativa. <strong>Avaliamos pessoas por evidências, não por impressões.</strong> O método Atto é uma sequência de quatro passos que substitui a triagem por currículos por leitura técnica do que é "dar certo" naquela vaga, naquela empresa.</p>
+    </div>
+
+    <div class="proc-grid">
+      <div class="proc-col">
+        <div class="pc-num">01</div>
+        <h3>Alinhamento <em>Estruturado</em></h3>
+        <p>Construímos o Perfil Inicial de Sucesso (PSV): clareza objetiva sobre o que significa "dar certo" naquela posição, antes de qualquer candidato entrar na mesa.</p>
+        <div class="pc-meta">PSV · Briefing técnico</div>
+      </div>
+
+      <div class="proc-col">
+        <div class="pc-num">02</div>
+        <h3>Curadoria <em>Ativa</em></h3>
+        <p>Lista curta, sem volume. Triagem técnica e eliminação ativa dos desalinhados ao PSV. Apresentamos quem realmente cabe, não quem está disponível.</p>
+        <div class="pc-meta">Lista curta · Sem volume</div>
+      </div>
+
+      <div class="proc-col">
+        <div class="pc-num">03</div>
+        <h3>Entrevista <em>Estruturada</em></h3>
+        <p>Roteiro padronizado, evidência comparável entre candidatos. Decisão deixa de depender de intuição: passa a apoiar-se em registro técnico do que foi dito e demonstrado.</p>
+        <div class="pc-meta">Evidência comparável</div>
+      </div>
+
+      <div class="proc-col">
+        <div class="pc-num">04</div>
+        <h3>Parecer <em>Executivo</em></h3>
+        <p>Documento técnico ao final do processo: aderência cultural, pontos fortes, riscos identificados, mitigação proposta e recomendação clara de decisão. Não opinião. Análise.</p>
+        <div class="pc-meta">Riscos · Mitigação · Decisão</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 03 · MODELOS ====== -->
+<section class="modelos" id="modelos">
+  <div class="container">
+    <div class="section-label">03 · Modelos</div>
+    <div class="mod-head">
+      <h2>Arquitetura adaptada ao <em>risco</em> da sua vaga.</h2>
+      <p>Não definimos o modelo apenas pelo salário, mas pelo impacto da posição e o custo do erro. Dois caminhos, calibrados pelo contexto. A Atto recomenda tecnicamente qual deles aplica em cada vaga.</p>
+    </div>
+
+    <div class="mod-grid">
+      <article class="mod-card">
+        <span class="mc-chip">Modelo Essencial</span>
+        <h3>Seleção qualificada, sem subjetividade.</h3>
+        <p class="mc-sub">Quando a vaga é importante e o contexto é estável.</p>
+        <p class="mc-desc">Para quem precisa elevar a régua do mercado tradicional sem complexidade adicional de governança. Quatro etapas, decisão clara.</p>
+        <ul>
+          <li><span class="li-tit">PSV</span> <span class="li-desc">Perfil Inicial de Sucesso · clareza objetiva.</span></li>
+          <li><span class="li-tit">Curadoria</span> <span class="li-desc">Triagem ativa e eliminação dos desalinhados.</span></li>
+          <li><span class="li-tit">Entrevista</span> <span class="li-desc">Estruturada Atto · evidências, não impressão.</span></li>
+          <li><span class="li-tit">Parecer</span> <span class="li-desc">Executivo · riscos e recomendação de decisão.</span></li>
+        </ul>
+        <div class="mc-garantia">
+          <span class="gar-label">Garantia</span>
+          <span class="gar-valor">60 dias</span>
+        </div>
+      </article>
+
+      <article class="mod-card alta">
+        <span class="mc-chip">Modelo Alta Aderência</span>
+        <h3>Decisão <em>+</em> sustentação.</h3>
+        <p class="mc-sub">Quando o erro é caro e o contexto exige governança.</p>
+        <p class="mc-desc">Para posições críticas e ambientes de pressão. O processo não termina no "sim" da contratação: segue 90 dias com checkpoints estruturados até a aderência consolidar.</p>
+        <ul>
+          <li><span class="li-tit">PSV completo</span> <span class="li-desc">Cultura, liderança, riscos do ambiente.</span></li>
+          <li><span class="li-tit">Mapa de Aderência</span> <span class="li-desc">Como o candidato age sob pressão e decide.</span></li>
+          <li><span class="li-tit">Trilha 90D</span> <span class="li-desc">Checkpoints com contratado + gestor + RH.</span></li>
+          <li><span class="li-tit">Diagnóstico</span> <span class="li-desc">Conclusão consolidada de aderência cultural.</span></li>
+        </ul>
+        <div class="mc-garantia">
+          <span class="gar-label">Garantia</span>
+          <span class="gar-valor">90 dias</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="mod-nota">
+      <span class="nota-label">Nota consultiva</span>
+      <p>A Atto recomenda tecnicamente o modelo mais adequado a partir do histórico da vaga, do impacto no time e da maturidade do contexto. Investimento sob consulta, proporcional ao risco e à complexidade, não ao cargo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 04 · GARANTIA + CUSTO DO ERRO ====== -->
+<section class="garantia" id="garantia">
+  <div class="container">
+    <div class="gar-grid">
+      <div class="gar-info">
+        <div class="section-label">04 · Garantia</div>
+        <h2>Garantia baseada em <em>evidência</em>, não em sorte.</h2>
+        <p class="gar-lead">Regras claras evitam subjetividade e protegem as partes. No <strong>Modelo Essencial</strong>, reposição em 60 dias por desistência ou quebra grave. No <strong>Alta Aderência</strong>, reposição em 90 dias quando há incompatibilidade comprovada com o PSV, com diagnóstico de causa.</p>
+        <p class="gar-frase">A Atto não vende sorte. Vende leitura técnica.</p>
+      </div>
+
+      <div class="custo-card">
+        <div class="cc-kicker">Custo do erro</div>
+        <div class="cc-num">3<em>x</em> a 15<em>x</em></div>
+        <div class="cc-desc">o salário mensal da posição.</div>
+        <p class="cc-meta">Tempo do gestor, retrabalho, desgaste do time e perda de produtividade. Quanto mais crítica a vaga, maior o múltiplo. É contra esse risco que o método se paga.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 05 · VAGAS ABERTAS ====== -->
+<section class="vagas" id="vagas">
+  <div class="container">
+    <div class="section-label">05 · Vagas abertas</div>
+    <div class="vag-head">
+      <h2>Vagas em <em>processo</em> hoje.</h2>
+      <p>Posições em curso conduzidas pela Atto para empresas clientes. <strong>A candidatura acontece no canal do cliente</strong>: clique em "Candidatar-se" e você é direcionado ao formulário oficial. A lista é atualizada conforme novos processos abrem e fecham.</p>
+    </div>
+
+    <!--
+      ============================================================
+      MOTOR DINÂMICO DE VAGAS · Atto
+      ------------------------------------------------------------
+      As vagas reais são lidas em tempo real da planilha publicada
+      do Google Sheets via CSV (atributo data-csv-url abaixo).
+      Os 4 cards a seguir funcionam como FALLBACK: aparecem caso a
+      planilha esteja fora do ar, vazia ou não configurada.
+      ------------------------------------------------------------
+      Para conectar a planilha, preencha data-csv-url com a URL
+      "Publicar na web" → CSV (formato:
+       https://docs.google.com/spreadsheets/d/e/2PACX-XXX/pub?output=csv)
+      Documentação completa no manual da Jéssica.
+      ============================================================
+    -->
+    <div class="vag-list" data-csv-url="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8Xow6Qf6G6SJ_9NggibiJmdEXGBiX0BMROpp69WuXTAsj5USqtl7qIRgGGSFPrIyS2Mp2G2GfVqE6/pub?gid=1333994151&amp;single=true&amp;output=csv" data-vagas-list>
+      <a href="#" class="vag-card" target="_blank" rel="noopener">
+        <div class="vc-tags">
+          <span class="vc-tag">Performance Financeira</span>
+          <span class="vc-tag">CLT</span>
+          <span class="vc-tag tag-modalidade">Híbrido</span>
+        </div>
+        <h3>Controller <em>Sênior</em></h3>
+        <div class="vc-cliente">Indústria · Setor metalmecânico</div>
+        <p class="vc-resumo">Liderar o ciclo de fechamento mensal, implantar painel gerencial de margem por cliente e atuar como contraparte técnica do CFO em pricing e custos. Reporte direto à diretoria.</p>
+        <div class="vc-footer">
+          <span class="vc-local">Caxias do Sul / RS</span>
+          <span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a href="#" class="vag-card" target="_blank" rel="noopener">
+        <div class="vc-tags">
+          <span class="vc-tag">Direção Estratégica</span>
+          <span class="vc-tag">PJ</span>
+          <span class="vc-tag tag-modalidade">Presencial</span>
+        </div>
+        <h3>Diretor <em>Comercial</em></h3>
+        <div class="vc-cliente">Distribuição · B2B nacional</div>
+        <p class="vc-resumo">Estruturar a área comercial em rotina semanal, redesenhar a régua de carteiras por representante e instalar o modelo RQS como painel de direção. Sucessão preparada.</p>
+        <div class="vc-footer">
+          <span class="vc-local">Bento Gonçalves / RS</span>
+          <span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a href="#" class="vag-card" target="_blank" rel="noopener">
+        <div class="vc-tags">
+          <span class="vc-tag">Pessoas &amp; Liderança</span>
+          <span class="vc-tag">CLT</span>
+          <span class="vc-tag tag-modalidade">Híbrido</span>
+        </div>
+        <h3>Gerente de <em>RH</em></h3>
+        <div class="vc-cliente">Indústria · Acessórios automotivos</div>
+        <p class="vc-resumo">Construir a arquitetura organizacional da próxima fase, implantar trilhas de liderança e instalar rituais de gestão de pessoas. Atuação direta com sócios.</p>
+        <div class="vc-footer">
+          <span class="vc-local">Farroupilha / RS</span>
+          <span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a href="#" class="vag-card" target="_blank" rel="noopener">
+        <div class="vc-tags">
+          <span class="vc-tag">Performance Financeira</span>
+          <span class="vc-tag">CLT</span>
+          <span class="vc-tag tag-modalidade">Presencial</span>
+        </div>
+        <h3>Coordenador <em>Financeiro</em></h3>
+        <div class="vc-cliente">Comércio · Distribuição agrícola</div>
+        <p class="vc-resumo">Implantar fluxo de caixa rolante, estruturar conciliação bancária e desenhar painel de capital de giro. Reportar à diretoria semanalmente em rotina estruturada.</p>
+        <div class="vc-footer">
+          <span class="vc-local">Caxias do Sul / RS</span>
+          <span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>
+        </div>
+      </a>
+    </div>
+
+    <div class="vag-banco">
+      <div>
+        <h3>Não viu uma vaga aderente ao seu <em>perfil</em>?</h3>
+        <p>Mantemos um banco de profissionais qualificados sob curadoria da Patrícia. Envie o seu material. Quando a próxima oportunidade alinhar, a Jéssica entra em contato.</p>
+      </div>
+      <a href="mailto:jessica.varela@gestaoatto.com.br?subject=Banco%20de%20talentos%20%C2%B7%20Atto" class="btn-primary banco-cta">Enviar material <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== 06 · LIDERANÇA ====== -->
+<section class="lideranca" id="lideranca">
+  <div class="container">
+    <div class="section-label">06 · Liderança</div>
+    <div class="lid-head">
+      <h2>Quem conduz a <em>Contratação Estratégica</em>.</h2>
+      <p>O método tem uma dupla por trás: <strong>liderança técnica</strong> que desenha o PSV e o parecer executivo, e <strong>operação dedicada</strong> que conduz o processo de ponta a ponta.</p>
+    </div>
+
+    <div class="lid-grid">
+      <article class="lid-card">
+        <div class="lc-foto"><img src="assets/time/Patr%C3%ADcia_Misturini.jpg" alt="Patrícia Misturini" loading="lazy" /></div>
+        <div class="lc-info">
+          <div class="lc-role">Líder do projeto</div>
+          <h3>Patrícia <em>Misturini</em></h3>
+          <div class="lc-area">Líder · Gente &amp; Gestão</div>
+          <p>Conduz o desenho do PSV, a curadoria comportamental e o parecer executivo. Atua diretamente com sócios e diretores na formação da próxima camada de liderança.</p>
+        </div>
+      </article>
+
+      <article class="lid-card">
+        <div class="lc-foto"><img src="assets/time/J%C3%A9ssica_Varela.jpg" alt="Jéssica Varela" loading="lazy" /></div>
+        <div class="lc-info">
+          <div class="lc-role">Operação · contato</div>
+          <h3>Jéssica <em>Varela</em></h3>
+          <div class="lc-area">Consultora · Recrutamento &amp; Seleção</div>
+          <p>Conduz o processo no dia-a-dia: triagem ativa, agenda das entrevistas estruturadas e relação com os candidatos. Ponto de contato para vagas e banco de talentos.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA FINAL ====== -->
+<section class="cta-final">
+  <div class="container">
+    <div class="cta-kicker">Próximo passo</div>
+    <h2>Vamos fazer o <em>alinhamento</em> da sua próxima vaga?</h2>
+    <p>30 minutos com a Patrícia, sob sigilo, para entender a posição que está na mesa, mapear o risco e propor o modelo certo. Sem proposta comercial disfarçada. Conversa técnica.</p>
+    <div class="actions">
+      <a href="contato.html#agendar" class="btn-primary">Agendar conversa <span class="arrow">→</span></a>
+      <a href="mailto:jessica.varela@gestaoatto.com.br" class="btn-ghost">Falar com a Jéssica <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p></div>
+      <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
+      <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li><li><a href="contratacao-estrategica.html">Contratação Estratégica</a></li></ul></div>
+      <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
+      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="#">Política de privacidade</a> · <a href="#">Termos</a></div></div>
+  </div>
+</footer>
+<script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.processo,.ce-hero,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
+
+<!-- ============================================================
+     MOTOR DINÂMICO DE VAGAS · lê CSV publicado do Google Sheets
+     ============================================================ -->
+<script>
+(function(){
+  var list = document.querySelector('[data-vagas-list]');
+  if(!list) return;
+  var url = (list.getAttribute('data-csv-url') || '').trim();
+  if(!url) return; // sem URL configurada → mantém fallback estático
+
+  var CACHE_KEY = 'atto_vagas_v1';
+  var CACHE_TTL = 5 * 60 * 1000; // 5 min
+
+  // -------- parser CSV (lida com aspas e vírgulas internas) --------
+  function parseCSV(text){
+    var rows = [], cur = '', row = [], q = false;
+    for(var i = 0; i < text.length; i++){
+      var ch = text[i], nx = text[i+1];
+      if(ch === '"' && q && nx === '"'){ cur += '"'; i++; continue; }
+      if(ch === '"'){ q = !q; continue; }
+      if(ch === ',' && !q){ row.push(cur); cur = ''; continue; }
+      if((ch === '\n' || ch === '\r') && !q){
+        if(ch === '\r' && nx === '\n') i++;
+        row.push(cur); cur = '';
+        if(row.some(function(c){ return c && c.trim(); })) rows.push(row);
+        row = [];
+        continue;
+      }
+      cur += ch;
+    }
+    if(cur.length || row.length){
+      row.push(cur);
+      if(row.some(function(c){ return c && c.trim(); })) rows.push(row);
+    }
+    if(rows.length < 2) return [];
+    var headers = rows[0].map(function(h){ return h.trim().toLowerCase(); });
+    return rows.slice(1).map(function(r){
+      var o = {};
+      headers.forEach(function(h, i){ o[h] = (r[i] || '').trim(); });
+      return o;
+    });
+  }
+
+  // -------- escapes HTML --------
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  // título com a última palavra em itálico+azul (padrão visual Atto)
+  function fmtTitulo(t){
+    var safe = esc(t);
+    var parts = safe.split(/\s+/);
+    if(parts.length < 2) return safe;
+    var last = parts.pop();
+    return parts.join(' ') + ' <em>' + last + '</em>';
+  }
+
+  // -------- render --------
+  function renderCard(v){
+    var area      = v['area']        || v['área']        || '';
+    var contrato  = v['contrato']    || v['tipo']        || '';
+    var modalid   = v['modalidade']  || '';
+    var titulo    = v['titulo']      || v['título']      || v['vaga']  || '';
+    var cliente   = v['cliente']     || '';
+    var resumo    = v['resumo']      || v['descricao']   || v['descrição'] || '';
+    var local     = v['local']       || v['localizacao'] || v['localização'] || '';
+    var link      = v['link']        || v['url']         || '#';
+
+    var tags = '';
+    if(area)     tags += '<span class="vc-tag">' + esc(area) + '</span>';
+    if(contrato) tags += '<span class="vc-tag">' + esc(contrato) + '</span>';
+    if(modalid)  tags += '<span class="vc-tag tag-modalidade">' + esc(modalid) + '</span>';
+
+    return '' +
+      '<a href="' + esc(link) + '" class="vag-card" target="_blank" rel="noopener">' +
+        '<div class="vc-tags">' + tags + '</div>' +
+        '<h3>' + fmtTitulo(titulo) + '</h3>' +
+        '<div class="vc-cliente">' + esc(cliente) + '</div>' +
+        '<p class="vc-resumo">' + esc(resumo) + '</p>' +
+        '<div class="vc-footer">' +
+          '<span class="vc-local">' + esc(local) + '</span>' +
+          '<span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>' +
+        '</div>' +
+      '</a>';
+  }
+
+  function paint(vagas){
+    var abertas = vagas.filter(function(v){
+      var st = (v['status'] || '').toLowerCase();
+      return st === 'aberta' || st === 'aberto' || st === 'ativa' || st === 'ativo';
+    });
+    if(!abertas.length) return; // mantém fallback se não há vagas abertas
+    list.innerHTML = abertas.map(renderCard).join('');
+  }
+
+  // -------- cache (evita refetch a cada navegação) --------
+  function readCache(){
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if(!raw) return null;
+      var obj = JSON.parse(raw);
+      if(!obj || (Date.now() - obj.t) > CACHE_TTL) return null;
+      return obj.v;
+    } catch(e){ return null; }
+  }
+  function writeCache(v){
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({t: Date.now(), v: v})); } catch(e){}
+  }
+
+  var cached = readCache();
+  if(cached) paint(cached);
+
+  fetch(url, {cache: 'no-store'})
+    .then(function(r){ return r.ok ? r.text() : Promise.reject(r.status); })
+    .then(function(txt){
+      var vagas = parseCSV(txt);
+      writeCache(vagas);
+      paint(vagas);
+    })
+    .catch(function(e){ console.warn('[Atto Vagas] Falha ao ler planilha:', e); });
+})();
+</script>
+</body>
+</html>
