@@ -228,12 +228,12 @@
 }
 </script>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTS41WC8HS"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-PTS41WC8HS');
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
 </head>
 <body>
@@ -443,7 +443,22 @@
       <p>Posições em curso conduzidas pela Atto para empresas clientes. <strong>A candidatura acontece no canal do cliente</strong>: clique em "Candidatar-se" e você é direcionado ao formulário oficial. A lista é atualizada conforme novos processos abrem e fecham.</p>
     </div>
 
-    <div class="vag-list">
+    <!--
+      ============================================================
+      MOTOR DINÂMICO DE VAGAS · Atto
+      ------------------------------------------------------------
+      As vagas reais são lidas em tempo real da planilha publicada
+      do Google Sheets via CSV (atributo data-csv-url abaixo).
+      Os 4 cards a seguir funcionam como FALLBACK: aparecem caso a
+      planilha esteja fora do ar, vazia ou não configurada.
+      ------------------------------------------------------------
+      Para conectar a planilha, preencha data-csv-url com a URL
+      "Publicar na web" → CSV (formato:
+       https://docs.google.com/spreadsheets/d/e/2PACX-XXX/pub?output=csv)
+      Documentação completa no manual da Jéssica.
+      ============================================================
+    -->
+    <div class="vag-list" data-csv-url="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8Xow6Qf6G6SJ_9NggibiJmdEXGBiX0BMROpp69WuXTAsj5USqtl7qIRgGGSFPrIyS2Mp2G2GfVqE6/pub?gid=1333994151&amp;single=true&amp;output=csv" data-vagas-list>
       <a href="#" class="vag-card" target="_blank" rel="noopener">
         <div class="vc-tags">
           <span class="vc-tag">Performance Financeira</span>
@@ -574,5 +589,130 @@
   </div>
 </footer>
 <script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.processo,.ce-hero,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
+
+<!-- ============================================================
+     MOTOR DINÂMICO DE VAGAS · lê CSV publicado do Google Sheets
+     ============================================================ -->
+<script>
+(function(){
+  var list = document.querySelector('[data-vagas-list]');
+  if(!list) return;
+  var url = (list.getAttribute('data-csv-url') || '').trim();
+  if(!url) return; // sem URL configurada → mantém fallback estático
+
+  var CACHE_KEY = 'atto_vagas_v1';
+  var CACHE_TTL = 5 * 60 * 1000; // 5 min
+
+  // -------- parser CSV (lida com aspas e vírgulas internas) --------
+  function parseCSV(text){
+    var rows = [], cur = '', row = [], q = false;
+    for(var i = 0; i < text.length; i++){
+      var ch = text[i], nx = text[i+1];
+      if(ch === '"' && q && nx === '"'){ cur += '"'; i++; continue; }
+      if(ch === '"'){ q = !q; continue; }
+      if(ch === ',' && !q){ row.push(cur); cur = ''; continue; }
+      if((ch === '\n' || ch === '\r') && !q){
+        if(ch === '\r' && nx === '\n') i++;
+        row.push(cur); cur = '';
+        if(row.some(function(c){ return c && c.trim(); })) rows.push(row);
+        row = [];
+        continue;
+      }
+      cur += ch;
+    }
+    if(cur.length || row.length){
+      row.push(cur);
+      if(row.some(function(c){ return c && c.trim(); })) rows.push(row);
+    }
+    if(rows.length < 2) return [];
+    var headers = rows[0].map(function(h){ return h.trim().toLowerCase(); });
+    return rows.slice(1).map(function(r){
+      var o = {};
+      headers.forEach(function(h, i){ o[h] = (r[i] || '').trim(); });
+      return o;
+    });
+  }
+
+  // -------- escapes HTML --------
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  // título com a última palavra em itálico+azul (padrão visual Atto)
+  function fmtTitulo(t){
+    var safe = esc(t);
+    var parts = safe.split(/\s+/);
+    if(parts.length < 2) return safe;
+    var last = parts.pop();
+    return parts.join(' ') + ' <em>' + last + '</em>';
+  }
+
+  // -------- render --------
+  function renderCard(v){
+    var area      = v['area']        || v['área']        || '';
+    var contrato  = v['contrato']    || v['tipo']        || '';
+    var modalid   = v['modalidade']  || '';
+    var titulo    = v['titulo']      || v['título']      || v['vaga']  || '';
+    var cliente   = v['cliente']     || '';
+    var resumo    = v['resumo']      || v['descricao']   || v['descrição'] || '';
+    var local     = v['local']       || v['localizacao'] || v['localização'] || '';
+    var link      = v['link']        || v['url']         || '#';
+
+    var tags = '';
+    if(area)     tags += '<span class="vc-tag">' + esc(area) + '</span>';
+    if(contrato) tags += '<span class="vc-tag">' + esc(contrato) + '</span>';
+    if(modalid)  tags += '<span class="vc-tag tag-modalidade">' + esc(modalid) + '</span>';
+
+    return '' +
+      '<a href="' + esc(link) + '" class="vag-card" target="_blank" rel="noopener">' +
+        '<div class="vc-tags">' + tags + '</div>' +
+        '<h3>' + fmtTitulo(titulo) + '</h3>' +
+        '<div class="vc-cliente">' + esc(cliente) + '</div>' +
+        '<p class="vc-resumo">' + esc(resumo) + '</p>' +
+        '<div class="vc-footer">' +
+          '<span class="vc-local">' + esc(local) + '</span>' +
+          '<span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>' +
+        '</div>' +
+      '</a>';
+  }
+
+  function paint(vagas){
+    var abertas = vagas.filter(function(v){
+      var st = (v['status'] || '').toLowerCase();
+      return st === 'aberta' || st === 'aberto' || st === 'ativa' || st === 'ativo';
+    });
+    if(!abertas.length) return; // mantém fallback se não há vagas abertas
+    list.innerHTML = abertas.map(renderCard).join('');
+  }
+
+  // -------- cache (evita refetch a cada navegação) --------
+  function readCache(){
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if(!raw) return null;
+      var obj = JSON.parse(raw);
+      if(!obj || (Date.now() - obj.t) > CACHE_TTL) return null;
+      return obj.v;
+    } catch(e){ return null; }
+  }
+  function writeCache(v){
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({t: Date.now(), v: v})); } catch(e){}
+  }
+
+  var cached = readCache();
+  if(cached) paint(cached);
+
+  fetch(url, {cache: 'no-store'})
+    .then(function(r){ return r.ok ? r.text() : Promise.reject(r.status); })
+    .then(function(txt){
+      var vagas = parseCSV(txt);
+      writeCache(vagas);
+      paint(vagas);
+    })
+    .catch(function(e){ console.warn('[Atto Vagas] Falha ao ler planilha:', e); });
+})();
+</script>
 </body>
 </html>
