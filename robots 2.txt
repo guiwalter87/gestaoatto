@@ -1,0 +1,30 @@
+# Atto Estratégias · robots.txt
+# Permite o crawl de todos os user-agents bons.
+
+User-agent: *
+Allow: /
+Disallow: /.git/
+Disallow: /_src/
+Disallow: /_sync/
+Disallow: /_preview*
+Disallow: /assets/clientes_src/
+Disallow: /assets/clientes_silhuetas/
+
+# Bloqueia AI scrapers que não respeitam Crawl-Delay
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap
+Sitemap: https://www.gestaoatto.com.br/sitemap.xml

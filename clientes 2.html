@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Clientes: Empresas atendidas pela Atto</title>
+<meta name="description" content="Empresas que aprovam o método. Depoimentos nominais quando autorizados. Casos anônimos em temas sensíveis." />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+.logos-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:1px solid var(--linha);border-left:1px solid var(--linha);margin-top:40px}
+.logo-cell{aspect-ratio:16/9;border-right:1px solid var(--linha);border-bottom:1px solid var(--linha);display:flex;align-items:center;justify-content:center;padding:24px;background:#fff;transition:background .25s}
+.logo-cell:hover{background:var(--papel-alt)}
+.logo-cell .logo-txt{font-family:'Outfit';font-weight:500;font-size:18px;letter-spacing:-.01em;color:var(--cinza-medio);transition:color .25s}
+.logo-cell:hover .logo-txt{color:var(--azul-noite)}
+.logo-cell .setor{position:absolute;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-claro);margin-top:44px;opacity:0;transition:opacity .25s}
+.logo-cell:hover .setor{opacity:1}
+
+.depo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;padding:40px 0}
+.depo{background:#fff;border:1px solid var(--linha);padding:48px 40px;border-radius:2px;display:flex;flex-direction:column}
+.depo .aspas{font-family:'Outfit';font-weight:200;font-size:80px;line-height:0.5;color:var(--teal-atto);margin-bottom:16px;letter-spacing:-.04em}
+.depo blockquote{font-family:'Outfit';font-weight:300;font-size:22px;line-height:1.4;color:var(--tinta);letter-spacing:-.01em;margin:0 0 32px;flex:1}
+.depo .autor{padding-top:24px;border-top:1px solid var(--linha);display:flex;gap:16px;align-items:center}
+.depo .av{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--azul-atto),var(--teal-atto));flex-shrink:0}
+.depo .nome{font-family:'Outfit';font-weight:400;font-size:16px;color:var(--tinta);margin-bottom:2px}
+.depo .cargo-dep{font-size:13px;color:var(--cinza-medio);line-height:1.5}
+
+.casos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;padding:40px 0}
+.caso{background:var(--papel-alt);padding:40px 32px;border-radius:2px;border-top:3px solid var(--azul-atto)}
+.caso .kicker-caso{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:16px}
+.caso h4{font-family:'Outfit';font-weight:400;font-size:22px;color:var(--tinta);margin-bottom:16px;line-height:1.25;letter-spacing:-.01em}
+.caso p{font-size:15px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:20px}
+.caso .meta-caso{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--azul-atto);padding-top:16px;border-top:1px solid rgba(10,14,26,.08)}
+
+@media (max-width:900px){
+  .logos-grid{grid-template-columns:repeat(2,1fr)}
+  .depo-grid,.casos-grid{grid-template-columns:1fr;gap:16px}
+}
+</style>
+<meta name="description" content="Conheça uma seleção de empresas que confiam à Atto sua jornada de crescimento.">
+<meta name="author" content="Atto Estratégias & Educação">
+<meta name="theme-color" content="#1A3A8F">
+<link rel="canonical" href="https://www.gestaoatto.com.br/clientes.html">
+<link rel="icon" type="image/png" href="assets/atto_logo_dark_sm.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Atto Estratégias">
+<meta property="og:title" content="Clientes: Empresas atendidas pela Atto">
+<meta property="og:description" content="Conheça uma seleção de empresas que confiam à Atto sua jornada de crescimento.">
+<meta property="og:url" content="https://www.gestaoatto.com.br/clientes.html">
+<meta property="og:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Clientes: Empresas atendidas pela Atto">
+<meta name="twitter:description" content="Conheça uma seleção de empresas que confiam à Atto sua jornada de crescimento.">
+<meta name="twitter:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Atto Estratégias & Educação",
+  "url": "https://www.gestaoatto.com.br",
+  "logo": "https://www.gestaoatto.com.br/assets/atto_logo_dark.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Caxias do Sul",
+    "addressRegion": "RS",
+    "addressCountry": "BR"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/gestaoatto",
+    "https://www.instagram.com/gestaoatto",
+    "https://www.facebook.com/gestaoatto"
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTS41WC8HS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PTS41WC8HS');
+</script>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-mark"><img class="logo-light" src="assets/atto_logo_light_sm.png" alt="Atto" /><img class="logo-dark" src="assets/atto_logo_dark_sm.png" alt="Atto" /></a>
+    <nav>
+      <a href="metodo.html">Método</a>
+      <a href="atuacao.html">Atuação</a>
+      <a href="perspectivas.html">Perspectivas</a>
+      <a href="sobre.html">A Atto</a>
+      <a href="contato.html#agendar" class="cta-nav">Agende conversa <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="breadcrumb"><a href="index.html">A Atto</a><span class="sep">/</span><a href="sobre.html">Quem somos</a><span class="sep">/</span><span class="current">Clientes</span></div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="kicker">Clientes · Quem aprova o método</div>
+    <h1>As empresas que <em>aprovam o método</em>.</h1>
+    <p class="lead">A prova da Atto não está em slides, está nas empresas que seguem com a gente por anos e permitem que suas marcas apareçam ao lado da nossa. Nomes de clientes entram aqui somente com autorização escrita. Casos sensíveis entram em formato anônimo, preservando a confidencialidade que o trabalho exige.</p>
+    <p class="lead"><strong>Política da casa:</strong> nome só se autorizado. Depoimento só se revisado e assinado pelo cliente. E tudo que envolve transação confidencial permanece fora do site, sempre.</p>
+  </div>
+</section>
+
+<section style="padding:80px 0">
+  <div class="container">
+    <div class="section-label">Marcas que autorizam aparecer</div>
+    <h2 class="section-title" style="margin-bottom:16px">Indústria, distribuição, <em>serviços técnicos</em>.</h2>
+    <p class="section-lead" style="max-width:60ch">Empresas de médio porte em setores que a Atto conhece bem. O padrão é: relação ativa, método aplicado, autorização formal para uso da marca neste espaço.</p>
+
+    <div class="logos-grid">
+      <div class="logo-cell"><span class="logo-txt">Cliente 01</span></div>
+      <div class="logo-cell"><span class="logo-txt">Cliente 02</span></div>
+      <div class="logo-cell"><span class="logo-txt">Cliente 03</span></div>
+      <div class="logo-cell"><span class="logo-txt">Cliente 04</span></div>
+      <div class="logo-cell"><span class="logo-txt">Cliente 05</span></div>
+      <div class="logo-cell"><span class="logo-txt">Cliente 06</span></div>
+      <div class="logo-cell"><span class="logo-txt">Cliente 07</span></div>
+      <div class="logo-cell"><span class="logo-txt">Cliente 08</span></div>
+      <div class="logo-cell"><span class="logo-txt">Cliente 09</span></div>
+      <div class="logo-cell"><span class="logo-txt">Cliente 10</span></div>
+    </div>
+
+    <p style="font-size:13px;color:var(--cinza-medio);margin-top:24px;max-width:60ch">* Espaço reservado para logos que venham a ser autorizados no lançamento do novo site. Outros clientes ativos permanecem sob sigilo por escolha, a confidencialidade é sempre a opção padrão.</p>
+  </div>
+</section>
+
+<section class="sintomas">
+  <div class="container">
+    <div class="section-label">Depoimentos</div>
+    <div class="sintomas-grid">
+      <h3>O que <em>eles dizem</em> sobre o método.</h3>
+      <div style="flex:1">
+        <p style="font-size:17px;line-height:1.7;color:var(--cinza-escuro);max-width:62ch">Cada depoimento abaixo é textual, revisado e assinado pelo cliente. Quando o cliente opta pelo formato anônimo, indicamos o setor, o estado e o porte, mantendo a essência da fala sem expor a empresa.</p>
+      </div>
+    </div>
+
+    <div class="depo-grid">
+
+      <div class="depo">
+        <span class="aspas">"</span>
+        <blockquote>A estruturação da empresa saiu do discurso e virou rotina. Painel gerencial, reunião de performance, política de preço escrita, tudo rodando num ritmo que a casa aguenta. Foi a primeira vez que a diretoria conseguiu enxergar o próprio negócio em alta definição.</blockquote>
+        <div class="autor">
+          <div class="av"></div>
+          <div>
+            <div class="nome">Sócio · Indústria metalmecânica</div>
+            <div class="cargo-dep">Estruturação da empresa · Serra Gaúcha</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="depo">
+        <span class="aspas">"</span>
+        <blockquote>Entramos em operação de recuperação com o caixa no sufoco e a leitura financeira inexistente. A Atto reconstruiu a DRE gerencial, renegociou banking, instalou o capital de giro previsível. Em dois trimestres o negócio voltou a respirar.</blockquote>
+        <div class="autor">
+          <div class="av"></div>
+          <div>
+            <div class="nome">Diretor-presidente · Distribuição industrial</div>
+            <div class="cargo-dep">Recuperação do negócio · Serra Gaúcha</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="depo">
+        <span class="aspas">"</span>
+        <blockquote>A preparação de lideranças foi o trabalho mais silencioso, e o mais transformador. Gerentes que esperavam autorização para tudo passaram a conduzir reunião com dono, número e decisão. A sucessão dentro da casa deixou de ser promessa e virou plano.</blockquote>
+        <div class="autor">
+          <div class="av"></div>
+          <div>
+            <div class="nome">Presidente · Empresa familiar de 2ª geração</div>
+            <div class="cargo-dep">Preparação de lideranças · Serra Gaúcha</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="depo">
+        <span class="aspas">"</span>
+        <blockquote>Turnaround bem-sucedido não é sorte, é método. A Atto entrou com leitura honesta, prioridade escrita e cobrança semanal. Doze meses depois, a empresa era outra: margem recomposta, time recalibrado, conversa com banco em posição confortável.</blockquote>
+        <div class="autor">
+          <div class="av"></div>
+          <div>
+            <div class="nome">Sócio-fundador · Indústria de componentes</div>
+            <div class="cargo-dep">Turnaround de sucesso · Serra Gaúcha</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="entregas">
+  <div class="container">
+    <div class="section-label">Casos anônimos</div>
+    <h2 class="section-title">Três histórias que <em>se repetem</em>, contadas sem nome, com método.</h2>
+    <p class="section-lead" style="max-width:62ch;margin-bottom:24px">Os casos abaixo são baseados em relações reais, com detalhes alterados ou suprimidos para preservar a confidencialidade. A estrutura da narrativa é a mesma: contexto, método aplicado, mudança observada.</p>
+
+    <div class="casos-grid">
+
+      <div class="caso">
+        <div class="kicker-caso">Caso 01 · Indústria · RS · Médio porte</div>
+        <h4>Do faturamento recorde ao <em>resultado que some</em>.</h4>
+        <p><strong>Contexto:</strong> indústria familiar com crescimento acelerado, DRE gerencial inexistente, dificuldade em enxergar onde a margem era perdida.</p>
+        <p><strong>Método aplicado:</strong> Diagnóstico 90 dias + reconstituição gerencial por linha de produto, canal e representante. Implantação de RQS e painel executivo.</p>
+        <p><strong>Mudança:</strong> em dois trimestres, a sócia passou a conduzir reunião de performance sobre números novos. Política de pricing escrita. Desconto deixou de ser cultura.</p>
+        <div class="meta-caso">Pilares: Performance · Direção</div>
+      </div>
+
+      <div class="caso">
+        <div class="kicker-caso">Caso 02 · Distribuição · SP · Médio porte</div>
+        <h4>Crédito travado, <em>operação sufocada</em>.</h4>
+        <p><strong>Contexto:</strong> distribuidora industrial com operação saudável e caixa no sufoco. Ciclo financeiro longo, inadimplência não medida, estoque inchado.</p>
+        <p><strong>Método aplicado:</strong> modelo de capital de giro por unidade, política de crédito escrita, régua de cobrança automatizada, renegociação de banking.</p>
+        <p><strong>Mudança:</strong> previsão de caixa em 90 dias confiável, inadimplência caindo mês a mês, linhas bancárias dimensionadas. O dia 20 deixou de ser evento traumático.</p>
+        <div class="meta-caso">Pilares: Performance · Direção</div>
+      </div>
+
+      <div class="caso">
+        <div class="kicker-caso">Caso 03 · Indústria · Serra Gaúcha · Turnaround</div>
+        <h4>O turnaround <em>que virou plano</em>.</h4>
+        <p><strong>Contexto:</strong> indústria familiar com margem em queda, endividamento curto, liderança intermediária sobrecarregada, sem visibilidade de onde o resultado era perdido.</p>
+        <p><strong>Método aplicado:</strong> Diagnóstico 90 dias + reconstituição gerencial + preparação de lideranças em três níveis (supervisor, gerente, diretor). Cobrança semanal das frentes prioritárias.</p>
+        <p><strong>Mudança:</strong> em doze meses, margem recomposta, endividamento reperfilado, time recalibrado. A empresa voltou a ter conversa confortável com bancos e fornecedores.</p>
+        <div class="meta-caso">Pilares: Performance · Pessoas · Direção</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="prova">
+  <div class="container">
+    <div class="section-label">Prova pela tese</div>
+    <p class="prova-quote">A melhor referência de consultoria não é o logo estampado na capa, é a relação de três, cinco, oito anos que sobrevive a crise, sucessão e mudança de sócio.</p>
+    <div class="prova-meta">
+      <span class="name">Guilherme Walter</span>
+      <span>Sócio-diretor · Atto Estratégias</span>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="container">
+    <h2>Quer conversar com <em>um cliente atual</em>?</h2>
+    <p>Com autorização prévia dos dois lados, organizamos referência direta, conversa telefônica ou presencial, para que você ouça de quem já rodou o método.</p>
+    <div class="actions">
+      <a href="contato.html" class="btn-primary">Agendar conversa <span class="arrow">→</span></a>
+      <a href="metodo.html" class="btn-ghost">Ver o método <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p></div>
+      <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
+      <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li></ul></div>
+      <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
+      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="#">Política de privacidade</a> · <a href="#">Termos</a></div></div>
+  </div>
+</footer>
+<script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
+</body>
+</html>
