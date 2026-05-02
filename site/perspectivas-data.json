@@ -1,5 +1,55 @@
 [
   {
+    "slug": "ia-generativa-pequena-media-empresa-industrial",
+    "numero": "12",
+    "titulo": "IA generativa na pequena e média empresa industrial: como sair do entusiasmo e chegar ao ROI mensurável.",
+    "titulo_curto": "IA generativa que gera ROI mensurável.",
+    "categoria": "Indústria",
+    "data": "2026-05-16",
+    "excerpt": "Pilotos pagos, treinamentos feitos, ferramentas contratadas e o ROI ainda não chegou na mesa. Onde a IA já gera retorno e o método que separa piloto de transformação.",
+    "leitura": "12 min"
+  },
+  {
+    "slug": "valuation-middle-market-multiplo-earn-out-2026",
+    "numero": "11",
+    "titulo": "Múltiplo, earn out e prêmio de governança: o que define o valuation no middle market brasileiro em 2026.",
+    "titulo_curto": "O que define o valuation no middle market.",
+    "categoria": "M&A",
+    "data": "2026-05-13",
+    "excerpt": "Mercado aquecido, comprador mais técnico. Onde o múltiplo é construído, por que o earn out virou regra e o que o sócio precisa preparar antes de abrir o processo.",
+    "leitura": "14 min"
+  },
+  {
+    "slug": "selic-alta-fpa-pequena-media-empresa-2026",
+    "numero": "10",
+    "titulo": "Selic alta em 2026 mudou o jogo do FP&A na pequena e média empresa: do orçamento anual ao caixa semanal.",
+    "titulo_curto": "FP&A em ciclo de juros altos.",
+    "categoria": "Performance",
+    "data": "2026-05-09",
+    "excerpt": "Em ciclo de juros elevados, o orçamento anual deixou de proteger. Por que a rotina de FP&A precisa migrar para horizonte semanal, sensibilidade obrigatória e renegociação antes do estresse.",
+    "leitura": "10 min"
+  },
+  {
+    "slug": "reforma-tributaria-pequenas-e-medias-empresas-2026",
+    "numero": "09",
+    "titulo": "Reforma tributária em fase de teste: o que a pequena e média empresa precisa decidir em 2026 para proteger margem.",
+    "titulo_curto": "Reforma tributária 2026: decisões agora.",
+    "categoria": "Direção",
+    "data": "2026-05-06",
+    "excerpt": "CBS e IBS entraram em cobrança simbólica. O que precisa ser feito agora em precificação, contrato, ERP e cadastro fiscal para chegar a 2027 sem perder margem.",
+    "leitura": "13 min"
+  },
+  {
+    "slug": "contratar-gente-engajada-pequenas-e-medias-empresas",
+    "numero": "08",
+    "titulo": "Contratar gente engajada virou o gargalo silencioso das pequenas e médias empresas brasileiras.",
+    "titulo_curto": "Contratar gente engajada virou gargalo.",
+    "categoria": "Pessoas",
+    "data": "2026-05-02",
+    "excerpt": "Recrutamento e seleção em 2026 não é mais operação de busca, é operação de proposta. Por que a empresa pequena e média perde o profissional bom antes mesmo da entrevista.",
+    "leitura": "11 min"
+  },
+  {
     "slug": "governanca-subcontratada-valuation",
     "numero": "07",
     "titulo": "A empresa média brasileira está <em>subcontratada</em> em governança — e é isso que explica o desconto no valuation.",

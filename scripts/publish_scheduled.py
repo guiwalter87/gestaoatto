@@ -2,22 +2,26 @@
 """
 publish_scheduled.py
 
-Ativa posts da pasta perspectivas/ cuja publish_date no scheduled_posts.json
-seja menor ou igual à data corrente (BRT). O script é idempotente: posts já
-publicados são ignorados em execuções subsequentes.
+Ativa posts da pasta site/perspectivas/ cuja publish_date no
+scripts/scheduled_posts.json seja menor ou igual à data corrente (BRT).
+O script é idempotente: posts já publicados são ignorados em execuções
+subsequentes.
 
 Operações por post ativado:
   1. Remove `<meta name="robots" content="noindex,nofollow"><!-- SCHEDULED:DATE -->`
-     do HTML do post.
-  2. Insere card no perspectivas.html dentro do bloco
+     do HTML do post em site/perspectivas/<slug>.html.
+  2. Insere card no site/perspectivas.html dentro do bloco
      <!-- SCHEDULED-POSTS-START --> ... <!-- SCHEDULED-POSTS-END -->
      (em ordem cronológica reversa: post mais novo no topo).
-  3. Insere URL no sitemap.xml dentro do bloco
+  3. Insere URL no site/sitemap.xml dentro do bloco
      <!-- SCHEDULED-SITEMAP-START --> ... <!-- SCHEDULED-SITEMAP-END -->.
+
+O cartão segue o padrão da grade publicada (âncora com background-image
+apontando pra capa hero gerada por scripts/capas.py).
 
 Uso:
   python3 scripts/publish_scheduled.py            # usa data de hoje
-  python3 scripts/publish_scheduled.py 2026-05-16 # simula data específica (dry-run mental)
+  python3 scripts/publish_scheduled.py 2026-05-16 # simula data específica
 
 Saída:
   - imprime "Published: <slug>" para cada post ativado
@@ -32,11 +36,12 @@ import sys
 from datetime import date, datetime, timezone, timedelta
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent  # site/
-PERSPECTIVAS_HTML = ROOT / "perspectivas.html"
-SITEMAP = ROOT / "sitemap.xml"
-PERSPECTIVAS_DIR = ROOT / "perspectivas"
-REGISTRY = ROOT / "scripts" / "scheduled_posts.json"
+REPO_ROOT = Path(__file__).resolve().parent.parent  # raiz do repo
+SITE = REPO_ROOT / "site"                            # subpasta de deploy
+PERSPECTIVAS_HTML = SITE / "perspectivas.html"
+SITEMAP = SITE / "sitemap.xml"
+PERSPECTIVAS_DIR = SITE / "perspectivas"
+REGISTRY = REPO_ROOT / "scripts" / "scheduled_posts.json"
 
 CARD_MARK_START = "<!-- SCHEDULED-POSTS-START"
 CARD_MARK_END = "<!-- SCHEDULED-POSTS-END -->"
@@ -65,16 +70,21 @@ def load_registry() -> list[dict]:
 
 
 def card_html(post: dict) -> str:
+    """Gera o cartão no formato da grade publicada (âncora com background-image
+    apontando pra capa hero gerada por scripts/capas.py).
+    """
+    slug = post["slug"]
     return (
-        f'      <article class="persp-card" '
-        f"onclick=\"window.location.href='perspectivas/{post['slug']}.html'\" "
+        f'      <a href="perspectivas/{slug}.html" class="persp-card" '
         f'data-publish-date="{post["publish_date"]}">\n'
-        f'        <div class="persp-card-img {post["tag_class"]}"><span class="tag">{post["tag"]}</span></div>\n'
+        f'        <div class="persp-card-img {post["tag_class"]}" '
+        f"style=\"background-image:url('assets/capas/{slug}_hero.png');"
+        f'background-size:cover;background-position:center"><span class="tag">{post["tag"]}</span></div>\n'
         f'        <div class="persp-card-meta"><span>{post["minutes"]} min</span><span>{post["month"]} · {post["year"]}</span></div>\n'
         f'        <h3>{post["h3"]}</h3>\n'
         f'        <p>{post["summary"]}</p>\n'
         f'        <span class="author">{post["author"]}</span>\n'
-        f"      </article>"
+        f"      </a>"
     )
 
 
@@ -100,7 +110,7 @@ def insert_card(perspectivas_text: str, post: dict) -> str:
     """Insere o card logo após a linha do START marker (post mais novo no topo)."""
     start_idx = perspectivas_text.find(CARD_MARK_START)
     if start_idx == -1:
-        raise RuntimeError("CARD_MARK_START não encontrado em perspectivas.html")
+        raise RuntimeError("CARD_MARK_START não encontrado em site/perspectivas.html")
     eol = perspectivas_text.find("\n", start_idx)
     block = card_html(post)
     return (
@@ -114,7 +124,7 @@ def insert_card(perspectivas_text: str, post: dict) -> str:
 def insert_sitemap(sitemap_text: str, post: dict) -> str:
     start_idx = sitemap_text.find(SITEMAP_MARK_START)
     if start_idx == -1:
-        raise RuntimeError("SITEMAP_MARK_START não encontrado em sitemap.xml")
+        raise RuntimeError("SITEMAP_MARK_START não encontrado em site/sitemap.xml")
     eol = sitemap_text.find("\n", start_idx)
     block = sitemap_url_html(post)
     return (
