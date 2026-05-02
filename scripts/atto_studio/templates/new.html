@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block title %}Nova perspectiva · Atto Studio{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="page-head-inner">
+    <div>
+      <div class="kicker">Criação · Perspectivas</div>
+      <h1>Nova <em>perspectiva</em>.</h1>
+      <p class="lead">Preencha os campos abaixo (ou cole o JSON entregue no chat) e o app gera o HTML, as 4 capas e atualiza o registry.</p>
+    </div>
+    <div class="page-head-actions">
+      <button type="button" class="btn-import" id="btnImport">
+        <span class="ai-spark">⤓</span>
+        <span>Importar do chat</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<dialog id="importDialog" class="import-dialog">
+  <div class="dialog-head">
+    <h3>Importar texto do chat</h3>
+    <button type="button" class="dlg-close" onclick="this.closest('dialog').close()">×</button>
+  </div>
+  <p class="hint" style="margin: 0 0 12px;">Cole o JSON que recebeu no chat. Aceita um post (objeto único) ou vários (array). Os campos preenchem o formulário automaticamente.</p>
+  <textarea id="importJson" rows="14" placeholder='{
+  "titulo": "...",
+  "titulo_curto": "...",
+  "categoria": "Performance",
+  "author": "Juliano Walter",
+  "data": "2026-05-23",
+  "minutes": 10,
+  "excerpt": "...",
+  "body": "## Primeira seção\n\n...",
+  "sources": "..."
+}'></textarea>
+  <div id="importQueue" class="import-queue hidden">
+    <strong>Fila de posts (importação em lote):</strong>
+    <ol id="importQueueList"></ol>
+  </div>
+  <div class="dialog-actions">
+    <button type="button" class="btn-ghost" onclick="this.closest('dialog').close()">Cancelar</button>
+    <button type="button" class="btn-primary" id="btnImportConfirm">Preencher formulário</button>
+  </div>
+</dialog>
+
+<form id="newPost" class="form-grid">
+  <!-- LEFT: meta -->
+  <div class="form-col">
+    <div class="field">
+      <label for="titulo">Título</label>
+      <input type="text" id="titulo" name="titulo" required maxlength="180"
+             placeholder="Ex: Conselho consultivo não é acessório, é o rito que separa empresa grande de empresa que só cresceu." />
+      <div class="hint">O título aparece na capa, no card da grade e no &lt;title&gt; do HTML.</div>
+    </div>
+
+    <div class="field">
+      <label for="titulo_curto">Título curto (opcional)</label>
+      <input type="text" id="titulo_curto" name="titulo_curto" maxlength="80"
+             placeholder="Versão enxuta para Instagram (Feed e Stories). Se vazio, usa o título normal." />
+      <div class="hint">Aparece nas capas 1080×1080 (IG Feed) e 1080×1920 (IG Stories), onde espaço é curto.</div>
+    </div>
+
+    <div class="field">
+      <label for="slug">Slug (URL)</label>
+      <div class="slug-row">
+        <span class="slug-prefix">/perspectivas/</span>
+        <input type="text" id="slug" name="slug"
+               placeholder="gerado-automatico-do-titulo" />
+        <button type="button" class="btn-ghost btn-mini" id="regenSlug">Refazer do título</button>
+      </div>
+      <div class="hint">Sem acento, sem espaço, em minúsculas. Vai virar a URL pública.</div>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="categoria">Categoria</label>
+        <select id="categoria" name="categoria" required>
+          {% for c in categorias %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="author">Autor</label>
+        <select id="author" name="author" required>
+          {% for a in autores %}<option value="{{ a }}">{{ a }}</option>{% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="row-2">
+      <div class="field">
+        <label for="data">Data de publicação</label>
+        <input type="date" id="data" name="data" value="{{ today }}" required />
+        <div class="hint">Datas futuras viram <strong>agendamento automático</strong>.</div>
+      </div>
+      <div class="field">
+        <label for="minutes">Tempo de leitura (min)</label>
+        <input type="number" id="minutes" name="minutes" min="3" max="40" value="10" required />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="excerpt">Resumo (excerpt)</label>
+      <textarea id="excerpt" name="excerpt" rows="3" required maxlength="280"
+                placeholder="Subtítulo que aparece nos cards e na meta-description. Máximo 280 caracteres."></textarea>
+      <div class="hint"><span id="excerptCount">0</span>/280</div>
+    </div>
+  </div>
+
+  <!-- RIGHT: body -->
+  <div class="form-col">
+    <div class="field">
+      <label for="body">Texto da perspectiva</label>
+      <textarea id="body" name="body" rows="22" required
+                placeholder="Cole o texto em Markdown vindo do chat ou escreva direto. Use ## para subtítulos, **negrito**, *itálico*, listas com - ou 1., e linhas em branco para parágrafos."></textarea>
+      <div class="hint">Suporta Markdown completo. Os títulos H2 viram seções do post.</div>
+    </div>
+
+    <div class="field">
+      <label for="sources">Fontes consultadas (opcional)</label>
+      <textarea id="sources" name="sources" rows="4"
+                placeholder="Mencione publicações, relatórios e sites consultados. Aparece num bloco destacado ao final do texto."></textarea>
+    </div>
+  </div>
+</form>
+
+<aside class="action-bar">
+  <div class="action-info">
+    <span id="statusLabel">Pronto para criar.</span>
+  </div>
+  <div class="action-buttons">
+    <button type="button" class="btn-ghost" id="btnSaveDraft">Salvar rascunho</button>
+    <button type="button" class="btn-primary" id="btnCreate">Criar e gerar capas</button>
+  </div>
+</aside>
+
+<div id="resultPanel" class="result-panel hidden">
+  <h3 id="resultTitle">Resultado</h3>
+  <pre id="resultLog"></pre>
+
+  <!-- Capas geradas — download direto -->
+  <section class="social-block">
+    <h4>Capas geradas</h4>
+    <div class="capa-grid">
+      <a class="capa-card" id="capaHeroLink" href="#" download>
+        <div class="capa-thumb"><img id="capaThumbHero" src="" alt="Hero" /></div>
+        <div class="capa-meta"><strong>Hero</strong><span>1600 × 900</span></div>
+      </a>
+      <a class="capa-card" id="capaOgLink" href="#" download>
+        <div class="capa-thumb"><img id="capaThumbOg" src="" alt="OG" /></div>
+        <div class="capa-meta"><strong>LinkedIn / OG</strong><span>1200 × 630</span></div>
+      </a>
+      <a class="capa-card" id="capaFeedLink" href="#" download>
+        <div class="capa-thumb"><img id="capaThumbFeed" src="" alt="Instagram Feed" /></div>
+        <div class="capa-meta"><strong>Instagram Feed</strong><span>1080 × 1080</span></div>
+      </a>
+      <a class="capa-card" id="capaStoryLink" href="#" download>
+        <div class="capa-thumb"><img id="capaThumbStory" src="" alt="Instagram Stories" /></div>
+        <div class="capa-meta"><strong>Instagram Stories</strong><span>1080 × 1920</span></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Texto LinkedIn -->
+  <section class="social-block">
+    <div class="social-head">
+      <h4>Texto para LinkedIn</h4>
+      <button type="button" class="btn-ghost btn-mini" data-copy-target="socialLinkedin">Copiar</button>
+    </div>
+    <textarea id="socialLinkedin" rows="10"></textarea>
+  </section>
+
+  <!-- Legenda Instagram -->
+  <section class="social-block">
+    <div class="social-head">
+      <h4>Legenda para Instagram</h4>
+      <button type="button" class="btn-ghost btn-mini" data-copy-target="socialInstagram">Copiar</button>
+    </div>
+    <textarea id="socialInstagram" rows="8"></textarea>
+  </section>
+
+  <div class="result-actions">
+    <button type="button" class="btn-ghost" id="btnViewCover">Ver capa hero ampliada</button>
+    <button type="button" class="btn-primary" id="btnGitPush">Commitar + push agora</button>
+  </div>
+</div>
+
+<dialog id="coverDialog">
+  <button type="button" class="dlg-close" onclick="this.closest('dialog').close()">×</button>
+  <img id="coverImg" src="" alt="Capa hero" />
+</dialog>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  initNewPostForm({
+    tagClass: {{ tag_class | tojson }},
+  });
+</script>
+{% endblock %}

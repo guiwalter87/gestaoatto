@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{% block title %}Atto Studio{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+{% block head %}{% endblock %}
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="logo-mark">a</span>
+      <div>
+        <div class="brand-name">Atto Studio</div>
+        <div class="brand-sub">Central de Perspectivas</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="/" class="{% if request.path == '/' %}is-active{% endif %}">Nova perspectiva</a>
+      <a href="/posts" class="{% if request.path == '/posts' %}is-active{% endif %}">Posts</a>
+      <a href="/agendamento" class="{% if request.path == '/agendamento' %}is-active{% endif %}">Agendamento</a>
+    </nav>
+    <div class="status-dot" id="health" title="Carregando..."></div>
+  </div>
+</header>
+
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+
+<div id="toast" class="toast"></div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

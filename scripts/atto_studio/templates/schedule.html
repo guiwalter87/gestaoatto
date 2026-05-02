@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Agendamento · Atto Studio{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="kicker">Calendário editorial</div>
+  <h1>Agendamento de <em>perspectivas</em>.</h1>
+  <p class="lead">Calendário visual dos próximos meses. Posts agendados aparecem nos dias correspondentes; passe o cursor para ver detalhe.</p>
+</section>
+
+<div class="schedule-toolbar">
+  <button class="btn-ghost btn-mini" id="prevMonth">← Mês anterior</button>
+  <h2 id="monthLabel"></h2>
+  <button class="btn-ghost btn-mini" id="nextMonth">Próximo mês →</button>
+</div>
+
+<div id="calendar" class="calendar"></div>
+
+<aside class="legend">
+  <span class="dot dot-published"></span> Publicado
+  <span class="dot dot-scheduled"></span> Agendado
+  <span class="dot dot-today"></span> Hoje
+</aside>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const POSTS = {{ posts | tojson }};
+  const TODAY = "{{ today }}";
+  initCalendar(POSTS, TODAY);
+</script>
+{% endblock %}

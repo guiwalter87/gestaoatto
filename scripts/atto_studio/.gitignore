@@ -1,0 +1,10 @@
+# Variáveis de ambiente locais — NUNCA versionar
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store

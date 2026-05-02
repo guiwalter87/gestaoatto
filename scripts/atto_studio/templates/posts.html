@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Posts · Atto Studio{% endblock %}
+
+{% block content %}
+<section class="page-head">
+  <div class="kicker">Lista · Perspectivas</div>
+  <h1>Posts <em>publicados, agendados e rascunhos</em>.</h1>
+  <p class="lead">Visão consolidada de todas as perspectivas. Cada cartão mostra status, data e ações disponíveis.</p>
+</section>
+
+<div class="filter-bar">
+  <button class="chip is-active" data-filter="all">Todos ({{ posts | length }})</button>
+  <button class="chip" data-filter="published">Publicados</button>
+  <button class="chip" data-filter="scheduled">Agendados</button>
+  <button class="chip" data-filter="draft">Rascunhos</button>
+</div>
+
+<div class="posts-list">
+  {% for p in posts %}
+  <article class="post-row" data-status="{{ p.status }}">
+    <div class="post-row-img">
+      {% if p.status == 'published' %}
+        <img src="/api/capa/{{ p.slug }}/hero" alt="" loading="lazy" onerror="this.style.display='none'" />
+      {% else %}
+        <span class="ph">no preview</span>
+      {% endif %}
+    </div>
+    <div class="post-row-body">
+      <div class="post-row-meta">
+        <span class="badge badge-{{ p.status }}">
+          {% if p.status == 'published' %}Publicado
+          {% elif p.status == 'scheduled' %}Agendado
+          {% else %}Rascunho{% endif %}
+        </span>
+        <span class="cat">{{ p.categoria }}</span>
+        <span class="date">{{ p.data or p.publish_date or '?' }}</span>
+        <span class="reading">{{ p.leitura or '' }}</span>
+      </div>
+      <h3>{{ p.titulo or p.h3 or p.slug }}</h3>
+      {% if p.excerpt %}<p class="excerpt">{{ p.excerpt }}</p>{% endif %}
+    </div>
+    <div class="post-row-actions">
+      <a href="https://www.gestaoatto.com.br/perspectivas/{{ p.slug }}.html" target="_blank" rel="noopener" class="btn-ghost btn-mini">Ver no site</a>
+      <button class="btn-ghost btn-mini" onclick="regenCover('{{ p.slug }}')">Regenerar capa</button>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  initPostsList();
+</script>
+{% endblock %}
