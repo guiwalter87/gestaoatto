@@ -4,21 +4,79 @@
 <meta charset="UTF-8">
 <title>Página não encontrada · Atto Estratégias</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="A página que você procura não existe ou foi movida. Volte para a home da Atto Estratégias.">
+<meta name="theme-color" content="#1A3A8F">
+<link rel="canonical" href="https://www.gestaoatto.com.br/404.html">
+<link rel="icon" type="image/png" href="/assets/atto_logo_dark_sm.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;500&family=Plus+Jakarta+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTS41WC8HS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PTS41WC8HS');
+</script>
 <style>
-  body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #F5F3EE; color: #0A0E1A;
-         display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-  .wrap { text-align: center; padding: 48px; max-width: 560px; }
-  h1 { font-family: 'Outfit', sans-serif; font-size: 96px; margin: 0; color: #1A3A8F; letter-spacing: -0.04em; }
-  p  { font-size: 18px; margin: 16px 0 32px; color: #6B6F7A; }
-  a  { display: inline-block; padding: 14px 28px; background: #0A0E1A; color: #fff;
-       text-decoration: none; border-radius: 999px; font-weight: 500; }
+  :root{--azul-noite:#080F1E;--azul-atto:#1A3A8F;--teal-atto:#00B5B8;--papel:#F5F3EE;--tinta:#0A0E1A;--cinza-medio:#6B6F7A;--linha:#E0DCD2}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--papel);color:var(--tinta);min-height:100vh;display:flex;flex-direction:column}
+  header{padding:24px 48px;border-bottom:1px solid var(--linha)}
+  .logo{font-family:'Outfit';font-weight:300;font-size:20px;letter-spacing:-.01em;color:var(--tinta)}
+  .logo strong{font-weight:600;color:var(--azul-atto)}
+  main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 32px}
+  .wrap{text-align:center;max-width:640px}
+  .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-atto);margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:12px}
+  .kicker::before,.kicker::after{content:'';width:24px;height:1px;background:var(--teal-atto)}
+  h1{font-family:'Outfit';font-weight:200;font-size:clamp(96px,14vw,168px);line-height:.95;letter-spacing:-.04em;color:var(--azul-atto);margin-bottom:8px}
+  h1 em{font-style:italic;color:var(--teal-atto)}
+  h2{font-family:'Outfit';font-weight:300;font-size:clamp(24px,3vw,32px);line-height:1.2;letter-spacing:-.02em;color:var(--tinta);margin-bottom:14px}
+  h2 em{font-style:italic;color:var(--azul-atto)}
+  p{font-size:16px;line-height:1.7;color:var(--cinza-medio);margin-bottom:40px;max-width:48ch;margin-inline:auto}
+  .links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;transition:all .2s;text-decoration:none}
+  .btn-primary{background:var(--azul-noite);color:#fff;border:1px solid var(--azul-noite)}
+  .btn-primary:hover{background:var(--azul-atto);border-color:var(--azul-atto)}
+  .btn-ghost{background:transparent;color:var(--tinta);border:1px solid var(--linha)}
+  .btn-ghost:hover{border-color:var(--azul-atto);color:var(--azul-atto)}
+  .atalhos{margin-top:56px;padding-top:32px;border-top:1px solid var(--linha)}
+  .atalhos-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:18px}
+  .atalhos-grid{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;font-size:14px}
+  .atalhos-grid a{color:var(--azul-atto);border-bottom:1px solid rgba(26,58,143,.25);transition:all .15s;text-decoration:none}
+  .atalhos-grid a:hover{border-bottom-color:var(--azul-atto)}
+  footer{padding:24px 48px;border-top:1px solid var(--linha);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);text-align:center}
 </style>
 </head>
 <body>
+<header>
+  <a href="/" class="logo"><strong>Atto</strong> · Estratégias &amp; Educação</a>
+</header>
+<main>
   <div class="wrap">
-    <h1>404</h1>
-    <p>Esta página não existe (ou foi movida). Vamos voltar ao início?</p>
-    <a href="/">Voltar para a Home</a>
+    <div class="kicker">Erro 404</div>
+    <h1>4<em>0</em>4</h1>
+    <h2>Esta página <em>não está aqui</em>.</h2>
+    <p>Pode ter sido movida na reformulação do site, ou o link que te trouxe está com erro de digitação. Use os atalhos abaixo para encontrar o que procurava.</p>
+    <div class="links">
+      <a class="btn btn-primary" href="/">Voltar para a home</a>
+      <a class="btn btn-ghost" href="/contato.html">Falar com a Atto</a>
+    </div>
+    <div class="atalhos">
+      <div class="atalhos-label">Atalhos rápidos</div>
+      <div class="atalhos-grid">
+        <a href="/metodo.html">Método</a>
+        <a href="/atuacao.html">Atuação</a>
+        <a href="/perspectivas.html">Perspectivas</a>
+        <a href="/sobre.html">Sobre</a>
+        <a href="/time.html">Time</a>
+        <a href="/contato.html">Contato</a>
+      </div>
+    </div>
   </div>
+</main>
+<footer>Atto Estratégias &amp; Educação · Caxias do Sul · RS</footer>
 </body>
 </html>
