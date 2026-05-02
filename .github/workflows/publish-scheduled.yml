@@ -1,0 +1,50 @@
+name: Publish scheduled posts
+
+# Roda diariamente às 10:00 UTC (07:00 BRT). Também pode ser disparado
+# manualmente em Actions > Publish scheduled posts > Run workflow.
+on:
+  schedule:
+    - cron: "0 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-scheduled
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run publisher
+        id: publish
+        run: |
+          python scripts/publish_scheduled.py | tee /tmp/publish_output.txt
+          echo "published_count=$(grep -c '^Published:' /tmp/publish_output.txt || echo 0)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push if changes
+        if: steps.publish.outputs.published_count != '0'
+        run: |
+          git config user.name "atto-publisher"
+          git config user.email "publisher@gestaoatto.com.br"
+          git add -A
+          if [[ -n "$(git status --porcelain)" ]]; then
+            DATE=$(date -u +"%Y-%m-%d")
+            git commit -m "publish(perspectivas): post(s) agendado(s) para ${DATE}"
+            git push
+          else
+            echo "Nenhuma alteração para commitar."
+          fi

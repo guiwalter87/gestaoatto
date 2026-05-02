@@ -1,0 +1,65 @@
+{
+  "_doc": "Registry de posts agendados para publicação automática. O workflow .github/workflows/publish-scheduled.yml roda diariamente (07:00 BRT), executa publish_scheduled.py e ativa todo post cuja publish_date for menor ou igual à data corrente. O processo é idempotente: posts já publicados são ignorados nas execuções seguintes.",
+  "scheduled": [
+    {
+      "slug": "contratar-gente-engajada-pequenas-e-medias-empresas",
+      "publish_date": "2026-05-02",
+      "tag": "Pessoas",
+      "tag_class": "img-paper",
+      "minutes": 11,
+      "month": "Mai",
+      "year": 2026,
+      "h3": "Contratar gente engajada virou o gargalo silencioso das pequenas e médias empresas brasileiras.",
+      "summary": "Recrutamento e seleção em 2026 não é mais operação de busca, é operação de proposta. Por que a empresa pequena e média perde o profissional bom antes mesmo da entrevista.",
+      "author": "Por Patrícia Misturini"
+    },
+    {
+      "slug": "reforma-tributaria-pequenas-e-medias-empresas-2026",
+      "publish_date": "2026-05-06",
+      "tag": "Direção",
+      "tag_class": "img-dark",
+      "minutes": 13,
+      "month": "Mai",
+      "year": 2026,
+      "h3": "Reforma tributária em fase de teste: o que a pequena e média empresa precisa decidir em 2026 para proteger margem.",
+      "summary": "CBS e IBS entraram em cobrança simbólica. O que precisa ser feito agora em precificação, contrato, ERP e cadastro fiscal para chegar a 2027 sem perder margem.",
+      "author": "Por Guilherme Walter"
+    },
+    {
+      "slug": "selic-alta-fpa-pequena-media-empresa-2026",
+      "publish_date": "2026-05-09",
+      "tag": "Performance",
+      "tag_class": "img-blue",
+      "minutes": 10,
+      "month": "Mai",
+      "year": 2026,
+      "h3": "Selic alta em 2026 mudou o jogo do FP&amp;A na pequena e média empresa: do orçamento anual ao caixa semanal.",
+      "summary": "Em ciclo de juros elevados, o orçamento anual deixou de proteger. Por que a rotina de FP&amp;A precisa migrar para horizonte semanal, sensibilidade obrigatória e renegociação antes do estresse.",
+      "author": "Por Juliano Walter"
+    },
+    {
+      "slug": "valuation-middle-market-multiplo-earn-out-2026",
+      "publish_date": "2026-05-13",
+      "tag": "M&amp;A",
+      "tag_class": "img-roxo",
+      "minutes": 14,
+      "month": "Mai",
+      "year": 2026,
+      "h3": "Múltiplo, earn out e prêmio de governança: o que define o valuation no middle market brasileiro em 2026.",
+      "summary": "Mercado aquecido, comprador mais técnico. Onde o múltiplo é construído, por que o earn out virou regra e o que o sócio precisa preparar antes de abrir o processo.",
+      "author": "Por Guilherme Walter"
+    },
+    {
+      "slug": "ia-generativa-pequena-media-empresa-industrial",
+      "publish_date": "2026-05-16",
+      "tag": "Indústria",
+      "tag_class": "img-teal",
+      "minutes": 12,
+      "month": "Mai",
+      "year": 2026,
+      "h3": "IA generativa na pequena e média empresa industrial: como sair do entusiasmo e chegar ao ROI mensurável.",
+      "summary": "Pilotos pagos, treinamentos feitos, ferramentas contratadas e o ROI ainda não chegou na mesa. Onde a IA já gera retorno e o método que separa piloto de transformação.",
+      "author": "Por Juliano Walter"
+    }
+  ]
+}
