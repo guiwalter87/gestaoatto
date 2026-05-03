@@ -54,7 +54,15 @@
       const res = await fetch('perspectivas-data.json', { cache: 'no-cache' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
-      const sorted = [...data].sort((a, b) => new Date(b.data) - new Date(a.data));
+      // Hoje em BRT (UTC-3). Posts agendados para o futuro NÃO podem aparecer
+      // no feed da home. O scheduler libera a publicação ao remover o noindex
+      // do HTML do post, mas a data continua imutável no perspectivas-data.json,
+      // então o filtro abaixo é a barreira de visibilidade.
+      const nowUtc = new Date();
+      const brtNow = new Date(nowUtc.getTime() - 3 * 60 * 60 * 1000);
+      const todayBrtIso = brtNow.toISOString().slice(0, 10); // YYYY-MM-DD
+      const visiveis = data.filter((post) => (post.data || '') <= todayBrtIso);
+      const sorted = visiveis.sort((a, b) => new Date(b.data) - new Date(a.data));
       const latest = sorted.slice(0, 3);
       container.innerHTML = latest.map(renderCard).join('');
     } catch (err) {
