@@ -213,16 +213,15 @@ def update_post_nav(slug: str, prev_slug: str | None, prev_title: str | None,
     return False
 
 
-def update_feature_block(post: dict) -> bool:
+def update_feature_block(text: str, post: dict) -> str:
     """Atualiza o bloco POSTS:FEATURE_START..END em site/perspectivas.html
-    para destacar o post mais recente."""
-    if not PERSPECTIVAS_HTML.exists():
-        return False
-    text = PERSPECTIVAS_HTML.read_text(encoding="utf-8")
+    para destacar o post mais recente. Recebe e retorna o texto em memória
+    (não escreve em disco) para não conflitar com inserções pendentes do card.
+    """
     start = text.find(FEATURE_MARK_START)
     end = text.find(FEATURE_MARK_END)
     if start == -1 or end == -1:
-        return False
+        return text
 
     pdate = datetime.strptime(post["publish_date"], "%Y-%m-%d").date()
     mes_curto = MES_CURTO[pdate.month]
@@ -254,10 +253,7 @@ def update_feature_block(post: dict) -> bool:
         f'    '
     )
     new_text = text[:start] + new_block + text[end:]
-    if new_text != text:
-        PERSPECTIVAS_HTML.write_text(new_text, encoding="utf-8")
-        return True
-    return False
+    return new_text
 
 
 def main() -> int:
@@ -339,10 +335,10 @@ def main() -> int:
                     next_title=post.get("h3", ""),
                 )
 
-        # 5. Atualiza o bloco "Em destaque" para o post mais recente
-        update_feature_block(post)
-        # recarrega perspectivas_text porque update_feature_block escreveu
-        perspectivas_text = PERSPECTIVAS_HTML.read_text(encoding="utf-8")
+        # 5. Atualiza o bloco "Em destaque" para o post mais recente.
+        # update_feature_block agora opera só em memória — a persistência
+        # acontece no bloco final, junto com o card e o sitemap.
+        perspectivas_text = update_feature_block(perspectivas_text, post)
 
         published.append(slug)
 

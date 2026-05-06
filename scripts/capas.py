@@ -131,9 +131,17 @@ def gerar_capa(W, H, numero, categoria, titulo, data, leitura, out_path, formato
 
     d = ImageDraw.Draw(img, 'RGBA')
 
-    # Margens — formatos estreitos (largura <= 1200) ganham margem lateral menor
+    # Margens — formatos quadrados (ig-feed 1080×1080) ganham margem lateral
+    # MAIOR para sobreviver ao crop 4:5 do "novo grid" do Instagram, que
+    # corta as laterais do thumbnail no perfil.
     is_narrow = W <= 1200
-    if is_narrow:
+    is_square = (W == H)
+    if is_square:
+        # Safe zone para ig-feed: 14% de cada lado (~150px em 1080) garante
+        # que o conteúdo crítico (número e título) sobreviva ao crop do grid.
+        PAD_L = int(W * 0.14)
+        PAD_R = int(W * 0.14)
+    elif is_narrow:
         PAD_L = int(W * 0.07)
         PAD_R = int(W * 0.07)
     else:
@@ -142,8 +150,13 @@ def gerar_capa(W, H, numero, categoria, titulo, data, leitura, out_path, formato
     PAD_T = int(90 * scale)
     PAD_B = int(90 * scale)
 
-    # 1) Número grande (topo)
-    num_size = int(H * 0.28) if H <= 1200 else int(H * 0.24)
+    # 1) Número grande (topo) — em ig-feed, reduzido para caber na safe zone
+    if is_square:
+        num_size = int(H * 0.22)
+    elif H <= 1200:
+        num_size = int(H * 0.28)
+    else:
+        num_size = int(H * 0.24)
     d.text((PAD_L, PAD_T - int(20 * scale)), numero, fill=TEAL + (220,), font=outfit(num_size, 160))
     num_bottom = PAD_T + int(num_size * 0.95)
 
@@ -166,8 +179,10 @@ def gerar_capa(W, H, numero, categoria, titulo, data, leitura, out_path, formato
     is_tall = H > W
     if is_tall:
         base_size = int(W * 0.085)   # story 9:16 — título grande
+    elif is_square:
+        base_size = int(W * 0.054)   # ig-feed quadrado com safe zone — título reduzido
     elif is_narrow:
-        base_size = int(W * 0.062)   # feed quadrado
+        base_size = int(W * 0.062)   # feed quadrado legacy
     else:
         base_size = int(W * 0.048)   # hero / og landscape
     sizes = [int(base_size * m) for m in (1.0, 0.92, 0.84, 0.76, 0.68, 0.6, 0.52, 0.45)]
