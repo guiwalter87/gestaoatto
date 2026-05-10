@@ -10,10 +10,14 @@ subsequentes.
 Operações por post ativado:
   1. Remove `<meta name="robots" content="noindex,nofollow"><!-- SCHEDULED:DATE -->`
      do HTML do post em site/perspectivas/<slug>.html. (libera indexação)
-  2. Insere URL no site/sitemap.xml dentro do bloco
+  2. Garante que o HTML carrega `assets/atto-events.js` (tracker GA4 custom).
+     Sem isso, scroll-90 / whatsapp_click / cta_agendar não são medidos.
+  3. Insere URL no site/sitemap.xml dentro do bloco
      <!-- SCHEDULED-SITEMAP-START --> ... <!-- SCHEDULED-SITEMAP-END -->.
-  3. Atualiza a navegação cronológica (post-nav) entre o post atual e o anterior.
-  4. Atualiza o bloco "Em destaque" (POSTS:FEATURE) em site/perspectivas.html.
+  4. Atualiza todos os <lastmod> do sitemap para a data de hoje
+     (evita lastmod stale, fresh signals para o Google).
+  5. Atualiza a navegação cronológica (post-nav) entre o post atual e o anterior.
+  6. Atualiza o bloco "Em destaque" (POSTS:FEATURE) em site/perspectivas.html.
 
 ⚠️ A inserção do card no grid de perspectivas.html foi REMOVIDA.
 O grid agora é renderizado dinamicamente por assets/perspectivas-grid.js
@@ -53,6 +57,11 @@ FEATURE_MARK_END = "<!-- POSTS:FEATURE_END -->"
 NOINDEX_RE = re.compile(
     r'\n<meta name="robots" content="noindex,nofollow"><!-- SCHEDULED:[\d\-]+ -->\n'
 )
+
+# SEO hygiene: garantir que toda perspectiva carrega o tracker custom
+ATTO_EVENTS_SCRIPT = '<script defer src="../assets/atto-events.js"></script>'
+ATTO_EVENTS_SENTINEL = 'atto-events.js'
+GTAG_CONFIG_LINE = "gtag('config', 'G-PTS41WC8HS');"
 
 # Mapeamento categoria → mês curto (também em scheduled_posts.json)
 MES_CURTO = {1: "Jan", 2: "Fev", 3: "Mar", 4: "Abr", 5: "Mai", 6: "Jun",
@@ -108,6 +117,34 @@ def insert_sitemap(sitemap_text: str, post: dict) -> str:
 
 def remove_noindex(post_html: str) -> str:
     return NOINDEX_RE.sub("\n", post_html, count=1)
+
+
+def ensure_atto_events_js(post_html: str) -> tuple[str, bool]:
+    """Garante que o HTML carrega o atto-events.js logo após o snippet do GA4.
+
+    Retorna (html_atualizado, foi_alterado).
+    """
+    if ATTO_EVENTS_SENTINEL in post_html:
+        return post_html, False
+    # Insere logo após o snippet gtag config
+    pattern = re.compile(
+        r"(\s*gtag\('config',\s*'G-PTS41WC8HS'\);\s*\n</script>\s*\n)",
+        re.IGNORECASE,
+    )
+    new_html, count = pattern.subn(r"\1" + ATTO_EVENTS_SCRIPT + "\n", post_html, count=1)
+    return new_html, count > 0
+
+
+def bump_sitemap_lastmod(sitemap_text: str, today_iso: str) -> str:
+    """Atualiza todos os lastmod do sitemap para a data atual.
+    Mantém a higiene de fresh signals e evita lastmod stale como o que
+    foi detectado na auditoria Day 7 (sitemap congelado em 01.mai).
+    """
+    return re.sub(
+        r"<lastmod>\d{4}-\d{2}-\d{2}</lastmod>",
+        f"<lastmod>{today_iso}</lastmod>",
+        sitemap_text,
+    )
 
 
 def find_previous_published(slug: str) -> dict | None:
@@ -256,9 +293,15 @@ def main() -> int:
             skipped.append(f"{slug} (já publicado)")
             continue
 
-        # 1. Remove noindex do post
+        # 1. Remove noindex do post + garante higiene SEO (atto-events.js)
+        html_alterado = False
         if has_noindex:
             post_html = remove_noindex(post_html)
+            html_alterado = True
+        post_html, events_added = ensure_atto_events_js(post_html)
+        if events_added:
+            html_alterado = True
+        if html_alterado:
             post_path.write_text(post_html, encoding="utf-8")
 
         # 2. Insere URL no sitemap (a inserção do card foi removida —
@@ -307,6 +350,9 @@ def main() -> int:
 
     # Persiste sempre que houve qualquer publicação
     if published:
+        # Higiene SEO: bump em todos os <lastmod> para a data corrente,
+        # garantindo que o Google receba "fresh signals" do site inteiro.
+        sitemap_text = bump_sitemap_lastmod(sitemap_text, today.isoformat())
         PERSPECTIVAS_HTML.write_text(perspectivas_text, encoding="utf-8")
         SITEMAP.write_text(sitemap_text, encoding="utf-8")
         for slug in published:
