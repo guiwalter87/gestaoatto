@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vagas em Aberto · Atto Estratégias &amp; Educação</title>
+<meta name="description" content="Vagas em processo conduzidas pela Atto. Posições reais para empresas médias do Sul do Brasil, sob curadoria comportamental e parecer executivo." />
+<link rel="stylesheet" href="assets/site.css" />
+<style>
+/* ===== HERO DARK (mesmo padrão de .ce-hero) ===== */
+.vag-hero{background:var(--azul-noite);color:var(--papel);padding:140px 0 100px;position:relative;overflow:hidden}
+.vag-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 900px 500px at 85% 30%,rgba(0,181,184,.10),transparent 60%),radial-gradient(ellipse 700px 400px at 15% 80%,rgba(26,58,143,.22),transparent 60%);pointer-events:none}
+.vag-hero .container{position:relative}
+.vag-hero .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-atto);margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.vag-hero .kicker::before{content:'';width:32px;height:1px;background:var(--teal-atto)}
+.vag-hero h1{font-family:'Outfit';font-weight:200;font-size:clamp(44px,6vw,80px);line-height:1.02;letter-spacing:-.025em;color:var(--papel);max-width:20ch;margin-bottom:28px}
+.vag-hero h1 em{font-style:italic;color:var(--teal-atto)}
+.vag-hero .lead{font-size:18px;line-height:1.7;color:rgba(245,243,238,.78);max-width:60ch;margin-bottom:0}
+.vag-hero .lead strong{color:var(--teal-atto);font-weight:500}
+
+/* ===== LISTA DE VAGAS (reaproveita o .vagas / .vag-list / .vag-card de contratacao-estrategica) ===== */
+.vagas{padding:100px 0 80px;background:var(--papel)}
+.vag-head{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-bottom:56px;align-items:end}
+.vag-head h2{font-family:'Outfit';font-weight:200;font-size:clamp(36px,4.6vw,56px);line-height:1.05;letter-spacing:-.02em;color:var(--tinta)}
+.vag-head h2 em{font-style:italic;color:var(--azul-atto)}
+.vag-head p{font-size:16px;line-height:1.7;color:var(--cinza-escuro);max-width:48ch}
+.vag-head p strong{color:var(--tinta);font-weight:600}
+.vag-list{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.vag-card{background:#fff;border:1px solid var(--linha);padding:36px 36px 32px;display:flex;flex-direction:column;min-height:280px;border-radius:2px;transition:all .2s;position:relative}
+.vag-card:hover{border-color:var(--azul-atto);transform:translateY(-2px);box-shadow:0 14px 44px rgba(10,14,26,.06)}
+.vag-card .vc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.vag-card .vc-tag{font-family:'JetBrains Mono';font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--azul-atto);padding:5px 10px;border:1px solid rgba(26,58,143,.2);border-radius:100px;background:rgba(26,58,143,.04)}
+.vag-card .vc-tag.tag-modalidade{color:var(--teal-atto);border-color:rgba(0,181,184,.3);background:rgba(0,181,184,.06)}
+.vag-card h3{font-family:'Outfit';font-weight:400;font-size:24px;line-height:1.2;letter-spacing:-.01em;color:var(--tinta);margin-bottom:12px}
+.vag-card h3 em{font-style:italic;color:var(--azul-atto)}
+.vag-card .vc-cliente{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:18px}
+.vag-card .vc-resumo{font-size:14.5px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:28px;flex:1}
+.vag-card .vc-footer{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--linha)}
+.vag-card .vc-local{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio)}
+.vag-card .vc-cta{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--azul-atto);font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:gap .2s}
+.vag-card:hover .vc-cta{gap:12px;color:var(--teal-atto)}
+
+/* mensagem de "nenhuma vaga aberta" */
+.vag-empty{background:var(--papel-alt);border:1px solid var(--linha);padding:64px 48px;border-radius:2px;text-align:center;display:none}
+.vag-empty.is-on{display:block}
+.vag-empty h3{font-family:'Outfit';font-weight:300;font-size:28px;color:var(--tinta);margin-bottom:14px;letter-spacing:-.01em}
+.vag-empty h3 em{font-style:italic;color:var(--azul-atto)}
+.vag-empty p{font-size:15.5px;line-height:1.65;color:var(--cinza-escuro);max-width:52ch;margin:0 auto 24px}
+
+.vag-banco{margin-top:48px;background:linear-gradient(135deg,rgba(0,181,184,.04) 0%,rgba(26,58,143,.04) 100%);border:1px solid var(--linha);padding:40px 44px;border-radius:2px;display:grid;grid-template-columns:2fr 1fr;gap:40px;align-items:center}
+.vag-banco h3{font-family:'Outfit';font-weight:300;font-size:26px;line-height:1.2;color:var(--tinta);margin-bottom:8px;letter-spacing:-.01em}
+.vag-banco h3 em{font-style:italic;color:var(--azul-atto)}
+.vag-banco p{font-size:15px;line-height:1.6;color:var(--cinza-escuro)}
+.vag-banco .banco-cta{justify-self:end}
+@media (max-width:900px){.vag-list,.vag-head,.vag-banco{grid-template-columns:1fr;gap:24px}.vag-banco .banco-cta{justify-self:start}}
+
+/* ===== "CONHEÇA O MÉTODO" ===== */
+.metodo-link{padding:80px 0 100px;background:var(--papel-alt)}
+.ml-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:center}
+.ml-grid h2{font-family:'Outfit';font-weight:200;font-size:clamp(32px,4vw,48px);line-height:1.1;letter-spacing:-.02em;color:var(--tinta);margin-bottom:20px}
+.ml-grid h2 em{font-style:italic;color:var(--azul-atto)}
+.ml-grid p{font-size:16.5px;line-height:1.7;color:var(--cinza-escuro);margin-bottom:24px;max-width:54ch}
+.ml-grid p strong{color:var(--tinta);font-weight:600}
+.ml-bullets{margin:8px 0 28px;padding:0;list-style:none}
+.ml-bullets li{font-size:15px;line-height:1.65;color:var(--cinza-escuro);padding:10px 0 10px 24px;position:relative;border-bottom:1px solid var(--linha)}
+.ml-bullets li:last-child{border-bottom:0}
+.ml-bullets li::before{content:'';position:absolute;left:0;top:18px;width:14px;height:1px;background:var(--teal-atto)}
+.ml-side{background:#fff;border:1px solid var(--linha);padding:40px;border-radius:2px}
+.ml-side .ml-kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-atto);margin-bottom:18px}
+.ml-side h3{font-family:'Outfit';font-weight:400;font-size:22px;line-height:1.25;color:var(--tinta);margin-bottom:14px;letter-spacing:-.01em}
+.ml-side p{font-size:14.5px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:22px}
+@media (max-width:900px){.ml-grid{grid-template-columns:1fr;gap:40px}}
+
+/* ===== CTA FINAL · overrides específicos ===== */
+.cta-final::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 800px 500px at 80% 50%,rgba(0,181,184,.18),transparent 60%);pointer-events:none}
+.cta-final{position:relative;overflow:hidden}
+.cta-final .container{position:relative}
+.cta-final .cta-kicker{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-atto);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.cta-final .cta-kicker::before{content:"";width:32px;height:1px;background:var(--teal-atto)}
+</style>
+<meta name="author" content="Atto Estratégias & Educação">
+<meta name="theme-color" content="#1A3A8F">
+<link rel="canonical" href="https://www.gestaoatto.com.br/vagas.html">
+<link rel="icon" type="image/png" href="assets/atto_logo_dark_sm.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Atto Estratégias">
+<meta property="og:title" content="Vagas em Aberto · Atto Estratégias">
+<meta property="og:description" content="Vagas em processo conduzidas pela Atto. Posições reais para empresas médias do Sul do Brasil, sob curadoria comportamental e parecer executivo.">
+<meta property="og:url" content="https://www.gestaoatto.com.br/vagas.html">
+<meta property="og:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vagas em Aberto · Atto Estratégias">
+<meta name="twitter:description" content="Vagas em processo conduzidas pela Atto. Posições reais para empresas médias do Sul do Brasil.">
+<meta name="twitter:image" content="https://www.gestaoatto.com.br/assets/atto_logo_dark.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Atto Estratégias & Educação",
+  "url": "https://www.gestaoatto.com.br",
+  "logo": "https://www.gestaoatto.com.br/assets/atto_logo_dark.png",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Caxias do Sul",
+    "addressRegion": "RS",
+    "addressCountry": "BR"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/gestaoatto",
+    "https://www.instagram.com/gestaoatto",
+    "https://www.facebook.com/gestaoatto"
+  ]
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTS41WC8HS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PTS41WC8HS');
+</script>
+<script defer src="assets/atto-events.js"></script>
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<header id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-mark"><img class="logo-light" src="assets/atto_logo_light_sm.png" alt="Atto" /><img class="logo-dark" src="assets/atto_logo_dark_sm.png" alt="Atto" /></a>
+    <nav>
+      <a href="metodo.html">Método</a>
+      <a href="atuacao.html">Atuação</a>
+      <a href="vagas.html" class="is-active">Vagas</a>
+      <a href="perspectivas.html">Perspectivas</a>
+      <a href="sobre.html">A Atto</a>
+      <a href="contato.html#agendar" class="cta-nav">Agende conversa <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- ====== HERO ====== -->
+<section class="vag-hero">
+  <div class="container">
+    <div class="kicker">Atto · Vagas em processo</div>
+    <h1>Posições <em>abertas</em> hoje, conduzidas pela Atto.</h1>
+    <p class="lead">Vagas reais em empresas clientes da Atto, conduzidas pelo método de <strong>curadoria comportamental e parecer executivo</strong>. A candidatura acontece no canal oficial do cliente. A lista é atualizada conforme os processos abrem e fecham.</p>
+  </div>
+</section>
+
+<!-- ====== LISTA DE VAGAS ====== -->
+<section class="vagas">
+  <div class="container">
+    <div class="vag-head">
+      <h2>Vagas em <em>processo</em> hoje.</h2>
+      <p><strong>A candidatura acontece no canal do cliente</strong>: clique em "Candidatar-se" e você é direcionado ao formulário oficial da empresa. A Atto conduz a curadoria; o vínculo formal é com o contratante.</p>
+    </div>
+
+    <!--
+      ============================================================
+      MOTOR DINÂMICO DE VAGAS · Atto
+      ------------------------------------------------------------
+      As vagas reais são lidas em tempo real da planilha publicada
+      do Google Sheets via CSV (atributo data-csv-url abaixo).
+      Mesma planilha usada em /contratacao-estrategica.html — mantém
+      a fonte única de verdade.
+      ------------------------------------------------------------
+      Caso a planilha esteja fora do ar OU vazia, o bloco .vag-empty
+      mais abaixo aparece como mensagem amigável.
+      ============================================================
+    -->
+    <div class="vag-list" data-csv-url="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8Xow6Qf6G6SJ_9NggibiJmdEXGBiX0BMROpp69WuXTAsj5USqtl7qIRgGGSFPrIyS2Mp2G2GfVqE6/pub?gid=1333994151&amp;single=true&amp;output=csv" data-vagas-list>
+      <!-- Cards estáticos como FALLBACK (mesmo padrão de contratacao-estrategica.html).
+           Se a planilha responder, este bloco é substituído pelas vagas reais. -->
+      <a href="#" class="vag-card" target="_blank" rel="noopener">
+        <div class="vc-tags">
+          <span class="vc-tag">Performance Financeira</span>
+          <span class="vc-tag">CLT</span>
+          <span class="vc-tag tag-modalidade">Híbrido</span>
+        </div>
+        <h3>Controller <em>Sênior</em></h3>
+        <div class="vc-cliente">Indústria · Setor metalmecânico</div>
+        <p class="vc-resumo">Liderar o ciclo de fechamento mensal, implantar painel gerencial de margem por cliente e atuar como contraparte técnica do CFO em pricing e custos. Reporte direto à diretoria.</p>
+        <div class="vc-footer">
+          <span class="vc-local">Caxias do Sul / RS</span>
+          <span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a href="#" class="vag-card" target="_blank" rel="noopener">
+        <div class="vc-tags">
+          <span class="vc-tag">Direção Estratégica</span>
+          <span class="vc-tag">PJ</span>
+          <span class="vc-tag tag-modalidade">Presencial</span>
+        </div>
+        <h3>Diretor <em>Comercial</em></h3>
+        <div class="vc-cliente">Distribuição · B2B nacional</div>
+        <p class="vc-resumo">Estruturar a área comercial em rotina semanal, redesenhar a régua de carteiras por representante e instalar o modelo RQS como painel de direção. Sucessão preparada.</p>
+        <div class="vc-footer">
+          <span class="vc-local">Bento Gonçalves / RS</span>
+          <span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a href="#" class="vag-card" target="_blank" rel="noopener">
+        <div class="vc-tags">
+          <span class="vc-tag">Pessoas &amp; Liderança</span>
+          <span class="vc-tag">CLT</span>
+          <span class="vc-tag tag-modalidade">Híbrido</span>
+        </div>
+        <h3>Gerente de <em>RH</em></h3>
+        <div class="vc-cliente">Indústria · Acessórios automotivos</div>
+        <p class="vc-resumo">Construir a arquitetura organizacional da próxima fase, implantar trilhas de liderança e instalar rituais de gestão de pessoas. Atuação direta com sócios.</p>
+        <div class="vc-footer">
+          <span class="vc-local">Farroupilha / RS</span>
+          <span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>
+        </div>
+      </a>
+
+      <a href="#" class="vag-card" target="_blank" rel="noopener">
+        <div class="vc-tags">
+          <span class="vc-tag">Performance Financeira</span>
+          <span class="vc-tag">CLT</span>
+          <span class="vc-tag tag-modalidade">Presencial</span>
+        </div>
+        <h3>Coordenador <em>Financeiro</em></h3>
+        <div class="vc-cliente">Comércio · Distribuição agrícola</div>
+        <p class="vc-resumo">Implantar fluxo de caixa rolante, estruturar conciliação bancária e desenhar painel de capital de giro. Reportar à diretoria semanalmente em rotina estruturada.</p>
+        <div class="vc-footer">
+          <span class="vc-local">Caxias do Sul / RS</span>
+          <span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>
+        </div>
+      </a>
+    </div>
+
+    <!-- mensagem aparece quando o motor confirma 0 vagas abertas -->
+    <div class="vag-empty" data-vagas-empty>
+      <h3>Sem processos <em>abertos</em> no momento.</h3>
+      <p>A Atto não mantém vagas eternas: cada processo tem janela e prazo. No intervalo entre uma posição e outra, o banco de talentos segue ativo sob curadoria da Patrícia. Envie seu material e a Jéssica entra em contato quando a próxima oportunidade alinhar.</p>
+      <a href="mailto:jessica.varela@gestaoatto.com.br?subject=Banco%20de%20talentos%20%C2%B7%20Atto" class="btn-primary">Enviar material <span class="arrow">→</span></a>
+    </div>
+
+    <div class="vag-banco">
+      <div>
+        <h3>Não viu uma vaga aderente ao seu <em>perfil</em>?</h3>
+        <p>Mantemos um banco de profissionais qualificados sob curadoria da Patrícia. Envie o seu material. Quando a próxima oportunidade alinhar, a Jéssica entra em contato.</p>
+      </div>
+      <a href="mailto:jessica.varela@gestaoatto.com.br?subject=Banco%20de%20talentos%20%C2%B7%20Atto" class="btn-primary banco-cta">Enviar material <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONHEÇA O MÉTODO ====== -->
+<section class="metodo-link">
+  <div class="container">
+    <div class="ml-grid">
+      <div>
+        <h2>Como conduzimos uma <em>contratação</em>.</h2>
+        <p>A Atto não é uma agência de currículos. Cada vaga acima nasce de um <strong>Perfil de Sucesso da Vaga (PSV)</strong> desenhado a quatro mãos com o sócio, e termina com um <strong>parecer executivo</strong> técnico, comportamental e de risco sobre cada finalista.</p>
+        <ul class="ml-bullets">
+          <li>Curadoria ativa, não triagem por palavra-chave.</li>
+          <li>Entrevista estruturada com critérios definidos antes da pessoa entrar na sala.</li>
+          <li>Parecer executivo entregue ao contratante na decisão final.</li>
+          <li>Garantia de 60 a 90 dias após assinatura, conforme o modelo aplicado.</li>
+        </ul>
+        <a href="contratacao-estrategica.html" class="btn-ghost">Conhecer o método completo <span class="arrow">→</span></a>
+      </div>
+      <aside class="ml-side">
+        <div class="ml-kicker">Conduz no dia-a-dia</div>
+        <h3>Jéssica <em>Varela</em></h3>
+        <p>Consultora de Recrutamento &amp; Seleção. Ponto de contato para vagas e banco de talentos. Conduz triagem ativa, agenda das entrevistas estruturadas e relação direta com candidatos finalistas.</p>
+        <a href="mailto:jessica.varela@gestaoatto.com.br" class="btn-ghost" style="font-size:13px">Falar com a Jéssica <span class="arrow">→</span></a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CTA FINAL ====== -->
+<section class="cta-final">
+  <div class="container">
+    <div class="cta-kicker">Para empresas que precisam contratar</div>
+    <h2>Vamos fazer o <em>alinhamento</em> da sua próxima vaga?</h2>
+    <p>30 minutos com a Patrícia, sob sigilo, para entender a posição que está na mesa, mapear o risco e propor o modelo certo. Sem proposta comercial disfarçada. Conversa técnica.</p>
+    <div class="actions">
+      <a href="contato.html#agendar" class="btn-primary">Agendar conversa <span class="arrow">→</span></a>
+      <a href="contratacao-estrategica.html" class="btn-ghost">Ver o método <span class="arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="index.html" class="footer-logo"><img src="assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p></div>
+      <div class="footer-col"><h5>Método</h5><ul><li><a href="metodo.html">Como trabalhamos</a></li><li><a href="diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="rotina-mensal.html">Rotina mensal</a></li></ul></div>
+      <div class="footer-col"><h5>Soluções</h5><ul><li><a href="direcao-estrategica.html">Direção Estratégica</a></li><li><a href="performance-financeira.html">Performance Financeira</a></li><li><a href="pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="governanca-ma.html">Governança &amp; M&amp;A</a></li><li><a href="contratacao-estrategica.html">Contratação Estratégica</a></li></ul></div>
+      <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="vagas.html">Vagas</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
+      <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="newsletter.html">Newsletter</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="politica-privacidade.html">Política de privacidade</a> · <a href="termos-uso.html">Termos</a></div></div>
+  </div>
+</footer>
+<script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.vag-hero,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
+
+<!-- ============================================================
+     MOTOR DINÂMICO DE VAGAS · lê CSV publicado do Google Sheets
+     (cópia 1:1 do motor de contratacao-estrategica.html — mesma planilha,
+      mesmo cache key. Mantém fonte única de vagas no site.)
+     ============================================================ -->
+<script>
+(function(){
+  var list = document.querySelector('[data-vagas-list]');
+  var empty = document.querySelector('[data-vagas-empty]');
+  if(!list) return;
+  var url = (list.getAttribute('data-csv-url') || '').trim();
+  if(!url) return;
+
+  var CACHE_KEY = 'atto_vagas_v1';
+  var CACHE_TTL = 5 * 60 * 1000; // 5 min
+
+  function parseCSV(text){
+    var rows = [], cur = '', row = [], q = false;
+    for(var i = 0; i < text.length; i++){
+      var ch = text[i], nx = text[i+1];
+      if(ch === '"' && q && nx === '"'){ cur += '"'; i++; continue; }
+      if(ch === '"'){ q = !q; continue; }
+      if(ch === ',' && !q){ row.push(cur); cur = ''; continue; }
+      if((ch === '\n' || ch === '\r') && !q){
+        if(ch === '\r' && nx === '\n') i++;
+        row.push(cur); cur = '';
+        if(row.some(function(c){ return c && c.trim(); })) rows.push(row);
+        row = [];
+        continue;
+      }
+      cur += ch;
+    }
+    if(cur.length || row.length){
+      row.push(cur);
+      if(row.some(function(c){ return c && c.trim(); })) rows.push(row);
+    }
+    if(rows.length < 2) return [];
+    var headers = rows[0].map(function(h){ return h.trim().toLowerCase(); });
+    return rows.slice(1).map(function(r){
+      var o = {};
+      headers.forEach(function(h, i){ o[h] = (r[i] || '').trim(); });
+      return o;
+    });
+  }
+
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function fmtTitulo(t){
+    var safe = esc(t);
+    var parts = safe.split(/\s+/);
+    if(parts.length < 2) return safe;
+    var last = parts.pop();
+    return parts.join(' ') + ' <em>' + last + '</em>';
+  }
+
+  function renderCard(v){
+    var area      = v['area']        || v['área']        || '';
+    var contrato  = v['contrato']    || v['tipo']        || '';
+    var modalid   = v['modalidade']  || '';
+    var titulo    = v['titulo']      || v['título']      || v['vaga']  || '';
+    var cliente   = v['cliente']     || '';
+    var resumo    = v['resumo']      || v['descricao']   || v['descrição'] || '';
+    var local     = v['local']       || v['localizacao'] || v['localização'] || '';
+    var link      = v['link']        || v['url']         || '#';
+
+    var tags = '';
+    if(area)     tags += '<span class="vc-tag">' + esc(area) + '</span>';
+    if(contrato) tags += '<span class="vc-tag">' + esc(contrato) + '</span>';
+    if(modalid)  tags += '<span class="vc-tag tag-modalidade">' + esc(modalid) + '</span>';
+
+    return '' +
+      '<a href="' + esc(link) + '" class="vag-card" target="_blank" rel="noopener">' +
+        '<div class="vc-tags">' + tags + '</div>' +
+        '<h3>' + fmtTitulo(titulo) + '</h3>' +
+        '<div class="vc-cliente">' + esc(cliente) + '</div>' +
+        '<p class="vc-resumo">' + esc(resumo) + '</p>' +
+        '<div class="vc-footer">' +
+          '<span class="vc-local">' + esc(local) + '</span>' +
+          '<span class="vc-cta">Candidatar-se <span class="arrow">→</span></span>' +
+        '</div>' +
+      '</a>';
+  }
+
+  function paint(vagas){
+    var abertas = vagas.filter(function(v){
+      var st = (v['status'] || '').toLowerCase();
+      return st === 'aberta' || st === 'aberto' || st === 'ativa' || st === 'ativo';
+    });
+    if(!abertas.length){
+      // 0 vagas abertas confirmadas pela planilha → esconde grid e banco, mostra empty
+      list.style.display = 'none';
+      var banco = document.querySelector('.vag-banco');
+      if(banco) banco.style.display = 'none';
+      if(empty) empty.classList.add('is-on');
+      return;
+    }
+    list.style.display = '';
+    var banco = document.querySelector('.vag-banco');
+    if(banco) banco.style.display = '';
+    if(empty) empty.classList.remove('is-on');
+    list.innerHTML = abertas.map(renderCard).join('');
+  }
+
+  function readCache(){
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if(!raw) return null;
+      var obj = JSON.parse(raw);
+      if(!obj || (Date.now() - obj.t) > CACHE_TTL) return null;
+      return obj.v;
+    } catch(e){ return null; }
+  }
+  function writeCache(v){
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify({t: Date.now(), v: v})); } catch(e){}
+  }
+
+  var cached = readCache();
+  if(cached) paint(cached);
+
+  fetch(url, {cache: 'no-store'})
+    .then(function(r){ return r.ok ? r.text() : Promise.reject(r.status); })
+    .then(function(txt){
+      var vagas = parseCSV(txt);
+      writeCache(vagas);
+      paint(vagas);
+    })
+    .catch(function(e){ console.warn('[Atto Vagas] Falha ao ler planilha:', e); });
+})();
+</script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
