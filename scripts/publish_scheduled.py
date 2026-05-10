@@ -9,15 +9,16 @@ subsequentes.
 
 Operações por post ativado:
   1. Remove `<meta name="robots" content="noindex,nofollow"><!-- SCHEDULED:DATE -->`
-     do HTML do post em site/perspectivas/<slug>.html.
-  2. Insere card no site/perspectivas.html dentro do bloco
-     <!-- SCHEDULED-POSTS-START --> ... <!-- SCHEDULED-POSTS-END -->
-     (em ordem cronológica reversa: post mais novo no topo).
-  3. Insere URL no site/sitemap.xml dentro do bloco
+     do HTML do post em site/perspectivas/<slug>.html. (libera indexação)
+  2. Insere URL no site/sitemap.xml dentro do bloco
      <!-- SCHEDULED-SITEMAP-START --> ... <!-- SCHEDULED-SITEMAP-END -->.
+  3. Atualiza a navegação cronológica (post-nav) entre o post atual e o anterior.
+  4. Atualiza o bloco "Em destaque" (POSTS:FEATURE) em site/perspectivas.html.
 
-O cartão segue o padrão da grade publicada (âncora com background-image
-apontando pra capa hero gerada por scripts/capas.py).
+⚠️ A inserção do card no grid de perspectivas.html foi REMOVIDA.
+O grid agora é renderizado dinamicamente por assets/perspectivas-grid.js
+a partir de perspectivas-data.json (mesma fonte da home), o que elimina
+o descompasso histórico quando o cron desta action atrasava ou falhava.
 
 Uso:
   python3 scripts/publish_scheduled.py            # usa data de hoje
@@ -44,8 +45,6 @@ PERSPECTIVAS_DIR = SITE / "perspectivas"
 DATA_JSON = SITE / "perspectivas-data.json"
 REGISTRY = REPO_ROOT / "scripts" / "scheduled_posts.json"
 
-CARD_MARK_START = "<!-- SCHEDULED-POSTS-START"
-CARD_MARK_END = "<!-- SCHEDULED-POSTS-END -->"
 SITEMAP_MARK_START = "<!-- SCHEDULED-SITEMAP-START"
 SITEMAP_MARK_END = "<!-- SCHEDULED-SITEMAP-END -->"
 FEATURE_MARK_START = "<!-- POSTS:FEATURE_START -->"
@@ -76,24 +75,6 @@ def load_registry() -> list[dict]:
     return data["scheduled"]
 
 
-def card_html(post: dict) -> str:
-    """Gera o cartão no formato da grade publicada (âncora com background-image
-    apontando pra capa hero gerada por scripts/capas.py).
-    """
-    slug = post["slug"]
-    return (
-        f'      <a href="perspectivas/{slug}.html" class="persp-card" '
-        f'data-publish-date="{post["publish_date"]}">\n'
-        f'        <div class="persp-card-img {post["tag_class"]}" '
-        f"style=\"background-image:url('assets/capas/{slug}_hero.png');"
-        f'background-size:cover;background-position:center"><span class="tag">{post["tag"]}</span></div>\n'
-        f'        <div class="persp-card-meta"><span>{post["minutes"]} min</span><span>{post["month"]} · {post["year"]}</span></div>\n'
-        f'        <h3>{post["h3"]}</h3>\n'
-        f'        <p>{post["summary"]}</p>\n'
-        f'        <span class="author">{post["author"]}</span>\n'
-        f"      </a>"
-    )
-
 
 def sitemap_url_html(post: dict) -> str:
     return (
@@ -105,27 +86,10 @@ def sitemap_url_html(post: dict) -> str:
     )
 
 
-def is_card_present(perspectivas_text: str, slug: str) -> bool:
-    return f"perspectivas/{slug}.html" in perspectivas_text
-
 
 def is_sitemap_present(sitemap_text: str, slug: str) -> bool:
     return f"perspectivas/{slug}.html" in sitemap_text
 
-
-def insert_card(perspectivas_text: str, post: dict) -> str:
-    """Insere o card logo após a linha do START marker (post mais novo no topo)."""
-    start_idx = perspectivas_text.find(CARD_MARK_START)
-    if start_idx == -1:
-        raise RuntimeError("CARD_MARK_START não encontrado em site/perspectivas.html")
-    eol = perspectivas_text.find("\n", start_idx)
-    block = card_html(post)
-    return (
-        perspectivas_text[: eol + 1]
-        + block
-        + "\n"
-        + perspectivas_text[eol + 1 :]
-    )
 
 
 def insert_sitemap(sitemap_text: str, post: dict) -> str:
@@ -281,12 +245,14 @@ def main() -> int:
             print(f"AVISO: arquivo {post_path} não existe — pulando {slug}", file=sys.stderr)
             continue
 
-        already_in_index = is_card_present(perspectivas_text, slug)
+        # NOTE: já não verificamos `already_in_index` (card no grid) porque o
+        # grid passou a ser renderizado dinamicamente. O critério de publicação
+        # agora depende apenas do sitemap + remoção do noindex.
         already_in_sitemap = is_sitemap_present(sitemap_text, slug)
         post_html = post_path.read_text(encoding="utf-8")
         has_noindex = bool(NOINDEX_RE.search(post_html))
 
-        if already_in_index and already_in_sitemap and not has_noindex:
+        if already_in_sitemap and not has_noindex:
             skipped.append(f"{slug} (já publicado)")
             continue
 
@@ -295,15 +261,12 @@ def main() -> int:
             post_html = remove_noindex(post_html)
             post_path.write_text(post_html, encoding="utf-8")
 
-        # 2. Insere card
-        if not already_in_index:
-            perspectivas_text = insert_card(perspectivas_text, post)
-
-        # 3. Insere URL no sitemap
+        # 2. Insere URL no sitemap (a inserção do card foi removida —
+        # agora o grid é dinâmico via assets/perspectivas-grid.js)
         if not already_in_sitemap:
             sitemap_text = insert_sitemap(sitemap_text, post)
 
-        # 4. Atualiza navegação cronológica:
+        # 3. Atualiza navegação cronológica:
         #    a) Post atual: prev = post publicado anterior, next = nenhum
         #    b) Post anterior: ganha "Próximo post → post atual"
         prev = find_previous_published(slug)
@@ -335,7 +298,7 @@ def main() -> int:
                     next_title=post.get("h3", ""),
                 )
 
-        # 5. Atualiza o bloco "Em destaque" para o post mais recente.
+        # 4. Atualiza o bloco "Em destaque" para o post mais recente.
         # update_feature_block agora opera só em memória — a persistência
         # acontece no bloco final, junto com o card e o sitemap.
         perspectivas_text = update_feature_block(perspectivas_text, post)

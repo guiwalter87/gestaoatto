@@ -7,7 +7,9 @@
     "categoria": "Indústria",
     "data": "2026-05-16",
     "excerpt": "Pilotos pagos, treinamentos feitos, ferramentas contratadas e o ROI ainda não chegou na mesa. Onde a IA já gera retorno e o método que separa piloto de transformação.",
-    "leitura": "12 min"
+    "leitura": "12 min",
+    "tag_class": "img-teal",
+    "autor": "Por Juliano Walter"
   },
   {
     "slug": "valuation-middle-market-multiplo-earn-out-2026",
@@ -17,7 +19,9 @@
     "categoria": "M&A",
     "data": "2026-05-13",
     "excerpt": "Mercado aquecido, comprador mais técnico. Onde o múltiplo é construído, por que o earn out virou regra e o que o sócio precisa preparar antes de abrir o processo.",
-    "leitura": "14 min"
+    "leitura": "14 min",
+    "tag_class": "img-roxo",
+    "autor": "Por Guilherme Walter"
   },
   {
     "slug": "selic-alta-fpa-pequena-media-empresa-2026",
@@ -27,7 +31,9 @@
     "categoria": "Performance",
     "data": "2026-05-09",
     "excerpt": "Em ciclo de juros elevados, o orçamento anual deixou de proteger. Por que a rotina de FP&A precisa migrar para horizonte semanal, sensibilidade obrigatória e renegociação antes do estresse.",
-    "leitura": "10 min"
+    "leitura": "10 min",
+    "tag_class": "img-blue",
+    "autor": "Por Juliano Walter"
   },
   {
     "slug": "reforma-tributaria-pequenas-e-medias-empresas-2026",
@@ -37,7 +43,9 @@
     "categoria": "Direção",
     "data": "2026-05-06",
     "excerpt": "CBS e IBS entraram em cobrança simbólica. O que precisa ser feito agora em precificação, contrato, ERP e cadastro fiscal para chegar a 2027 sem perder margem.",
-    "leitura": "13 min"
+    "leitura": "13 min",
+    "tag_class": "img-dark",
+    "autor": "Por Guilherme Walter"
   },
   {
     "slug": "contratar-gente-engajada-pequenas-e-medias-empresas",
@@ -47,7 +55,9 @@
     "categoria": "Pessoas",
     "data": "2026-05-02",
     "excerpt": "Recrutamento e seleção em 2026 não é mais operação de busca, é operação de proposta. Por que a empresa pequena e média perde o profissional bom antes mesmo da entrevista.",
-    "leitura": "11 min"
+    "leitura": "11 min",
+    "tag_class": "img-paper",
+    "autor": "Por Patrícia Misturini"
   },
   {
     "slug": "governanca-subcontratada-valuation",
@@ -57,7 +67,9 @@
     "categoria": "Governança",
     "data": "2026-04-10",
     "excerpt": "O corte recorrente de valuation vem sempre da mesma região do balanço: ausência de conselho, acordo de sócios frágil e DRE gerencial que não resiste à due diligence.",
-    "leitura": "12 min"
+    "leitura": "12 min",
+    "tag_class": "img-teal",
+    "autor": "Por Guilherme Walter"
   },
   {
     "slug": "rqs-metrica-empresa-media",
@@ -67,7 +79,9 @@
     "categoria": "Performance",
     "data": "2026-04-02",
     "excerpt": "A diferença entre crescer e crescer bem aparece no corte de receita por qualidade — margem, pulverização, recorrência e mix.",
-    "leitura": "8 min"
+    "leitura": "8 min",
+    "tag_class": "img-blue",
+    "autor": "Por Juliano Walter"
   },
   {
     "slug": "conselho-consultivo-empresa-media",
@@ -77,7 +91,9 @@
     "categoria": "Governança",
     "data": "2026-03-22",
     "excerpt": "O conselho bem desenhado resolve três problemas ao mesmo tempo: solidão do sócio, falta de mesa de decisão e preparação para eventos de M&A.",
-    "leitura": "14 min"
+    "leitura": "14 min",
+    "tag_class": "img-teal",
+    "autor": "Por Guilherme Walter"
   },
   {
     "slug": "arquitetura-humana-consequencia-estrategia",
@@ -87,7 +103,9 @@
     "categoria": "Pessoas",
     "data": "2026-03-10",
     "excerpt": "Por que organograma redesenhado sem passar pela estratégia é perda de tempo. Como abordar o problema na ordem correta — a partir das frentes dos próximos 24 meses.",
-    "leitura": "10 min"
+    "leitura": "10 min",
+    "tag_class": "img-paper",
+    "autor": "Por Patrícia Misturini"
   },
   {
     "slug": "pre-ma-multiplo-construido",
@@ -97,7 +115,9 @@
     "categoria": "M&A",
     "data": "2026-02-18",
     "excerpt": "A fase que todo mundo subestima. Do que consiste a preparação técnica para venda, por que ela muda o valuation e quanto tempo leva para ser feita direito.",
-    "leitura": "12 min"
+    "leitura": "12 min",
+    "tag_class": "img-roxo",
+    "autor": "Por Guilherme Walter"
   },
   {
     "slug": "socio-refem-agenda-direcao",
@@ -107,7 +127,9 @@
     "categoria": "Direção",
     "data": "2026-02-05",
     "excerpt": "O momento em que todo sócio bem-sucedido percebe que virou refém do próprio negócio. E o que é preciso instalar para que a empresa ande sem ele na sala.",
-    "leitura": "10 min"
+    "leitura": "10 min",
+    "tag_class": "img-dark",
+    "autor": "Por Guilherme Walter"
   },
   {
     "slug": "familia-sociedade-gestao-tres-circulos",
@@ -117,6 +139,8 @@
     "categoria": "Sucessão",
     "data": "2026-01-24",
     "excerpt": "O protocolo familiar não é burocracia cartorial. É o documento que permite à família conversar sobre dinheiro, poder e afeto sem misturar os três.",
-    "leitura": "12 min"
+    "leitura": "12 min",
+    "tag_class": "img-warm",
+    "autor": "Por Patrícia Misturini"
   }
 ]
