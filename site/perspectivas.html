@@ -130,7 +130,11 @@
 <section class="persp-feature">
   <div class="container">
     <!-- POSTS:FEATURE_START -->
-    <div class="persp-feature-grid">
+    <!-- ⚠️ FONTE ÚNICA: bloco renderizado por assets/perspectivas-feature.js
+         a partir de perspectivas-data.json. O conteúdo abaixo é fallback
+         estático (SEO / no-JS) — pode ficar desatualizado, o JS sempre
+         sobrescreve com o post publicado mais recente. -->
+    <div class="persp-feature-grid" id="persp-feature">
       <div class="persp-feature-body">
         <div class="kicker" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase">Em destaque · Mai · 2026</div>
         <div class="meta">
@@ -282,6 +286,7 @@
 <script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();
 document.querySelectorAll('.persp-chip').forEach(c=>c.addEventListener('click',function(){document.querySelectorAll('.persp-chip').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));})();</script>
 <script src="assets/site.js" defer></script>
+<script src="assets/perspectivas-feature.js" defer></script>
 <script src="assets/perspectivas-grid.js" defer></script>
 </body>
 </html>
