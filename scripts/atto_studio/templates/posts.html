@@ -17,13 +17,9 @@
 
 <div class="posts-list">
   {% for p in posts %}
-  <article class="post-row" data-status="{{ p.status }}">
+  <article class="post-row" data-status="{{ p.status }}" data-slug="{{ p.slug }}" data-numero="{{ p.numero }}">
     <div class="post-row-img">
-      {% if p.status == 'published' %}
-        <img src="/api/capa/{{ p.slug }}/hero" alt="" loading="lazy" onerror="this.style.display='none'" />
-      {% else %}
-        <span class="ph">no preview</span>
-      {% endif %}
+      <img src="/api/capa/{{ p.slug }}/hero" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph',textContent:'no preview'}))" />
     </div>
     <div class="post-row-body">
       <div class="post-row-meta">
@@ -35,17 +31,62 @@
         <span class="cat">{{ p.categoria }}</span>
         <span class="date">{{ p.data or p.publish_date or '?' }}</span>
         <span class="reading">{{ p.leitura or '' }}</span>
+        {% if p.numero %}<span class="num">#{{ p.numero }}</span>{% endif %}
       </div>
       <h3>{{ p.titulo or p.h3 or p.slug }}</h3>
       {% if p.excerpt %}<p class="excerpt">{{ p.excerpt }}</p>{% endif %}
     </div>
     <div class="post-row-actions">
-      <a href="https://www.gestaoatto.com.br/perspectivas/{{ p.slug }}.html" target="_blank" rel="noopener" class="btn-ghost btn-mini">Ver no site</a>
-      <button class="btn-ghost btn-mini" onclick="regenCover('{{ p.slug }}')">Regenerar capa</button>
+      <a href="/api/preview/{{ p.slug }}" target="_blank" rel="noopener" class="btn-ghost btn-mini" title="Preview local renderizado">Preview</a>
+      <a href="https://www.gestaoatto.com.br/perspectivas/{{ p.slug }}.html" target="_blank" rel="noopener" class="btn-ghost btn-mini" title="Versão publicada no site">Site</a>
+      <button class="btn-ghost btn-mini" onclick="editPost('{{ p.slug }}')" title="Editar título, corpo e metadados">Editar</button>
+      <button class="btn-ghost btn-mini" onclick="reschedulePost('{{ p.slug }}', '{{ p.data or p.publish_date or '' }}')" title="Mudar data de publicação">Reagendar</button>
+      <button class="btn-ghost btn-mini" onclick="regenCover('{{ p.slug }}')" title="Regerar as 4 capas">Capas</button>
+      {% if p.status == 'scheduled' %}
+      <button class="btn-ghost btn-mini btn-publish" onclick="publishNow('{{ p.slug }}', '#{{ p.numero }}')" title="Publicar agora (remove noindex)">Publicar agora</button>
+      {% endif %}
+      <button class="btn-ghost btn-mini btn-danger" onclick="deletePost('{{ p.slug }}', '#{{ p.numero }}')" title="Excluir permanentemente">Excluir</button>
     </div>
   </article>
   {% endfor %}
 </div>
+
+<!-- Modal: Reschedule -->
+<dialog id="rescheduleDialog" class="atto-dialog">
+  <h3>Reagendar publicação</h3>
+  <p class="lead">Mudando a data: <strong id="rescheduleSlugLabel"></strong></p>
+  <label>
+    Nova data
+    <input type="date" id="rescheduleDate" />
+  </label>
+  <div class="dialog-actions">
+    <button class="btn-ghost" onclick="document.getElementById('rescheduleDialog').close()">Cancelar</button>
+    <button class="btn-primary" id="rescheduleConfirm">Reagendar</button>
+  </div>
+</dialog>
+
+<!-- Modal: Delete confirmation -->
+<dialog id="deleteDialog" class="atto-dialog">
+  <h3>Confirmar exclusão</h3>
+  <p class="lead">Você está prestes a <strong>excluir permanentemente</strong> a Perspectiva <strong id="deleteNumLabel"></strong>.</p>
+  <p>Isso vai apagar: HTML do post, 4 capas (hero, og, ig-feed, ig-story), entrada em <code>perspectivas-data.json</code>, entrada em <code>scheduled_posts.json</code> e a fonte markdown preservada.</p>
+  <p>Esta ação <strong>não pode ser desfeita</strong>.</p>
+  <div class="dialog-actions">
+    <button class="btn-ghost" onclick="document.getElementById('deleteDialog').close()">Cancelar</button>
+    <button class="btn-danger" id="deleteConfirm">Excluir permanentemente</button>
+  </div>
+</dialog>
+
+<!-- Modal: Publish now confirmation -->
+<dialog id="publishDialog" class="atto-dialog">
+  <h3>Publicar agora?</h3>
+  <p class="lead">Você está prestes a publicar <strong id="publishNumLabel"></strong> imediatamente.</p>
+  <p>A data será mudada para hoje, o meta <code>noindex</code> será removido e o post ficará indexável pelo Google assim que você fizer git push.</p>
+  <div class="dialog-actions">
+    <button class="btn-ghost" onclick="document.getElementById('publishDialog').close()">Cancelar</button>
+    <button class="btn-primary" id="publishConfirm">Publicar agora</button>
+  </div>
+</dialog>
 {% endblock %}
 
 {% block scripts %}

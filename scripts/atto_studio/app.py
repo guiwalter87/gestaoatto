@@ -57,6 +57,9 @@ DATA_JSON = SITE / "perspectivas-data.json"
 SCHEDULED_JSON = SCRIPTS_DIR / "scheduled_posts.json"
 CAPAS_DIR = SITE / "assets" / "capas"
 TEMPLATE_HTML = STUDIO_DIR / "post_template.html"
+# Fonte markdown preservada de cada post (para suportar edit limpo)
+SOURCES_DIR = STUDIO_DIR / "sources"
+SOURCES_DIR.mkdir(exist_ok=True)
 
 CAPAS_PY = SCRIPTS_DIR / "capas.py"
 PATCH_PY = SCRIPTS_DIR / "patch_posts.py"
@@ -159,6 +162,70 @@ def load_scheduled() -> dict:
 def save_scheduled(reg: dict) -> None:
     SCHEDULED_JSON.write_text(json.dumps(reg, ensure_ascii=False, indent=2),
                               encoding="utf-8")
+
+
+def source_path(slug: str) -> Path:
+    """Caminho do arquivo de fonte markdown (preservado para edição)."""
+    return SOURCES_DIR / f"{slug}.json"
+
+
+def save_source(slug: str, body: str, sources: str = "") -> None:
+    """Salva a fonte markdown do post para suportar edição posterior."""
+    payload = {"slug": slug, "body": body, "sources": sources,
+               "saved_at": datetime.now(timezone(timedelta(hours=-3))).isoformat()}
+    source_path(slug).write_text(json.dumps(payload, ensure_ascii=False, indent=2),
+                                  encoding="utf-8")
+
+
+def load_source(slug: str) -> dict | None:
+    """Carrega a fonte markdown do post se preservada.
+
+    Para posts legados (sem source preservada), tenta extrair do HTML.
+    Retorna None se não conseguir.
+    """
+    sp = source_path(slug)
+    if sp.exists():
+        try:
+            return json.loads(sp.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    # fallback: tentar reconstruir markdown a partir do HTML existente
+    post_path = PERSPECTIVAS_DIR / f"{slug}.html"
+    if not post_path.exists():
+        return None
+    html = post_path.read_text(encoding="utf-8")
+    m = re.search(r'<div class="post-body">(.*?)</div>\s*(?:<div class="post-sources">|<div class="post-share">|<div class="post-footer">)',
+                  html, re.DOTALL)
+    if not m:
+        return None
+    inner = m.group(1)
+    inner = re.sub(r'<h2[^>]*>(.*?)</h2>', r'## \1\n', inner, flags=re.DOTALL)
+    inner = re.sub(r'<h3[^>]*>(.*?)</h3>', r'### \1\n', inner, flags=re.DOTALL)
+    inner = re.sub(r'<strong[^>]*>(.*?)</strong>', r'**\1**', inner, flags=re.DOTALL)
+    inner = re.sub(r'<em[^>]*>(.*?)</em>', r'*\1*', inner, flags=re.DOTALL)
+    inner = re.sub(r'<p[^>]*>(.*?)</p>', r'\1\n\n', inner, flags=re.DOTALL)
+    inner = re.sub(r'<li[^>]*>(.*?)</li>', r'- \1\n', inner, flags=re.DOTALL)
+    inner = re.sub(r'<[^>]+>', '', inner)
+    body = inner.strip()
+    # Sources
+    sources = ""
+    ms = re.search(r'<div class="post-sources">.*?<h2[^>]*>[^<]*</h2>(.*?)</div>', html, re.DOTALL)
+    if ms:
+        s = ms.group(1)
+        s = re.sub(r'<p[^>]*>(.*?)</p>', r'\1\n\n', s, flags=re.DOTALL)
+        s = re.sub(r'<[^>]+>', '', s)
+        sources = s.strip()
+    return {"slug": slug, "body": body, "sources": sources, "fallback": True}
+
+
+def delete_source(slug: str) -> None:
+    """Remove a fonte markdown do post."""
+    sp = source_path(slug)
+    if sp.exists():
+        try:
+            sp.unlink()
+        except Exception:
+            pass
 
 
 def post_status(slug: str, publish_date: str | None) -> str:
@@ -369,12 +436,37 @@ def run_git(args: list[str]) -> tuple[bool, str]:
 # ============================================================
 @app.route("/")
 def page_new():
+    """Form de criação ou edição de Perspectiva.
+
+    Se receber ?edit=SLUG, carrega o post existente e renderiza em modo edição.
+    """
+    edit_slug = request.args.get("edit", "").strip()
+    edit_data = None
+    if edit_slug:
+        data = load_data()
+        post = next((p for p in data if p.get("slug") == edit_slug), None)
+        if post:
+            src = load_source(edit_slug) or {"body": "", "sources": ""}
+            edit_data = {
+                "slug": edit_slug,
+                "numero": post.get("numero", ""),
+                "titulo": post.get("titulo", ""),
+                "titulo_curto": post.get("titulo_curto", ""),
+                "categoria": post.get("categoria", ""),
+                "data": post.get("data", ""),
+                "minutes": int(re.sub(r"[^0-9]", "", post.get("leitura", "10 min")) or "10"),
+                "excerpt": post.get("excerpt", ""),
+                "body": src.get("body", ""),
+                "sources": src.get("sources", ""),
+                "fallback": src.get("fallback", False),
+            }
     return render_template(
         "new.html",
         categorias=CATEGORIAS,
         tag_class=TAG_CLASS,
         autores=list(AUTORES.keys()),
         today=today_brt().isoformat(),
+        edit_data=edit_data,
     )
 
 
@@ -453,6 +545,9 @@ def api_create():
                             scheduled_for=data_iso if (scheduled and is_future) else None)
     post_path = PERSPECTIVAS_DIR / f"{slug}.html"
     post_path.write_text(html, encoding="utf-8")
+
+    # 1b) Preserva a fonte markdown para edição futura
+    save_source(slug, body, sources)
 
     # 2) Atualiza perspectivas-data.json
     data = load_data()
@@ -662,6 +757,501 @@ def api_capa(slug: str, format: str):
 @app.get("/api/posts")
 def api_posts():
     return jsonify(merge_posts())
+
+
+# ============================================================
+# ROUTES — gerenciamento avançado (v2)
+# ============================================================
+@app.post("/api/delete/<slug>")
+def api_delete(slug: str):
+    """Apaga completamente um post: HTML, capas (4), entradas em JSON e fonte."""
+    data = load_data()
+    post = next((p for p in data if p.get("slug") == slug), None)
+    if not post:
+        return jsonify({"ok": False, "error": "Post não encontrado."}), 404
+
+    removed = []
+    # 1) HTML
+    post_path = PERSPECTIVAS_DIR / f"{slug}.html"
+    if post_path.exists():
+        try:
+            post_path.unlink()
+            removed.append(post_path.name)
+        except Exception as e:
+            return jsonify({"ok": False, "error": f"Falha ao remover HTML: {e}"}), 500
+
+    # 2) Capas (4 variantes)
+    for variant in ("hero", "og", "ig-feed", "ig-story"):
+        cp = CAPAS_DIR / f"{slug}_{variant}.png"
+        if cp.exists():
+            try:
+                cp.unlink()
+                removed.append(cp.name)
+            except Exception:
+                pass
+
+    # 3) perspectivas-data.json
+    new_data = [p for p in data if p.get("slug") != slug]
+    save_data(new_data)
+
+    # 4) scheduled_posts.json
+    reg = load_scheduled()
+    reg["scheduled"] = [s for s in reg.get("scheduled", []) if s.get("slug") != slug]
+    save_scheduled(reg)
+
+    # 5) Fonte markdown
+    delete_source(slug)
+    removed.append(f"sources/{slug}.json")
+
+    return jsonify({
+        "ok": True,
+        "slug": slug,
+        "removed_files": removed,
+        "numero": post.get("numero"),
+        "message": f"Post #{post.get('numero')} ({slug}) removido. {len(removed)} arquivos apagados.",
+    })
+
+
+@app.post("/api/edit/<slug>")
+def api_edit(slug: str):
+    """Edita um post existente. Aceita qualquer subconjunto dos campos:
+    titulo, titulo_curto, categoria, data, author, minutes, excerpt, body, sources.
+    Preserva o número original da Perspectiva.
+    Re-renderiza HTML, atualiza JSONs e regenera capa.
+    """
+    p = request.json or {}
+    data = load_data()
+    post = next((x for x in data if x.get("slug") == slug), None)
+    if not post:
+        return jsonify({"ok": False, "error": "Post não encontrado."}), 404
+
+    # Carrega fonte atual para usar como base
+    src = load_source(slug) or {"body": "", "sources": ""}
+
+    # Campos atualizáveis (com fallback para o valor atual)
+    titulo = (p.get("titulo") or post.get("titulo", "")).strip()
+    titulo_curto = (p.get("titulo_curto") or post.get("titulo_curto") or titulo).strip()
+    categoria = p.get("categoria") or post.get("categoria", "")
+    data_iso = p.get("data") or post.get("data", "")
+    author = p.get("author") or post.get("author", "")
+    minutes_raw = p.get("minutes", post.get("leitura", "10 min"))
+    if isinstance(minutes_raw, str):
+        minutes = int(re.sub(r"[^0-9]", "", minutes_raw) or "10")
+    else:
+        minutes = int(minutes_raw)
+    excerpt = (p.get("excerpt") or post.get("excerpt", "")).strip()
+    body = p.get("body") if p.get("body") is not None else src.get("body", "")
+    sources = p.get("sources") if p.get("sources") is not None else src.get("sources", "")
+
+    # Valida data
+    try:
+        pdate = datetime.strptime(data_iso, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"ok": False, "error": "Data inválida (use YYYY-MM-DD)."}), 400
+    is_future = pdate > today_brt()
+
+    meta = {
+        "slug": slug,
+        "titulo": titulo,
+        "titulo_curto": titulo_curto,
+        "categoria": categoria,
+        "data": data_iso,
+        "minutes": minutes,
+        "excerpt": excerpt,
+        "author": author,
+    }
+
+    # 1) Re-renderiza HTML
+    html = render_post_html(meta, body, sources,
+                            scheduled_for=data_iso if is_future else None)
+    post_path = PERSPECTIVAS_DIR / f"{slug}.html"
+    post_path.write_text(html, encoding="utf-8")
+
+    # 1b) Atualiza fonte preservada
+    save_source(slug, body, sources)
+
+    # 2) Atualiza perspectivas-data.json PRESERVANDO o numero
+    numero = post.get("numero")
+    new_data = [x for x in data if x.get("slug") != slug]
+    new_entry = {
+        "slug": slug,
+        "numero": numero,
+        "titulo": titulo,
+        "titulo_curto": titulo_curto,
+        "categoria": categoria,
+        "data": data_iso,
+        "excerpt": excerpt,
+        "leitura": f"{minutes} min",
+    }
+    # Mantém ordem por número desc
+    new_data.append(new_entry)
+    new_data.sort(key=lambda x: int(x.get("numero", 0)), reverse=True)
+    save_data(new_data)
+
+    # 3) Atualiza scheduled_posts.json se for futuro
+    reg = load_scheduled()
+    reg.setdefault("scheduled", [])
+    reg["scheduled"] = [s for s in reg["scheduled"] if s.get("slug") != slug]
+    if is_future:
+        mes_label, ano = fmt_date_card(data_iso)
+        reg["scheduled"].append({
+            "slug": slug,
+            "publish_date": data_iso,
+            "tag": categoria,
+            "tag_class": TAG_CLASS.get(categoria, "img-blue"),
+            "minutes": minutes,
+            "month": mes_label,
+            "year": ano,
+            "h3": titulo,
+            "summary": excerpt,
+            "author": f"Por {author}",
+        })
+    save_scheduled(reg)
+
+    # 4) Regenera capa (título/data/categoria/minutos podem ter mudado)
+    capa_ok, capa_log = run_capa(slug)
+
+    # 5) Re-aplica patch_posts.py para reinjetar hero+share (capa pode ter mudado)
+    patch_ok, patch_log = run_patch()
+
+    return jsonify({
+        "ok": True,
+        "slug": slug,
+        "numero": numero,
+        "scheduled": is_future,
+        "capa_ok": capa_ok,
+        "patch_ok": patch_ok,
+        "message": f"Post #{numero} atualizado.",
+    })
+
+
+@app.post("/api/reschedule/<slug>")
+def api_reschedule(slug: str):
+    """Muda só a data de publicação. Regenera capa e atualiza HTML."""
+    p = request.json or {}
+    new_date = (p.get("data") or p.get("new_date") or "").strip()
+    try:
+        pdate = datetime.strptime(new_date, "%Y-%m-%d").date()
+    except ValueError:
+        return jsonify({"ok": False, "error": "Data inválida (use YYYY-MM-DD)."}), 400
+
+    data = load_data()
+    post = next((x for x in data if x.get("slug") == slug), None)
+    if not post:
+        return jsonify({"ok": False, "error": "Post não encontrado."}), 404
+    post["data"] = new_date
+
+    # Atualiza scheduled_posts.json
+    is_future = pdate > today_brt()
+    reg = load_scheduled()
+    reg.setdefault("scheduled", [])
+    reg["scheduled"] = [s for s in reg["scheduled"] if s.get("slug") != slug]
+    if is_future:
+        mes_label, ano = fmt_date_card(new_date)
+        reg["scheduled"].append({
+            "slug": slug,
+            "publish_date": new_date,
+            "tag": post.get("categoria", ""),
+            "tag_class": TAG_CLASS.get(post.get("categoria", ""), "img-blue"),
+            "minutes": int(re.sub(r"[^0-9]", "", post.get("leitura", "10 min")) or "10"),
+            "month": mes_label,
+            "year": ano,
+            "h3": post.get("titulo", ""),
+            "summary": post.get("excerpt", ""),
+            "author": "",
+        })
+    save_scheduled(reg)
+    save_data(data)
+
+    # Atualiza datas no HTML
+    post_path = PERSPECTIVAS_DIR / f"{slug}.html"
+    if post_path.exists():
+        html = post_path.read_text(encoding="utf-8")
+        human = fmt_date_human(new_date)
+        html = re.sub(r'(article:published_time" content=")[^"]+(")', rf'\g<1>{new_date}\g<2>', html)
+        html = re.sub(r'(datetime=")[^"]+(")', rf'\g<1>{new_date}\g<2>', html)
+        html = re.sub(r'("datePublished"\s*:\s*")[^"]+(")', rf'\g<1>{new_date}\g<2>', html)
+        # SCHEDULED marker
+        if is_future:
+            if "SCHEDULED:" in html:
+                html = re.sub(r'(SCHEDULED:)[^\s<>-]+', rf'\g<1>{new_date}', html)
+            else:
+                html = NOINDEX_TAG.format(date=new_date) + html
+        else:
+            html = re.sub(r'<meta name="robots" content="noindex,nofollow"><!-- SCHEDULED:[^\s<>-]+ -->\n?', '', html)
+        # Data humana (substitui só a primeira ocorrência, evita estragar conteúdo)
+        old_human = re.compile(r'\d{1,2}\s+de\s+(?:janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\s+de\s+\d{4}', re.IGNORECASE)
+        html = old_human.sub(human, html, count=1)
+        post_path.write_text(html, encoding="utf-8")
+
+    # Regenera capa (data aparece no rodapé da capa)
+    capa_ok, _ = run_capa(slug)
+
+    return jsonify({
+        "ok": True,
+        "slug": slug,
+        "new_date": new_date,
+        "is_future": is_future,
+        "capa_ok": capa_ok,
+        "message": f"Post #{post.get('numero')} reagendado para {new_date}.",
+    })
+
+
+@app.post("/api/publish-now/<slug>")
+def api_publish_now(slug: str):
+    """Força publicação imediata: remove noindex, ajusta data para hoje,
+    remove do scheduled_posts.json."""
+    data = load_data()
+    post = next((x for x in data if x.get("slug") == slug), None)
+    if not post:
+        return jsonify({"ok": False, "error": "Post não encontrado."}), 404
+
+    today_iso = today_brt().isoformat()
+    post["data"] = today_iso
+    save_data(data)
+
+    # Remove do scheduled
+    reg = load_scheduled()
+    reg["scheduled"] = [s for s in reg.get("scheduled", []) if s.get("slug") != slug]
+    save_scheduled(reg)
+
+    # Remove noindex e ajusta data no HTML
+    post_path = PERSPECTIVAS_DIR / f"{slug}.html"
+    if post_path.exists():
+        html = post_path.read_text(encoding="utf-8")
+        html = re.sub(r'<meta name="robots" content="noindex,nofollow"><!-- SCHEDULED:[^\s<>-]+ -->\n?', '', html)
+        html = re.sub(r'(article:published_time" content=")[^"]+(")', rf'\g<1>{today_iso}\g<2>', html)
+        html = re.sub(r'("datePublished"\s*:\s*")[^"]+(")', rf'\g<1>{today_iso}\g<2>', html)
+        old_human = re.compile(r'\d{1,2}\s+de\s+(?:janeiro|fevereiro|março|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\s+de\s+\d{4}', re.IGNORECASE)
+        html = old_human.sub(fmt_date_human(today_iso), html, count=1)
+        post_path.write_text(html, encoding="utf-8")
+
+    # Regenera capa com nova data
+    run_capa(slug)
+
+    return jsonify({
+        "ok": True,
+        "slug": slug,
+        "published_at": today_iso,
+        "message": f"Post #{post.get('numero')} publicado agora.",
+    })
+
+
+@app.post("/api/duplicate-check")
+def api_duplicate_check():
+    """Recebe {titulo, excerpt, body?} e retorna até 5 posts existentes
+    mais similares por tokens compartilhados. Ajuda a evitar canibalização.
+    """
+    p = request.json or {}
+    titulo = (p.get("titulo") or "").lower()
+    excerpt = (p.get("excerpt") or "").lower()
+    body = (p.get("body") or "").lower()
+    query = f"{titulo} {titulo} {excerpt} {body}"  # peso 2 no título
+
+    # Tokeniza removendo stopwords PT comuns
+    STOP = {"a","o","as","os","de","do","da","dos","das","e","ou","que","para","por","com","em","no","na","nos","nas","um","uma","uns","umas","se","ser","ter","mais","menos","ao","aos","à","às","é","é","sua","seu","suas","seus","esse","essa","esses","essas","este","esta","estes","estas","isso","isto","como","quando","onde","ele","ela","eles","elas","minha","minhas","meu","meus","muito","muita","muitos","muitas"}
+    def tokenize(text: str) -> set[str]:
+        words = re.findall(r"[a-zA-Záàâãéêíóôõúçñ]{4,}", text.lower())
+        return {w for w in words if w not in STOP}
+
+    qtokens = tokenize(query)
+    if not qtokens:
+        return jsonify({"ok": True, "similar": []})
+
+    results = []
+    for post in load_data():
+        ptext = f"{post.get('titulo','')} {post.get('titulo','')} {post.get('excerpt','')}"
+        # também carrega corpo se tiver fonte
+        src = load_source(post.get("slug", ""))
+        if src:
+            ptext += " " + (src.get("body") or "")[:2000]
+        ptokens = tokenize(ptext)
+        if not ptokens:
+            continue
+        inter = qtokens & ptokens
+        union = qtokens | ptokens
+        jaccard = len(inter) / len(union) if union else 0
+        if jaccard > 0.05:
+            results.append({
+                "numero": post.get("numero"),
+                "slug": post.get("slug"),
+                "titulo": post.get("titulo"),
+                "categoria": post.get("categoria"),
+                "data": post.get("data"),
+                "similarity": round(jaccard, 3),
+                "shared_words": sorted(inter, key=lambda x: -len(x))[:10],
+            })
+    results.sort(key=lambda x: -x["similarity"])
+    top = results[:5]
+    risk = "alto" if top and top[0]["similarity"] > 0.25 else ("medio" if top and top[0]["similarity"] > 0.12 else "baixo")
+    return jsonify({"ok": True, "similar": top, "risk": risk})
+
+
+@app.post("/api/seo-score")
+def api_seo_score():
+    """Avalia o SEO de um post. Aceita {titulo, excerpt, body, slug} no JSON.
+    Retorna nota 0-100 + checklist com hint específico para cada falha.
+    """
+    p = request.json or {}
+    titulo = (p.get("titulo") or "").strip()
+    excerpt = (p.get("excerpt") or "").strip()
+    body = (p.get("body") or "").strip()
+    slug = (p.get("slug") or "").strip()
+
+    checks = []
+    def add(name, passed, weight, hint=""):
+        checks.append({"name": name, "passed": passed, "weight": weight, "hint": hint if not passed else ""})
+
+    # 1. Título
+    add("Título tem 30-80 caracteres", 30 <= len(titulo) <= 80, 10,
+        f"Atual: {len(titulo)}. Ideal entre 30 e 80 para Google.")
+    add("Título termina com ponto", titulo.endswith(".") if titulo else False, 5,
+        "Padrão Atto: título termina com ponto final.")
+    add("Título tem dois pontos (estrutura tema: ângulo)", ":" in titulo, 5,
+        "Padrão Atto: 'tema: ângulo do artigo.'")
+
+    # 2. Slug
+    slug_ok = bool(re.match(r"^[a-z0-9-]{10,70}$", slug))
+    add("Slug entre 10-70 chars, kebab-case", slug_ok, 8,
+        f"Atual: '{slug}' ({len(slug)} chars). Use kebab-case 10-70 chars.")
+
+    # 3. Excerpt
+    add("Excerpt tem 80-220 caracteres", 80 <= len(excerpt) <= 220, 10,
+        f"Atual: {len(excerpt)}. Ideal entre 80-220 para meta-description.")
+
+    # 4. Corpo
+    word_count = len(body.split())
+    add("Corpo tem 800-3000 palavras", 800 <= word_count <= 3000, 12,
+        f"Atual: {word_count} palavras. Padrão Atto: 800-3000.")
+    add("Tem pelo menos 3 H2", body.count("\n## ") >= 3, 10,
+        f"Atual: {body.count(chr(10) + '## ')}. Recomendado: 3-7 H2.")
+    add("Tem pelo menos 1 H3", body.count("\n### ") >= 1, 5,
+        "Adicionar pelo menos um H3 para estrutura.")
+
+    # 5. Parágrafos
+    paragraphs = [b for b in body.split("\n\n") if b.strip() and not b.strip().startswith("#")]
+    long_paragraphs = [p for p in paragraphs if len(p.split()) > 120]
+    add("Sem parágrafos com >120 palavras", len(long_paragraphs) == 0, 8,
+        f"{len(long_paragraphs)} parágrafo(s) com >120 palavras. Quebre para leitura.")
+
+    # 6. Sem listas-bala agressivas (padrão Atto: usar H3 em vez de bullets longos)
+    bullet_count = sum(1 for line in body.split("\n") if re.match(r"^\s*[-*]\s", line))
+    add("Uso moderado de listas-bala (<= 8)", bullet_count <= 8, 5,
+        f"{bullet_count} bullets. Padrão Atto usa H3 em vez de listas longas.")
+
+    # 7. Sem CTAs comerciais
+    cta_words = ["fale conosco", "agende uma", "marque uma conversa", "entre em contato", "saiba mais"]
+    has_cta = any(w in body.lower() for w in cta_words)
+    add("Sem CTA comercial agressivo", not has_cta, 6,
+        "Padrão Atto: encerrar em 'Como a Atto conduz', observacional, não vendedor.")
+
+    # 8. Tom em terceira pessoa (heurística)
+    voce_count = len(re.findall(r"\bvoc[êe]\b", body, re.IGNORECASE))
+    add("Tom em terceira pessoa (poucos 'você')", voce_count <= 3, 6,
+        f"{voce_count} ocorrências de 'você'. Padrão Atto usa 'a empresa', 'o sócio'.")
+
+    # 9. Encerramento padrão Atto
+    has_como_atto = "## Como a Atto" in body or "## O que a Atto" in body
+    add("Tem seção de encerramento padrão Atto", has_como_atto, 5,
+        "Adicionar '## Como a Atto conduz' ou '## O que a Atto observa em campo'.")
+
+    # 10. Sem emojis
+    has_emoji = bool(re.search(r"[\U0001F300-\U0001FAFF]", body))
+    add("Sem emojis no corpo", not has_emoji, 5,
+        "Padrão Atto: sem emojis no corpo do artigo.")
+
+    score = sum(c["weight"] for c in checks if c["passed"])
+    total = sum(c["weight"] for c in checks)
+    return jsonify({
+        "ok": True,
+        "score": round(score / total * 100) if total else 0,
+        "max": 100,
+        "passed": sum(1 for c in checks if c["passed"]),
+        "total_checks": len(checks),
+        "checks": checks,
+    })
+
+
+@app.post("/api/brand-voice-check")
+def api_brand_voice_check():
+    """Validação leve de tom Atto sem chamar API externa (rápido e offline).
+    Para validação profunda use a skill brand-voice:enforce-voice via Cowork.
+    """
+    p = request.json or {}
+    body = p.get("body", "")
+    issues = []
+
+    # Travessões — proibido no padrão Atto
+    if "—" in body or "–" in body:
+        n = body.count("—") + body.count("–")
+        issues.append({"severity": "high", "rule": "Sem travessões (—/–)",
+                       "hint": f"{n} travessão(ões) encontrado(s). Use vírgula ou ponto."})
+
+    # Aspas inglesas “ ” em vez de portuguesas
+    if "“" in body or "”" in body:
+        issues.append({"severity": "low", "rule": "Aspas portuguesas",
+                       "hint": "Use aspas duplas \"\" em vez de “ ”."})
+
+    # Clichês banidos
+    cliches = ["pensar fora da caixa", "ganha-ganha", "sinergia", "alavancar resultados",
+               "estourar a curva", "fazer a diferença", "transforma vidas"]
+    for c in cliches:
+        if c in body.lower():
+            issues.append({"severity": "high", "rule": "Clichê banido",
+                           "hint": f"Remover '{c}' — clichê fora do padrão Atto."})
+
+    # Muito advérbio em -mente
+    mente_count = len(re.findall(r"\b\w+mente\b", body, re.IGNORECASE))
+    if mente_count > 8:
+        issues.append({"severity": "medium", "rule": "Advérbios em -mente",
+                       "hint": f"{mente_count} advérbios em -mente. Reduza para abaixo de 8."})
+
+    # Tom de marketing
+    marketing_words = ["incrível", "revolucionário", "imperdível", "sensacional", "fantástico", "extraordinário"]
+    found_marketing = [w for w in marketing_words if w in body.lower()]
+    if found_marketing:
+        issues.append({"severity": "high", "rule": "Tom de marketing",
+                       "hint": f"Palavras vendedoras encontradas: {', '.join(found_marketing)}."})
+
+    score = max(0, 100 - sum({"high": 15, "medium": 8, "low": 3}.get(i["severity"], 5) for i in issues))
+    return jsonify({"ok": True, "voice_score": score, "issues": issues})
+
+
+@app.get("/api/preview/<slug>")
+def api_preview(slug: str):
+    """Serve o HTML renderizado do post para preview local."""
+    post_path = PERSPECTIVAS_DIR / f"{slug}.html"
+    if not post_path.exists():
+        return "Post não encontrado", 404
+    html = post_path.read_text(encoding="utf-8")
+    # Reescreve caminhos relativos para o Atto Studio servir
+    html = html.replace('href="../assets/', 'href="/preview-asset/')
+    html = html.replace('src="../assets/', 'src="/preview-asset/')
+    return html
+
+
+@app.get("/preview-asset/<path:asset_path>")
+def preview_asset(asset_path: str):
+    """Serve qualquer asset estático do site para o preview funcionar."""
+    asset = SITE / "assets" / asset_path
+    if not asset.exists():
+        return "Asset não encontrado", 404
+    mimes = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+             ".svg": "image/svg+xml", ".css": "text/css", ".js": "application/javascript",
+             ".woff": "font/woff", ".woff2": "font/woff2"}
+    mime = mimes.get(asset.suffix.lower(), "application/octet-stream")
+    return send_file(asset, mimetype=mime)
+
+
+@app.get("/api/source/<slug>")
+def api_source(slug: str):
+    """Retorna a fonte markdown preservada (ou reconstruída) de um post."""
+    src = load_source(slug)
+    if not src:
+        return jsonify({"ok": False, "error": "Fonte não encontrada"}), 404
+    data = load_data()
+    post = next((p for p in data if p.get("slug") == slug), None) or {}
+    return jsonify({"ok": True, "source": src, "meta": post})
 
 
 @app.get("/api/health")

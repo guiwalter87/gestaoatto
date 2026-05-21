@@ -801,3 +801,280 @@ dialog::backdrop { background: rgba(8, 18, 58, 0.85); }
   .post-row { grid-template-columns: 100px 1fr; }
   .post-row-actions { grid-column: 1 / -1; flex-direction: row; }
 }
+
+/* ===========================================
+   v2 — Action buttons (danger, publish, num) */
+.btn-danger {
+  border-color: rgba(192, 67, 67, .25) !important;
+  color: #b94343 !important;
+}
+.btn-danger:hover {
+  background: rgba(192, 67, 67, .08) !important;
+  border-color: rgba(192, 67, 67, .6) !important;
+  color: #8c3030 !important;
+}
+
+.btn-publish {
+  border-color: rgba(42, 128, 89, .35) !important;
+  color: #1f7b4d !important;
+  font-weight: 500;
+}
+.btn-publish:hover {
+  background: rgba(42, 128, 89, .08) !important;
+  border-color: rgba(42, 128, 89, .65) !important;
+}
+
+.post-row-meta .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cinza-escuro);
+  background: var(--papel-alt);
+  padding: 2px 8px;
+  border-radius: 100px;
+  letter-spacing: .05em;
+}
+
+.post-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: flex-start;
+}
+
+/* ===========================================
+   v2 — Atto dialog (modal padrão) */
+.atto-dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 520px;
+  width: 90vw;
+  background: var(--papel);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .12), 0 8px 24px rgba(0, 0, 0, .05);
+}
+.atto-dialog::backdrop {
+  background: rgba(15, 28, 48, .55);
+  backdrop-filter: blur(2px);
+}
+.atto-dialog h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 26px;
+  letter-spacing: -.01em;
+  margin: 0 0 12px;
+  color: var(--tinta);
+}
+.atto-dialog p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--cinza-escuro);
+  margin: 0 0 12px;
+}
+.atto-dialog p.lead {
+  font-size: 15px;
+  color: var(--tinta);
+}
+.atto-dialog label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--cinza-escuro);
+  margin: 20px 0 8px;
+}
+.atto-dialog input[type="date"] {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--linha);
+  border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  color: var(--tinta);
+  background: var(--papel);
+}
+.atto-dialog input[type="date"]:focus {
+  outline: none;
+  border-color: var(--azul-atto);
+}
+.atto-dialog code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: var(--papel-alt);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.atto-dialog .dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--linha);
+}
+
+/* ===========================================
+   v2 — SEO score widget */
+.seo-widget {
+  position: sticky;
+  top: 20px;
+  background: var(--papel-alt);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--linha);
+}
+.seo-widget h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--cinza-escuro);
+  margin: 0 0 12px;
+}
+.seo-widget .seo-score {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.seo-widget .seo-score-value {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 200;
+  font-size: 48px;
+  color: var(--azul-atto);
+  line-height: 1;
+}
+.seo-widget .seo-score-max {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--cinza-medio);
+}
+.seo-widget .seo-bar {
+  height: 6px;
+  background: var(--linha);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.seo-widget .seo-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--azul-atto), var(--teal-atto));
+  transition: width .3s ease;
+}
+.seo-widget .seo-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 0;
+  font-size: 13px;
+  border-bottom: 1px solid var(--linha);
+}
+.seo-widget .seo-check:last-child { border-bottom: none; }
+.seo-widget .seo-check.passed { color: var(--cinza-escuro); }
+.seo-widget .seo-check.failed { color: var(--tinta); }
+.seo-widget .seo-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+.seo-widget .seo-icon.passed { color: var(--verde); }
+.seo-widget .seo-icon.failed { color: #b94343; }
+.seo-widget .seo-hint {
+  font-size: 12px;
+  color: var(--cinza-escuro);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+/* ===========================================
+   v2 — Capa preview live (no formulário de novo post) */
+.cover-preview-live {
+  margin-top: 16px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #0a1929, #1a3a8f);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 24px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(26, 58, 143, .15);
+}
+.cover-preview-live .cover-num {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 200;
+  font-size: 48px;
+  color: var(--teal-atto);
+  line-height: 1;
+}
+.cover-preview-live .cover-kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--teal-atto);
+  margin: 8px 0 16px;
+  border-top: 1px solid var(--teal-atto);
+  padding-top: 4px;
+  display: inline-block;
+}
+.cover-preview-live .cover-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.2;
+  color: white;
+  margin: 0;
+}
+.cover-preview-live .cover-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  color: var(--teal-atto);
+}
+
+/* ===========================================
+   v2 — Duplicate check banner */
+.dup-banner {
+  background: rgba(201, 138, 62, .08);
+  border-left: 3px solid var(--laranja);
+  padding: 16px;
+  border-radius: 4px;
+  margin: 16px 0;
+}
+.dup-banner.risk-alto { border-left-color: #b94343; background: rgba(192, 67, 67, .06); }
+.dup-banner.risk-baixo { display: none; }
+.dup-banner h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--cinza-escuro);
+  margin: 0 0 8px;
+}
+.dup-banner ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+}
+.dup-banner li {
+  padding: 4px 0;
+  color: var(--cinza-escuro);
+}
+.dup-banner .sim {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--laranja);
+  margin-left: 8px;
+}

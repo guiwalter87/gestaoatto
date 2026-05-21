@@ -50,7 +50,27 @@ function initNewPostForm(opts) {
   const result = f("resultPanel");
   const resultLog = f("resultLog");
 
-  let slugManuallyEdited = false;
+  // ===== v2: edit mode =====
+  const editData = opts && opts.editData ? opts.editData : null;
+  const isEditMode = !!editData;
+  let slugManuallyEdited = isEditMode;  // em edit, o slug é fixo
+
+  if (isEditMode) {
+    // Pré-popula o formulário com dados existentes
+    titulo.value = editData.titulo || "";
+    f("titulo_curto").value = editData.titulo_curto || "";
+    slug.value = editData.slug || "";
+    slug.readOnly = true;
+    slug.title = "Slug não pode ser alterado em modo edição (preserva URLs e capas).";
+    if (regenSlug) regenSlug.style.display = "none";
+    if (editData.categoria) f("categoria").value = editData.categoria;
+    f("data").value = editData.data || "";
+    f("minutes").value = editData.minutes || 10;
+    excerpt.value = editData.excerpt || "";
+    f("body").value = editData.body || "";
+    f("sources").value = editData.sources || "";
+    setStatus(`Editando #${editData.numero} — salve quando terminar.`);
+  }
 
   // Auto-slug
   titulo.addEventListener("input", async () => {
@@ -69,6 +89,50 @@ function initNewPostForm(opts) {
   const updateCount = () => { excerptCount.textContent = excerpt.value.length; };
   excerpt.addEventListener("input", updateCount);
   updateCount();
+
+  // ===== v2: duplicate check live (com debounce) =====
+  let dupTimer = null;
+  const dupBanner = document.getElementById("dupBanner");
+  const dupList = document.getElementById("dupList");
+
+  function renderDupes(similar, risk) {
+    if (!dupBanner) return;
+    if (!similar || similar.length === 0 || risk === "baixo") {
+      dupBanner.classList.add("hidden");
+      return;
+    }
+    dupBanner.classList.remove("hidden");
+    dupBanner.classList.remove("risk-alto", "risk-medio", "risk-baixo");
+    dupBanner.classList.add("risk-" + risk);
+    dupList.innerHTML = "";
+    similar.slice(0, 3).forEach((p) => {
+      const li = document.createElement("li");
+      const pct = Math.round(p.similarity * 100);
+      const status = p.data ? new Date(p.data).toLocaleDateString("pt-BR") : "";
+      li.innerHTML = `<strong>#${p.numero}</strong> — ${p.titulo} <span class="sim">${pct}% similaridade · ${status}</span>`;
+      dupList.appendChild(li);
+    });
+  }
+
+  function checkDupes() {
+    if (isEditMode) return; // não checa em edit
+    clearTimeout(dupTimer);
+    dupTimer = setTimeout(async () => {
+      const t = titulo.value.trim();
+      const e = excerpt.value.trim();
+      if (t.length < 15) {
+        if (dupBanner) dupBanner.classList.add("hidden");
+        return;
+      }
+      const r = await api("/api/duplicate-check", {
+        method: "POST",
+        body: { titulo: t, excerpt: e, body: f("body").value },
+      });
+      if (r.ok) renderDupes(r.similar, r.risk);
+    }, 600);
+  }
+  titulo.addEventListener("input", checkDupes);
+  excerpt.addEventListener("input", checkDupes);
 
   // ---- IMPORTAR DO CHAT (paste de JSON) ----
   let importQueue = [];   // posts em fila de batch
@@ -194,9 +258,21 @@ function initNewPostForm(opts) {
     }
 
     btnCreate.disabled = true;
-    setStatus("Criando post e gerando capas (pode levar 10-20s)...");
 
-    const r = await api("/api/create", { method: "POST", body: data });
+    // v2: route to /api/edit if in edit mode (preserves numero + capas)
+    let r;
+    if (isEditMode) {
+      setStatus("Salvando alterações e regenerando capa (~10-15s)...");
+      r = await api(`/api/edit/${editData.slug}`, { method: "POST", body: data });
+      // edit endpoint doesn't return capa_log / social; fill defaults
+      r.scheduled = r.scheduled || false;
+      r.scheduled_msg = r.message || "alterações salvas";
+      r.post_path = `site/perspectivas/${editData.slug}.html`;
+      r.capa_log = r.capa_ok ? "Capa regenerada." : "Capa não regenerada.";
+    } else {
+      setStatus("Criando post e gerando capas (pode levar 10-20s)...");
+      r = await api("/api/create", { method: "POST", body: data });
+    }
 
     btnCreate.disabled = false;
 
@@ -326,6 +402,82 @@ async function regenCover(slug) {
   } else {
     toast("Falha: " + (r.log || "").slice(0, 80), "error");
   }
+}
+
+// ----------------------------------------
+// POSTS — DELETE / EDIT / RESCHEDULE / PUBLISH NOW (v2)
+// ----------------------------------------
+function deletePost(slug, numero) {
+  const dlg = document.getElementById("deleteDialog");
+  const label = document.getElementById("deleteNumLabel");
+  const btn = document.getElementById("deleteConfirm");
+  label.textContent = `${numero} (${slug})`;
+  btn.onclick = async () => {
+    btn.disabled = true;
+    const r = await api(`/api/delete/${slug}`, { method: "POST" });
+    btn.disabled = false;
+    dlg.close();
+    if (r.ok) {
+      toast(r.message || "Post excluído.", "success");
+      // Remove o cartão da tela sem reload
+      document.querySelector(`.post-row[data-slug='${slug}']`)?.remove();
+    } else {
+      toast("Falha ao excluir: " + (r.error || ""), "error");
+    }
+  };
+  dlg.showModal();
+}
+
+function reschedulePost(slug, currentDate) {
+  const dlg = document.getElementById("rescheduleDialog");
+  const label = document.getElementById("rescheduleSlugLabel");
+  const input = document.getElementById("rescheduleDate");
+  const btn = document.getElementById("rescheduleConfirm");
+  label.textContent = slug;
+  input.value = currentDate || "";
+  btn.onclick = async () => {
+    const newDate = input.value;
+    if (!newDate) {
+      toast("Escolha uma data.", "error");
+      return;
+    }
+    btn.disabled = true;
+    const r = await api(`/api/reschedule/${slug}`, { method: "POST", body: { data: newDate } });
+    btn.disabled = false;
+    dlg.close();
+    if (r.ok) {
+      toast(r.message || "Reagendado.", "success");
+      setTimeout(() => location.reload(), 800);
+    } else {
+      toast("Falha: " + (r.error || ""), "error");
+    }
+  };
+  dlg.showModal();
+}
+
+function publishNow(slug, numero) {
+  const dlg = document.getElementById("publishDialog");
+  const label = document.getElementById("publishNumLabel");
+  const btn = document.getElementById("publishConfirm");
+  label.textContent = `Perspectiva ${numero}`;
+  btn.onclick = async () => {
+    btn.disabled = true;
+    const r = await api(`/api/publish-now/${slug}`, { method: "POST" });
+    btn.disabled = false;
+    dlg.close();
+    if (r.ok) {
+      toast(r.message || "Publicado.", "success");
+      setTimeout(() => location.reload(), 800);
+    } else {
+      toast("Falha: " + (r.error || ""), "error");
+    }
+  };
+  dlg.showModal();
+}
+
+function editPost(slug) {
+  // Abre o formulário de edição numa nova janela (reutiliza o /?edit=slug)
+  window.location.href = `/?edit=${encodeURIComponent(slug)}`;
 }
 
 // ----------------------------------------

@@ -1,5 +1,29 @@
 [
   {
+    "slug": "sucessao-empresa-familiar-janela-cinco-anos",
+    "numero": "14",
+    "titulo": "Sucessão na empresa familiar: a janela de cinco anos que o fundador insiste em encolher.",
+    "titulo_curto": "Sucessão familiar: a janela de cinco anos.",
+    "categoria": "Sucessão",
+    "data": "2026-05-27",
+    "excerpt": "No Brasil, 90% das empresas são familiares e apenas 30% chegam à terceira geração. O dado não é fatalismo: é o resultado previsível de tratar a sucessão como evento, quando ela é processo de cinco a dez anos.",
+    "leitura": "11 min",
+    "tag_class": "img-warm",
+    "autor": "Por Guilherme Walter"
+  },
+  {
+    "slug": "ia-linha-de-custo-controle-interno-pme",
+    "numero": "13",
+    "titulo": "IA virou linha de custo recorrente: o controle interno que separa investimento de prejuízo na pequena e média empresa.",
+    "titulo_curto": "IA como linha de custo: o controle interno que faltou.",
+    "categoria": "Performance",
+    "data": "2026-05-20",
+    "excerpt": "Assinaturas contratadas em três cartões diferentes, ferramentas pagas que ninguém usa, dado sensível trafegando fora de política. A IA virou item de orçamento recorrente sem o controle interno que toda outra linha de custo da empresa tem.",
+    "leitura": "10 min",
+    "tag_class": "img-blue",
+    "autor": "Por Juliano Walter"
+  },
+  {
     "slug": "ia-generativa-pequena-media-empresa-industrial",
     "numero": "12",
     "titulo": "IA generativa na pequena e média empresa industrial: como sair do entusiasmo e chegar ao ROI mensurável.",

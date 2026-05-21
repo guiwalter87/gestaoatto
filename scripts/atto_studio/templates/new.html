@@ -1,22 +1,36 @@
 {% extends "base.html" %}
-{% block title %}Nova perspectiva · Atto Studio{% endblock %}
+{% block title %}{% if edit_data %}Editar Perspectiva #{{ edit_data.numero }}{% else %}Nova perspectiva{% endif %} · Atto Studio{% endblock %}
 
 {% block content %}
 <section class="page-head">
   <div class="page-head-inner">
     <div>
+      {% if edit_data %}
+      <div class="kicker">Edição · Perspectiva #{{ edit_data.numero }}</div>
+      <h1>Editar <em>{{ edit_data.slug }}</em>.</h1>
+      <p class="lead">Você está editando uma Perspectiva existente. O número, slug e capas são preservados. Ao salvar, o HTML é re-renderizado e a capa é regenerada (caso título, data, categoria ou tempo mudem).{% if edit_data.fallback %} <strong>Atenção:</strong> o body foi reconstruído a partir do HTML existente (fonte original não preservada) — revise antes de salvar.{% endif %}</p>
+      <p style="margin-top: 8px;"><a href="/posts" class="btn-ghost btn-mini">← Voltar para a lista</a></p>
+      {% else %}
       <div class="kicker">Criação · Perspectivas</div>
       <h1>Nova <em>perspectiva</em>.</h1>
       <p class="lead">Preencha os campos abaixo (ou cole o JSON entregue no chat) e o app gera o HTML, as 4 capas e atualiza o registry.</p>
+      {% endif %}
     </div>
     <div class="page-head-actions">
+      {% if not edit_data %}
       <button type="button" class="btn-import" id="btnImport">
         <span class="ai-spark">⤓</span>
         <span>Importar do chat</span>
       </button>
+      {% endif %}
     </div>
   </div>
 </section>
+
+<div id="dupBanner" class="dup-banner hidden">
+  <h4>⚠ Posts similares já publicados</h4>
+  <ul id="dupList"></ul>
+</div>
 
 <dialog id="importDialog" class="import-dialog">
   <div class="dialog-head">
@@ -131,7 +145,7 @@
   </div>
   <div class="action-buttons">
     <button type="button" class="btn-ghost" id="btnSaveDraft">Salvar rascunho</button>
-    <button type="button" class="btn-primary" id="btnCreate">Criar e gerar capas</button>
+    <button type="button" class="btn-primary" id="btnCreate">{% if edit_data %}Salvar alterações{% else %}Criar e gerar capas{% endif %}</button>
   </div>
 </aside>
 
@@ -196,6 +210,7 @@
 <script>
   initNewPostForm({
     tagClass: {{ tag_class | tojson }},
+    editData: {{ edit_data | tojson if edit_data else 'null' }},
   });
 </script>
 {% endblock %}
