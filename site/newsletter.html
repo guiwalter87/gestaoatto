@@ -124,50 +124,10 @@
 
       <div class="nl-card">
         <h3>Assinar a newsletter</h3>
-        <p class="sub">Dois campos, LGPD, pronto. Você confirma o e-mail na caixa de entrada e começa a receber na próxima edição.</p>
+        <p class="sub">Informe seu e-mail. Você confirma na própria caixa de entrada, o double opt-in, e começa a receber na próxima edição. Descadastro em um clique no rodapé.</p>
 
-        <form id="nl-form" onsubmit="return submitNewsletter(event)">
-          <div class="field">
-            <label>Seu nome</label>
-            <input type="text" name="nome" required placeholder="Como prefere ser chamado" />
-          </div>
-
-          <div class="field">
-            <label>Seu e-mail</label>
-            <input type="email" name="email" required placeholder="voce@empresa.com" />
-          </div>
-
-          <div class="field">
-            <label>Empresa (opcional)</label>
-            <input type="text" name="empresa" placeholder="Nome da empresa onde atua" />
-          </div>
-
-          <div class="field">
-            <label>Cargo / função (opcional)</label>
-            <select name="cargo">
-              <option value="">selecione</option>
-              <option>Sócio · Fundador</option>
-              <option>Conselheiro</option>
-              <option>CEO · Diretor executivo</option>
-              <option>CFO · Diretor financeiro</option>
-              <option>Diretor · Outras áreas</option>
-              <option>Gerente · Coordenador</option>
-              <option>Consultor · Profissional autônomo</option>
-              <option>Outro</option>
-            </select>
-          </div>
-
-          <div class="field-check">
-            <input type="checkbox" required id="conf-lgpd" />
-            <label for="conf-lgpd" style="font-family:inherit;font-size:14px;letter-spacing:0;text-transform:none;color:var(--cinza-escuro);margin:0">Autorizo a Atto a tratar meu e-mail exclusivamente para envio da newsletter mensal. Posso descadastrar a qualquer momento. <a href="politica-privacidade.html" style="color:var(--azul-atto);border-bottom:1px solid var(--azul-atto)">Política de privacidade</a>.</label>
-          </div>
-
-          <button type="submit">Assinar a newsletter <span class="arrow">→</span></button>
-        </form>
-
-        <div id="nl-success" class="nl-success">
-          <strong>Abrimos seu e-mail pra enviar a confirmação.</strong>
-          Se nada abriu, copie e envie manualmente para <a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a> com o assunto "Assinatura Newsletter". Respondemos com a confirmação em até 1 dia útil.
+        <div class="nl-embed" style="border:1px solid var(--linha);border-radius:12px;overflow:hidden;background:#fff">
+          <iframe title="Assinar a newsletter Perspectivas Atto" width="100%" height="460" src="https://bb70b9ab.sibforms.com/v2/serve/MUIFANr_GTlRgCFEf_9YcNPAKy9ZEcWGUjL40IdjX5ji2mEHpQQchQz2hfLrfQGpPxkTym0T8A6GPXfR9NokC86FwTM_3rAW3cHzW_J5BWq6epxp_ycD6b54PSM3i7XyyOC8qOLWp8k-yin_3aZ18r1R5Au1uwpL-u0dZt9RcPGc8YNvVsIwprSY-WTXiwoJcJ-YKDGmB3fP78q-sQ==" frameborder="0" scrolling="auto" allowfullscreen style="display:block;width:100%;max-width:100%;min-height:440px;border:0"></iframe>
         </div>
       </div>
     </div>
@@ -199,31 +159,7 @@
   </div>
 </footer>
 
-<script>
-function submitNewsletter(e) {
-  e.preventDefault();
-  const f = e.target;
-  const nome = (f.nome.value || '').trim();
-  const email = (f.email.value || '').trim();
-  const empresa = (f.empresa.value || '').trim();
-  const cargo = (f.cargo.value || '').trim();
-  const linhas = [
-    'Gostaria de assinar a Newsletter Atto: Perspectivas.',
-    '',
-    'Nome: ' + nome,
-    'E-mail: ' + email,
-  ];
-  if (empresa) linhas.push('Empresa: ' + empresa);
-  if (cargo)   linhas.push('Cargo: ' + cargo);
-  linhas.push('');
-  linhas.push('Autorizo o tratamento do e-mail conforme a Política de Privacidade da Atto.');
-  const subject = encodeURIComponent('Assinatura Newsletter Atto');
-  const body = encodeURIComponent(linhas.join('\n'));
-  document.getElementById('nl-success').classList.add('is-on');
-  window.location.href = 'mailto:contato@gestaoatto.com.br?subject=' + subject + '&body=' + body;
-  return false;
-}
-</script>
+
 <script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
 <script src="assets/site.js" defer></script>
 </body>

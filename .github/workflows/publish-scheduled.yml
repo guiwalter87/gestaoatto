@@ -49,3 +49,22 @@ jobs:
           else
             echo "Nenhuma alteração para commitar."
           fi
+
+      - name: Enviar newsletter (Perspectivas publicadas)
+        if: steps.publish.outputs.published_count != '0'
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+        run: |
+          SLUGS=$(grep '^Published:' /tmp/publish_output.txt | sed 's/^Published:[[:space:]]*//')
+          for slug in $SLUGS; do
+            echo "Enviando newsletter para: $slug"
+            python scripts/send_perspectiva_brevo.py "$slug"
+          done
+          if [[ -n "$(git status --porcelain scripts/newsletter_sent.json)" ]]; then
+            git config user.name "atto-publisher"
+            git config user.email "publisher@gestaoatto.com.br"
+            git add scripts/newsletter_sent.json
+            git commit -m "newsletter: registrar envios do dia"
+            git pull --rebase --autostash || true
+            git push || true
+          fi
