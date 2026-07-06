@@ -106,7 +106,13 @@ def build_html(e: dict) -> str:
     autor = (e.get("autor") or "").replace("Por ", "").strip()
     if not autor:
         autor = AUTOR_POR_CATEGORIA.get(e.get("categoria", ""), "Atto Estrategias")
-    hero = f"{BASE}/assets/capas/{e['slug']}_hero.png"
+    # Prefere a capa do Instagram (com o rosto do autor, mais humanizada);
+    # cai para a hero 16:9 quando a capa de IG ainda nao foi gerada.
+    capas = SITE / "assets" / "capas"
+    if (capas / f"{e['slug']}_ig-feed.png").exists():
+        hero = f"{BASE}/assets/capas/{e['slug']}_ig-feed.png"
+    else:
+        hero = f"{BASE}/assets/capas/{e['slug']}_hero.png"
     link = f"{BASE}/perspectivas/{e['slug']}.html"
     html = EMAIL_TEMPLATE
     repl = {
