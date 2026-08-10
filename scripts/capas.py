@@ -104,8 +104,21 @@ def fit_title(d, text, max_w_px, max_lines, sizes, weight=220):
                 continue
             if all(d.textbbox((0, 0), ln, font=f)[2] <= max_w_px for ln in lines):
                 return lines, size
-    # Último recurso — usa o menor tamanho mesmo que ultrapasse
-    return textwrap.wrap(text, 60, break_long_words=False, break_on_hyphens=False), sizes[-1]
+    # Último recurso: menor tamanho da lista, quebrando pela largura medida.
+    # Evita devolver linha que estoure a caixa do título (títulos longos).
+    size = sizes[-1]
+    f = outfit(size, weight)
+    linhas, atual = [], ""
+    for palavra in text.split():
+        tentativa = (atual + " " + palavra).strip()
+        if atual and d.textbbox((0, 0), tentativa, font=f)[2] > max_w_px:
+            linhas.append(atual)
+            atual = palavra
+        else:
+            atual = tentativa
+    if atual:
+        linhas.append(atual)
+    return linhas, size
 
 # ============================================================
 # GERADOR
