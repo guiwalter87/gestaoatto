@@ -57,6 +57,7 @@ def classify(rel):
         "perspectivas": "editorial", "newsletter": "editorial",
         "trabalhe-conosco": "carreiras", "vagas": "carreiras",
         "politica-privacidade": "legal", "termos-uso": "legal",
+        "links": "social",
     }.get(name, "outro")
     n = name.lower()
     if re.search(r"direcao|metodo|atuacao|diagnostico|rotina", n):
@@ -102,7 +103,7 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){{dataLayer.push(arguments);}}
 gtag('consent', 'default', {{analytics_storage:'denied', ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', functionality_storage:'granted', security_storage:'granted', wait_for_update:500}});
 gtag('set', 'ads_data_redaction', true);
-try {{ var c = JSON.parse(localStorage.getItem('atto_consent') || 'null'); if (c && c.ts && (Date.now() - c.ts) < 31536000000 && c.analytics === 'granted') {{ gtag('consent', 'update', {{analytics_storage:'granted'}}); }} }} catch (e) {{}}
+try {{ var c = JSON.parse(localStorage.getItem('atto_consent') || 'null'); if (c && c.ts && (Date.now() - c.ts) < 31536000000 && c.analytics === 'granted') {{ gtag('consent', 'update', {{analytics_storage:'granted', ad_storage:'granted', ad_user_data:'granted', ad_personalization:'granted'}}); }} }} catch (e) {{}}
 dataLayer.push({{{dl}}});
 </script>
 <!-- Google Tag Manager -->

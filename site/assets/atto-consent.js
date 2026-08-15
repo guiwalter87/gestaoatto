@@ -1,12 +1,13 @@
 /* ==========================================================================
    Atto · Consentimento de cookies (LGPD) + Google Consent Mode v2
-   v1.0 · 2026-08-15
+   v1.1 · 2026-08-15 (analytics + marketing)
    --------------------------------------------------------------------------
    - O padrão "denied" e a leitura da escolha salva acontecem INLINE no <head>
      (antes do GTM). Este arquivo cuida só da interface do banner.
    - Escolha guardada em localStorage["atto_consent"] por 12 meses.
    - Qualquer elemento com [data-cookie-prefs] reabre o banner.
-   - Emite dataLayer.push({event:'consent_update', consent_analytics: ...}).
+   - 'Aceitar' libera analytics_storage E ad_storage/ad_user_data/ad_personalization
+     (GA4 + Meta Pixel). Emite dataLayer.push({event:'consent_update', ...}).
    ========================================================================== */
 (function () {
   'use strict';
@@ -36,11 +37,11 @@
     var state = analytics ? 'granted' : 'denied';
     gtag('consent', 'update', {
       analytics_storage: state,
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied'
+      ad_storage: state,
+      ad_user_data: state,
+      ad_personalization: state
     });
-    dl.push({ event: 'consent_update', consent_analytics: state });
+    dl.push({ event: 'consent_update', consent_analytics: state, consent_ads: state });
   }
 
   // ---------------------------------------------------------------- estilos
@@ -91,8 +92,8 @@
     banner.hidden = true;
     banner.innerHTML =
       '<h2 id="atto-cc-title">Cookies e privacidade</h2>' +
-      '<p id="atto-cc-desc">Usamos cookies de análise (Google Analytics) para entender como o conteúdo é lido e melhorar o site. ' +
-      'Nenhum dado é vendido nem usado para publicidade. Você pode mudar sua escolha a qualquer momento em ' +
+      '<p id="atto-cc-desc">Usamos cookies de análise (Google Analytics) para entender como o conteúdo é lido e cookies de marketing (Meta Pixel) ' +
+      'para medir e direcionar nossa comunicação nas redes sociais. Nenhum dado é vendido. Você pode mudar sua escolha a qualquer momento em ' +
       '<a href="' + politicaHref() + '">Política de privacidade</a>.</p>' +
       '<div class="atto-cc-actions">' +
         '<button type="button" class="atto-cc-accept">Aceitar</button>' +

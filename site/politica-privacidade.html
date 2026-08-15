@@ -20,7 +20,7 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent', 'default', {analytics_storage:'denied', ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', functionality_storage:'granted', security_storage:'granted', wait_for_update:500});
 gtag('set', 'ads_data_redaction', true);
-try { var c = JSON.parse(localStorage.getItem('atto_consent') || 'null'); if (c && c.ts && (Date.now() - c.ts) < 31536000000 && c.analytics === 'granted') { gtag('consent', 'update', {analytics_storage:'granted'}); } } catch (e) {}
+try { var c = JSON.parse(localStorage.getItem('atto_consent') || 'null'); if (c && c.ts && (Date.now() - c.ts) < 31536000000 && c.analytics === 'granted') { gtag('consent', 'update', {analytics_storage:'granted', ad_storage:'granted', ad_user_data:'granted', ad_personalization:'granted'}); } } catch (e) {}
 dataLayer.push({page_family: 'legal'});
 </script>
 <!-- Google Tag Manager -->
@@ -80,7 +80,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <li><strong>Identificação:</strong> nome, sobrenome, cargo, empresa.</li>
       <li><strong>Contato:</strong> e-mail corporativo, telefone, cidade/UF.</li>
       <li><strong>Contexto do pedido:</strong> texto que você escreve em formulários (intenção, desafio, prazo).</li>
-      <li><strong>Dados de navegação:</strong> páginas visitadas, origem do acesso, tipo de dispositivo e navegador, interações com botões e formulários — via Google Analytics 4, de forma agregada, sem registro de endereço IP completo e <strong>somente após o seu consentimento</strong> no aviso de cookies.</li>
+      <li><strong>Dados de navegação:</strong> páginas visitadas, origem do acesso, tipo de dispositivo e navegador, interações com botões e formulários — via Google Analytics 4 e Meta Pixel, de forma agregada, sem registro de endereço IP completo e <strong>somente após o seu consentimento</strong> no aviso de cookies.</li>
       <li><strong>Currículo e histórico profissional:</strong> apenas quando você se candidata a uma vaga através da página Trabalhe Conosco.</li>
     </ul>
     <p style="font-size:17px;line-height:1.7;margin-bottom:32px"><strong>Não coletamos</strong> CPF, dados bancários, dados de saúde ou outras categorias sensíveis em canais abertos. Se algum trabalho contratado exigir tratamento desses dados, isso é regido por contrato específico e NDA.</p>
@@ -95,7 +95,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </ul>
 
     <h2 style="font-family:var(--serif);font-size:32px;margin:0 0 16px">4. Base legal do tratamento</h2>
-    <p style="font-size:17px;line-height:1.7;margin-bottom:32px">Conforme o artigo 7º da LGPD, tratamos dados com base em: <strong>consentimento</strong> (formulários, newsletter e cookies de análise), <strong>procedimentos preliminares a contrato</strong> (retorno a pedidos de conversa), <strong>execução de contrato</strong> (clientes ativos), <strong>legítimo interesse</strong> (follow-up comercial institucional) e <strong>obrigação legal</strong> (fiscal e trabalhista).</p>
+    <p style="font-size:17px;line-height:1.7;margin-bottom:32px">Conforme o artigo 7º da LGPD, tratamos dados com base em: <strong>consentimento</strong> (formulários, newsletter e cookies de análise e marketing), <strong>procedimentos preliminares a contrato</strong> (retorno a pedidos de conversa), <strong>execução de contrato</strong> (clientes ativos), <strong>legítimo interesse</strong> (follow-up comercial institucional) e <strong>obrigação legal</strong> (fiscal e trabalhista).</p>
 
     <h2 style="font-family:var(--serif);font-size:32px;margin:0 0 16px">5. Compartilhamento</h2>
     <p style="font-size:17px;line-height:1.7;margin-bottom:16px">Seus dados <strong>não são vendidos, alugados ou cedidos</strong> a terceiros para fins comerciais. Compartilhamos apenas quando necessário para a operação, com prestadores que seguem os mesmos padrões de sigilo:</p>
@@ -103,6 +103,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <li><strong>Formspree</strong> (EUA) — recebimento do formulário de contato.</li>
       <li><strong>Brevo</strong> (França) — cadastro e envio da newsletter Perspectivas.</li>
       <li><strong>Google</strong> (EUA) — Google Analytics 4 e Google Tag Manager (dados de navegação agregados, mediante consentimento), Google Forms (banco de talentos), Google Fonts.</li>
+      <li><strong>Meta Platforms</strong> (EUA) — Meta Pixel, para medir o alcance da nossa comunicação no Instagram e no Facebook e direcioná-la a quem já visitou o site (mediante consentimento).</li>
       <li><strong>GitHub Pages</strong> (EUA) — hospedagem do site.</li>
       <li>Parceiros técnicos e contábeis contratualmente vinculados a sigilo.</li>
       <li>Autoridades públicas, quando houver requisição legal.</li>
@@ -114,7 +115,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <p style="font-size:17px;line-height:1.7;margin-bottom:32px">Registros comerciais inativos são eliminados após 24 meses sem interação, salvo requerimento legal específico.</p>
 
     <h2 style="font-family:var(--serif);font-size:32px;margin:0 0 16px">7. Cookies</h2>
-    <p style="font-size:17px;line-height:1.7;margin-bottom:16px">Este site não usa cookies próprios para funcionar. Os únicos cookies são <strong>de análise</strong> (Google Analytics 4), usados para entender como o conteúdo é lido e quais páginas geram contato. Eles <strong>só são gravados depois que você clica em "Aceitar"</strong> no aviso exibido na primeira visita. Se você recusar, o site continua funcionando normalmente e o Google Analytics recebe apenas sinais anônimos, sem cookie e sem identificador.</p>
+    <p style="font-size:17px;line-height:1.7;margin-bottom:16px">Este site não usa cookies próprios para funcionar. Os únicos cookies são <strong>de análise</strong> (Google Analytics 4), usados para entender como o conteúdo é lido e quais páginas geram contato, e <strong>de marketing</strong> (Meta Pixel), usados para medir e direcionar nossa comunicação no Instagram e no Facebook. Eles <strong>só são gravados depois que você clica em "Aceitar"</strong> no aviso exibido na primeira visita. Se você recusar, o site continua funcionando normalmente, o Google Analytics recebe apenas sinais anônimos (sem cookie e sem identificador) e o Meta Pixel não é carregado.</p>
     <div style="overflow-x:auto;margin-bottom:16px">
       <table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5">
         <thead>
@@ -125,6 +126,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <tbody>
           <tr style="border-bottom:1px solid var(--linha)"><td style="padding:10px 12px 10px 0"><code>_ga</code></td><td style="padding:10px 12px">Google Analytics</td><td style="padding:10px 12px">Distinguir visitantes de forma pseudonimizada</td><td style="padding:10px 0 10px 12px">13 meses</td></tr>
           <tr style="border-bottom:1px solid var(--linha)"><td style="padding:10px 12px 10px 0"><code>_ga_PTS41WC8HS</code></td><td style="padding:10px 12px">Google Analytics</td><td style="padding:10px 12px">Manter o estado da sessão de navegação</td><td style="padding:10px 0 10px 12px">13 meses</td></tr>
+          <tr style="border-bottom:1px solid var(--linha)"><td style="padding:10px 12px 10px 0"><code>_fbp</code></td><td style="padding:10px 12px">Meta Pixel</td><td style="padding:10px 12px">Distinguir visitantes para medir e direcionar comunicação no Instagram/Facebook</td><td style="padding:10px 0 10px 12px">3 meses</td></tr>
           <tr><td style="padding:10px 12px 10px 0"><code>atto_consent</code> <span style="color:var(--cinza-medio)">(armazenamento local)</span></td><td style="padding:10px 12px">Atto</td><td style="padding:10px 12px">Lembrar a sua escolha no aviso de cookies</td><td style="padding:10px 0 10px 12px">12 meses</td></tr>
         </tbody>
       </table>

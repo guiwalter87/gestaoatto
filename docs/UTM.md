@@ -47,3 +47,10 @@ O script `scripts/send_perspectiva_brevo.py` já pode montar os links com UTM
 Relatórios → Aquisição → Aquisição de tráfego → dimensão
 "Origem/mídia da sessão" ou "Campanha da sessão". No painel Looker Studio a aba
 "Aquisição" já usa essa convenção.
+
+## Instagram — link da bio (a partir de 15/08/2026)
+O link da bio aponta para a página própria `https://www.gestaoatto.com.br/links.html?utm_source=instagram&utm_medium=social&utm_campaign=bio`
+(substitui o Linktree). Os botões dessa página são links internos **sem UTM** (para não
+sobrescrever a atribuição da sessão); cada clique é medido pelo evento `cta_click` com
+`cta_position=links` e `cta_id` = agendar / ler_perspectiva / perspectivas / newsletter /
+site / linkedin (WhatsApp vira `generate_lead`).
