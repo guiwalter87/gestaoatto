@@ -15,14 +15,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;500&family=Plus+Jakarta+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTS41WC8HS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PTS41WC8HS');
-</script>
 <script defer src="/assets/atto-events.js"></script>
 <style>
   :root{--azul-noite:#080F1E;--azul-atto:#1A3A8F;--teal-atto:#00B5B8;--papel:#F5F3EE;--tinta:#0A0E1A;--cinza-medio:#6B6F7A;--linha:#E0DCD2}
@@ -53,8 +45,29 @@
   .atalhos-grid a:hover{border-bottom-color:var(--azul-atto)}
   footer{padding:24px 48px;border-top:1px solid var(--linha);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--cinza-medio);text-align:center}
 </style>
+<!-- Atto · Data Layer -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage:'denied', ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', functionality_storage:'granted', security_storage:'granted', wait_for_update:500});
+gtag('set', 'ads_data_redaction', true);
+try { var c = JSON.parse(localStorage.getItem('atto_consent') || 'null'); if (c && c.ts && (Date.now() - c.ts) < 31536000000 && c.analytics === 'granted') { gtag('consent', 'update', {analytics_storage:'granted'}); } } catch (e) {}
+dataLayer.push({page_family: 'erro'});
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N495GLWN');</script>
+<!-- End Google Tag Manager -->
+<script defer src="assets/atto-events.js"></script>
+<script defer src="assets/atto-consent.js"></script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N495GLWN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <header>
   <a href="/" class="logo"><strong>Atto</strong> · Estratégias &amp; Educação</a>
 </header>

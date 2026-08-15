@@ -14,17 +14,29 @@
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="icon" href="assets/favicon.ico">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTS41WC8HS"></script>
+<!-- Atto · Data Layer -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PTS41WC8HS');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage:'denied', ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', functionality_storage:'granted', security_storage:'granted', wait_for_update:500});
+gtag('set', 'ads_data_redaction', true);
+try { var c = JSON.parse(localStorage.getItem('atto_consent') || 'null'); if (c && c.ts && (Date.now() - c.ts) < 31536000000 && c.analytics === 'granted') { gtag('consent', 'update', {analytics_storage:'granted'}); } } catch (e) {}
+dataLayer.push({page_family: 'legal'});
 </script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N495GLWN');</script>
+<!-- End Google Tag Manager -->
 <script defer src="assets/atto-events.js"></script>
+<script defer src="assets/atto-consent.js"></script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N495GLWN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <div class="scroll-progress" aria-hidden="true"></div>
 
@@ -51,7 +63,7 @@
     <div class="kicker">Transparência · LGPD</div>
     <h1>Política de <em>Privacidade</em>.</h1>
     <p class="lead">Esta política descreve, em linguagem direta, como a <strong>Atto Estratégias &amp; Educação Empresarial</strong> coleta, utiliza, armazena e protege os dados pessoais de quem interage com nossos canais digitais e relacionais, em conformidade com a <strong>Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018)</strong>.</p>
-    <p class="lead" style="font-size:15px;color:var(--cinza-escuro);margin-top:12px"><strong>Última atualização:</strong> abril de 2026.</p>
+    <p class="lead" style="font-size:15px;color:var(--cinza-escuro);margin-top:12px"><strong>Última atualização:</strong> agosto de 2026.</p>
   </div>
 </section>
 
@@ -68,7 +80,7 @@
       <li><strong>Identificação:</strong> nome, sobrenome, cargo, empresa.</li>
       <li><strong>Contato:</strong> e-mail corporativo, telefone, cidade/UF.</li>
       <li><strong>Contexto do pedido:</strong> texto que você escreve em formulários (intenção, desafio, prazo).</li>
-      <li><strong>Dados de navegação:</strong> IP, tipo de navegador, páginas visitadas, via Google Analytics, de forma agregada e anonimizada.</li>
+      <li><strong>Dados de navegação:</strong> páginas visitadas, origem do acesso, tipo de dispositivo e navegador, interações com botões e formulários — via Google Analytics 4, de forma agregada, sem registro de endereço IP completo e <strong>somente após o seu consentimento</strong> no aviso de cookies.</li>
       <li><strong>Currículo e histórico profissional:</strong> apenas quando você se candidata a uma vaga através da página Trabalhe Conosco.</li>
     </ul>
     <p style="font-size:17px;line-height:1.7;margin-bottom:32px"><strong>Não coletamos</strong> CPF, dados bancários, dados de saúde ou outras categorias sensíveis em canais abertos. Se algum trabalho contratado exigir tratamento desses dados, isso é regido por contrato específico e NDA.</p>
@@ -83,23 +95,41 @@
     </ul>
 
     <h2 style="font-family:var(--serif);font-size:32px;margin:0 0 16px">4. Base legal do tratamento</h2>
-    <p style="font-size:17px;line-height:1.7;margin-bottom:32px">Conforme o artigo 7º da LGPD, tratamos dados com base em: <strong>consentimento</strong> (formulários e newsletter), <strong>execução de contrato</strong> (clientes ativos), <strong>legítimo interesse</strong> (follow-up comercial institucional) e <strong>obrigação legal</strong> (fiscal e trabalhista).</p>
+    <p style="font-size:17px;line-height:1.7;margin-bottom:32px">Conforme o artigo 7º da LGPD, tratamos dados com base em: <strong>consentimento</strong> (formulários, newsletter e cookies de análise), <strong>procedimentos preliminares a contrato</strong> (retorno a pedidos de conversa), <strong>execução de contrato</strong> (clientes ativos), <strong>legítimo interesse</strong> (follow-up comercial institucional) e <strong>obrigação legal</strong> (fiscal e trabalhista).</p>
 
     <h2 style="font-family:var(--serif);font-size:32px;margin:0 0 16px">5. Compartilhamento</h2>
     <p style="font-size:17px;line-height:1.7;margin-bottom:16px">Seus dados <strong>não são vendidos, alugados ou cedidos</strong> a terceiros para fins comerciais. Compartilhamos apenas quando necessário para a operação, com prestadores que seguem os mesmos padrões de sigilo:</p>
-    <ul style="font-size:17px;line-height:1.8;padding-left:24px;margin-bottom:32px">
-      <li>Plataforma de envio de formulários e e-mail transacional.</li>
-      <li>Google Analytics (dados de navegação agregados).</li>
+    <ul style="font-size:17px;line-height:1.8;padding-left:24px;margin-bottom:16px">
+      <li><strong>Formspree</strong> (EUA) — recebimento do formulário de contato.</li>
+      <li><strong>Brevo</strong> (França) — cadastro e envio da newsletter Perspectivas.</li>
+      <li><strong>Google</strong> (EUA) — Google Analytics 4 e Google Tag Manager (dados de navegação agregados, mediante consentimento), Google Forms (banco de talentos), Google Fonts.</li>
+      <li><strong>GitHub Pages</strong> (EUA) — hospedagem do site.</li>
       <li>Parceiros técnicos e contábeis contratualmente vinculados a sigilo.</li>
       <li>Autoridades públicas, quando houver requisição legal.</li>
     </ul>
+    <p style="font-size:17px;line-height:1.7;margin-bottom:32px">Alguns desses prestadores operam fora do Brasil. A transferência internacional ocorre nos termos do art. 33 da LGPD, com fornecedores que adotam cláusulas contratuais e padrões de segurança reconhecidos.</p>
 
     <h2 style="font-family:var(--serif);font-size:32px;margin:0 0 16px">6. Armazenamento e segurança</h2>
     <p style="font-size:17px;line-height:1.7;margin-bottom:16px">Dados são armazenados em servidores contratados com controles de acesso, criptografia em trânsito (HTTPS) e backup. Mantemos os dados apenas pelo tempo necessário para cumprir a finalidade que motivou a coleta, observados os prazos legais aplicáveis.</p>
     <p style="font-size:17px;line-height:1.7;margin-bottom:32px">Registros comerciais inativos são eliminados após 24 meses sem interação, salvo requerimento legal específico.</p>
 
     <h2 style="font-family:var(--serif);font-size:32px;margin:0 0 16px">7. Cookies</h2>
-    <p style="font-size:17px;line-height:1.7;margin-bottom:32px">Utilizamos cookies <strong>estritamente necessários</strong> para o funcionamento do site e cookies <strong>de análise</strong> para entender como o conteúdo é consumido (Google Analytics). Você pode bloquear cookies no seu navegador; algumas funcionalidades podem ser afetadas.</p>
+    <p style="font-size:17px;line-height:1.7;margin-bottom:16px">Este site não usa cookies próprios para funcionar. Os únicos cookies são <strong>de análise</strong> (Google Analytics 4), usados para entender como o conteúdo é lido e quais páginas geram contato. Eles <strong>só são gravados depois que você clica em "Aceitar"</strong> no aviso exibido na primeira visita. Se você recusar, o site continua funcionando normalmente e o Google Analytics recebe apenas sinais anônimos, sem cookie e sem identificador.</p>
+    <div style="overflow-x:auto;margin-bottom:16px">
+      <table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5">
+        <thead>
+          <tr style="border-bottom:2px solid var(--linha);text-align:left">
+            <th style="padding:10px 12px 10px 0">Cookie</th><th style="padding:10px 12px">Fornecedor</th><th style="padding:10px 12px">Finalidade</th><th style="padding:10px 0 10px 12px">Duração</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--linha)"><td style="padding:10px 12px 10px 0"><code>_ga</code></td><td style="padding:10px 12px">Google Analytics</td><td style="padding:10px 12px">Distinguir visitantes de forma pseudonimizada</td><td style="padding:10px 0 10px 12px">13 meses</td></tr>
+          <tr style="border-bottom:1px solid var(--linha)"><td style="padding:10px 12px 10px 0"><code>_ga_PTS41WC8HS</code></td><td style="padding:10px 12px">Google Analytics</td><td style="padding:10px 12px">Manter o estado da sessão de navegação</td><td style="padding:10px 0 10px 12px">13 meses</td></tr>
+          <tr><td style="padding:10px 12px 10px 0"><code>atto_consent</code> <span style="color:var(--cinza-medio)">(armazenamento local)</span></td><td style="padding:10px 12px">Atto</td><td style="padding:10px 12px">Lembrar a sua escolha no aviso de cookies</td><td style="padding:10px 0 10px 12px">12 meses</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:17px;line-height:1.7;margin-bottom:32px">Você pode rever ou revogar sua escolha a qualquer momento pelo link <a href="#" data-cookie-prefs style="color:var(--azul-atto);border-bottom:1px solid var(--azul-atto)">Preferências de cookies</a> (também disponível no rodapé de todas as páginas) ou bloqueando cookies no seu navegador.</p>
 
     <h2 style="font-family:var(--serif);font-size:32px;margin:0 0 16px">8. Seus direitos</h2>
     <p style="font-size:17px;line-height:1.7;margin-bottom:16px">Nos termos da LGPD (art. 18), você pode solicitar a qualquer momento:</p>
@@ -132,7 +162,7 @@
       <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="vagas.html">Vagas</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
       <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="newsletter.html">Newsletter</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="politica-privacidade.html">Política de privacidade</a> · <a href="termos-uso.html">Termos</a></div></div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="politica-privacidade.html">Política de privacidade</a> · <a href="termos-uso.html">Termos</a> · <a href="#" data-cookie-prefs>Cookies</a></div></div>
   </div>
 </footer>
 <script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>

@@ -75,7 +75,7 @@ EMAIL_TEMPLATE = """<!DOCTYPE html>
 <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:1px;color:#7E8796;padding-top:16px;">
 <a href="https://www.linkedin.com/company/gestaoatto" style="color:#2FE0D6;text-decoration:none;">LinkedIn</a> &nbsp;&middot;&nbsp;
 <a href="https://www.instagram.com/gestaoatto" style="color:#2FE0D6;text-decoration:none;">Instagram</a> &nbsp;&middot;&nbsp;
-<a href="https://www.gestaoatto.com.br/perspectivas.html" style="color:#2FE0D6;text-decoration:none;">Todas as Perspectivas</a></div>
+<a href="https://www.gestaoatto.com.br/perspectivas.html?utm_source=brevo&amp;utm_medium=email&amp;utm_campaign=__CAMPANHA__&amp;utm_content=rodape" style="color:#2FE0D6;text-decoration:none;">Todas as Perspectivas</a></div>
 <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;line-height:1.6;color:#6B7280;padding-top:18px;">Atto Estrategias &amp; Educacao &middot; Caxias do Sul / RS<br>Voce recebe este e-mail porque assinou as Perspectivas Atto. <a href="{{ unsubscribe }}" style="color:#9AA3B2;text-decoration:underline;">Cancelar inscricao</a>.</div>
 </td></tr>
 </table></td></tr></table></body></html>"""
@@ -113,7 +113,11 @@ def build_html(e: dict) -> str:
         hero = f"{BASE}/assets/capas/{e['slug']}_ig-feed.png"
     else:
         hero = f"{BASE}/assets/capas/{e['slug']}_hero.png"
-    link = f"{BASE}/perspectivas/{e['slug']}.html"
+    # Links com UTM (convenção em docs/UTM.md): a newsletter aparece no GA4
+    # como brevo / email / perspectiva-NN em vez de "referral sendibm3.com".
+    campanha = f"perspectiva-{e.get('numero', '')}".rstrip("-") or "perspectiva"
+    utm = f"utm_source=brevo&utm_medium=email&utm_campaign={campanha}"
+    link = f"{BASE}/perspectivas/{e['slug']}.html?{utm}&utm_content=cta-ler"
     html = EMAIL_TEMPLATE
     repl = {
         "__NUMERO__": str(e.get("numero", "")),
@@ -123,6 +127,7 @@ def build_html(e: dict) -> str:
         "__EXCERPT__": e.get("excerpt", ""),
         "__HERO__": hero,
         "__LINK__": link,
+        "__CAMPANHA__": campanha,
         "__AUTOR__": autor,
     }
     for k, v in repl.items():

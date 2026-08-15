@@ -89,17 +89,29 @@
   ]
 }
 </script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTS41WC8HS"></script>
+<!-- Atto · Data Layer -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PTS41WC8HS');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage:'denied', ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', functionality_storage:'granted', security_storage:'granted', wait_for_update:500});
+gtag('set', 'ads_data_redaction', true);
+try { var c = JSON.parse(localStorage.getItem('atto_consent') || 'null'); if (c && c.ts && (Date.now() - c.ts) < 31536000000 && c.analytics === 'granted') { gtag('consent', 'update', {analytics_storage:'granted'}); } } catch (e) {}
+dataLayer.push({page_family: 'conversao'});
 </script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N495GLWN');</script>
+<!-- End Google Tag Manager -->
 <script defer src="assets/atto-events.js"></script>
+<script defer src="assets/atto-consent.js"></script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N495GLWN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <div class="scroll-progress" aria-hidden="true"></div>
 
@@ -133,13 +145,19 @@
   <div class="container">
     <div class="contato-grid">
 
-      <div class="form-card">
+      <div class="form-card" id="agendar">
         <h3>Agende uma conversa.</h3>
         <p class="sub">Resposta em até 1 dia útil. Encaminhamos convite de agenda com dois horários sugeridos: videoconferência ou presencial em Caxias, conforme sua preferência.</p>
 
-        <form action="https://formspree.io/f/mpqbzdjg" method="POST">
+        <div id="contato-sucesso" hidden tabindex="-1" role="status" aria-live="polite" style="padding:28px 24px;border:1px solid var(--linha);border-left:3px solid var(--teal-atto);background:var(--papel-alt)">
+          <h4 style="font-family:'Outfit';font-weight:500;font-size:20px;letter-spacing:-.01em;margin:0 0 10px;color:var(--tinta)">Recebido. Obrigado pela confiança.</h4>
+          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--cinza-escuro)">Um dos sócios responde em até 1 dia útil com dois horários sugeridos. Se preferir, o WhatsApp e o telefone ao lado continuam disponíveis.</p>
+        </div>
+
+        <form action="https://formspree.io/f/mpqbzdjg" method="POST" id="contato-form" novalidate="false">
           <input type="hidden" name="_subject" value="[Atto Site] Novo contato pelo formulário" />
           <input type="hidden" name="_language" value="pt" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
 
           <div class="field-row">
             <div class="field">
@@ -200,6 +218,7 @@
           </div>
 
           <button type="submit">Agendar conversa confidencial <span class="arrow">→</span></button>
+          <p id="contato-erro" hidden role="alert" style="margin:14px 0 0;font-size:14px;line-height:1.5;color:#b42318">Não conseguimos enviar agora. Tente novamente em instantes ou fale direto pelo WhatsApp ou e-mail ao lado.</p>
         </form>
       </div>
 
@@ -221,7 +240,7 @@
 
         <div class="info-block">
           <h5>WhatsApp</h5>
-          <div class="valor"><a href="https://wa.me/5554999079939" target="_blank" rel="noopener">+55 (54) 99907.9939</a></div>
+          <div class="valor"><a href="https://wa.me/5554999079939?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Atto%20e%20gostaria%20de%20agendar%20uma%20conversa." target="_blank" rel="noopener">+55 (54) 99907.9939</a></div>
           <div class="sub">Mensagens dos sócios · respostas em horário comercial</div>
         </div>
 
@@ -289,7 +308,7 @@
       <div class="footer-col"><h5>A Atto</h5><ul><li><a href="sobre.html">Quem somos</a></li><li><a href="clientes.html">Clientes</a></li><li><a href="atuacao.html">Atuação</a></li><li><a href="vagas.html">Vagas</a></li><li><a href="trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
       <div class="footer-col"><h5>Contato</h5><ul><li><a href="contato.html">Agende conversa</a></li><li><a href="newsletter.html">Newsletter</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="politica-privacidade.html">Política de privacidade</a> · <a href="termos-uso.html">Termos</a></div></div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="politica-privacidade.html">Política de privacidade</a> · <a href="termos-uso.html">Termos</a> · <a href="#" data-cookie-prefs>Cookies</a></div></div>
   </div>
 </footer>
 <script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>

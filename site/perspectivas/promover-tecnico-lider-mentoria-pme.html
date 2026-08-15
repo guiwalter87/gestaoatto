@@ -79,15 +79,6 @@
   ]
 }
 </script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PTS41WC8HS"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PTS41WC8HS');
-</script>
-<script defer src="../assets/atto-events.js"></script>
 <style>
 .post-hero{padding:96px 0 40px;max-width:860px;margin:0 auto}
 .post-hero .back{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:32px;display:inline-block}
@@ -143,8 +134,29 @@
   .post-nav{grid-template-columns:1fr}
 }
 </style>
+<!-- Atto · Data Layer -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage:'denied', ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', functionality_storage:'granted', security_storage:'granted', wait_for_update:500});
+gtag('set', 'ads_data_redaction', true);
+try { var c = JSON.parse(localStorage.getItem('atto_consent') || 'null'); if (c && c.ts && (Date.now() - c.ts) < 31536000000 && c.analytics === 'granted') { gtag('consent', 'update', {analytics_storage:'granted'}); } } catch (e) {}
+dataLayer.push({page_family: 'perspectiva', vertical_atto: 'Perspectivas', article_section: 'Pessoas', article_author: 'Patrícia Misturini', article_slug: 'promover-tecnico-lider-mentoria-pme'});
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N495GLWN');</script>
+<!-- End Google Tag Manager -->
+<script defer src="../assets/atto-events.js"></script>
+<script defer src="../assets/atto-consent.js"></script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N495GLWN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <div class="scroll-progress" aria-hidden="true"></div>
 
@@ -268,7 +280,7 @@
       <div class="footer-col"><h5>A Atto</h5><ul><li><a href="../sobre.html">Quem somos</a></li><li><a href="../clientes.html">Clientes</a></li><li><a href="../atuacao.html">Atuação</a></li><li><a href="../vagas.html">Vagas</a></li><li><a href="../trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
       <div class="footer-col"><h5>Contato</h5><ul><li><a href="../contato.html">Agende conversa</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="#">Política de privacidade</a> · <a href="#">Termos</a></div></div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="../politica-privacidade.html">Política de privacidade</a> · <a href="../termos-uso.html">Termos</a> · <a href="#" data-cookie-prefs>Cookies</a></div></div>
   </div>
 </footer>
 <script src="../assets/site.js" defer></script>

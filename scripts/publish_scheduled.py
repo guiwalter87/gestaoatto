@@ -126,12 +126,17 @@ def ensure_atto_events_js(post_html: str) -> tuple[str, bool]:
     """
     if ATTO_EVENTS_SENTINEL in post_html:
         return post_html, False
-    # Insere logo após o snippet gtag config
+    # Site migrado para GTM (ago/2026): insere após o snippet do GTM.
+    # Mantém fallback para o snippet gtag antigo, se algum post legado aparecer.
+    scripts = ATTO_EVENTS_SCRIPT + '\n<script defer src="../assets/atto-consent.js"></script>\n'
+    if "<!-- End Google Tag Manager -->" in post_html:
+        new_html = post_html.replace("<!-- End Google Tag Manager -->", "<!-- End Google Tag Manager -->\n" + scripts, 1)
+        return new_html, True
     pattern = re.compile(
         r"(\s*gtag\('config',\s*'G-PTS41WC8HS'\);\s*\n</script>\s*\n)",
         re.IGNORECASE,
     )
-    new_html, count = pattern.subn(r"\1" + ATTO_EVENTS_SCRIPT + "\n", post_html, count=1)
+    new_html, count = pattern.subn(r"\1" + scripts, post_html, count=1)
     return new_html, count > 0
 
 
