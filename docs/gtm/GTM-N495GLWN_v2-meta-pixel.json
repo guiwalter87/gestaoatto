@@ -1,0 +1,291 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2026-08-15 16:00:00",
+  "containerVersion": {
+    "path": "accounts/6371618964/containers/261358089/versions/0",
+    "accountId": "6371618964",
+    "containerId": "261358089",
+    "containerVersionId": "0",
+    "name": "v2 — Meta Pixel",
+    "description": "Meta Pixel 623028748785185 condicionado a ad_storage; ViewContent em páginas de conteúdo; Lead/Contact e eventos custom a partir do dataLayer.",
+    "container": {
+      "path": "accounts/6371618964/containers/261358089",
+      "accountId": "6371618964",
+      "containerId": "261358089",
+      "name": "www.gestaoatto.com.br",
+      "publicId": "GTM-N495GLWN",
+      "usageContext": [
+        "WEB"
+      ],
+      "fingerprint": "0"
+    },
+    "tag": [
+      {
+        "accountId": "6371618964",
+        "containerId": "261358089",
+        "tagId": "101",
+        "name": "Meta - Pixel base (PageView)",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?\nn.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;\nn.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;\nt.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,\ndocument,'script','https://connect.facebook.net/en_US/fbevents.js');\nfbq('init', '623028748785185');\nfbq('track', 'PageView');\n</script>\n<noscript><img height=\"1\" width=\"1\" style=\"display:none\" src=\"https://www.facebook.com/tr?id=623028748785185&ev=PageView&noscript=1\"/></noscript>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "101",
+          "102"
+        ],
+        "tagFiringOption": "ONCE_PER_LOAD",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "accountId": "6371618964",
+        "containerId": "261358089",
+        "tagId": "102",
+        "name": "Meta - ViewContent (conteúdo)",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  if (typeof fbq !== 'function') return;\n  var pf = {{DL - page_family}} || '';\n  var slug = {{DL - article_slug}} || '';\n  var d = { content_name: {{Page Path}}, content_category: pf };\n  if (slug) { d.content_ids = [slug]; d.content_type = 'perspectiva'; }\n  if ({{DL - vertical_atto}}) { d.vertical = {{DL - vertical_atto}}; }\n  fbq('track', 'ViewContent', d);\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "103"
+        ],
+        "tagFiringOption": "ONCE_PER_LOAD",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "setupTag": [
+          {
+            "tagName": "Meta - Pixel base (PageView)",
+            "stopOnSetupFailure": false
+          }
+        ]
+      },
+      {
+        "accountId": "6371618964",
+        "containerId": "261358089",
+        "tagId": "103",
+        "name": "Meta - Eventos (Lead/Contact/custom)",
+        "type": "html",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "html",
+            "value": "<script>\n(function(){\n  if (typeof fbq !== 'function') return;\n  var ev = {{Event}};\n  var ls = {{DL - lead_source}} || '';\n  var fs = {{DL - form_subject}} || '';\n  var pf = {{DL - page_family}} || '';\n  var cp = {{DL - cta_position}} || '';\n  if (ev === 'generate_lead') {\n    fbq('track', 'Lead', { content_name: ls || 'lead', content_category: fs || pf, currency: 'BRL', value: 0 });\n    if (ls && ls !== 'form') { fbq('track', 'Contact', { content_name: ls, content_category: pf }); }\n  } else if (ev === 'form_start') {\n    fbq('trackCustom', 'FormStart', { content_name: 'contato' });\n  } else if (ev === 'newsletter_click') {\n    fbq('trackCustom', 'NewsletterClick', { content_name: cp });\n  } else if (ev === 'perspectiva_lida' && String({{DL - percent_scrolled}}) === '90') {\n    fbq('trackCustom', 'PerspectivaLida', { content_ids: [{{DL - article_slug}} || ''], content_type: 'perspectiva' });\n  } else if (ev === 'share') {\n    fbq('trackCustom', 'Share', { content_name: {{DL - method}} || '', content_ids: [{{DL - item_id}} || ''] });\n  }\n})();\n</script>"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "supportDocumentWrite",
+            "value": "false"
+          }
+        ],
+        "firingTriggerId": [
+          "104"
+        ],
+        "tagFiringOption": "ONCE_PER_EVENT",
+        "monitoringMetadata": {
+          "type": "MAP"
+        },
+        "consentSettings": {
+          "consentStatus": "NEEDED",
+          "consentType": {
+            "type": "LIST",
+            "list": [
+              {
+                "type": "TEMPLATE",
+                "value": "ad_storage"
+              }
+            ]
+          }
+        },
+        "setupTag": [
+          {
+            "tagName": "Meta - Pixel base (PageView)",
+            "stopOnSetupFailure": false
+          }
+        ]
+      }
+    ],
+    "trigger": [
+      {
+        "accountId": "6371618964",
+        "containerId": "261358089",
+        "triggerId": "101",
+        "name": "All Pages",
+        "type": "PAGEVIEW"
+      },
+      {
+        "accountId": "6371618964",
+        "containerId": "261358089",
+        "triggerId": "102",
+        "name": "CE - consent_update (ads granted)",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "consent_update"
+              }
+            ]
+          }
+        ],
+        "filter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{DL - consent_ads}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "granted"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "6371618964",
+        "containerId": "261358089",
+        "triggerId": "103",
+        "name": "PV - Páginas de conteúdo (servico/metodo/setor/perspectiva)",
+        "type": "PAGEVIEW",
+        "filter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{DL - page_family}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "^(servico|metodo|setor|perspectiva)$"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "accountId": "6371618964",
+        "containerId": "261358089",
+        "triggerId": "104",
+        "name": "CE - Eventos Meta (lead/newsletter/form_start/leitura/share)",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "MATCH_REGEX",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "^(generate_lead|newsletter_click|form_start|perspectiva_lida|share)$"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "accountId": "6371618964",
+        "containerId": "261358089",
+        "variableId": "201",
+        "name": "DL - consent_ads",
+        "type": "v",
+        "parameter": [
+          {
+            "type": "TEMPLATE",
+            "key": "name",
+            "value": "consent_ads"
+          },
+          {
+            "type": "INTEGER",
+            "key": "dataLayerVersion",
+            "value": "2"
+          },
+          {
+            "type": "BOOLEAN",
+            "key": "setDefaultValue",
+            "value": "false"
+          }
+        ]
+      }
+    ],
+    "builtInVariable": [
+      {
+        "accountId": "6371618964",
+        "containerId": "261358089",
+        "type": "PAGE_PATH",
+        "name": "Page Path"
+      },
+      {
+        "accountId": "6371618964",
+        "containerId": "261358089",
+        "type": "EVENT",
+        "name": "Event"
+      }
+    ],
+    "fingerprint": "0"
+  }
+}
