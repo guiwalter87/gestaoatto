@@ -42,6 +42,7 @@
       ad_personalization: state
     });
     dl.push({ event: 'consent_update', consent_analytics: state, consent_ads: state });
+    if (analytics) { dl.push({ event: 'atto_ads_granted' }); }   // gatilho determinístico do Meta Pixel no GTM
   }
 
   // ---------------------------------------------------------------- estilos

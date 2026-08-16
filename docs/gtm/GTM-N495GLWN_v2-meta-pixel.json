@@ -6,8 +6,8 @@
     "accountId": "6371618964",
     "containerId": "261358089",
     "containerVersionId": "0",
-    "name": "v2 — Meta Pixel",
-    "description": "Meta Pixel 623028748785185 condicionado a ad_storage; ViewContent em páginas de conteúdo; Lead/Contact e eventos custom a partir do dataLayer.",
+    "name": "v3 — Meta Pixel via atto_ads_granted",
+    "description": "Pixel base e ViewContent disparam só no evento atto_ads_granted (emitido pelo consentimento do site); eventos Meta checam typeof fbq.",
     "container": {
       "path": "accounts/6371618964/containers/261358089",
       "accountId": "6371618964",
@@ -30,7 +30,7 @@
           {
             "type": "TEMPLATE",
             "key": "html",
-            "value": "<script>\n!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?\nn.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;\nn.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;\nt.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,\ndocument,'script','https://connect.facebook.net/en_US/fbevents.js');\nfbq('init', '623028748785185');\nfbq('track', 'PageView');\n</script>\n<noscript><img height=\"1\" width=\"1\" style=\"display:none\" src=\"https://www.facebook.com/tr?id=623028748785185&ev=PageView&noscript=1\"/></noscript>"
+            "value": "<!-- Dispara SOMENTE no evento atto_ads_granted (consentimento de marketing aceito) -->\n<script>\n!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?\nn.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;\nn.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;\nt.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,\ndocument,'script','https://connect.facebook.net/en_US/fbevents.js');\nfbq('init', '623028748785185');\nfbq('track', 'PageView');\n</script>\n<noscript><img height=\"1\" width=\"1\" style=\"display:none\" src=\"https://www.facebook.com/tr?id=623028748785185&ev=PageView&noscript=1\"/></noscript>"
           },
           {
             "type": "BOOLEAN",
@@ -39,24 +39,14 @@
           }
         ],
         "firingTriggerId": [
-          "101",
-          "102"
+          "105"
         ],
         "tagFiringOption": "ONCE_PER_LOAD",
         "monitoringMetadata": {
           "type": "MAP"
         },
         "consentSettings": {
-          "consentStatus": "NEEDED",
-          "consentType": {
-            "type": "LIST",
-            "list": [
-              {
-                "type": "TEMPLATE",
-                "value": "ad_storage"
-              }
-            ]
-          }
+          "consentStatus": "NOT_SET"
         }
       },
       {
@@ -78,30 +68,15 @@
           }
         ],
         "firingTriggerId": [
-          "103"
+          "106"
         ],
         "tagFiringOption": "ONCE_PER_LOAD",
         "monitoringMetadata": {
           "type": "MAP"
         },
         "consentSettings": {
-          "consentStatus": "NEEDED",
-          "consentType": {
-            "type": "LIST",
-            "list": [
-              {
-                "type": "TEMPLATE",
-                "value": "ad_storage"
-              }
-            ]
-          }
-        },
-        "setupTag": [
-          {
-            "tagName": "Meta - Pixel base (PageView)",
-            "stopOnSetupFailure": false
-          }
-        ]
+          "consentStatus": "NOT_SET"
+        }
       },
       {
         "accountId": "6371618964",
@@ -129,38 +104,16 @@
           "type": "MAP"
         },
         "consentSettings": {
-          "consentStatus": "NEEDED",
-          "consentType": {
-            "type": "LIST",
-            "list": [
-              {
-                "type": "TEMPLATE",
-                "value": "ad_storage"
-              }
-            ]
-          }
-        },
-        "setupTag": [
-          {
-            "tagName": "Meta - Pixel base (PageView)",
-            "stopOnSetupFailure": false
-          }
-        ]
+          "consentStatus": "NOT_SET"
+        }
       }
     ],
     "trigger": [
       {
         "accountId": "6371618964",
         "containerId": "261358089",
-        "triggerId": "101",
-        "name": "All Pages",
-        "type": "PAGEVIEW"
-      },
-      {
-        "accountId": "6371618964",
-        "containerId": "261358089",
-        "triggerId": "102",
-        "name": "CE - consent_update (ads granted)",
+        "triggerId": "105",
+        "name": "CE - atto_ads_granted (consentimento de marketing)",
         "type": "CUSTOM_EVENT",
         "customEventFilter": [
           {
@@ -174,24 +127,7 @@
               {
                 "type": "TEMPLATE",
                 "key": "arg1",
-                "value": "consent_update"
-              }
-            ]
-          }
-        ],
-        "filter": [
-          {
-            "type": "EQUALS",
-            "parameter": [
-              {
-                "type": "TEMPLATE",
-                "key": "arg0",
-                "value": "{{DL - consent_ads}}"
-              },
-              {
-                "type": "TEMPLATE",
-                "key": "arg1",
-                "value": "granted"
+                "value": "atto_ads_granted"
               }
             ]
           }
@@ -200,9 +136,26 @@
       {
         "accountId": "6371618964",
         "containerId": "261358089",
-        "triggerId": "103",
-        "name": "PV - Páginas de conteúdo (servico/metodo/setor/perspectiva)",
-        "type": "PAGEVIEW",
+        "triggerId": "106",
+        "name": "CE - atto_ads_granted em páginas de conteúdo",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          {
+            "type": "EQUALS",
+            "parameter": [
+              {
+                "type": "TEMPLATE",
+                "key": "arg0",
+                "value": "{{_event}}"
+              },
+              {
+                "type": "TEMPLATE",
+                "key": "arg1",
+                "value": "atto_ads_granted"
+              }
+            ]
+          }
+        ],
         "filter": [
           {
             "type": "MATCH_REGEX",
@@ -246,32 +199,7 @@
         ]
       }
     ],
-    "variable": [
-      {
-        "accountId": "6371618964",
-        "containerId": "261358089",
-        "variableId": "201",
-        "name": "DL - consent_ads",
-        "type": "v",
-        "parameter": [
-          {
-            "type": "TEMPLATE",
-            "key": "name",
-            "value": "consent_ads"
-          },
-          {
-            "type": "INTEGER",
-            "key": "dataLayerVersion",
-            "value": "2"
-          },
-          {
-            "type": "BOOLEAN",
-            "key": "setDefaultValue",
-            "value": "false"
-          }
-        ]
-      }
-    ],
+    "variable": [],
     "builtInVariable": [
       {
         "accountId": "6371618964",
