@@ -29,6 +29,7 @@ GTAG_BLOCK = re.compile(
 )
 EVENTS_TAG = re.compile(r"<script defer src=\"(\.\./)?assets/atto-events\.js\"></script>\s*")
 CONSENT_TAG = re.compile(r"<script defer src=\"(\.\./)?assets/atto-consent\.js\"></script>\s*")
+WA_TAG = re.compile(r"<script defer src=\"(\.\./)?assets/atto-whatsapp\.js\"></script>\s*")
 DL_BLOCK = re.compile(r"<!-- Atto · Data Layer -->.*?<!-- End Google Tag Manager -->\s*", re.S)
 NOSCRIPT = re.compile(r"\s*<!-- Google Tag Manager \(noscript\) -->.*?<!-- End Google Tag Manager \(noscript\) -->", re.S)
 
@@ -133,8 +134,10 @@ def migrate(path):
     html = GTAG_BLOCK.sub("", html)
     html = EVENTS_TAG.sub("", html)
     html = CONSENT_TAG.sub("", html)
+    html = WA_TAG.sub("", html)
     scripts = (f'<script defer src="{prefix}assets/atto-events.js"></script>\n'
-               f'<script defer src="{prefix}assets/atto-consent.js"></script>\n')
+               f'<script defer src="{prefix}assets/atto-consent.js"></script>\n'
+               f'<script defer src="{prefix}assets/atto-whatsapp.js"></script>\n')
     html = html.replace("</head>", head_block(rel, html) + scripts + "</head>", 1)
 
     # 2. noscript após <body>

@@ -1,6 +1,6 @@
 /* ==========================================================================
    Atto · Data Layer Events
-   v2.0 · 2026-08-15
+   v2.1 · 2026-08-16
    --------------------------------------------------------------------------
    Publica eventos semânticos no window.dataLayer (lidos pelo Google Tag
    Manager, que os envia ao GA4). Não chama gtag() diretamente.
@@ -29,7 +29,7 @@
   'use strict';
 
   var dl = (window.dataLayer = window.dataLayer || []);
-  var WA_COMERCIAL = '5554999079939';
+  var WA_COMERCIAIS = ['5554999079939', '5551993333826'];   // vagas/RH e sócios (botão flutuante)
   var EMAIL_COMERCIAL = 'contato@gestaoatto.com.br';
   var EMAIL_RH = 'jessica.varela@gestaoatto.com.br';
   var DOWNLOAD_EXT = /\.(pdf|xlsx?|docx?|pptx?|zip|csv|png|jpe?g|svg|webp)(\?|#|$)/i;
@@ -142,8 +142,10 @@
 
     // WhatsApp
     if (/^https?:\/\/(wa\.me|api\.whatsapp\.com|chat\.whatsapp\.com)/.test(hrefLower) || /^whatsapp:/.test(hrefLower)) {
-      if (hrefLower.indexOf(WA_COMERCIAL) !== -1) {
-        push('generate_lead', Object.assign({ lead_source: 'whatsapp', currency: 'BRL', value: 0 }, base));
+      var ehComercial = WA_COMERCIAIS.some(function (n) { return hrefLower.indexOf(n) !== -1; });
+      if (ehComercial) {
+        var topic = (a.dataset && a.dataset.waTopic) || (hrefLower.indexOf('5551993333826') !== -1 ? 'socios' : 'geral');
+        push('generate_lead', Object.assign({ lead_source: 'whatsapp', contact_topic: topic, currency: 'BRL', value: 0 }, base));
       } else {
         push('share', Object.assign({ method: 'whatsapp', content_type: slug ? 'perspectiva' : 'pagina', item_id: slug || location.pathname }, base));
       }

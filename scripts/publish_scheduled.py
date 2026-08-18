@@ -128,7 +128,7 @@ def ensure_atto_events_js(post_html: str) -> tuple[str, bool]:
         return post_html, False
     # Site migrado para GTM (ago/2026): insere após o snippet do GTM.
     # Mantém fallback para o snippet gtag antigo, se algum post legado aparecer.
-    scripts = ATTO_EVENTS_SCRIPT + '\n<script defer src="../assets/atto-consent.js"></script>\n'
+    scripts = ATTO_EVENTS_SCRIPT + '\n<script defer src="../assets/atto-consent.js"></script>\n<script defer src="../assets/atto-whatsapp.js"></script>\n'
     if "<!-- End Google Tag Manager -->" in post_html:
         new_html = post_html.replace("<!-- End Google Tag Manager -->", "<!-- End Google Tag Manager -->\n" + scripts, 1)
         return new_html, True
