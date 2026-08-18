@@ -40,6 +40,22 @@
 .vag-card .vc-cta{font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--azul-atto);font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:gap .2s}
 .vag-card:hover .vc-cta{gap:12px;color:var(--teal-atto)}
 
+/* ===== FILTROS DE VAGAS ===== */
+.vag-filtros{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:16px;align-items:end;margin-bottom:28px;padding:24px 28px;background:#fff;border:1px solid var(--linha);border-radius:2px}
+.vag-filtros .vf-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:8px}
+.vag-filtros .vf-field input,.vag-filtros .vf-field select{width:100%;border:none;border-bottom:1px solid var(--linha);background:transparent;padding:10px 0;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;color:var(--tinta);border-radius:0;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.vag-filtros .vf-field select{background-image:linear-gradient(45deg,transparent 50%,var(--cinza-medio) 50%),linear-gradient(135deg,var(--cinza-medio) 50%,transparent 50%);background-position:calc(100% - 12px) 55%,calc(100% - 7px) 55%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:24px;cursor:pointer}
+.vag-filtros .vf-field input:focus,.vag-filtros .vf-field select:focus{outline:none;border-bottom-color:var(--azul-atto)}
+.vag-filtros .vf-field input::placeholder{color:var(--cinza-medio)}
+.vag-filtros .vf-actions{display:flex;flex-direction:column;align-items:flex-end;gap:6px;white-space:nowrap}
+.vag-filtros .vf-count{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--azul-atto)}
+.vag-filtros .vf-clear{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);background:none;border:none;border-bottom:1px solid transparent;padding:0;cursor:pointer;transition:color .2s,border-color .2s}
+.vag-filtros .vf-clear:hover{color:var(--tinta);border-bottom-color:var(--tinta)}
+.vag-filtros .vf-clear[hidden]{display:none}
+.vag-nenhuma{grid-column:1/-1;background:var(--papel-alt);border:1px dashed var(--linha);padding:40px 32px;text-align:center;border-radius:2px;font-size:15px;line-height:1.6;color:var(--cinza-escuro)}
+.vag-nenhuma strong{color:var(--tinta);font-weight:600}
+@media (max-width:900px){.vag-filtros{grid-template-columns:1fr 1fr;padding:20px}.vag-filtros .vf-field:first-child{grid-column:1/-1}.vag-filtros .vf-actions{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center}}
+
 /* mensagem de "nenhuma vaga aberta" */
 .vag-empty{background:var(--papel-alt);border:1px solid var(--linha);padding:64px 48px;border-radius:2px;text-align:center;display:none}
 .vag-empty.is-on{display:block}
@@ -186,6 +202,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       mais abaixo aparece como mensagem amigável.
       ============================================================
     -->
+    <form class="vag-filtros" data-vagas-filtros hidden onsubmit="return false" aria-label="Filtrar vagas">
+      <div class="vf-field">
+        <label for="vf-busca">Nome da vaga</label>
+        <input type="search" id="vf-busca" name="busca" placeholder="Ex.: analista, coordenador, produção" autocomplete="off" />
+      </div>
+      <div class="vf-field">
+        <label for="vf-cidade">Cidade</label>
+        <select id="vf-cidade" name="cidade"><option value="">Todas as cidades</option></select>
+      </div>
+      <div class="vf-field">
+        <label for="vf-contrato">Contrato</label>
+        <select id="vf-contrato" name="contrato"><option value="">CLT ou PJ</option></select>
+      </div>
+      <div class="vf-actions">
+        <span class="vf-count" data-vf-count aria-live="polite"></span>
+        <button type="button" class="vf-clear" data-vf-clear hidden>Limpar filtros</button>
+      </div>
+    </form>
     <div class="vag-list" data-csv-url="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8Xow6Qf6G6SJ_9NggibiJmdEXGBiX0BMROpp69WuXTAsj5USqtl7qIRgGGSFPrIyS2Mp2G2GfVqE6/pub?gid=1333994151&amp;single=true&amp;output=csv" data-vagas-list>
       <!-- Cards estáticos como FALLBACK (mesmo padrão de contratacao-estrategica.html).
            Se a planilha responder, este bloco é substituído pelas vagas reais. -->
@@ -406,24 +440,112 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       '</a>';
   }
 
+  // ---------- filtros (nome, cidade, contrato) ----------
+  var form   = document.querySelector('[data-vagas-filtros]');
+  var fBusca = form && form.querySelector('[name=busca]');
+  var fCid   = form && form.querySelector('[name=cidade]');
+  var fCon   = form && form.querySelector('[name=contrato]');
+  var fCount = form && form.querySelector('[data-vf-count]');
+  var fClear = form && form.querySelector('[data-vf-clear]');
+  var todasAbertas = [];
+
+  function norm(s){
+    return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
+  }
+  // "Caxias do Sul / Rs", "caxias do sul/RS", "Farroupilha/RS" → "Caxias do Sul / RS"
+  function cidadeDe(v){
+    var raw = v['local'] || v['localizacao'] || v['localização'] || '';
+    var parts = raw.split('/');
+    var cid = parts[0].trim().replace(/\s+/g, ' ');
+    var uf  = (parts[1] || '').trim().toUpperCase();
+    if(!cid) return '';
+    cid = cid.split(' ').map(function(w){ return (w.length <= 2 && w !== 'RS') ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1); }).join(' ');
+    return uf ? cid + ' / ' + uf : cid;
+  }
+  function contratoDe(v){
+    return String(v['contrato'] || v['tipo'] || '').trim().toUpperCase();
+  }
+  function tituloDe(v){ return v['titulo'] || v['título'] || v['vaga'] || ''; }
+
+  function fillSelect(sel, values, keepFirst){
+    if(!sel) return;
+    var atual = sel.value;
+    while(sel.options.length > 1) sel.remove(1);
+    values.forEach(function(val){
+      var o = document.createElement('option'); o.value = val; o.textContent = val; sel.appendChild(o);
+    });
+    if(keepFirst && values.indexOf(atual) !== -1) sel.value = atual;
+  }
+
+  function opcoes(vagas){
+    var cids = {}, cons = {};
+    vagas.forEach(function(v){ var c = cidadeDe(v); if(c) cids[c] = 1; var k = contratoDe(v); if(k) cons[k] = 1; });
+    var ordemCon = ['CLT', 'PJ'];
+    return {
+      cidades: Object.keys(cids).sort(function(a,b){ return a.localeCompare(b, 'pt-BR'); }),
+      contratos: Object.keys(cons).sort(function(a,b){ var ia = ordemCon.indexOf(a), ib = ordemCon.indexOf(b); return (ia<0?9:ia) - (ib<0?9:ib) || a.localeCompare(b); })
+    };
+  }
+
+  function aplicarFiltros(){
+    var q   = fBusca ? norm(fBusca.value) : '';
+    var cid = fCid ? fCid.value : '';
+    var con = fCon ? fCon.value : '';
+    var res = todasAbertas.filter(function(v){
+      if(q && norm(tituloDe(v)).indexOf(q) === -1) return false;
+      if(cid && cidadeDe(v) !== cid) return false;
+      if(con && contratoDe(v) !== con) return false;
+      return true;
+    });
+    if(res.length){
+      list.innerHTML = res.map(renderCard).join('');
+    } else {
+      list.innerHTML = '<div class="vag-nenhuma"><strong>Nenhuma vaga com esses critérios.</strong><br>Ajuste os filtros ou envie seu currículo para o banco de talentos abaixo.</div>';
+    }
+    if(fCount) fCount.textContent = res.length + (res.length === 1 ? ' vaga' : ' vagas') + (res.length !== todasAbertas.length ? ' de ' + todasAbertas.length : '');
+    var ativo = !!(q || cid || con);
+    if(fClear) fClear.hidden = !ativo;
+    if(ativo && window.dataLayer){
+      window.dataLayer.push({ event: 'vaga_filter', filtro_busca: q || undefined, filtro_cidade: cid || undefined, filtro_contrato: con || undefined, resultados: res.length });
+    }
+  }
+
+  var debounce;
+  if(form){
+    if(fBusca) fBusca.addEventListener('input', function(){ clearTimeout(debounce); debounce = setTimeout(aplicarFiltros, 180); });
+    if(fCid) fCid.addEventListener('change', aplicarFiltros);
+    if(fCon) fCon.addEventListener('change', aplicarFiltros);
+    if(fClear) fClear.addEventListener('click', function(){ if(fBusca) fBusca.value=''; if(fCid) fCid.value=''; if(fCon) fCon.value=''; aplicarFiltros(); if(fBusca) fBusca.focus(); });
+  }
+
   function paint(vagas){
     var abertas = vagas.filter(function(v){
       var st = (v['status'] || '').toLowerCase();
       return st === 'aberta' || st === 'aberto' || st === 'ativa' || st === 'ativo';
     });
     if(!abertas.length){
-      // 0 vagas abertas confirmadas pela planilha → esconde grid e banco, mostra empty
+      // 0 vagas abertas confirmadas pela planilha → esconde grid, filtros e banco, mostra empty
       list.style.display = 'none';
+      if(form) form.hidden = true;
       var banco = document.querySelector('.vag-banco');
       if(banco) banco.style.display = 'none';
       if(empty) empty.classList.add('is-on');
       return;
     }
     list.style.display = '';
-    var banco = document.querySelector('.vag-banco');
-    if(banco) banco.style.display = '';
+    var banco2 = document.querySelector('.vag-banco');
+    if(banco2) banco2.style.display = '';
     if(empty) empty.classList.remove('is-on');
-    list.innerHTML = abertas.map(renderCard).join('');
+    todasAbertas = abertas;
+    if(form){
+      var op = opcoes(abertas);
+      fillSelect(fCid, op.cidades, true);
+      fillSelect(fCon, op.contratos, true);
+      form.hidden = false;
+      aplicarFiltros();
+    } else {
+      list.innerHTML = abertas.map(renderCard).join('');
+    }
   }
 
   function readCache(){
