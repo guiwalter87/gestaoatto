@@ -141,15 +141,24 @@ def ensure_atto_events_js(post_html: str) -> tuple[str, bool]:
 
 
 def bump_sitemap_lastmod(sitemap_text: str, today_iso: str) -> str:
-    """Atualiza todos os lastmod do sitemap para a data atual.
-    Mantém a higiene de fresh signals e evita lastmod stale como o que
-    foi detectado na auditoria Day 7 (sitemap congelado em 01.mai).
+    """Atualiza o lastmod APENAS das páginas que realmente mudam quando um
+    post é publicado: a home (feed) e perspectivas.html (grid/destaque).
+
+    Auditoria 2026-09-02: o bump global anterior marcava todas as 44 URLs
+    com a mesma data a cada publicação. O Google documenta que passa a
+    ignorar <lastmod> quando ele não reflete mudança real de conteúdo, o que
+    anulava o sinal justamente para os posts novos. Agora o sinal é seletivo.
     """
-    return re.sub(
-        r"<lastmod>\d{4}-\d{2}-\d{2}</lastmod>",
-        f"<lastmod>{today_iso}</lastmod>",
-        sitemap_text,
-    )
+    def _bump(url: str, text: str) -> str:
+        pat = re.compile(
+            r"(<loc>" + re.escape(url) + r"</loc>\s*<lastmod>)\d{4}-\d{2}-\d{2}(</lastmod>)"
+        )
+        return pat.sub(rf"\g<1>{today_iso}\g<2>", text)
+
+    for url in ("https://www.gestaoatto.com.br/",
+                "https://www.gestaoatto.com.br/perspectivas.html"):
+        sitemap_text = _bump(url, sitemap_text)
+    return sitemap_text
 
 
 def find_previous_published(slug: str) -> dict | None:
@@ -360,6 +369,17 @@ def main() -> int:
         sitemap_text = bump_sitemap_lastmod(sitemap_text, today.isoformat())
         PERSPECTIVAS_HTML.write_text(perspectivas_text, encoding="utf-8")
         SITEMAP.write_text(sitemap_text, encoding="utf-8")
+
+        # 5. Malha de links internos ESTÁTICA (post-nav de todos os posts +
+        #    fallback estático do grid). Sem isso, posts novos só ficam
+        #    linkados via JS e o Google demora a indexar (auditoria 2026-09-02).
+        try:
+            sys.path.insert(0, str(REPO_ROOT / "scripts"))
+            import seo_internal_links  # noqa: E402
+            seo_internal_links.run(today)
+        except Exception as exc:  # não derruba a publicação por causa disso
+            print(f"AVISO: seo_internal_links falhou: {exc}", file=sys.stderr)
+
         for slug in published:
             print(f"Published: {slug}")
     else:
