@@ -217,7 +217,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     track(ok ? 'valido' : 'revogado');
   }
 
-  async function validar(raw){
+  async function validar(raw, rolar){
     var code = norm(raw);
     if (!code) return;
     input.value = code;
@@ -240,12 +240,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       track('erro');
     } finally {
       btn.disabled = false;
+      if (rolar) { var alvo = form.parentElement || form; alvo.style.scrollMarginTop = '96px'; alvo.scrollIntoView({behavior: 'smooth', block: 'start'}); }
     }
   }
 
   form.addEventListener('submit', function(ev){ ev.preventDefault(); validar(input.value); });
-  window.addEventListener('hashchange', function(){ validar(decodeURIComponent(location.hash.slice(1))); });
-  if (location.hash.length > 1) validar(decodeURIComponent(location.hash.slice(1)));
+  window.addEventListener('hashchange', function(){ validar(decodeURIComponent(location.hash.slice(1)), true); });
+  if (location.hash.length > 1) validar(decodeURIComponent(location.hash.slice(1)), true);
 })();
 </script>
 <script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
