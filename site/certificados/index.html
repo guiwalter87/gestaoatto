@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Validação de certificados · Atto Estratégias &amp; Educação</title>
+<meta name="description" content="Confira a autenticidade de certificados de programas e treinamentos emitidos pela Atto Estratégias &amp; Educação." />
+<meta name="theme-color" content="#1A3A8F">
+<meta name="referrer" content="no-referrer">
+<link rel="canonical" href="https://www.gestaoatto.com.br/certificados/">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16.png">
+<link rel="icon" href="../assets/favicon.ico">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css" />
+<style>
+.cv-wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:72px;padding:24px 0 140px;align-items:start}
+.cv-side .section-label{color:var(--cinza-medio)}
+.cv-side h2{font-family:'Outfit';font-weight:200;font-size:clamp(28px,3vw,40px);line-height:1.1;letter-spacing:-.02em;color:var(--tinta);margin-bottom:20px}
+.cv-side h2 em{color:var(--azul-atto)}
+.cv-side p{font-size:16px;line-height:1.65;color:var(--cinza-escuro);margin-bottom:28px;max-width:46ch}
+.cv-steps{list-style:none;padding:0;margin:0}
+.cv-steps li{padding:18px 0;border-top:1px solid var(--linha);display:grid;grid-template-columns:auto 1fr;gap:16px;font-size:15px;line-height:1.6;color:var(--cinza-escuro)}
+.cv-steps li:last-child{border-bottom:1px solid var(--linha)}
+.cv-steps .mark{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--teal-atto);padding-top:3px}
+
+.cv-card{background:#fff;border:1px solid var(--linha);border-radius:2px;padding:48px}
+.cv-card h3{font-family:'Outfit';font-weight:300;font-size:24px;color:var(--tinta);margin-bottom:8px}
+.cv-card .sub{font-size:15px;color:var(--cinza-escuro);line-height:1.6;margin-bottom:32px}
+.cv-form{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.cv-field{flex:1 1 280px}
+.cv-field label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cinza-medio);margin-bottom:10px}
+.cv-field input{width:100%;border:none;border-bottom:1px solid var(--linha);background:transparent;padding:12px 0;font-family:'JetBrains Mono',monospace;font-size:18px;letter-spacing:.06em;text-transform:uppercase;color:var(--tinta);border-radius:0}
+.cv-field input:focus{outline:none;border-bottom-color:var(--azul-atto)}
+.cv-form button{background:var(--azul-noite);color:#fff;border:none;padding:18px 28px;font-family:'Outfit';font-weight:500;font-size:15px;cursor:pointer;border-radius:2px;display:inline-flex;align-items:center;gap:10px;transition:background .2s}
+.cv-form button:hover{background:var(--azul-atto)}
+.cv-form button[disabled]{opacity:.6;cursor:wait}
+
+.cv-result{margin-top:40px;display:none}
+.cv-result.is-on{display:block}
+.cv-status{display:flex;align-items:center;gap:14px;padding:18px 22px;border-radius:2px;margin-bottom:32px;font-family:'Outfit';font-weight:500;font-size:17px}
+.cv-status .dot{width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none;color:#fff;font-size:18px;line-height:1}
+.cv-status.ok{background:rgba(0,181,184,.08);border:1px solid rgba(0,181,184,.35);color:var(--tinta)}
+.cv-status.ok .dot{background:var(--teal-atto)}
+.cv-status.bad{background:rgba(190,40,40,.06);border:1px solid rgba(190,40,40,.3);color:#7a1c1c}
+.cv-status.bad .dot{background:#b83232}
+.cv-status small{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;font-size:13px;color:var(--cinza-escuro);margin-top:2px}
+.cv-name{font-family:'Outfit';font-weight:600;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.01em;color:var(--tinta);line-height:1.15;margin-bottom:6px}
+.cv-prog{font-size:16px;color:var(--azul-atto);font-weight:500;margin-bottom:28px}
+.cv-dl{display:grid;grid-template-columns:180px 1fr;border-top:1px solid var(--linha)}
+.cv-dl dt,.cv-dl dd{padding:14px 0;border-bottom:1px solid var(--linha);font-size:15px;line-height:1.55}
+.cv-dl dt{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cinza-medio);padding-top:17px}
+.cv-dl dd{color:var(--cinza-escuro)}
+.cv-dl dd.mono{font-family:'JetBrains Mono',monospace;letter-spacing:.04em;color:var(--tinta)}
+.cv-foot{margin-top:28px;font-size:13px;line-height:1.6;color:var(--cinza-medio)}
+.cv-foot a{color:var(--azul-atto);text-decoration:underline}
+@media (max-width:960px){
+  .cv-wrap{grid-template-columns:1fr;gap:48px}
+  .cv-card{padding:32px 24px}
+  .cv-dl{grid-template-columns:1fr}
+  .cv-dl dt{border-bottom:none;padding-bottom:0}
+}
+@media print{header,footer,.cv-side,.cv-form,.breadcrumb,.page-hero .lead{display:none!important}.cv-wrap{display:block;padding:0}.cv-card{border:none;padding:0}}
+</style>
+<meta name="author" content="Atto Estratégias & Educação">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Atto Estratégias">
+<meta property="og:title" content="Validação de certificados · Atto">
+<meta property="og:description" content="Confira a autenticidade de certificados emitidos pela Atto Estratégias & Educação.">
+<meta property="og:url" content="https://www.gestaoatto.com.br/certificados/">
+<meta property="og:image" content="https://www.gestaoatto.com.br/assets/og-cover.png">
+<!-- Atto · Data Layer -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {analytics_storage:'denied', ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', functionality_storage:'granted', security_storage:'granted', wait_for_update:500});
+gtag('set', 'ads_data_redaction', true);
+try { var c = JSON.parse(localStorage.getItem('atto_consent') || 'null'); if (c && c.ts && (Date.now() - c.ts) < 31536000000 && c.analytics === 'granted') { gtag('consent', 'update', {analytics_storage:'granted', ad_storage:'granted', ad_user_data:'granted', ad_personalization:'granted'}); dataLayer.push({event:'atto_ads_granted'}); } } catch (e) {}
+dataLayer.push({page_family: 'institucional', vertical_atto: 'Certificados'});
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-N495GLWN');</script>
+<!-- End Google Tag Manager -->
+<script defer src="../assets/atto-events.js"></script>
+<script defer src="../assets/atto-consent.js"></script>
+<script defer src="../assets/atto-whatsapp.js"></script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N495GLWN" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<header id="siteHeader">
+  <div class="container header-inner">
+    <a href="../index.html" class="logo-mark"><img class="logo-light" src="../assets/atto_logo_light_sm.png" alt="Atto" /><img class="logo-dark" src="../assets/atto_logo_dark_sm.png" alt="Atto" /></a>
+    <nav>
+      <a href="../metodo.html">Método</a>
+      <a href="../atuacao.html">Atuação</a>
+      <a href="../vagas.html">Vagas</a>
+      <a href="../perspectivas.html">Perspectivas</a>
+      <a href="../sobre.html">A Atto</a>
+      <a href="../contato.html#agendar" class="cta-nav">Agende conversa <span class="arrow">→</span></a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <div class="breadcrumb"><a href="../index.html">A Atto</a><span class="sep">/</span><span class="current">Validação de certificados</span></div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="kicker">Atto Estratégias &amp; Educação · Certificados</div>
+    <h1>Validação de <em>certificados</em>.</h1>
+    <p class="lead">Confira a autenticidade de um certificado de programa ou treinamento emitido pela Atto. Escaneie o QR Code impresso no certificado ou digite o código de validação abaixo.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="cv-wrap">
+      <div class="cv-side">
+        <div class="section-label">Como funciona</div>
+        <h2>Cada certificado tem um <em>código único</em>.</h2>
+        <p>O código aparece no verso do certificado, logo abaixo do QR Code. A consulta confirma se o documento foi emitido pela Atto e se continua válido.</p>
+        <ul class="cv-steps">
+          <li><span class="mark">01</span><span>Escaneie o QR Code com a câmera do celular, ou digite o código no campo ao lado.</span></li>
+          <li><span class="mark">02</span><span>O resultado mostra titular, programa, período, carga horária e data de emissão.</span></li>
+          <li><span class="mark">03</span><span>Os dados só são exibidos para quem tem o código. Não existe listagem pública de participantes.</span></li>
+        </ul>
+      </div>
+
+      <div class="cv-card" aria-live="polite">
+        <h3>Consultar certificado</h3>
+        <p class="sub">Informe o código exatamente como aparece no certificado. Letras maiúsculas ou minúsculas são aceitas.</p>
+        <form class="cv-form" id="cvForm" autocomplete="off">
+          <div class="cv-field">
+            <label for="cvCode">Código de validação</label>
+            <input id="cvCode" name="codigo" placeholder="LC-IJ-2026-XXXX-XXXX" spellcheck="false" required />
+          </div>
+          <button type="submit" id="cvBtn">Validar <span class="arrow">→</span></button>
+        </form>
+
+        <div class="cv-result" id="cvResult"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand"><a href="../index.html" class="footer-logo"><img src="../assets/atto_logo_dark.png" alt="Atto" /></a><p>Boutique de estruturação empresarial. Fundada em 2019, em Caxias do Sul / RS.</p></div>
+      <div class="footer-col"><h5>Método</h5><ul><li><a href="../metodo.html">Como trabalhamos</a></li><li><a href="../diagnostico-90-dias.html">Diagnóstico 90 dias</a></li><li><a href="../rotina-mensal.html">Rotina mensal</a></li><li><a href="../rqs.html">O que é RQS</a></li></ul></div>
+      <div class="footer-col"><h5>Soluções</h5><ul><li><a href="../direcao-estrategica.html">Direção Estratégica</a></li><li><a href="../performance-financeira.html">Performance Financeira</a></li><li><a href="../pessoas-lideranca.html">Pessoas &amp; Liderança</a></li><li><a href="../governanca-ma.html">Governança &amp; M&amp;A</a></li></ul></div>
+      <div class="footer-col"><h5>A Atto</h5><ul><li><a href="../sobre.html">Quem somos</a></li><li><a href="../clientes.html">Clientes</a></li><li><a href="../atuacao.html">Atuação</a></li><li><a href="../vagas.html">Vagas</a></li><li><a href="../trabalhe-conosco.html">Trabalhe conosco</a></li></ul></div>
+      <div class="footer-col"><h5>Contato</h5><ul><li><a href="../contato.html">Agende conversa</a></li><li><a href="../newsletter.html">Newsletter</a></li><li><a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><div>Atto Estratégias &amp; Educação · &copy; 2026 · Caxias do Sul / RS</div><div><a href="../politica-privacidade.html">Política de privacidade</a> · <a href="../termos-uso.html">Termos</a> · <a href="#" data-cookie-prefs>Cookies</a></div></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('cvForm');
+  var input = document.getElementById('cvCode');
+  var btn = document.getElementById('cvBtn');
+  var out = document.getElementById('cvResult');
+  var enc = new TextEncoder();
+
+  function norm(s){ return (s || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').replace(/^-+|-+$/g, ''); }
+  function b64(s){ return Uint8Array.from(atob(s), function(c){ return c.charCodeAt(0); }); }
+  function hex(buf){ return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2, '0'); }).join(''); }
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  function track(result){ try { dataLayer.push({event:'certificado_validacao', resultado: result}); } catch(e){} }
+
+  function showError(title, text){
+    out.innerHTML = '<div class="cv-status bad"><span class="dot">!</span><div>' + esc(title) + '<small>' + esc(text) + '</small></div></div>' +
+      '<p class="cv-foot">Se o problema persistir, escreva para <a href="mailto:contato@gestaoatto.com.br">contato@gestaoatto.com.br</a> informando o código.</p>';
+    out.classList.add('is-on');
+  }
+
+  function render(d){
+    var ok = d.status === 'valido';
+    var rows = [
+      ['Titular', d.nome],
+      ['Programa', d.programa],
+      ['Empresa', d.empresa],
+      ['Período', d.periodo],
+      ['Carga horária', d.carga_horaria],
+      [d.conteudo_rotulo || 'Conteúdo', d.conteudo],
+      ['Emissão', d.emissao],
+      ['Responsável', d.responsavel + (d.responsavel_cargo ? ', ' + d.responsavel_cargo : '')],
+      ['Emissor', d.emissor],
+      ['Código', d.codigo]
+    ].filter(function(r){ return r[1]; });
+    out.innerHTML =
+      (ok
+        ? '<div class="cv-status ok"><span class="dot">✓</span><div>Certificado válido<small>Documento autêntico, emitido pela Atto Estratégias &amp; Educação.</small></div></div>'
+        : '<div class="cv-status bad"><span class="dot">!</span><div>Certificado revogado<small>Este documento foi emitido pela Atto, mas não tem mais validade.</small></div></div>') +
+      '<div class="cv-name">' + esc(d.nome) + '</div>' +
+      '<div class="cv-prog">' + esc(d.programa) + '</div>' +
+      '<dl class="cv-dl">' + rows.map(function(r){
+        return '<dt>' + esc(r[0]) + '</dt><dd' + (r[0] === 'Código' ? ' class="mono"' : '') + '>' + esc(r[1]) + '</dd>';
+      }).join('') + '</dl>' +
+      (d.descricao ? '<p class="cv-foot">' + esc(d.descricao) + '</p>' : '') +
+      '<p class="cv-foot">Consulta realizada em ' + new Date().toLocaleString('pt-BR') + '.</p>';
+    out.classList.add('is-on');
+    track(ok ? 'valido' : 'revogado');
+  }
+
+  async function validar(raw){
+    var code = norm(raw);
+    if (!code) return;
+    input.value = code;
+    if (location.hash.slice(1) !== code) history.replaceState(null, '', '#' + code);
+    btn.disabled = true;
+    out.classList.remove('is-on');
+    try {
+      if (!window.crypto || !crypto.subtle) throw new Error('crypto');
+      var id = hex(await crypto.subtle.digest('SHA-256', enc.encode('atto-cert-v1|' + code))).slice(0, 40);
+      var res = await fetch('d/' + id + '.json', {cache: 'no-store'});
+      if (res.status === 404) { showError('Código não encontrado', 'Confira se o código foi digitado corretamente, incluindo os hífens.'); track('nao_encontrado'); return; }
+      if (!res.ok) throw new Error('http');
+      var env = await res.json();
+      var base = await crypto.subtle.importKey('raw', enc.encode(code), 'PBKDF2', false, ['deriveKey']);
+      var key = await crypto.subtle.deriveKey({name:'PBKDF2', salt: b64(env.salt), iterations: env.it, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
+      var pt = await crypto.subtle.decrypt({name:'AES-GCM', iv: b64(env.iv)}, key, b64(env.ct));
+      render(JSON.parse(new TextDecoder().decode(pt)));
+    } catch (e) {
+      showError('Não foi possível concluir a consulta', 'Verifique sua conexão e tente novamente em alguns instantes.');
+      track('erro');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  form.addEventListener('submit', function(ev){ ev.preventDefault(); validar(input.value); });
+  window.addEventListener('hashchange', function(){ validar(decodeURIComponent(location.hash.slice(1))); });
+  if (location.hash.length > 1) validar(decodeURIComponent(location.hash.slice(1)));
+})();
+</script>
+<script>(function(){const h=document.getElementById('siteHeader');const d=document.querySelectorAll('.cta-final,.timeline,.bg-dark,.page-hero--dark');function u(){let i=false;d.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<80&&r.bottom>80)i=true});h.classList.toggle('on-dark',i)}window.addEventListener('scroll',u,{passive:true});window.addEventListener('resize',u);u();})();</script>
+<script src="../assets/site.js" defer></script>
+</body>
+</html>
