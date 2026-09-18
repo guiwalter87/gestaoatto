@@ -1,0 +1,61 @@
+name: Radar Atto - artes e aprovacao
+
+# Disparado quando a tarefa do Claude grava radar/edicoes/AAAA-MM-DD/edicao.json (por volta das 06:00).
+# Gera as 3 artes, atualiza o site e abre a issue de aprovacao no app do GitHub.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "radar/edicoes/*/edicao.json"
+  workflow_dispatch:
+    inputs:
+      data:
+        description: "Data da edicao (AAAA-MM-DD). Vazio = hoje"
+        required: false
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+concurrency:
+  group: radar
+  cancel-in-progress: false
+
+jobs:
+  montar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pillow==11.*
+      - name: Identificar edicao
+        id: ed
+        run: |
+          D="${{ github.event.inputs.data }}"
+          D="${D:-$(TZ=America/Sao_Paulo date +%F)}"
+          test -f "radar/edicoes/$D/edicao.json" || { echo "Sem edicao.json para $D"; exit 1; }
+          echo "data=$D" >> "$GITHUB_OUTPUT"
+      - name: Validar e gerar artes
+        run: python radar/montar.py ${{ steps.ed.outputs.data }}
+      - name: Gravar artes
+        run: |
+          D=${{ steps.ed.outputs.data }}
+          git config user.name "Radar Atto"
+          git config user.email "radar@gestaoatto.com.br"
+          git add "radar/edicoes/$D" "site/radar/$D"
+          git diff --cached --quiet || git commit -m "Radar Atto $D: artes para aprovacao"
+          git pull --rebase
+          git push
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+      - name: Atualizar site (Pages)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run static.yml --ref main
+      - name: Abrir issue de aprovacao
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: GITHUB_SHA=$sha python radar/radar_gh.py abrir ${{ steps.ed.outputs.data }}

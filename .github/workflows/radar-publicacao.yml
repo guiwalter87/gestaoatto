@@ -1,0 +1,59 @@
+name: Radar Atto - publicacao
+
+# Inicia 07:00 (Brasilia) e publica exatamente as 07:20, somente se aprovado na issue.
+on:
+  schedule:
+    - cron: "0 10 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      data:
+        description: "Data da edicao (AAAA-MM-DD). Vazio = hoje"
+        required: false
+      simular:
+        description: "1 = prepara os stories na Meta sem publicar (teste)"
+        required: false
+        default: "0"
+      agora:
+        description: "1 = nao esperar ate 07:20"
+        required: false
+        default: "0"
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: radar
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Aguardar 07:20
+        if: github.event.inputs.agora != '1'
+        run: |
+          ALVO=$(TZ=America/Sao_Paulo date -d "07:20" +%s)
+          AGORA=$(date +%s)
+          if [ "$AGORA" -lt "$ALVO" ]; then sleep $((ALVO-AGORA)); fi
+      - name: Publicar
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          RADAR_SIMULAR: ${{ github.event.inputs.simular }}
+        run: |
+          D="${{ github.event.inputs.data }}"
+          D="${D:-$(TZ=America/Sao_Paulo date +%F)}"
+          python radar/radar_gh.py publicar "$D"
+      - name: Gravar historico
+        run: |
+          git config user.name "Radar Atto"
+          git config user.email "radar@gestaoatto.com.br"
+          git add radar/historico.json
+          git diff --cached --quiet || (git commit -m "Radar Atto: historico atualizado" && git pull --rebase && git push)

@@ -1,0 +1,24 @@
+name: Radar Atto - renovacao do token
+
+# Toda segunda-feira as 12:00 (Brasilia): renova o token do Instagram (validade de 60 dias).
+on:
+  schedule:
+    - cron: "0 15 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  renovar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pynacl
+      - env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          RADAR_GH_TOKEN: ${{ secrets.RADAR_GH_TOKEN }}
+        run: python radar/radar_gh.py renovar
