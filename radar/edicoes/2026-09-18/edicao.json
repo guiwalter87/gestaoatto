@@ -1,0 +1,43 @@
+{
+ "data": "2026-09-18",
+ "blocos": [
+  {
+   "titulo": "Mundo",
+   "icone": "globo",
+   "ref": "17/09",
+   "indicadores": [
+    {"nome": "S&P 500", "valor": "7.637", "var": "1,14%", "dir": "up"},
+    {"nome": "Brent", "valor": "US$ 104,82", "var": "0,95%", "dir": "down"},
+    {"nome": "VIX", "valor": "15,44", "var": "12,82%", "dir": "down"}
+   ],
+   "itens": [
+    {"chapeu": "PETRÓLEO", "titulo": "Arábia Saudita reroteia petróleo após ataque a duto", "frase": "Brent fechou em queda de 0,95%, a US$ 104,82, após Riad desviar petróleo por Ormuz para compensar duto avariado.", "fonte": "CNBC", "url": "https://www.cnbc.com/2026/09/17/oil-prices-today-wti-brent-hormuz-iran-war.html"},
+    {"chapeu": "INFLAÇÃO NA EUROPA", "titulo": "Inflação da zona do euro acelera a 3,2% em agosto", "frase": "Índice de preços ao consumidor da zona do euro subiu 3,2% em 12 meses até agosto, acima do esperado.", "fonte": "Estadão/Broadcast", "url": "https://www.opovo.com.br/noticias/economia/2026/09/17/na-zona-do-euro-cpi-anual-acelera-a-32-em-agosto.html"},
+    {"chapeu": "EMPREGO NOS EUA", "titulo": "Pedidos de seguro-desemprego nos EUA caem a 196 mil", "frase": "Departamento do Trabalho dos EUA registrou queda de 10 mil pedidos na semana, abaixo do esperado pelo mercado.", "fonte": "Estadão/Broadcast", "url": "https://www.opovo.com.br/noticias/economia/2026/09/17/pedidos-de-auxilio-desemprego-nos-eua-caem-10-mil-para-196-mil.html"}
+   ]
+  },
+  {
+   "titulo": "Brasil",
+   "icone": "bandeira",
+   "ref": "17/09",
+   "indicadores": [
+    {"nome": "Ibovespa", "valor": "185.992", "var": "0,24%", "dir": "up"},
+    {"nome": "Dólar", "valor": "R$ 5,13", "var": "0,24%", "dir": "down"},
+    {"nome": "DI jan/29", "valor": "13,87%", "var": "0,07 p.p.", "dir": "down"}
+   ],
+   "itens": [
+    {"chapeu": "PIB", "titulo": "Economia brasileira recua 0,4% em julho, diz FGV", "frase": "Monitor do PIB da FGV apontou segundo mês seguido de queda, após retração de 1% em junho.", "fonte": "CNN Brasil", "url": "https://www.cnnbrasil.com.br/economia/money/macroeconomia/monitor-do-pib-apurado-pela-fgv-aponta-queda-de-04-em-julho-ante-junho/"},
+    {"chapeu": "IMÓVEIS CORPORATIVOS", "titulo": "Itaú aluga prédio inteiro da Eztec por R$ 1,17 bi", "frase": "Contrato de locação do Esther Towers, em São Paulo, deve gerar R$ 1,17 bilhão em receita em dez anos.", "fonte": "InfoMoney", "url": "https://www.infomoney.com.br/mercados/eztec-eztc3-fecha-locacao-do-esther-towers-e-preve-receita-de-r-117-bi-em-10-anos/"},
+    {"chapeu": "BOLSA FAMÍLIA", "titulo": "Bolsa Família tem reajuste de 15% e piso vai a R$ 691", "frase": "Decreto no Diário Oficial eleva o piso do benefício de R$ 600 para R$ 691 a partir de outubro.", "fonte": "Agência Brasil", "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-09/bolsa-familia-e-reajustado-em-15-medida-vale-partir-de-outubro"}
+   ]
+  },
+  {
+   "titulo": "Serra Gaúcha",
+   "icone": "serra",
+   "itens": [
+    {"chapeu": "INDÚSTRIA GAÚCHA", "titulo": "Exportações da indústria gaúcha crescem 19% em agosto", "frase": "Vendas externas da indústria de transformação do RS somaram US$ 1,5 bilhão em agosto, segundo a Fiergs.", "fonte": "Fiergs", "url": "https://www.fiergs.org.br/noticias/exportacoes"}
+   ]
+  }
+ ],
+ "checagem": "S&P 500, Brent e VIX confirmados via CNBC e dados de mercado (FactSet/FRED) do fechamento de 17/09/2026. Ibovespa, Dólar e DI jan/29 confirmados via Exame e CNN Brasil do mesmo fechamento."
+}
