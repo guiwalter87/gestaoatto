@@ -19,6 +19,8 @@ Use a busca e a leitura de páginas na web.
   * Mundo: S&P 500 (pontos), Brent (US$ por barril), VIX.
   * Brasil: Ibovespa (pontos), Dólar comercial (R$), DI jan/29 (taxa e variação em pontos percentuais, "p.p.").
 * Apartidarismo absoluto: nada de eleições, pesquisas, declarações de políticos ou avaliação de governo. Atos de governo só como fato, sem mérito nem culpa.
+* Fora da pauta: programas sociais e benefícios pagos pelo governo (Bolsa Família, auxílios, reajustes de benefícios, programas habitacionais e similares), salvo quando tiverem efeito direto e concreto no custo ou na receita das empresas.
+* Notícias com mais de um dia não entram, mesmo que importantes. Se a notícia mais relevante da semana já saiu, busque o desdobramento novo (reação do mercado, efeito no crédito) em vez de repetir o fato.
 
 ## 4. Redigir
 Grave `radar/edicoes/DATA/edicao.json` exatamente neste formato:
@@ -42,11 +44,13 @@ Grave `radar/edicoes/DATA/edicao.json` exatamente neste formato:
      "itens": []},
     {"titulo": "Serra Gaúcha", "icone": "serra", "itens": []}
   ],
-  "checagem": "como cada número foi confirmado (duas fontes cada)"
+  "checagem": "uma linha por indicador: nome, valor usado, fonte 1 (valor), fonte 2 (valor)"
 }
 ```
 
 Regras de texto: chapéu com 1 a 3 palavras em caixa alta (na Serra, a cidade); título com no máximo 55 caracteres; frase com no máximo 115 caracteres, uma única frase; fonte = nome do veículo; "ref" = data do fechamento (dd/mm); "dir" = "up" se subiu, "down" se caiu; números no padrão brasileiro. Proibido travessão (—), meia-risca (–), hífen entre espaços ( - ) e a sigla PME. Sem emojis, opinião ou previsão. Reescreva sempre com palavras próprias.
+
+Indicadores: use somente valores de fechamento oficial do dia (não use cotação intradiária). Se as duas fontes divergirem, prefira a fonte oficial (B3 para Ibovespa e DI; Banco Central/PTAX ou fechamento do Estadão/Broadcast para o dólar; S&P Dow Jones/CNBC para S&P 500 e VIX; ICE/Reuters para o Brent) e registre a divergência na checagem.
 
 ## 5. Validar
 Rode `python3 radar/checar.py validar DATA`. Se aparecer algum PROBLEMA, corrija o JSON e rode de novo até imprimir `OK`.

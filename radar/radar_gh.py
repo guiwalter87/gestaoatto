@@ -68,7 +68,7 @@ def abrir(data):
     ed = json.load(open(os.path.join(AQUI, "edicoes", data, "edicao.json"), encoding="utf-8"))
     sha = os.environ.get("GITHUB_SHA", "main")
     raw = f"https://github.com/{REPO}/blob/{sha}/radar/edicoes/{data}"
-    linhas = [f"**Edição de {datetime.date.fromisoformat(data).strftime('%d/%m/%Y')}.** Publicação automática às **07:20**, somente com aprovação.", "",
+    linhas = [f"@{REPO.split('/')[0]} **Edição de {datetime.date.fromisoformat(data).strftime('%d/%m/%Y')}.** Publicação automática às **07:20**, somente com aprovação.", "",
               "Para aprovar, comente **aprovado**. Para cancelar, comente **não publicar**.", "",
               f'<img src="{raw}/story_1.jpg?raw=true" width="32%"> <img src="{raw}/story_2.jpg?raw=true" width="32%"> <img src="{raw}/story_3.jpg?raw=true" width="32%">', ""]
     for b in ed["blocos"]:
@@ -79,7 +79,7 @@ def abrir(data):
             linhas.append(f"  - {ind['nome']}: {ind['valor']} ({'+' if ind.get('dir') == 'up' else '−' if ind.get('dir') == 'down' else ''}{ind.get('var','')})")
         linhas.append("")
     if ed.get("checagem"):
-        linhas += ["<details><summary>Checagem dos números</summary>", "", ed["checagem"], "</details>"]
+        linhas += ["### Checagem dos números", "", ed["checagem"], ""]
     try:
         gh("POST", "/labels", {"name": ROTULO, "color": "00888e"})
     except RuntimeError:

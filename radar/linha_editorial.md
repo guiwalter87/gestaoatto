@@ -13,7 +13,7 @@ Prioridade:
 5. Indicadores de atividade: PIB, produção industrial, emprego, confiança, projeções de entidades (CNI, FIERGS, CIC).
 6. Mudanças regulatórias e trabalhistas com efeito direto na gestão.
 
-Fica fora: política partidária e eleições, pesquisas eleitorais, declarações de políticos, avaliação de governo, polêmicas, crimes, fofoca empresarial, consumo, entretenimento, esportes, eventos e agendas de entidades (salvo quando geram decisão concreta), opinião e colunas.
+Fica fora: programas sociais e benefícios pagos pelo governo (salvo efeito direto no custo ou na receita das empresas), política partidária e eleições, pesquisas eleitorais, declarações de políticos, avaliação de governo, polêmicas, crimes, fofoca empresarial, consumo, entretenimento, esportes, eventos e agendas de entidades (salvo quando geram decisão concreta), opinião e colunas.
 
 Serra Gaúcha: Caxias do Sul, Bento Gonçalves, Farroupilha, Flores da Cunha, Garibaldi, Carlos Barbosa, Nova Prata, Veranópolis, Vacaria, São Marcos, Antônio Prado, Nova Petrópolis e Gramado/Canela (estes dois apenas em negócios). Em dia fraco na Serra, aceita-se 1 notícia do RS com impacto direto na indústria da região, com chapéu "INDÚSTRIA GAÚCHA" ou similar.
 Recuperação judicial e fechamento de empresas regionais: apenas com fonte pública confiável, tom neutro e factual.
